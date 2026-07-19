@@ -1,0 +1,119 @@
+# 22 Eighth Schedule languages + English = 23 document languages.
+# `hf_first_language_aliases` must match nvidia/Nemotron-Personas-India `first_language`
+# values on the en_IN split exactly. No fuzzy matching. No fallback assignment.
+
+languages:
+  - code: as
+    name: Assamese
+    script: Bengali
+    hf_first_language_aliases: [Assamese]
+
+  - code: bn
+    name: Bengali
+    script: Bengali
+    hf_first_language_aliases: [Bengali]
+
+  - code: brx
+    name: Bodo
+    script: Devanagari
+    hf_first_language_aliases: [Bodo]
+
+  - code: doi
+    name: Dogri
+    script: Devanagari
+    hf_first_language_aliases: [Dogri]
+
+  - code: en
+    name: English
+    script: Latin
+    hf_first_language_aliases: [English]
+
+  - code: gu
+    name: Gujarati
+    script: Gujarati
+    hf_first_language_aliases: [Gujarati]
+
+  - code: hi
+    name: Hindi
+    script: Devanagari
+    hf_first_language_aliases: [Hindi]
+
+  - code: kn
+    name: Kannada
+    script: Kannada
+    hf_first_language_aliases: [Kannada]
+
+  - code: ks
+    name: Kashmiri
+    script: Arabic
+    hf_first_language_aliases: [Kashmiri]
+
+  - code: kok
+    name: Konkani
+    script: Devanagari
+    hf_first_language_aliases: [Konkani]
+
+  - code: mai
+    name: Maithili
+    script: Devanagari
+    hf_first_language_aliases: [Maithili]
+
+  - code: ml
+    name: Malayalam
+    script: Malayalam
+    hf_first_language_aliases: [Malayalam]
+
+  - code: mni
+    name: Manipuri
+    script: Meitei
+    hf_first_language_aliases: [Manipuri]
+
+  - code: mr
+    name: Marathi
+    script: Devanagari
+    hf_first_language_aliases: [Marathi]
+
+  - code: ne
+    name: Nepali
+    script: Devanagari
+    hf_first_language_aliases: [Nepali]
+
+  - code: or
+    name: Odia
+    script: Odia
+    hf_first_language_aliases: [Odia, Oriya]
+
+  - code: pa
+    name: Punjabi
+    script: Gurmukhi
+    hf_first_language_aliases: [Punjabi]
+
+  - code: sa
+    name: Sanskrit
+    script: Devanagari
+    hf_first_language_aliases: [Sanskrit]
+
+  - code: sat
+    name: Santali
+    script: Ol_Chiki
+    hf_first_language_aliases: [Santali]
+
+  - code: sd
+    name: Sindhi
+    script: Arabic
+    hf_first_language_aliases: [Sindhi]
+
+  - code: ta
+    name: Tamil
+    script: Tamil
+    hf_first_language_aliases: [Tamil]
+
+  - code: te
+    name: Telugu
+    script: Telugu
+    hf_first_language_aliases: [Telugu]
+
+  - code: ur
+    name: Urdu
+    script: Arabic
+    hf_first_language_aliases: [Urdu]

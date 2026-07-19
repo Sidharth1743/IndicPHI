@@ -1,0 +1,91 @@
+{
+  "stage": "s4_generation",
+  "timestamp_utc": "2026-07-19T13:49:01.617003+00:00",
+  "provider": "sarvam",
+  "model": "sarvam-105b",
+  "base_url": "https://api.sarvam.ai/v1",
+  "reasoning_effort": null,
+  "requests_per_minute": 110.0,
+  "max_workers": 12,
+  "max_tokens": 16384,
+  "reject_truncated": true,
+  "input_jsonl": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s3_prompts/prompts.jsonl",
+  "rows_requested": 20,
+  "rows_generated": 20,
+  "failures": [],
+  "soft_failures": [
+    {
+      "uuid": "7568f8e67bea4c959a480fd295d29db7",
+      "document_id": "7568f8e67bea4c959a480fd295d29db7__0",
+      "doc_type_id": "discharge_summary",
+      "document_language_code": "en",
+      "missing_required_entities": [
+        "DOB"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:DOB"
+      ]
+    },
+    {
+      "uuid": "396f437fcf6a45e6b7f38f4fe5cf5e48",
+      "document_id": "396f437fcf6a45e6b7f38f4fe5cf5e48__0",
+      "doc_type_id": "opd_slip",
+      "document_language_code": "gu",
+      "missing_required_entities": [
+        "DOB",
+        "OCCUPATION",
+        "HOSPITAL_ID"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:DOB,OCCUPATION,HOSPITAL_ID"
+      ]
+    }
+  ],
+  "soft_fail_count": 2,
+  "entity_coverage_incomplete_count": 2,
+  "entity_stuffing_count": 0,
+  "doc_type_counts": {
+    "asha_worker_note": 1,
+    "automated_sms": 1,
+    "discharge_summary": 2,
+    "insurance_claim": 1,
+    "lab_report": 2,
+    "opd_slip": 4,
+    "phc_register": 1,
+    "prescription": 2,
+    "radiology_report": 2,
+    "surgical_note": 4
+  },
+  "language_counts": {
+    "bn": 2,
+    "en": 2,
+    "gu": 2,
+    "hi": 2,
+    "kn": 2,
+    "ml": 2,
+    "mr": 2,
+    "pa": 2,
+    "ta": 2,
+    "te": 2
+  },
+  "mean_chars": 1368.9,
+  "entity_coverage_complete_rate": 0.9,
+  "columns_added": [
+    "document_id",
+    "generated_text",
+    "generator_provider",
+    "generator_model",
+    "generator_finish_reason",
+    "generator_prompt_tokens",
+    "generator_completion_tokens",
+    "entity_coverage_complete",
+    "missing_required_entities",
+    "entity_stuffing",
+    "stuffed_entity_types",
+    "generation_soft_fail",
+    "generation_soft_fail_reasons",
+    "stage"
+  ]
+}

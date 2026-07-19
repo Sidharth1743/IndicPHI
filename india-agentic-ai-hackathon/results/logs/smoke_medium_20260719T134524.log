@@ -1,0 +1,60 @@
+[run] run_id=20260719T191524
+[run] folder=/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524
+[run] config=/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/pipeline.resolved.yaml
+
+=== s1_persona_sampling ===
+[s1_persona_sampling] OK → /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s1_persona_sampling
+  jsonl: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s1_persona_sampling/personas.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s1_persona_sampling/personas.parquet
+  audit_json: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s1_persona_sampling/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s1_persona_sampling/audit.md
+  preview_jsonl: /home/sidharth/Desktop/nvidia-hack/data/samples/s1_personas_preview.jsonl
+
+=== s2_taxonomy ===
+[s2_taxonomy] OK → /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s2_taxonomy
+  jsonl: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s2_taxonomy/assignments.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s2_taxonomy/assignments.parquet
+  audit_json: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s2_taxonomy/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s2_taxonomy/audit.md
+  preview_jsonl: /home/sidharth/Desktop/nvidia-hack/data/samples/s2_taxonomy_preview.jsonl
+
+=== s2b_persona_summary ===
+[s2b_persona_summary] OK → /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s2b_persona_summary
+  jsonl: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s2b_persona_summary/assignments_summarized.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s2b_persona_summary/assignments_summarized.parquet
+  audit_json: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s2b_persona_summary/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s2b_persona_summary/audit.md
+
+=== s3_prompt_construction ===
+[s3_prompt_construction] OK → /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s3_prompts
+  jsonl: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s3_prompts/prompts.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s3_prompts/prompts.parquet
+  audit_json: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s3_prompts/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s3_prompts/audit.md
+  preview_jsonl: /home/sidharth/Desktop/nvidia-hack/data/samples/s3_prompts_preview.jsonl
+
+=== s4_generation ===
+[s4] SOFT-FAIL uuid=396f437fcf6a45e6b7f38f4fe5cf5e48 doc_type=opd_slip reasons=['missing_required_entities:DOB,OCCUPATION,HOSPITAL_ID']
+[s4] SOFT-FAIL uuid=7568f8e67bea4c959a480fd295d29db7 doc_type=discharge_summary reasons=['missing_required_entities:DOB']
+[s4] WARNING: 2 soft-fail(s) logged (incomplete coverage and/or stuffing) — see audit soft_failures
+[s4_generation] OK → /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s4_generation
+  jsonl: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s4_generation/documents.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s4_generation/documents.parquet
+  audit_json: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s4_generation/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s4_generation/audit.md
+  soft_failures_jsonl: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s4_generation/soft_failures.jsonl
+  preview_jsonl: /home/sidharth/Desktop/nvidia-hack/data/samples/s4_documents_preview.jsonl
+
+=== s4b_translation ===
+[s4b] SOFT-FAIL uuid=396f437fcf6a45e6b7f38f4fe5cf5e48 lang=gu doc_type=opd_slip error=script_purity_failed:target_script_ratio:0.241<0.35 attempt=1
+[s4b] WARNING: 1 translation soft-fail(s) logged — see audit soft_failures
+[s4b_translation] OK → /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s4b_translation
+  jsonl: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s4b_translation/documents.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s4b_translation/documents.parquet
+  audit_json: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s4b_translation/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s4b_translation/audit.md
+  soft_failures_jsonl: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s4b_translation/soft_failures.jsonl
+
+=== s5_linguistic_judge ===
+[s5_linguistic_judge] FAILED: Judge failed at row 1 uuid='8dc5cee1129948649f9f8779d44cb473': OpenAI-compatible network error: <urlopen error [Errno -3] Temporary failure in name resolution>
+[run] failures audit → /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/failures.md

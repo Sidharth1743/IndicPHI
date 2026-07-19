@@ -1,0 +1,40 @@
+{
+  "stage": "s3_prompt_construction",
+  "timestamp_utc": "2026-07-19T12:17:56.384329+00:00",
+  "input_jsonl": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T174747/s2b_persona_summary/assignments_summarized.jsonl",
+  "rows_in": 10,
+  "rows_out": 10,
+  "max_docs": null,
+  "language_codes": null,
+  "include_persona_narrative_in_prompt": false,
+  "doc_type_counts": {
+    "asha_worker_note": 2,
+    "automated_sms": 2,
+    "opd_slip": 2,
+    "prescription": 1,
+    "radiology_report": 1,
+    "referral_letter": 1,
+    "surgical_note": 1
+  },
+  "language_counts": {
+    "bn": 1,
+    "en": 1,
+    "gu": 1,
+    "hi": 1,
+    "kn": 1,
+    "ml": 1,
+    "mr": 1,
+    "pa": 1,
+    "ta": 1,
+    "te": 1
+  },
+  "mean_user_prompt_chars": 2602.2,
+  "mean_system_prompt_chars": 5196,
+  "columns_added": [
+    "system_prompt",
+    "user_prompt",
+    "required_entities",
+    "optional_entities",
+    "stage"
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "stage": "s4b_translation",
+  "timestamp_utc": "2026-07-19T15:51:42.553632+00:00",
+  "model": "sarvam-105b",
+  "rows_in": 20,
+  "rows_out": 20,
+  "rows_translated": 18,
+  "rows_skipped": 2,
+  "soft_failures": [
+    {
+      "uuid": "bfcd0a5ac1664137a563f86f8f72d85a",
+      "document_id": "bfcd0a5ac1664137a563f86f8f72d85a__0",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "ml",
+      "translation_error": "script_purity_failed:target_script_ratio:0.000<0.35 attempt=1",
+      "translation_script_ok": false
+    }
+  ],
+  "soft_fail_count": 1,
+  "script_fail_count": 1,
+  "max_workers": 12,
+  "requests_per_minute": 110.0,
+  "skip_language_codes": [
+    "en"
+  ],
+  "columns_added": [
+    "generated_text_en",
+    "generated_text",
+    "translation_applied",
+    "translation_script_ok",
+    "translator_model",
+    "translator_finish_reason",
+    "translation_attempts",
+    "translation_error",
+    "translation_soft_fail",
+    "stage"
+  ]
+}

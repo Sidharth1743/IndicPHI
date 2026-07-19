@@ -1,0 +1,95 @@
+[run] run_id=20260719T211827
+[run] folder=/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827
+[run] config=/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/pipeline.resolved.yaml
+
+=== s1_persona_sampling ===
+[s1_persona_sampling] OK → /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s1_persona_sampling
+  jsonl: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s1_persona_sampling/personas.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s1_persona_sampling/personas.parquet
+  audit_json: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s1_persona_sampling/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s1_persona_sampling/audit.md
+  preview_jsonl: /home/sidharth/Desktop/nvidia-hack/data/samples/s1_personas_preview.jsonl
+
+=== s2_taxonomy ===
+[s2_taxonomy] OK → /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s2_taxonomy
+  jsonl: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s2_taxonomy/assignments.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s2_taxonomy/assignments.parquet
+  audit_json: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s2_taxonomy/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s2_taxonomy/audit.md
+  preview_jsonl: /home/sidharth/Desktop/nvidia-hack/data/samples/s2_taxonomy_preview.jsonl
+
+=== s2b_persona_summary ===
+[s2b_persona_summary] OK → /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s2b_persona_summary
+  jsonl: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s2b_persona_summary/assignments_summarized.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s2b_persona_summary/assignments_summarized.parquet
+  audit_json: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s2b_persona_summary/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s2b_persona_summary/audit.md
+
+=== s3_prompt_construction ===
+[s3_prompt_construction] OK → /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s3_prompts
+  jsonl: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s3_prompts/prompts.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s3_prompts/prompts.parquet
+  audit_json: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s3_prompts/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s3_prompts/audit.md
+  preview_jsonl: /home/sidharth/Desktop/nvidia-hack/data/samples/s3_prompts_preview.jsonl
+
+=== s4_generation ===
+[s4_generation] OK → /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s4_generation
+  jsonl: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s4_generation/documents.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s4_generation/documents.parquet
+  audit_json: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s4_generation/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s4_generation/audit.md
+  soft_failures_jsonl: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s4_generation/soft_failures.jsonl
+  preview_jsonl: /home/sidharth/Desktop/nvidia-hack/data/samples/s4_documents_preview.jsonl
+
+=== s4b_translation ===
+[s4b] SOFT-FAIL uuid=bfcd0a5ac1664137a563f86f8f72d85a lang=ml doc_type=insurance_claim error=script_purity_failed:target_script_ratio:0.000<0.35 attempt=1
+[s4b] WARNING: 1 translation soft-fail(s) logged — see audit soft_failures
+[s4b_translation] OK → /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s4b_translation
+  jsonl: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s4b_translation/documents.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s4b_translation/documents.parquet
+  audit_json: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s4b_translation/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s4b_translation/audit.md
+  soft_failures_jsonl: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s4b_translation/soft_failures.jsonl
+
+=== s5_linguistic_judge ===
+[s5] WARNING: 3 judge fail(s) logged — see failed.jsonl and audit failures
+[s5_linguistic_judge] OK → /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s5_linguistic_judge
+  all_jsonl: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s5_linguistic_judge/judged.jsonl
+  passed_jsonl: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s5_linguistic_judge/passed.jsonl
+  failed_jsonl: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s5_linguistic_judge/failed.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s5_linguistic_judge/judged.parquet
+  audit_json: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s5_linguistic_judge/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s5_linguistic_judge/audit.md
+  soft_failures_jsonl: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s5_linguistic_judge/soft_failures.jsonl
+
+=== s6_deterministic_auditor ===
+[s6] WARNING: 2 auditor failure(s) logged — see failed.jsonl and audit failures
+[s6_deterministic_auditor] OK → /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s6_deterministic_auditor
+  all_jsonl: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s6_deterministic_auditor/audited.jsonl
+  passed_jsonl: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s6_deterministic_auditor/passed.jsonl
+  failed_jsonl: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s6_deterministic_auditor/failed.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s6_deterministic_auditor/audited.parquet
+  audit_json: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s6_deterministic_auditor/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s6_deterministic_auditor/audit.md
+  failures_jsonl: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s6_deterministic_auditor/failures.jsonl
+
+=== s7_s8_curation ===
+[s7_s8_curation] OK → /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s7_s8_curation
+  jsonl: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s7_s8_curation/curated.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s7_s8_curation/curated.parquet
+  audit_json: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s7_s8_curation/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s7_s8_curation/audit.md
+
+=== s9_gliner_format ===
+[s9_gliner_format] OK → /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s9_gliner_format
+  jsonl: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s9_gliner_format/gliner_docs.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s9_gliner_format/gliner_docs.parquet
+  gliner_json: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s9_gliner_format/gliner_train.json
+  audit_json: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s9_gliner_format/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/s9_gliner_format/audit.md
+  preview_jsonl: /home/sidharth/Desktop/nvidia-hack/data/samples/s9_gliner_preview.jsonl
+
+[run] complete → /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827
+[run] latest symlink → /home/sidharth/Desktop/nvidia-hack/data/generated/runs/latest
+[run] failures audit → /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T211827/failures.md

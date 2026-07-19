@@ -1,0 +1,210 @@
+{
+  "run_id": "20260719T180310",
+  "status": "ok",
+  "base_config": "/home/sidharth/Desktop/nvidia-hack/configs/synthetic-data/pipeline.smoke.yaml",
+  "resolved_config": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/pipeline.resolved.yaml",
+  "stages": [
+    {
+      "stage": "s1_persona_sampling",
+      "folder": "s1_persona_sampling",
+      "status": "ok",
+      "started_utc": "2026-07-19T12:33:10.406299+00:00",
+      "finished_utc": "2026-07-19T12:33:10.822191+00:00",
+      "outputs": {
+        "jsonl": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s1_persona_sampling/personas.jsonl",
+        "parquet": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s1_persona_sampling/personas.parquet",
+        "audit_json": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s1_persona_sampling/audit.json",
+        "audit_md": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s1_persona_sampling/audit.md",
+        "preview_jsonl": "/home/sidharth/Desktop/nvidia-hack/data/samples/s1_personas_preview.jsonl"
+      },
+      "preview": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s1_persona_sampling/audit.md"
+    },
+    {
+      "stage": "s2_taxonomy",
+      "folder": "s2_taxonomy",
+      "status": "ok",
+      "started_utc": "2026-07-19T12:33:10.822213+00:00",
+      "finished_utc": "2026-07-19T12:33:10.833770+00:00",
+      "outputs": {
+        "jsonl": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s2_taxonomy/assignments.jsonl",
+        "parquet": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s2_taxonomy/assignments.parquet",
+        "audit_json": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s2_taxonomy/audit.json",
+        "audit_md": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s2_taxonomy/audit.md",
+        "preview_jsonl": "/home/sidharth/Desktop/nvidia-hack/data/samples/s2_taxonomy_preview.jsonl"
+      },
+      "preview": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s2_taxonomy/audit.md"
+    },
+    {
+      "stage": "s2b_persona_summary",
+      "folder": "s2b_persona_summary",
+      "status": "ok",
+      "started_utc": "2026-07-19T12:33:10.833793+00:00",
+      "finished_utc": "2026-07-19T12:33:21.361376+00:00",
+      "outputs": {
+        "jsonl": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s2b_persona_summary/assignments_summarized.jsonl",
+        "parquet": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s2b_persona_summary/assignments_summarized.parquet",
+        "audit_json": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s2b_persona_summary/audit.json",
+        "audit_md": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s2b_persona_summary/audit.md"
+      },
+      "preview": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s2b_persona_summary/audit.md"
+    },
+    {
+      "stage": "s3_prompt_construction",
+      "folder": "s3_prompts",
+      "status": "ok",
+      "started_utc": "2026-07-19T12:33:21.361400+00:00",
+      "finished_utc": "2026-07-19T12:33:21.391919+00:00",
+      "outputs": {
+        "jsonl": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s3_prompts/prompts.jsonl",
+        "parquet": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s3_prompts/prompts.parquet",
+        "audit_json": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s3_prompts/audit.json",
+        "audit_md": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s3_prompts/audit.md",
+        "preview_jsonl": "/home/sidharth/Desktop/nvidia-hack/data/samples/s3_prompts_preview.jsonl"
+      },
+      "preview": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s3_prompts/audit.md"
+    },
+    {
+      "stage": "s4_generation",
+      "folder": "s4_generation",
+      "status": "ok",
+      "started_utc": "2026-07-19T12:33:21.391945+00:00",
+      "finished_utc": "2026-07-19T12:33:44.155424+00:00",
+      "outputs": {
+        "jsonl": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s4_generation/documents.jsonl",
+        "parquet": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s4_generation/documents.parquet",
+        "audit_json": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s4_generation/audit.json",
+        "audit_md": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s4_generation/audit.md",
+        "preview_jsonl": "/home/sidharth/Desktop/nvidia-hack/data/samples/s4_documents_preview.jsonl"
+      },
+      "preview": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s4_generation/audit.md"
+    },
+    {
+      "stage": "s4b_translation",
+      "folder": "s4b_translation",
+      "status": "ok",
+      "started_utc": "2026-07-19T12:33:44.155447+00:00",
+      "finished_utc": "2026-07-19T12:34:10.248968+00:00",
+      "outputs": {
+        "jsonl": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s4b_translation/documents.jsonl",
+        "parquet": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s4b_translation/documents.parquet",
+        "audit_json": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s4b_translation/audit.json",
+        "audit_md": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s4b_translation/audit.md"
+      },
+      "preview": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s4b_translation/audit.md"
+    },
+    {
+      "stage": "s5_linguistic_judge",
+      "folder": "s5_linguistic_judge",
+      "status": "ok",
+      "started_utc": "2026-07-19T12:34:10.248992+00:00",
+      "finished_utc": "2026-07-19T12:37:18.024997+00:00",
+      "outputs": {
+        "all_jsonl": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s5_linguistic_judge/judged.jsonl",
+        "passed_jsonl": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s5_linguistic_judge/passed.jsonl",
+        "failed_jsonl": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s5_linguistic_judge/failed.jsonl",
+        "parquet": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s5_linguistic_judge/judged.parquet",
+        "audit_json": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s5_linguistic_judge/audit.json",
+        "audit_md": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s5_linguistic_judge/audit.md"
+      },
+      "preview": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s5_linguistic_judge/audit.md"
+    },
+    {
+      "stage": "s6_deterministic_auditor",
+      "folder": "s6_deterministic_auditor",
+      "status": "ok",
+      "started_utc": "2026-07-19T12:37:18.025020+00:00",
+      "finished_utc": "2026-07-19T12:37:18.044179+00:00",
+      "outputs": {
+        "all_jsonl": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s6_deterministic_auditor/audited.jsonl",
+        "passed_jsonl": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s6_deterministic_auditor/passed.jsonl",
+        "failed_jsonl": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s6_deterministic_auditor/failed.jsonl",
+        "parquet": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s6_deterministic_auditor/audited.parquet",
+        "audit_json": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s6_deterministic_auditor/audit.json",
+        "audit_md": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s6_deterministic_auditor/audit.md"
+      },
+      "preview": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s6_deterministic_auditor/audit.md"
+    },
+    {
+      "stage": "s7_s8_curation",
+      "folder": "s7_s8_curation",
+      "status": "ok",
+      "started_utc": "2026-07-19T12:37:18.044201+00:00",
+      "finished_utc": "2026-07-19T12:37:18.322405+00:00",
+      "outputs": {
+        "jsonl": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s7_s8_curation/curated.jsonl",
+        "parquet": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s7_s8_curation/curated.parquet",
+        "audit_json": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s7_s8_curation/audit.json",
+        "audit_md": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s7_s8_curation/audit.md"
+      },
+      "preview": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s7_s8_curation/audit.md"
+    },
+    {
+      "stage": "s9_gliner_format",
+      "folder": "s9_gliner_format",
+      "status": "ok",
+      "started_utc": "2026-07-19T12:37:18.322426+00:00",
+      "finished_utc": "2026-07-19T12:37:18.339634+00:00",
+      "outputs": {
+        "jsonl": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s9_gliner_format/gliner_docs.jsonl",
+        "parquet": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s9_gliner_format/gliner_docs.parquet",
+        "gliner_json": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s9_gliner_format/gliner_train.json",
+        "audit_json": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s9_gliner_format/audit.json",
+        "audit_md": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s9_gliner_format/audit.md",
+        "preview_jsonl": "/home/sidharth/Desktop/nvidia-hack/data/samples/s9_gliner_preview.jsonl"
+      },
+      "preview": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T180310/s9_gliner_format/audit.md"
+    }
+  ],
+  "stage_specs": [
+    {
+      "block": "persona_sampling",
+      "folder": "s1_persona_sampling",
+      "primary": "personas.jsonl"
+    },
+    {
+      "block": "taxonomy",
+      "folder": "s2_taxonomy",
+      "primary": "assignments.jsonl"
+    },
+    {
+      "block": "persona_summary",
+      "folder": "s2b_persona_summary",
+      "primary": "assignments_summarized.jsonl"
+    },
+    {
+      "block": "prompt_construction",
+      "folder": "s3_prompts",
+      "primary": "prompts.jsonl"
+    },
+    {
+      "block": "generation",
+      "folder": "s4_generation",
+      "primary": "documents.jsonl"
+    },
+    {
+      "block": "translation",
+      "folder": "s4b_translation",
+      "primary": "documents.jsonl"
+    },
+    {
+      "block": "linguistic_judge",
+      "folder": "s5_linguistic_judge",
+      "primary": "judged.jsonl"
+    },
+    {
+      "block": "deterministic_auditor",
+      "folder": "s6_deterministic_auditor",
+      "primary": "audited.jsonl"
+    },
+    {
+      "block": "curation",
+      "folder": "s7_s8_curation",
+      "primary": "curated.jsonl"
+    },
+    {
+      "block": "gliner_format",
+      "folder": "s9_gliner_format",
+      "primary": "gliner_docs.jsonl"
+    }
+  ]
+}

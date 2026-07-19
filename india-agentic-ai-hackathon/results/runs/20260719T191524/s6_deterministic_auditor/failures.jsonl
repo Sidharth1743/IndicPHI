@@ -1,0 +1,2 @@
+{"uuid": "7568f8e67bea4c959a480fd295d29db7", "document_id": "7568f8e67bea4c959a480fd295d29db7__0", "doc_type_id": "discharge_summary", "document_language_code": "en", "auditor_errors": ["missing_required:DOB", "upstream_generation_soft_fail:missing_required_entities:DOB"]}
+{"uuid": "66f87f0087064abda3938f2c4aba879e", "document_id": "66f87f0087064abda3938f2c4aba879e__0", "doc_type_id": "insurance_claim", "document_language_code": "pa", "auditor_errors": ["format:AADHAAR_NUMBER:aadhaar_verhoeff", "phi_residue:3"]}

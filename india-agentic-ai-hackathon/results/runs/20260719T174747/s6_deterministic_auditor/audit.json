@@ -1,0 +1,10 @@
+{
+  "stage": "s6_deterministic_auditor",
+  "timestamp_utc": "2026-07-19T12:30:15.721836+00:00",
+  "rows_audited": 8,
+  "rows_passed": 5,
+  "pass_rate": 0.625,
+  "mean_dics": 1.0,
+  "mean_ecr": 0.9573863636363636,
+  "mean_bcr": 0.0
+}

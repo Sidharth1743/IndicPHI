@@ -1,0 +1,27 @@
+{
+  "stage": "s5_linguistic_judge",
+  "timestamp_utc": "2026-07-19T12:37:18.019604+00:00",
+  "provider": "azure_foundry",
+  "model": "grok-4.3",
+  "base_url": "https://ambedkar-interpreter-resource.services.ai.azure.com/openai/v1",
+  "requests_per_minute": 500.0,
+  "rows_judged": 10,
+  "pass_rate": 0.8,
+  "label_distribution": {
+    "fail": 0.2,
+    "pass": 0.8
+  },
+  "positional_length_bias": {
+    "pearson_r": -0.8163041537394841,
+    "n": 10.0
+  },
+  "columns_added": [
+    "judge_verdict",
+    "judge_score",
+    "judge_reasoning",
+    "judge_flags",
+    "judge_provider",
+    "judge_model",
+    "stage"
+  ]
+}

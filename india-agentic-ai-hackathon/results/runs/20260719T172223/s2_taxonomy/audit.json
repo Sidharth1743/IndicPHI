@@ -1,0 +1,203 @@
+{
+  "stage": "s2_taxonomy",
+  "timestamp_utc": "2026-07-19T11:52:23.753720+00:00",
+  "input_jsonl": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T172223/s1_persona_sampling/personas.jsonl",
+  "seed": 42,
+  "personas_in": 10,
+  "documents_out": 10,
+  "doc_types": 14,
+  "domains": 7,
+  "taxonomy_cells": 98,
+  "prefer_unique_cell_per_persona": true,
+  "prefer_unique_doc_type_per_persona": true,
+  "prefer_unique_domain_per_persona": true,
+  "by_language": {
+    "bn": {
+      "docs": 1,
+      "cells_touched": 1,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "hospital_billing": 1
+      },
+      "domain_counts": {
+        "oncology_chronic": 1
+      },
+      "cell_counts": {
+        "hospital_billing__oncology_chronic": 1
+      }
+    },
+    "en": {
+      "docs": 1,
+      "cells_touched": 1,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "prescription": 1
+      },
+      "domain_counts": {
+        "psychiatry_behavioral": 1
+      },
+      "cell_counts": {
+        "prescription__psychiatry_behavioral": 1
+      }
+    },
+    "gu": {
+      "docs": 1,
+      "cells_touched": 1,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "prescription": 1
+      },
+      "domain_counts": {
+        "tb_ncd": 1
+      },
+      "cell_counts": {
+        "prescription__tb_ncd": 1
+      }
+    },
+    "hi": {
+      "docs": 1,
+      "cells_touched": 1,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "automated_sms": 1
+      },
+      "domain_counts": {
+        "tb_ncd": 1
+      },
+      "cell_counts": {
+        "automated_sms__tb_ncd": 1
+      }
+    },
+    "kn": {
+      "docs": 1,
+      "cells_touched": 1,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "automated_sms": 1
+      },
+      "domain_counts": {
+        "tb_ncd": 1
+      },
+      "cell_counts": {
+        "automated_sms__tb_ncd": 1
+      }
+    },
+    "ml": {
+      "docs": 1,
+      "cells_touched": 1,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "automated_sms": 1
+      },
+      "domain_counts": {
+        "general_medicine": 1
+      },
+      "cell_counts": {
+        "automated_sms__general_medicine": 1
+      }
+    },
+    "mr": {
+      "docs": 1,
+      "cells_touched": 1,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "discharge_summary": 1
+      },
+      "domain_counts": {
+        "tb_ncd": 1
+      },
+      "cell_counts": {
+        "discharge_summary__tb_ncd": 1
+      }
+    },
+    "pa": {
+      "docs": 1,
+      "cells_touched": 1,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "automated_sms": 1
+      },
+      "domain_counts": {
+        "psychiatry_behavioral": 1
+      },
+      "cell_counts": {
+        "automated_sms__psychiatry_behavioral": 1
+      }
+    },
+    "ta": {
+      "docs": 1,
+      "cells_touched": 1,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "automated_sms": 1
+      },
+      "domain_counts": {
+        "maternal_health": 1
+      },
+      "cell_counts": {
+        "automated_sms__maternal_health": 1
+      }
+    },
+    "te": {
+      "docs": 1,
+      "cells_touched": 1,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "referral_letter": 1
+      },
+      "domain_counts": {
+        "tb_ncd": 1
+      },
+      "cell_counts": {
+        "referral_letter__tb_ncd": 1
+      }
+    }
+  },
+  "global_doc_type_counts": {
+    "hospital_billing": 1,
+    "prescription": 2,
+    "automated_sms": 5,
+    "discharge_summary": 1,
+    "referral_letter": 1
+  },
+  "global_domain_counts": {
+    "oncology_chronic": 1,
+    "psychiatry_behavioral": 2,
+    "tb_ncd": 5,
+    "general_medicine": 1,
+    "maternal_health": 1
+  },
+  "persona_unique_cells_histogram": {
+    "1": 10
+  },
+  "columns_added": [
+    "doc_slot",
+    "doc_type_id",
+    "doc_type_name",
+    "domain_id",
+    "domain_name",
+    "taxonomy_cell_id",
+    "assignment_seed",
+    "stage"
+  ]
+}

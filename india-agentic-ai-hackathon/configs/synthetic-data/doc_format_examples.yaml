@@ -1,0 +1,100 @@
+# Short worked examples per doc type (shown in S3 prompts when generation drifts).
+# Keep examples tiny; they teach structure + [[TYPE|value]] discipline, not full clinical content.
+
+examples:
+  opd_slip: |
+    Example skeleton (adapt language/script; keep tags):
+    OPD Slip | [[HOSPITAL_NAME|District Hospital X]] | ID [[HOSPITAL_ID|DH-X-01]]
+    Patient: [[PATIENT_NAME|...]] | DOB [[DOB|1992-03-14]] | Age: [[AGE|34]] | Gender: [[GENDER|Female]]
+    Occupation: [[OCCUPATION|Teacher]] | MRN: [[MRN|OPD-2024-001]] | Doctor: [[DOCTOR_NAME|Dr. ...]]
+    District: [[DISTRICT|...]] | Chief complaint: <short clinical line>
+
+  prescription: |
+    Example skeleton:
+    Prescription — [[HOSPITAL_NAME|...]]
+    Patient [[PATIENT_NAME|...]], [[AGE|28]] / [[GENDER|Male]], MRN [[MRN|RX-1001]]
+    Dr. [[DOCTOR_NAME|...]]
+    Rx: <drug dose frequency>  (do NOT tag drug names as entities)
+
+  asha_worker_note: |
+    Example skeleton:
+    ASHA note — Village [[VILLAGE|...]], District [[DISTRICT|...]]
+    Beneficiary [[PATIENT_NAME|...]], [[AGE|26]] / [[GENDER|Female]]
+    ASHA: [[ASHA_WORKER_NAME|...]] | Phone [[PHONE_NUMBER|98XXXXXXXX]]
+    Visit findings: <2-4 short sentences>
+
+  automated_sms: |
+    CRITICAL: keep the WHOLE SMS under ~400 characters / 2–4 sentences. Not a form dump.
+    Example:
+    [[PATIENT_NAME|Meena Devi]]: appt [[APPOINTMENT_ID|APT-240521-01]] at [[HOSPITAL_NAME|PHC Kanpur]] on 21-May 10:30 with [[DOCTOR_NAME|Dr. Sharma]]. Confirm on [[PHONE_NUMBER|9876512340]].
+
+  hospital_billing: |
+    Example skeleton:
+    Invoice — [[HOSPITAL_NAME|...]] | Patient [[PATIENT_NAME|...]] | MRN [[MRN|...]]
+    Address district [[DISTRICT|...]] PIN [[PIN_CODE|110001]]
+    Ambulance / parking vehicle [[VEHICLE_REGISTRATION|PB10AB1234]] (exactly once).
+    Line items with amounts (no entity tags on procedure names).
+
+  discharge_summary: |
+    Example skeleton:
+    Discharge Summary — [[HOSPITAL_NAME|...]]
+    [[PATIENT_NAME|...]] DOB [[DOB|1994-06-21]] [[AGE|30]] [[GENDER|Female]]
+    Adm [[ADMISSION_NUMBER|...]] Ward [[WARD_NUMBER|B2]] Bed [[BED_NUMBER|12]]
+    Dr [[DOCTOR_NAME|...]] | Course / advice: <concise paragraphs matching domain + persona sex/age>
+
+  referral_letter: |
+    Example skeleton:
+    Referral [[REFERRAL_ID|REF-2024-01]] from [[HOSPITAL_NAME|...]] / [[DOCTOR_NAME|...]]
+    Re: [[PATIENT_NAME|...]], [[AGE|36]] / [[GENDER|Male]], District [[DISTRICT|...]]
+    Reason: <domain-appropriate clinical reason matching persona>
+
+  radiology_report: |
+    Example skeleton:
+    Imaging report — [[HOSPITAL_NAME|...]] | [[PATIENT_NAME|...]] [[AGE|45]] [[GENDER|Female]]
+    MRN [[MRN|...]] Encounter [[ENCOUNTER_ID|...]] | Findings: <radiology prose, untagged>
+
+  er_triage_notes: |
+    Example skeleton:
+    ER triage — [[HOSPITAL_NAME|...]] Encounter [[ENCOUNTER_ID|...]]
+    [[PATIENT_NAME|...]] [[AGE|22]] [[GENDER|Male]] Ward [[WARD_NUMBER|ER]] Bed [[BED_NUMBER|...]]
+    Arrived by ambulance / RTA vehicle [[VEHICLE_REGISTRATION|PB10AB1234]] (exactly once).
+    Relative [[RELATIVE_NAME|...]] Phone [[PHONE_NUMBER|...]] Dr [[DOCTOR_NAME|...]]
+    Vitals / acuity: <short notes>
+
+  telemedicine_transcript: |
+    Example skeleton — put device/network IDs ONLY in a short session header (once each),
+    then keep chat turns free of IP/IMEI/MAC/URL spam:
+    --- session ---
+    Appt [[APPOINTMENT_ID|...]] Portal [[URL|https://tele.example.in/visit]]
+    Client IP [[IP_ADDRESS|103.21.244.12]] Device IMEI [[IMEI_NUMBER|356938035643809]]
+    MAC [[MAC_ADDRESS|A1:B2:C3:D4:E5:F6]]
+    --- chat ---
+    Patient [[PATIENT_NAME|...]] [[AGE|34]] [[GENDER|Female]] ([[PHONE_NUMBER|98XXXXXXXX]], [[EMAIL_ADDRESS|...]]): <symptom>
+    Dr [[DOCTOR_NAME|...]] ([[HOSPITAL_NAME|...]]): <advice>
+
+  surgical_note: |
+    Example skeleton:
+    Operative note — [[HOSPITAL_NAME|...]] Adm [[ADMISSION_NUMBER|...]] Ward [[WARD_NUMBER|OT]]
+    [[PATIENT_NAME|...]] [[AGE|50]] [[GENDER|Female]] Surgeon [[DOCTOR_NAME|...]]
+    Procedure / findings: MUST describe an actual procedure/operation matching the
+    assigned clinical domain (not a psychiatry admission note). Keep relative names
+    gender-plausible.
+
+  lab_report: |
+    Example skeleton:
+    Lab report — [[HOSPITAL_NAME|...]] MRN [[MRN|...]]
+    [[PATIENT_NAME|...]] [[AGE|41]] [[GENDER|Male]] Ordered by [[DOCTOR_NAME|...]]
+    Results table (analyte values NOT tagged as PHI entities).
+
+  phc_register: |
+    Example skeleton:
+    PHC register — [[HOSPITAL_NAME|PHC ...]] Village [[VILLAGE|...]] District [[DISTRICT|...]]
+    [[PATIENT_NAME|...]] [[AGE|19]] [[GENDER|Female]] | brief entry line
+
+  insurance_claim: |
+    Example skeleton:
+    TPA claim — Policy [[INSURANCE_POLICY_NUMBER|POL-PB-2024-7781]]
+    [[PATIENT_NAME|...]] [[AGE|25]] [[GENDER|Male]] Aadhaar [[AADHAAR_NUMBER|157815659387]]
+    Hospital [[HOSPITAL_NAME|...]] District [[DISTRICT|...]]
+    Motor / RTA vehicle [[VEHICLE_REGISTRATION|PB10AB1234]] (exactly once).
+    PAN [[PAN_NUMBER|ABCDE1234F]] IFSC [[IFSC_CODE|SBIN0001234]] account [[BANK_ACCOUNT_NUMBER|...]]

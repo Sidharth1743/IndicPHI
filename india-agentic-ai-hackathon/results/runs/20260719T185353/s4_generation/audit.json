@@ -1,0 +1,76 @@
+{
+  "stage": "s4_generation",
+  "timestamp_utc": "2026-07-19T13:27:25.419983+00:00",
+  "provider": "sarvam",
+  "model": "sarvam-105b",
+  "base_url": "https://api.sarvam.ai/v1",
+  "reasoning_effort": null,
+  "requests_per_minute": 110.0,
+  "max_workers": 8,
+  "max_tokens": 16384,
+  "reject_truncated": true,
+  "input_jsonl": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T185353/s3_prompts/prompts.jsonl",
+  "rows_requested": 10,
+  "rows_generated": 10,
+  "failures": [],
+  "soft_failures": [
+    {
+      "uuid": "7568f8e67bea4c959a480fd295d29db7",
+      "document_id": "7568f8e67bea4c959a480fd295d29db7__0",
+      "doc_type_id": "telemedicine_transcript",
+      "document_language_code": "en",
+      "missing_required_entities": [
+        "AGE",
+        "GENDER"
+      ],
+      "stuffed_entity_types": [
+        "DOCTOR_NAME",
+        "PATIENT_NAME"
+      ],
+      "reasons": [
+        "missing_required_entities:AGE,GENDER",
+        "entity_stuffing:DOCTOR_NAME,PATIENT_NAME"
+      ]
+    }
+  ],
+  "soft_fail_count": 1,
+  "entity_coverage_incomplete_count": 1,
+  "entity_stuffing_count": 1,
+  "doc_type_counts": {
+    "asha_worker_note": 2,
+    "automated_sms": 3,
+    "er_triage_notes": 1,
+    "radiology_report": 3,
+    "telemedicine_transcript": 1
+  },
+  "language_counts": {
+    "bn": 1,
+    "en": 1,
+    "gu": 1,
+    "hi": 1,
+    "kn": 1,
+    "ml": 1,
+    "mr": 1,
+    "pa": 1,
+    "ta": 1,
+    "te": 1
+  },
+  "mean_chars": 719.2,
+  "entity_coverage_complete_rate": 0.9,
+  "columns_added": [
+    "document_id",
+    "generated_text",
+    "generator_provider",
+    "generator_model",
+    "generator_finish_reason",
+    "generator_prompt_tokens",
+    "generator_completion_tokens",
+    "entity_coverage_complete",
+    "missing_required_entities",
+    "entity_stuffing",
+    "stuffed_entity_types",
+    "generation_soft_fail",
+    "generation_soft_fail_reasons",
+    "stage"
+  ]
+}

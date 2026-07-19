@@ -1,0 +1,58 @@
+{
+  "stage": "s9_gliner_format",
+  "timestamp_utc": "2026-07-19T11:55:56.371035+00:00",
+  "input_jsonl": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T172223/s7_s8_curation/curated.jsonl",
+  "rows_in": 6,
+  "rows_out": 6,
+  "mean_tokens": 238.16666666666666,
+  "mean_entities": 5.5,
+  "ecr": {
+    "mean_ecr": 1.0,
+    "min_ecr": 1.0,
+    "max_ecr": 1.0,
+    "n": 6
+  },
+  "ised": {
+    "mean_ised": 0.9153846153846155,
+    "per_entity_type": {
+      "ADMISSION_NUMBER": 1.0,
+      "AGE": 1.0,
+      "APPOINTMENT_ID": 0.5,
+      "BED_NUMBER": 1.0,
+      "DISTRICT": 1.0,
+      "DOCTOR_NAME": 1.0,
+      "GENDER": 1.0,
+      "HOSPITAL_NAME": 1.0,
+      "MRN": 1.0,
+      "PATIENT_NAME": 1.0,
+      "PHONE_NUMBER": 0.4,
+      "RESIDENTIAL_ADDRESS": 1.0,
+      "WARD_NUMBER": 1.0
+    },
+    "entity_types": 13,
+    "total_mentions": 33
+  },
+  "ied": {
+    "mean_ised": 0.9153846153846155,
+    "per_entity_type": {
+      "ADMISSION_NUMBER": 1.0,
+      "AGE": 1.0,
+      "APPOINTMENT_ID": 0.5,
+      "BED_NUMBER": 1.0,
+      "DISTRICT": 1.0,
+      "DOCTOR_NAME": 1.0,
+      "GENDER": 1.0,
+      "HOSPITAL_NAME": 1.0,
+      "MRN": 1.0,
+      "PATIENT_NAME": 1.0,
+      "PHONE_NUMBER": 0.4,
+      "RESIDENTIAL_ADDRESS": 1.0,
+      "WARD_NUMBER": 1.0
+    },
+    "entity_types": 13,
+    "total_mentions": 33
+  },
+  "gold_span_metrics": null,
+  "gold_jsonl": null,
+  "fail_on_token_misalign": true
+}

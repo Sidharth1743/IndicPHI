@@ -1,0 +1,36 @@
+{
+  "stage": "s3_prompt_construction",
+  "timestamp_utc": "2026-07-19T10:07:49.069865+00:00",
+  "input_jsonl": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T153748/s2_taxonomy/assignments.jsonl",
+  "rows_in": 10,
+  "rows_out": 10,
+  "max_docs": null,
+  "language_codes": null,
+  "doc_type_counts": {
+    "automated_sms": 3,
+    "discharge_summary": 1,
+    "hospital_billing": 1,
+    "insurance_claim": 2,
+    "prescription": 2,
+    "referral_letter": 1
+  },
+  "language_counts": {
+    "bn": 1,
+    "en": 1,
+    "gu": 1,
+    "hi": 1,
+    "kn": 1,
+    "ml": 1,
+    "mr": 1,
+    "pa": 1,
+    "ta": 1,
+    "te": 1
+  },
+  "columns_added": [
+    "system_prompt",
+    "user_prompt",
+    "required_entities",
+    "optional_entities",
+    "stage"
+  ]
+}

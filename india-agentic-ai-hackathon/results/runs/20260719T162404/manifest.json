@@ -1,0 +1,56 @@
+{
+  "run_id": "20260719T162404",
+  "created_utc": "2026-07-19T10:54:04.861368+00:00",
+  "base_config": "/home/sidharth/Desktop/nvidia-hack/configs/synthetic-data/pipeline.smoke.yaml",
+  "resolved_config": "data/generated/runs/20260719T162404/pipeline.resolved.yaml",
+  "stages": [
+    {
+      "block": "persona_sampling",
+      "folder": "s1_persona_sampling",
+      "primary_output": "personas.jsonl",
+      "path": "data/generated/runs/20260719T162404/s1_persona_sampling"
+    },
+    {
+      "block": "taxonomy",
+      "folder": "s2_taxonomy",
+      "primary_output": "assignments.jsonl",
+      "path": "data/generated/runs/20260719T162404/s2_taxonomy"
+    },
+    {
+      "block": "prompt_construction",
+      "folder": "s3_prompts",
+      "primary_output": "prompts.jsonl",
+      "path": "data/generated/runs/20260719T162404/s3_prompts"
+    },
+    {
+      "block": "generation",
+      "folder": "s4_generation",
+      "primary_output": "documents.jsonl",
+      "path": "data/generated/runs/20260719T162404/s4_generation"
+    },
+    {
+      "block": "linguistic_judge",
+      "folder": "s5_linguistic_judge",
+      "primary_output": "judged.jsonl",
+      "path": "data/generated/runs/20260719T162404/s5_linguistic_judge"
+    },
+    {
+      "block": "deterministic_auditor",
+      "folder": "s6_deterministic_auditor",
+      "primary_output": "audited.jsonl",
+      "path": "data/generated/runs/20260719T162404/s6_deterministic_auditor"
+    },
+    {
+      "block": "curation",
+      "folder": "s7_s8_curation",
+      "primary_output": "curated.jsonl",
+      "path": "data/generated/runs/20260719T162404/s7_s8_curation"
+    },
+    {
+      "block": "gliner_format",
+      "folder": "s9_gliner_format",
+      "primary_output": "gliner_docs.jsonl",
+      "path": "data/generated/runs/20260719T162404/s9_gliner_format"
+    }
+  ]
+}

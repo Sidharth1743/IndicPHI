@@ -1,0 +1,12 @@
+# GLiNER fine-tuning config (stub)
+
+base_model: gliner-community/gliner_medium-v2.1  # example; finalize at train time
+epochs: 5
+learning_rate: 5.0e-5
+train_fraction_curve: [0.1, 0.2, 0.3, 0.5, 0.75, 1.0]
+batch_size: 8
+max_length: 384
+seed: 42
+# data paths filled after S9 / S10 split
+train_json: data/generated/runs/latest/s9_gliner_format/gliner_train.json
+eval_dir: data/eval

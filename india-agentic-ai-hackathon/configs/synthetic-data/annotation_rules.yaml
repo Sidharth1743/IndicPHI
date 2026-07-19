@@ -1,0 +1,37 @@
+# Inline surrogate annotation rules (plan §5).
+
+inline_format:
+  pattern: "[[TYPE|surrogate_value]]"
+  description: >
+    Every PII/PHI mention in the generated clinical text MUST be wrapped as
+    [[ENTITY_TYPE|surrogate_value]] using an entity id from the allow-list only.
+    Do not emit unlabeled real-looking identifiers. Do not invent TYPE names
+    (no DATE, TIME, POLICY_NUMBER, MEDICAL_RECORD_NUMBER — use MRN / APPOINTMENT_ID / etc.).
+
+rules:
+  - Use ONLY synthetic surrogate values. Never copy real people or real IDs.
+  - Keep the same surrogate for the same entity type within one document (DICS).
+  - Write clinical prose in the assigned document language and script.
+  - ID-like entity values (Aadhaar, PAN, IFSC, MRN, phone, policy numbers, emails)
+    MAY stay Latin/digits even in Indic documents — that is expected, not impurity.
+  - Person/place names should prefer the document script when natural; Latin names are OK if culturally plausible.
+  - Ground geography in the persona state/district/zone when location appears.
+  - Age and gender in the note MUST match the persona fields exactly.
+  - Clinical content MUST fit the assigned domain AND the persona (no maternal delivery for male patients; no paediatric domain for adults).
+  - Include every mandatory entity from the doc-type profile at least once
+    (required ∪ optional when require_all_profile_entities is on).
+  - Prefer exactly one tag per mandatory TYPE. Never dump/repeat the same TYPE
+    to pad coverage (max 2 occurrences). No trailing entity laundry-lists.
+  - Device/network IDs (IP_ADDRESS, URL, IMEI_NUMBER, MAC_ADDRESS) belong only
+    in telemedicine session metadata — once each, never inside chat turns.
+  - VEHICLE_REGISTRATION belongs only in ER arrival, hospital billing, or
+    insurance claim lines — once, never dumped.
+  - Optional entities may be included when natural for the document type.
+  - Do not invent entity TYPE names outside the provided allow-list.
+  - Never invent DATE, TIME, APPOINTMENT_DATE, APPOINTMENT_TIME, POLICY_NUMBER —
+    write calendar dates/times as plain prose outside tags.
+  - Do not wrap non-PHI clinical prose (symptoms, meds, vitals, drug names) as entities.
+  - Never tag currency/amounts (rupees, GST, totals, line-item rates) — leave as plain numbers.
+  - Use 10-digit Indian mobiles (optional +91 / 91 prefix). Avoid toy patterns.
+  - automated_sms must stay short (≤ ~400 characters, 2–4 sentences) — never dump a full chart into an SMS.
+  - Output ONLY the clinical document text — no markdown fences, no preamble, no postscript.

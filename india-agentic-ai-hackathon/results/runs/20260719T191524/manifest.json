@@ -1,0 +1,68 @@
+{
+  "run_id": "20260719T191524",
+  "created_utc": "2026-07-19T13:45:24.727301+00:00",
+  "base_config": "/home/sidharth/Desktop/nvidia-hack/configs/synthetic-data/pipeline.smoke.medium.yaml",
+  "resolved_config": "data/generated/runs/20260719T191524/pipeline.resolved.yaml",
+  "stages": [
+    {
+      "block": "persona_sampling",
+      "folder": "s1_persona_sampling",
+      "primary_output": "personas.jsonl",
+      "path": "data/generated/runs/20260719T191524/s1_persona_sampling"
+    },
+    {
+      "block": "taxonomy",
+      "folder": "s2_taxonomy",
+      "primary_output": "assignments.jsonl",
+      "path": "data/generated/runs/20260719T191524/s2_taxonomy"
+    },
+    {
+      "block": "persona_summary",
+      "folder": "s2b_persona_summary",
+      "primary_output": "assignments_summarized.jsonl",
+      "path": "data/generated/runs/20260719T191524/s2b_persona_summary"
+    },
+    {
+      "block": "prompt_construction",
+      "folder": "s3_prompts",
+      "primary_output": "prompts.jsonl",
+      "path": "data/generated/runs/20260719T191524/s3_prompts"
+    },
+    {
+      "block": "generation",
+      "folder": "s4_generation",
+      "primary_output": "documents.jsonl",
+      "path": "data/generated/runs/20260719T191524/s4_generation"
+    },
+    {
+      "block": "translation",
+      "folder": "s4b_translation",
+      "primary_output": "documents.jsonl",
+      "path": "data/generated/runs/20260719T191524/s4b_translation"
+    },
+    {
+      "block": "linguistic_judge",
+      "folder": "s5_linguistic_judge",
+      "primary_output": "judged.jsonl",
+      "path": "data/generated/runs/20260719T191524/s5_linguistic_judge"
+    },
+    {
+      "block": "deterministic_auditor",
+      "folder": "s6_deterministic_auditor",
+      "primary_output": "audited.jsonl",
+      "path": "data/generated/runs/20260719T191524/s6_deterministic_auditor"
+    },
+    {
+      "block": "curation",
+      "folder": "s7_s8_curation",
+      "primary_output": "curated.jsonl",
+      "path": "data/generated/runs/20260719T191524/s7_s8_curation"
+    },
+    {
+      "block": "gliner_format",
+      "folder": "s9_gliner_format",
+      "primary_output": "gliner_docs.jsonl",
+      "path": "data/generated/runs/20260719T191524/s9_gliner_format"
+    }
+  ]
+}

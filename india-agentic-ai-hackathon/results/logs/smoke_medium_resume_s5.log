@@ -1,0 +1,95 @@
+[run] resuming run_id=20260719T191524
+[run] run_id=20260719T191524
+[run] folder=/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524
+[run] config=/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/pipeline.resolved.yaml
+--- skip s1_persona_sampling (before --from-stage) ---
+--- skip s2_taxonomy (before --from-stage) ---
+--- skip s2b_persona_summary (before --from-stage) ---
+--- skip s3_prompt_construction (before --from-stage) ---
+--- skip s4_generation (before --from-stage) ---
+--- skip s4b_translation (before --from-stage) ---
+
+=== s5_linguistic_judge ===
+[s5_linguistic_judge] FAILED: Judge failed at row 2 uuid='7568f8e67bea4c959a480fd295d29db7': OpenAI-compatible network error: <urlopen error [Errno -3] Temporary failure in name resolution>
+[run] failures audit → /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/failures.md
+[run] resuming run_id=20260719T191524
+[run] run_id=20260719T191524
+[run] folder=/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524
+[run] config=/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/pipeline.resolved.yaml
+--- skip s1_persona_sampling (before --from-stage) ---
+--- skip s2_taxonomy (before --from-stage) ---
+--- skip s2b_persona_summary (before --from-stage) ---
+--- skip s3_prompt_construction (before --from-stage) ---
+--- skip s4_generation (before --from-stage) ---
+--- skip s4b_translation (before --from-stage) ---
+
+=== s5_linguistic_judge ===
+[run] resuming run_id=20260719T191524
+[run] run_id=20260719T191524
+[run] folder=/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524
+[run] config=/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/pipeline.resolved.yaml
+--- skip s1_persona_sampling (before --from-stage) ---
+--- skip s2_taxonomy (before --from-stage) ---
+--- skip s2b_persona_summary (before --from-stage) ---
+--- skip s3_prompt_construction (before --from-stage) ---
+--- skip s4_generation (before --from-stage) ---
+--- skip s4b_translation (before --from-stage) ---
+
+=== s5_linguistic_judge ===
+[s5_linguistic_judge] FAILED: The read operation timed out
+[run] failures audit → /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/failures.md
+[run] resuming run_id=20260719T191524
+[run] run_id=20260719T191524
+[run] folder=/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524
+[run] config=/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/pipeline.resolved.yaml
+--- skip s1_persona_sampling (before --from-stage) ---
+--- skip s2_taxonomy (before --from-stage) ---
+--- skip s2b_persona_summary (before --from-stage) ---
+--- skip s3_prompt_construction (before --from-stage) ---
+--- skip s4_generation (before --from-stage) ---
+--- skip s4b_translation (before --from-stage) ---
+
+=== s5_linguistic_judge ===
+[s5] retry 1/4 uuid=a0e48ed9fa6f415f8cf8127949fb1a73 after 1s: OpenAI-compatible timeout after 600.0s: The read operation timed out
+[s5] retry 1/4 uuid=48c92b81b6d94d4f8673300bd6855118 after 1s: OpenAI-compatible timeout after 600.0s: The read operation timed out
+[s5] retry 1/4 uuid=01fef5fa094b4e0e83a555263004aa08 after 1s: OpenAI-compatible timeout after 600.0s: The read operation timed out
+[s5] WARNING: 2 judge fail(s) logged — see failed.jsonl and audit failures
+[s5_linguistic_judge] OK → /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s5_linguistic_judge
+  all_jsonl: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s5_linguistic_judge/judged.jsonl
+  passed_jsonl: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s5_linguistic_judge/passed.jsonl
+  failed_jsonl: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s5_linguistic_judge/failed.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s5_linguistic_judge/judged.parquet
+  audit_json: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s5_linguistic_judge/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s5_linguistic_judge/audit.md
+  soft_failures_jsonl: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s5_linguistic_judge/soft_failures.jsonl
+
+=== s6_deterministic_auditor ===
+[s6] WARNING: 2 auditor failure(s) logged — see failed.jsonl and audit failures
+[s6_deterministic_auditor] OK → /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s6_deterministic_auditor
+  all_jsonl: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s6_deterministic_auditor/audited.jsonl
+  passed_jsonl: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s6_deterministic_auditor/passed.jsonl
+  failed_jsonl: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s6_deterministic_auditor/failed.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s6_deterministic_auditor/audited.parquet
+  audit_json: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s6_deterministic_auditor/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s6_deterministic_auditor/audit.md
+  failures_jsonl: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s6_deterministic_auditor/failures.jsonl
+
+=== s7_s8_curation ===
+[s7_s8_curation] OK → /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s7_s8_curation
+  jsonl: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s7_s8_curation/curated.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s7_s8_curation/curated.parquet
+  audit_json: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s7_s8_curation/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s7_s8_curation/audit.md
+
+=== s9_gliner_format ===
+[s9_gliner_format] OK → /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s9_gliner_format
+  jsonl: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s9_gliner_format/gliner_docs.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s9_gliner_format/gliner_docs.parquet
+  gliner_json: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s9_gliner_format/gliner_train.json
+  audit_json: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s9_gliner_format/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/s9_gliner_format/audit.md
+  preview_jsonl: /home/sidharth/Desktop/nvidia-hack/data/samples/s9_gliner_preview.jsonl
+
+[run] complete → /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524
+[run] latest symlink → /home/sidharth/Desktop/nvidia-hack/data/generated/runs/latest
+[run] failures audit → /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T191524/failures.md

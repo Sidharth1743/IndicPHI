@@ -1,0 +1,25 @@
+{
+  "stage": "s6_deterministic_auditor",
+  "timestamp_utc": "2026-07-19T13:30:36.692117+00:00",
+  "rows_audited": 9,
+  "rows_passed": 8,
+  "rows_failed": 1,
+  "pass_rate": 0.8888888888888888,
+  "mean_dics": 1.0,
+  "mean_ecr": 0.9814814814814815,
+  "mean_bcr": 0.0,
+  "failures": [
+    {
+      "uuid": "7568f8e67bea4c959a480fd295d29db7",
+      "document_id": "7568f8e67bea4c959a480fd295d29db7__0",
+      "doc_type_id": "telemedicine_transcript",
+      "document_language_code": "en",
+      "auditor_errors": [
+        "missing_required:AGE,GENDER",
+        "entity_stuffing:DOCTOR_NAME,PATIENT_NAME",
+        "upstream_generation_soft_fail:missing_required_entities:AGE,GENDER;entity_stuffing:DOCTOR_NAME,PATIENT_NAME"
+      ]
+    }
+  ],
+  "failure_count": 1
+}

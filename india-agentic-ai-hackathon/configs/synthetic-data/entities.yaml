@@ -1,0 +1,166 @@
+# PII / PHI entity taxonomy (plan §9). Stable `id` is the inline tag TYPE.
+
+entities:
+  # Personal
+  - id: PATIENT_NAME
+    name: Patient Name
+    category: pii_personal
+  - id: RELATIVE_NAME
+    name: Relative Name (Father/Mother/Spouse/Guardian)
+    category: pii_personal
+  - id: DOB
+    name: Date of Birth
+    category: pii_personal
+  - id: AGE
+    name: Age
+    category: pii_personal
+  - id: GENDER
+    name: Gender
+    category: pii_personal
+  - id: RELIGION
+    name: Religion
+    category: pii_personal
+  - id: CASTE
+    name: Caste
+    category: pii_personal
+  - id: OCCUPATION
+    name: Occupation
+    category: pii_personal
+
+  # Government IDs
+  - id: AADHAAR_NUMBER
+    name: Aadhaar Number
+    category: pii_gov_id
+  - id: PAN_NUMBER
+    name: PAN Number
+    category: pii_gov_id
+  - id: PASSPORT_NUMBER
+    name: Passport Number
+    category: pii_gov_id
+  - id: DRIVING_LICENCE
+    name: Driving Licence Number
+    category: pii_gov_id
+  - id: VOTER_ID
+    name: Voter ID
+    category: pii_gov_id
+  - id: BPL_RATION_CARD
+    name: BPL / Ration Card Number
+    category: pii_gov_id
+  - id: TAX_ID
+    name: Tax Identification Number (TIN/GSTIN)
+    category: pii_gov_id
+
+  # Contact & location
+  - id: PHONE_NUMBER
+    name: Phone Number
+    category: pii_contact
+  - id: TELEPHONE_LANDLINE
+    name: Telephone Number (Landline)
+    category: pii_contact
+  - id: EMAIL_ADDRESS
+    name: Email Address
+    category: pii_contact
+  - id: RESIDENTIAL_ADDRESS
+    name: Residential Address
+    category: pii_contact
+  - id: DISTRICT
+    name: District
+    category: pii_contact
+  - id: VILLAGE
+    name: Village
+    category: pii_contact
+  - id: PIN_CODE
+    name: ZIP / Postal Code (PIN Code)
+    category: pii_contact
+  - id: IP_ADDRESS
+    name: IP Address
+    category: pii_contact
+  - id: URL
+    name: URL (Personal Website/Profile)
+    category: pii_contact
+
+  # Financial
+  - id: BANK_ACCOUNT_NUMBER
+    name: Bank Account Number
+    category: pii_financial
+  - id: IFSC_CODE
+    name: IFSC Code
+    category: pii_financial
+  - id: BANK_ROUTING_NUMBER
+    name: Bank Routing Number
+    category: pii_financial
+  - id: CREDIT_CARD_NUMBER
+    name: Credit Card Number
+    category: pii_financial
+  - id: CVV
+    name: CVV
+    category: pii_financial
+  - id: PIN
+    name: PIN
+    category: pii_financial
+
+  # Professional / device / other
+  - id: EMPLOYEE_ID
+    name: Employee ID
+    category: pii_professional
+  - id: STUDENT_ID
+    name: Student ID
+    category: pii_professional
+  - id: IMEI_NUMBER
+    name: IMEI Number
+    category: pii_device
+  - id: MAC_ADDRESS
+    name: MAC Address
+    category: pii_device
+  - id: VEHICLE_REGISTRATION
+    name: Vehicle Registration Number
+    category: pii_other
+
+  # PHI — patient healthcare IDs
+  - id: ABHA_ID
+    name: ABHA ID
+    category: phi_patient_id
+  - id: ABHA_ADDRESS
+    name: ABHA Address
+    category: phi_patient_id
+  - id: MRN
+    name: Medical Record Number (MRN)
+    category: phi_patient_id
+  - id: PATIENT_ID
+    name: Patient ID
+    category: phi_patient_id
+  - id: HOSPITAL_ID
+    name: Hospital ID
+    category: phi_patient_id
+  - id: ADMISSION_NUMBER
+    name: Admission Number
+    category: phi_patient_id
+  - id: ENCOUNTER_ID
+    name: Encounter / Visit ID
+    category: phi_patient_id
+  - id: APPOINTMENT_ID
+    name: Appointment ID
+    category: phi_patient_id
+  - id: REFERRAL_ID
+    name: Referral ID
+    category: phi_patient_id
+
+  # PHI — providers / facility
+  - id: DOCTOR_NAME
+    name: Doctor Name
+    category: phi_provider
+  - id: ASHA_WORKER_NAME
+    name: ASHA Worker Name
+    category: phi_provider
+  - id: HOSPITAL_NAME
+    name: Hospital / Institution Name
+    category: phi_provider
+  - id: BED_NUMBER
+    name: Bed Number
+    category: phi_facility
+  - id: WARD_NUMBER
+    name: Ward Number
+    category: phi_facility
+  - id: INSURANCE_POLICY_NUMBER
+    name: Insurance Policy Number
+    category: phi_facility

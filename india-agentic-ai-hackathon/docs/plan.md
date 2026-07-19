@@ -40,7 +40,7 @@ nvidia-hack/                         # repo root (existing)
 │   ├── demo-script.md               # step-by-step live demo walkthrough
 │   └── evaluation-plan.md           # intrinsic + extrinsic metric definitions & targets
 │
-├── app/                             # the pipeline "agents" + orchestration (importable pkg)
+├── main/                            # the pipeline "agents" + orchestration (importable pkg)
 │   ├── __init__.py
 │   ├── agents/                      # per-stage logic (the flowchart boxes)
 │   │   ├── persona_sampler.py       # S1  sample Nemotron-Personas-India (HF)
@@ -106,7 +106,7 @@ nvidia-hack/                         # repo root (existing)
     └── eval_report.md               # final intrinsic + extrinsic numbers
 ```
 
-**Note on existing files:** Existing prototype snippets were folded into `notebooks/02_preview_generation.ipynb` and `app/pipeline/designer_config.py`, then removed from standalone scratch files. The cloned `Curator/` repo stays local for reference but is `.gitignored`; this project depends on `nemo-curator` from PyPI.
+**Note on existing files:** Existing prototype snippets were folded into `notebooks/02_preview_generation.ipynb` and `main/pipeline/designer_config.py`, then removed from standalone scratch files. The cloned `Curator/` repo stays local for reference but is `.gitignored`; this project depends on `nemo-curator` from PyPI.
 
 ---
 
@@ -115,18 +115,18 @@ nvidia-hack/                         # repo root (existing)
 | Stage | Flowchart box                     | Module                                                              |
 | ----- | --------------------------------- | ------------------------------------------------------------------- |
 | S0    | Foundation / NIM setup            | `configs/nim.env.example`, `pyproject.toml`                         |
-| S1    | Persona sampling (3 docs/persona) | `app/agents/persona_sampler.py`                                     |
-| S2    | Doc taxonomy (14×7)               | `app/agents/taxonomy.py`, `configs/synthetic-data/*`                |
-| S3    | Prompt construction               | `app/agents/prompt_builder.py`                                      |
-| S4    | Generator (Sarvam-30B)            | `app/agents/generator.py`, `app/pipeline/designer_config.py`        |
-| S5    | Linguistic judge (Sarvam-105B)    | `app/agents/linguistic_judge.py`, `app/metrics/judge_metrics.py`    |
-| S6    | Deterministic auditor             | `app/agents/deterministic_auditor.py`, `app/validators/*`           |
-| S7    | Dedup (MinHash+LSH)               | `app/pipeline/curate.py`                                            |
-| S8    | Distribution balancing            | `app/pipeline/curate.py`                                            |
-| S9    | GLiNER format + intrinsic         | `app/pipeline/gliner_format.py`, `app/metrics/intrinsic.py`         |
-| S10   | Train/test split                  | `app/pipeline/split.py`                                             |
-| S11   | Dataset release (HF + DPDP)       | `app/pipeline/release.py`                                           |
-| S12   | GLiNER fine-tune + curve          | `app/train/gliner_finetune.py`, `notebooks/03_learning_curve.ipynb` |
+| S1    | Persona sampling (3 docs/persona) | `main/agents/persona_sampler.py`                                     |
+| S2    | Doc taxonomy (14×7)               | `main/agents/taxonomy.py`, `configs/synthetic-data/*`                |
+| S3    | Prompt construction               | `main/agents/prompt_builder.py`                                      |
+| S4    | Generator (Sarvam-30B)            | `main/agents/generator.py`, `main/pipeline/designer_config.py`        |
+| S5    | Linguistic judge (Sarvam-105B)    | `main/agents/linguistic_judge.py`, `main/metrics/judge_metrics.py`    |
+| S6    | Deterministic auditor             | `main/agents/deterministic_auditor.py`, `main/validators/*`           |
+| S7    | Dedup (MinHash+LSH)               | `main/pipeline/curate.py`                                            |
+| S8    | Distribution balancing            | `main/pipeline/curate.py`                                            |
+| S9    | GLiNER format + intrinsic         | `main/pipeline/gliner_format.py`, `main/metrics/intrinsic.py`         |
+| S10   | Train/test split                  | `main/pipeline/split.py`                                             |
+| S11   | Dataset release (HF + DPDP)       | `main/pipeline/release.py`                                           |
+| S12   | GLiNER fine-tune + curve          | `main/train/gliner_finetune.py`, `notebooks/03_learning_curve.ipynb` |
 
 ---
 

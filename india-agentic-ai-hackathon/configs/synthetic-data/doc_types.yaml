@@ -1,0 +1,44 @@
+# 14 clinical document types (plan §7). Stable `id` is used in assignments.
+
+doc_types:
+  - id: opd_slip
+    name: OPD Slip (Outpatient Department)
+
+  - id: prescription
+    name: Prescription
+
+  - id: asha_worker_note
+    name: ASHA Worker Note
+
+  - id: automated_sms
+    name: Automated SMS Notifications
+
+  - id: hospital_billing
+    name: Hospital Billing / Invoice
+
+  - id: discharge_summary
+    name: Discharge Summary
+
+  - id: referral_letter
+    name: Referral Letter
+
+  - id: radiology_report
+    name: Radiology / Imaging Report
+
+  - id: er_triage_notes
+    name: ER Triage & Nursing Notes
+
+  - id: telemedicine_transcript
+    name: Telemedicine / Doctor-Patient Chat Transcript
+
+  - id: surgical_note
+    name: Surgical / Operative Note
+
+  - id: lab_report
+    name: Lab Report
+
+  - id: phc_register
+    name: PHC Register Entry (Primary Health Centre)
+
+  - id: insurance_claim
+    name: Insurance Claim / TPA Form

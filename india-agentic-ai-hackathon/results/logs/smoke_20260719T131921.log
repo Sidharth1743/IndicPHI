@@ -1,0 +1,26 @@
+[s2b_persona_summary] FAILED: Persona summary failed at row 0 uuid='89d785f5c9f64f119b428efc6d0c259e': Sarvam network error: <urlopen error [Errno -3] Temporary failure in name resolution>
+[run] run_id=20260719T184922
+[run] folder=/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T184922
+[run] config=/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T184922/pipeline.resolved.yaml
+
+=== s1_persona_sampling ===
+[s1_persona_sampling] OK → /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T184922/s1_persona_sampling
+  jsonl: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T184922/s1_persona_sampling/personas.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T184922/s1_persona_sampling/personas.parquet
+  audit_json: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T184922/s1_persona_sampling/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T184922/s1_persona_sampling/audit.md
+  preview_jsonl: /home/sidharth/Desktop/nvidia-hack/data/samples/s1_personas_preview.jsonl
+
+=== s2_taxonomy ===
+[s2_taxonomy] OK → /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T184922/s2_taxonomy
+  jsonl: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T184922/s2_taxonomy/assignments.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T184922/s2_taxonomy/assignments.parquet
+  audit_json: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T184922/s2_taxonomy/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T184922/s2_taxonomy/audit.md
+  preview_jsonl: /home/sidharth/Desktop/nvidia-hack/data/samples/s2_taxonomy_preview.jsonl
+
+=== s2b_persona_summary ===
+[run] resuming run_id=20260719T184922
+[run] run_id=20260719T184922
+[run] folder=/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T184922
+[run] config=/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T184922/pipeline.resolved.yaml

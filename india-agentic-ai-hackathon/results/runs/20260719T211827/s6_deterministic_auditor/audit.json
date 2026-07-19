@@ -1,0 +1,32 @@
+{
+  "stage": "s6_deterministic_auditor",
+  "timestamp_utc": "2026-07-19T15:57:42.692118+00:00",
+  "rows_audited": 17,
+  "rows_passed": 15,
+  "rows_failed": 2,
+  "pass_rate": 0.8823529411764706,
+  "mean_dics": 1.0,
+  "mean_ecr": 1.0,
+  "mean_bcr": 0.0,
+  "failures": [
+    {
+      "uuid": "9a1021f9af894a73808c2e1c1dc870b0",
+      "document_id": "9a1021f9af894a73808c2e1c1dc870b0__0",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "ta",
+      "auditor_errors": [
+        "format:AADHAAR_NUMBER:aadhaar_verhoeff"
+      ]
+    },
+    {
+      "uuid": "01fef5fa094b4e0e83a555263004aa08",
+      "document_id": "01fef5fa094b4e0e83a555263004aa08__0",
+      "doc_type_id": "radiology_report",
+      "document_language_code": "te",
+      "auditor_errors": [
+        "unknown_entity_types:STATE"
+      ]
+    }
+  ],
+  "failure_count": 2
+}

@@ -1,0 +1,229 @@
+# Per doc-type entity surface. Every doc_type_id from doc_types.yaml MUST appear.
+# Every entity id from entities.yaml MUST appear in ≥1 profile (full taxonomy coverage).
+# require_all_profile_entities=true → every listed entity is mandatory (≥1 tag).
+#
+# Placement rules for device / vehicle IDs (do NOT make these LLM-optional):
+# - IP_ADDRESS, URL, IMEI_NUMBER, MAC_ADDRESS → telemedicine_transcript only
+#   (session/device metadata block — once each, never spam chat turns)
+# - VEHICLE_REGISTRATION → er_triage_notes (RTA arrival), hospital_billing
+#   (ambulance/parking), insurance_claim (motor/RTA claim)
+
+profiles:
+  opd_slip:
+    required:
+      - PATIENT_NAME
+      - AGE
+      - GENDER
+      - DOB
+      - OCCUPATION
+      - DOCTOR_NAME
+      - HOSPITAL_NAME
+      - HOSPITAL_ID
+      - DISTRICT
+      - MRN
+      - PHONE_NUMBER
+      - RELATIVE_NAME
+      - EMPLOYEE_ID
+    optional: []
+
+  prescription:
+    required:
+      - PATIENT_NAME
+      - AGE
+      - GENDER
+      - DOCTOR_NAME
+      - HOSPITAL_NAME
+      - MRN
+      - PHONE_NUMBER
+      - DISTRICT
+      - RESIDENTIAL_ADDRESS
+      - PATIENT_ID
+      - ABHA_ID
+    optional: []
+
+  asha_worker_note:
+    required:
+      - PATIENT_NAME
+      - AGE
+      - GENDER
+      - ASHA_WORKER_NAME
+      - VILLAGE
+      - DISTRICT
+      - PHONE_NUMBER
+      - RELATIVE_NAME
+      - BPL_RATION_CARD
+      - VOTER_ID
+      - RELIGION
+    optional: []
+
+  automated_sms:
+    required:
+      - PATIENT_NAME
+      - PHONE_NUMBER
+      - HOSPITAL_NAME
+      - APPOINTMENT_ID
+      - DOCTOR_NAME
+      - MRN
+    optional: []
+
+  hospital_billing:
+    required:
+      - PATIENT_NAME
+      - HOSPITAL_NAME
+      - MRN
+      - DISTRICT
+      - PIN_CODE
+      - PHONE_NUMBER
+      - AADHAAR_NUMBER
+      - INSURANCE_POLICY_NUMBER
+      - TAX_ID
+      - TELEPHONE_LANDLINE
+      - VEHICLE_REGISTRATION
+    optional: []
+
+  discharge_summary:
+    required:
+      - PATIENT_NAME
+      - AGE
+      - GENDER
+      - DOB
+      - DOCTOR_NAME
+      - HOSPITAL_NAME
+      - ADMISSION_NUMBER
+      - WARD_NUMBER
+      - BED_NUMBER
+      - RELATIVE_NAME
+      - DISTRICT
+      - PHONE_NUMBER
+      - ABHA_ADDRESS
+      - CASTE
+    optional: []
+
+  referral_letter:
+    required:
+      - PATIENT_NAME
+      - AGE
+      - GENDER
+      - DOCTOR_NAME
+      - HOSPITAL_NAME
+      - REFERRAL_ID
+      - DISTRICT
+      - MRN
+      - PHONE_NUMBER
+      - RELATIVE_NAME
+      - PASSPORT_NUMBER
+      - DRIVING_LICENCE
+    optional: []
+
+  radiology_report:
+    required:
+      - PATIENT_NAME
+      - AGE
+      - GENDER
+      - DOCTOR_NAME
+      - HOSPITAL_NAME
+      - MRN
+      - ENCOUNTER_ID
+      - DISTRICT
+      - PHONE_NUMBER
+      - HOSPITAL_ID
+      - ABHA_ID
+    optional: []
+
+  er_triage_notes:
+    # Vehicle belongs here for RTA / ambulance arrival — once in intake line.
+    required:
+      - PATIENT_NAME
+      - AGE
+      - GENDER
+      - DOCTOR_NAME
+      - HOSPITAL_NAME
+      - ENCOUNTER_ID
+      - WARD_NUMBER
+      - RELATIVE_NAME
+      - PHONE_NUMBER
+      - BED_NUMBER
+      - VEHICLE_REGISTRATION
+    optional: []
+
+  telemedicine_transcript:
+    # Device/network IDs belong ONLY here as session metadata (exactly once each).
+    required:
+      - PATIENT_NAME
+      - PHONE_NUMBER
+      - DOCTOR_NAME
+      - HOSPITAL_NAME
+      - AGE
+      - GENDER
+      - EMAIL_ADDRESS
+      - APPOINTMENT_ID
+      - IP_ADDRESS
+      - URL
+      - IMEI_NUMBER
+      - MAC_ADDRESS
+    optional: []
+
+  surgical_note:
+    required:
+      - PATIENT_NAME
+      - AGE
+      - GENDER
+      - DOCTOR_NAME
+      - HOSPITAL_NAME
+      - ADMISSION_NUMBER
+      - WARD_NUMBER
+      - BED_NUMBER
+      - MRN
+      - RELATIVE_NAME
+      - PATIENT_ID
+    optional: []
+
+  lab_report:
+    required:
+      - PATIENT_NAME
+      - AGE
+      - GENDER
+      - HOSPITAL_NAME
+      - MRN
+      - DOCTOR_NAME
+      - DISTRICT
+      - PHONE_NUMBER
+      - PATIENT_ID
+      - STUDENT_ID
+    optional: []
+
+  phc_register:
+    required:
+      - PATIENT_NAME
+      - AGE
+      - GENDER
+      - VILLAGE
+      - DISTRICT
+      - HOSPITAL_NAME
+      - PHONE_NUMBER
+      - ASHA_WORKER_NAME
+      - BPL_RATION_CARD
+      - VOTER_ID
+      - ABHA_ID
+    optional: []
+
+  insurance_claim:
+    # Vehicle belongs here for motor / RTA insurance claims — once.
+    required:
+      - PATIENT_NAME
+      - AGE
+      - GENDER
+      - HOSPITAL_NAME
+      - INSURANCE_POLICY_NUMBER
+      - AADHAAR_NUMBER
+      - DISTRICT
+      - PAN_NUMBER
+      - BANK_ACCOUNT_NUMBER
+      - IFSC_CODE
+      - BANK_ROUTING_NUMBER
+      - CREDIT_CARD_NUMBER
+      - CVV
+      - PIN
+      - PHONE_NUMBER
+      - VEHICLE_REGISTRATION
+    optional: []

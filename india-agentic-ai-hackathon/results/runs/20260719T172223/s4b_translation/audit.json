@@ -1,0 +1,22 @@
+{
+  "stage": "s4b_translation",
+  "timestamp_utc": "2026-07-19T11:52:51.319766+00:00",
+  "model": "sarvam-105b",
+  "rows_in": 10,
+  "rows_out": 10,
+  "rows_translated": 9,
+  "rows_skipped": 1,
+  "max_workers": 8,
+  "requests_per_minute": 110.0,
+  "skip_language_codes": [
+    "en"
+  ],
+  "columns_added": [
+    "generated_text_en",
+    "generated_text",
+    "translation_applied",
+    "translator_model",
+    "translator_finish_reason",
+    "stage"
+  ]
+}

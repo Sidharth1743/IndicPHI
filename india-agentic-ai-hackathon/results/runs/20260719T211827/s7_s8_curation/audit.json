@@ -1,0 +1,42 @@
+{
+  "stage": "s7_s8_curation",
+  "timestamp_utc": "2026-07-19T15:57:43.614835+00:00",
+  "rows_in": 15,
+  "dedup": {
+    "backend": "cpu_minhash",
+    "jaccard_threshold": 0.8,
+    "rows_in": 15,
+    "rows_kept": 15,
+    "rows_dropped": 0,
+    "dropped_ids": []
+  },
+  "balancing": {
+    "enabled": true,
+    "target_docs_per_language": 1,
+    "per_language": {
+      "bn": 1,
+      "en": 1,
+      "gu": 1,
+      "hi": 1,
+      "kn": 1,
+      "ml": 1,
+      "mr": 1,
+      "ta": 1,
+      "te": 1
+    },
+    "rows_out": 9,
+    "underfilled": {}
+  },
+  "language_counts_out": {
+    "bn": 1,
+    "en": 1,
+    "gu": 1,
+    "hi": 1,
+    "kn": 1,
+    "ml": 1,
+    "mr": 1,
+    "ta": 1,
+    "te": 1
+  },
+  "rows_out": 9
+}

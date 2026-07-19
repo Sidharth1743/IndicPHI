@@ -1,0 +1,2 @@
+{"uuid": "9a1021f9af894a73808c2e1c1dc870b0", "document_id": "9a1021f9af894a73808c2e1c1dc870b0__0", "doc_type_id": "insurance_claim", "document_language_code": "ta", "auditor_errors": ["format:AADHAAR_NUMBER:aadhaar_verhoeff"]}
+{"uuid": "01fef5fa094b4e0e83a555263004aa08", "document_id": "01fef5fa094b4e0e83a555263004aa08__0", "doc_type_id": "radiology_report", "document_language_code": "te", "auditor_errors": ["unknown_entity_types:STATE"]}

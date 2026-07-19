@@ -1,0 +1,46 @@
+{
+  "stage": "s4_generation",
+  "timestamp_utc": "2026-07-19T11:52:42.664598+00:00",
+  "provider": "sarvam",
+  "model": "sarvam-105b",
+  "base_url": "https://api.sarvam.ai/v1",
+  "reasoning_effort": null,
+  "requests_per_minute": 110.0,
+  "max_workers": 8,
+  "max_tokens": 16384,
+  "reject_truncated": true,
+  "input_jsonl": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T172223/s3_prompts/prompts.jsonl",
+  "rows_requested": 10,
+  "rows_generated": 10,
+  "failures": [],
+  "doc_type_counts": {
+    "automated_sms": 5,
+    "discharge_summary": 1,
+    "hospital_billing": 1,
+    "prescription": 2,
+    "referral_letter": 1
+  },
+  "language_counts": {
+    "bn": 1,
+    "en": 1,
+    "gu": 1,
+    "hi": 1,
+    "kn": 1,
+    "ml": 1,
+    "mr": 1,
+    "pa": 1,
+    "ta": 1,
+    "te": 1
+  },
+  "mean_chars": 713.5,
+  "columns_added": [
+    "document_id",
+    "generated_text",
+    "generator_provider",
+    "generator_model",
+    "generator_finish_reason",
+    "generator_prompt_tokens",
+    "generator_completion_tokens",
+    "stage"
+  ]
+}

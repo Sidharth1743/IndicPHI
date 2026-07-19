@@ -1,0 +1,29 @@
+# 7 clinical domains (plan §8). Stable `id` is used in assignments.
+# Optional eligibility gates prevent impossible persona×domain pairs
+# (e.g. male patient + maternal_health delivery note).
+
+domains:
+  - id: general_medicine
+    name: General Medicine
+
+  - id: maternal_health
+    name: Maternal Health
+    require_sex: [Female]
+    min_age: 15
+    max_age: 49
+
+  - id: tb_ncd
+    name: Tuberculosis & Non-Communicable Diseases
+
+  - id: surgical
+    name: Surgical
+
+  - id: paediatric
+    name: Paediatric
+    max_age: 17
+
+  - id: oncology_chronic
+    name: Oncology / Complex Chronic Care
+
+  - id: psychiatry_behavioral
+    name: Psychiatry / Behavioral Health

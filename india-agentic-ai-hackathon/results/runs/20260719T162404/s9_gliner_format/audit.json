@@ -1,0 +1,42 @@
+{
+  "stage": "s9_gliner_format",
+  "timestamp_utc": "2026-07-19T11:01:32.114932+00:00",
+  "input_jsonl": "/home/sidharth/Desktop/nvidia-hack/data/generated/runs/20260719T162404/s7_s8_curation/curated.jsonl",
+  "rows_in": 1,
+  "rows_out": 1,
+  "mean_tokens": 45.0,
+  "mean_entities": 5.0,
+  "ecr": {
+    "mean_ecr": 1.0,
+    "min_ecr": 1.0,
+    "max_ecr": 1.0,
+    "n": 1
+  },
+  "ised": {
+    "mean_ised": 1.0,
+    "per_entity_type": {
+      "APPOINTMENT_ID": 1.0,
+      "DOCTOR_NAME": 1.0,
+      "HOSPITAL_NAME": 1.0,
+      "PATIENT_NAME": 1.0,
+      "PHONE_NUMBER": 1.0
+    },
+    "entity_types": 5,
+    "total_mentions": 5
+  },
+  "ied": {
+    "mean_ised": 1.0,
+    "per_entity_type": {
+      "APPOINTMENT_ID": 1.0,
+      "DOCTOR_NAME": 1.0,
+      "HOSPITAL_NAME": 1.0,
+      "PATIENT_NAME": 1.0,
+      "PHONE_NUMBER": 1.0
+    },
+    "entity_types": 5,
+    "total_mentions": 5
+  },
+  "gold_span_metrics": null,
+  "gold_jsonl": null,
+  "fail_on_token_misalign": true
+}
