@@ -25,9 +25,30 @@ def _require_nemo_curator() -> None:
         import nemo_curator  # noqa: F401
     except ImportError as exc:
         raise NemoCuratorDedupError(
-            "nemo_curator is not installed. Install the PyPI package "
-            "(e.g. `pip install nemo-curator`) in this venv. "
+            "nemo_curator is not installed. Install with:\n"
+            "  uv pip install 'nemo-curator[deduplication-cuda12]==1.2.0' "
+            "--extra-index-url https://pypi.nvidia.com\n"
             "Do not import from the cloned Curator/ reference tree."
+        ) from exc
+
+    # Curator 1.2.0 pins RAPIDS 25.10.* for fuzzy dedup. 26.6 breaks imports
+    # (rapidsmpf.buffer / utils.ray_utils moved). Fail closed with the fix.
+    try:
+        import cudf  # noqa: F401
+        import rapidsmpf  # noqa: F401
+        from rapidsmpf.buffer.buffer import MemoryType  # noqa: F401
+    except ImportError as exc:
+        raise NemoCuratorDedupError(
+            f"NeMo Curator RAPIDS stack incomplete or wrong series ({exc}). "
+            "Curator 1.2 requires RAPIDS **25.10.***, not 26.6. Reinstall:\n\n"
+            "  uv pip uninstall -y cudf-cu12 cugraph-cu12 pylibcugraph-cu12 "
+            "pylibraft-cu12 raft-dask-cu12 rapidsmpf-cu12 librapidsmpf-cu12 "
+            "rmm-cu12 libcudf-cu12 libcugraph-cu12 libraft-cu12 librmm-cu12 "
+            "dask-cudf-cu12 cuml-cu12 2>/dev/null || true\n"
+            "  uv pip install 'nemo-curator[deduplication-cuda12]==1.2.0' "
+            "--extra-index-url https://pypi.nvidia.com\n\n"
+            "Then verify: python -c \"import cudf, rapidsmpf.buffer.buffer; "
+            "print(cudf.__version__)\"  # expect 25.10.x"
         ) from exc
 
 

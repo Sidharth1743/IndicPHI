@@ -1,20 +1,34 @@
-"""NeMo Data Designer config bridge (plan S4 / idea Stage-0→4).
+"""NeMo Data Designer — **required** S4 generation engine.
 
-Builds a ``DataDesignerConfigBuilder`` seeded from Stage-3 prompts so
-generation can run through Data Designer LLM columns when an OpenAI-compatible
-NIM (or gateway) endpoint is configured.
+Smoke and full pipelines must generate through Data Designer (batching,
+parallelism, seed datasets). Direct Sarvam HTTP in ``generator.py`` is only
+used as the OpenAI-compatible backend that Data Designer calls via a custom
+provider — never as a silent alternate path around Data Designer.
 
-Smoke path today uses ``main.designers.generator`` + Sarvam HTTP directly.
-This module is the explicit bridge — no silent fallback between engines.
+Usage::
+
+    from main.pipeline.designer_config import run_data_designer_generation
+    paths = run_data_designer_generation(pipeline_config)
 """
 
 from __future__ import annotations
 
+import json
+import os
 from dataclasses import dataclass
+from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
+from typing import Any, Mapping, Sequence
 
+from main.pipeline.checkpoint import (
+    CheckpointStore,
+    atomic_write_jsonl,
+    request_hash,
+    row_key_from_prompt,
+)
 from main.pipeline.config_io import REPO_ROOT, load_yaml, resolve_repo_path
+from main.pipeline.env import load_env_file, require_env
+from main.pipeline.io import read_jsonl, write_json, write_parquet
 
 
 @dataclass(frozen=True)
@@ -24,10 +38,15 @@ class DesignerBridgeSettings:
     model_id: str
     provider: str
     temperature: float
-    max_tokens: float | int
+    max_tokens: int
     system_prompt_column: str
     user_prompt_column: str
     output_column: str
+    provider_endpoint: str
+    provider_api_key_env: str
+    # OpenAI-compatible auth header style: bearer | subscription_key
+    auth_style: str
+    required: bool
 
 
 class DesignerConfigError(RuntimeError):
@@ -39,8 +58,13 @@ def load_designer_bridge_settings(pipeline_config: Path) -> DesignerBridgeSettin
     block = root.get("data_designer")
     if not isinstance(block, dict):
         raise DesignerConfigError(
-            f"'data_designer' mapping required in {pipeline_config} "
-            "when using the Data Designer generation engine"
+            f"'data_designer' mapping is REQUIRED in {pipeline_config}. "
+            "S4 must run through NeMo Data Designer — no silent HTTP fallback."
+        )
+    if block.get("required", True) is False:
+        raise DesignerConfigError(
+            "data_designer.required=false is not allowed. "
+            "This pipeline strictly uses NeMo Data Designer for S4."
         )
 
     required = (
@@ -55,6 +79,24 @@ def load_designer_bridge_settings(pipeline_config: Path) -> DesignerBridgeSettin
     if missing:
         raise DesignerConfigError(f"Missing data_designer keys {missing}")
 
+    gen = root.get("generation") if isinstance(root.get("generation"), dict) else {}
+    endpoint = str(
+        block.get("provider_endpoint")
+        or gen.get("base_url")
+        or "https://api.sarvam.ai/v1"
+    )
+    api_key_env = str(
+        block.get("provider_api_key_env")
+        or gen.get("api_key_env")
+        or "SARVAM_API_KEY"
+    )
+    auth_style = str(block.get("auth_style", "subscription_key")).strip().lower()
+    if auth_style not in {"bearer", "subscription_key"}:
+        raise DesignerConfigError(
+            f"Unsupported data_designer.auth_style={auth_style!r} "
+            "(use bearer or subscription_key)"
+        )
+
     return DesignerBridgeSettings(
         seed_path=resolve_repo_path(str(block["seed_path"])),
         model_alias=str(block["model_alias"]),
@@ -65,32 +107,189 @@ def load_designer_bridge_settings(pipeline_config: Path) -> DesignerBridgeSettin
         system_prompt_column=str(block.get("system_prompt_column", "system_prompt")),
         user_prompt_column=str(block.get("user_prompt_column", "user_prompt")),
         output_column=str(block.get("output_column", "generated_text")),
+        provider_endpoint=endpoint.rstrip("/"),
+        provider_api_key_env=api_key_env,
+        auth_style=auth_style,
+        required=True,
     )
 
 
-def load_config_builder(pipeline_config: Path | None = None):
-    """Return a DataDesignerConfigBuilder seeded from pipeline prompts.
+_SARVAM_STRING_CONTENT_PATCHED = False
 
-    Requires the ``data-designer`` package. Seed columns (including prompts)
-    are kept; an LLM text column generates the clinical document.
+
+def _flatten_text_only_content(content: Any) -> Any:
+    """Sarvam rejects ChatML content-block lists; it needs ``content: str``."""
+    if not isinstance(content, list):
+        return content
+    texts: list[str] = []
+    for block in content:
+        if isinstance(block, str):
+            texts.append(block)
+            continue
+        if isinstance(block, dict) and block.get("type") == "text":
+            texts.append(str(block.get("text") or ""))
+            continue
+        # Multimodal / non-text block — leave the list intact.
+        return content
+    return "\n".join(texts)
+
+
+def _patch_data_designer_string_content() -> None:
+    """Make Data Designer's OpenAI adapter emit string message content for Sarvam.
+
+    Data Designer normalizes messages to::
+
+        {"role": "...", "content": [{"type": "text", "text": "..."}]}
+
+    Sarvam's chat API validates ``content`` as a plain string and returns::
+
+        body.messages.0.system.content : Input should be a valid string
     """
+    global _SARVAM_STRING_CONTENT_PATCHED
+    if _SARVAM_STRING_CONTENT_PATCHED:
+        return
+    from data_designer.engine.models.clients.adapters import openai_compatible as oc
+
+    original = oc.translate_openai_compatible_messages
+
+    def _patched(
+        messages: list[dict[str, Any]],
+        *,
+        provider_name: str,
+        model_name: str,
+    ) -> list[dict[str, Any]]:
+        translated = original(
+            messages, provider_name=provider_name, model_name=model_name
+        )
+        # Always flatten pure-text blocks: OpenAI accepts strings; Sarvam requires them.
+        flattened: list[dict[str, Any]] = []
+        for message in translated:
+            item = dict(message)
+            if "content" in item:
+                item["content"] = _flatten_text_only_content(item.get("content"))
+            flattened.append(item)
+        return flattened
+
+    oc.translate_openai_compatible_messages = _patched
+    _SARVAM_STRING_CONTENT_PATCHED = True
+
+
+def _import_data_designer():
     try:
         import data_designer.config as dd
+        from data_designer.interface import DataDesigner
     except ImportError as exc:
         raise DesignerConfigError(
-            "data-designer is not installed. "
-            "Install with `pip install data-designer`."
+            "NeMo Data Designer is REQUIRED but not installed. "
+            "Install with: `uv pip install 'data-designer>=0.7.0'` "
+            "(or `uv sync` in india-agentic-ai-hackathon/)."
         ) from exc
+    _patch_data_designer_string_content()
+    return dd, DataDesigner
 
-    config_path = pipeline_config or (
-        REPO_ROOT / "configs" / "synthetic-data" / "pipeline.yaml"
-    )
-    settings = load_designer_bridge_settings(config_path)
-    if not settings.seed_path.is_file():
-        raise DesignerConfigError(
-            f"Data Designer seed not found: {settings.seed_path}. "
-            "Run S3 prompt construction first (prompts.parquet preferred)."
+
+def _designer_home() -> Path:
+    home = Path(
+        os.environ.get(
+            "DATA_DESIGNER_HOME",
+            str(REPO_ROOT / "artifacts" / "data_designer_home"),
         )
+    )
+    home.mkdir(parents=True, exist_ok=True)
+    os.environ["DATA_DESIGNER_HOME"] = str(home)
+    return home
+
+
+def build_model_provider(settings: DesignerBridgeSettings, api_key: str) -> Any:
+    """Build an in-process ``ModelProvider`` for Sarvam / OpenAI-compatible APIs.
+
+    Writing YAML under ``DATA_DESIGNER_HOME`` alone is not enough — ``DataDesigner``
+    must receive ``model_providers=[...]`` or the named provider is unregistered.
+    Sarvam auth uses ``api-subscription-key`` (not Bearer).
+    """
+    dd, _DataDesigner = _import_data_designer()
+    os.environ[settings.provider_api_key_env] = api_key
+
+    extra_body: dict[str, Any] = {"reasoning_effort": None}
+    if settings.auth_style == "subscription_key":
+        # Avoid Bearer; Sarvam requires api-subscription-key.
+        return dd.ModelProvider(
+            name=settings.provider,
+            endpoint=settings.provider_endpoint,
+            provider_type="openai",
+            api_key=None,
+            extra_headers={"api-subscription-key": api_key},
+            extra_body=extra_body,
+        )
+    return dd.ModelProvider(
+        name=settings.provider,
+        endpoint=settings.provider_endpoint,
+        provider_type="openai",
+        api_key=settings.provider_api_key_env,  # env var name resolved by DD
+        extra_body=extra_body,
+    )
+
+
+def _ensure_provider_files(settings: DesignerBridgeSettings, api_key: str) -> Path:
+    """Materialize DATA_DESIGNER_HOME YAML mirrors (audit/debug) + export API key."""
+    home = _designer_home()
+    providers_path = home / "model_providers.yaml"
+    provider_entry: dict[str, Any] = {
+        "name": settings.provider,
+        "endpoint": settings.provider_endpoint,
+        "provider_type": "openai",
+    }
+    if settings.auth_style == "subscription_key":
+        provider_entry["api_key"] = None
+        provider_entry["extra_headers"] = {"api-subscription-key": "${" + settings.provider_api_key_env + "}"}
+        provider_entry["extra_body"] = {"reasoning_effort": None}
+    else:
+        provider_entry["api_key"] = settings.provider_api_key_env
+        provider_entry["extra_body"] = {"reasoning_effort": None}
+
+    providers_doc = {"providers": [provider_entry]}
+    providers_path.write_text(
+        __import__("yaml").safe_dump(providers_doc, sort_keys=False),
+        encoding="utf-8",
+    )
+
+    models_path = home / "model_configs.yaml"
+    models_doc = {
+        "model_configs": [
+            {
+                "alias": settings.model_alias,
+                "model": settings.model_id,
+                "provider": settings.provider,
+                "inference_parameters": {
+                    "temperature": settings.temperature,
+                    "max_tokens": settings.max_tokens,
+                    "extra_body": {"reasoning_effort": None},
+                },
+            }
+        ]
+    }
+    models_path.write_text(
+        __import__("yaml").safe_dump(models_doc, sort_keys=False),
+        encoding="utf-8",
+    )
+    os.environ[settings.provider_api_key_env] = api_key
+    return home
+
+
+def _build_config_builder(
+    dd: Any,
+    settings: DesignerBridgeSettings,
+    *,
+    seed_path: Path,
+    max_parallel_requests: int | None = None,
+) -> Any:
+    inference_kwargs: dict[str, Any] = {
+        "temperature": settings.temperature,
+        "max_tokens": settings.max_tokens,
+        "extra_body": {"reasoning_effort": None},
+    }
+    if max_parallel_requests is not None and max_parallel_requests > 0:
+        inference_kwargs["max_parallel_requests"] = int(max_parallel_requests)
 
     builder = dd.DataDesignerConfigBuilder()
     builder.add_model_config(
@@ -98,13 +297,10 @@ def load_config_builder(pipeline_config: Path | None = None):
             alias=settings.model_alias,
             model=settings.model_id,
             provider=settings.provider,
-            inference_parameters=dd.ChatCompletionInferenceParams(
-                temperature=settings.temperature,
-                max_tokens=settings.max_tokens,
-            ),
+            inference_parameters=dd.ChatCompletionInferenceParams(**inference_kwargs),
         )
     )
-    builder.with_seed_dataset(dd.LocalFileSeedSource(path=str(settings.seed_path)))
+    builder.with_seed_dataset(dd.LocalFileSeedSource(path=str(seed_path)))
     builder.add_column(
         dd.LLMTextColumnConfig(
             name=settings.output_column,
@@ -116,16 +312,322 @@ def load_config_builder(pipeline_config: Path | None = None):
     return builder
 
 
-def describe_bridge() -> dict[str, Any]:
-    """Capability note for audits / README."""
+def load_config_builder(pipeline_config: Path | None = None):
+    """Return a DataDesignerConfigBuilder seeded from S3 prompts parquet/jsonl."""
+    dd, _DataDesigner = _import_data_designer()
+    config_path = pipeline_config or (
+        REPO_ROOT / "configs" / "synthetic-data" / "pipeline.yaml"
+    )
+    settings = load_designer_bridge_settings(config_path)
+    if not settings.seed_path.is_file():
+        raise DesignerConfigError(
+            f"Data Designer seed not found: {settings.seed_path}. "
+            "Run S3 prompt construction first (prompts.parquet preferred)."
+        )
+    return _build_config_builder(dd, settings, seed_path=settings.seed_path)
+
+
+def _coverage_and_stuffing(text: str, required: Sequence[str]) -> tuple[list[str], list[str]]:
+    import re
+
+    tag_re = re.compile(r"\[\[([A-Z][A-Z0-9_]*)\|")
+    present = set(tag_re.findall(text))
+    missing = [entity_id for entity_id in required if entity_id not in present]
+    counts: dict[str, int] = {}
+    for entity_id in tag_re.findall(text):
+        counts[entity_id] = counts.get(entity_id, 0) + 1
+    exempt = {"PATIENT_NAME", "DOCTOR_NAME"}
+    stuffed = [
+        entity_id
+        for entity_id, count in counts.items()
+        if entity_id not in exempt and count > 2
+    ]
+    return missing, stuffed
+
+
+def _dataframe_to_rows(dataset: Any) -> list[dict[str, Any]]:
+    if hasattr(dataset, "to_dict"):
+        records = dataset.to_dict(orient="records")
+        return [dict(row) for row in records]
+    if isinstance(dataset, list):
+        return [dict(row) for row in dataset]
+    raise DesignerConfigError(f"Unsupported Data Designer dataset type: {type(dataset)}")
+
+
+def run_data_designer_generation(pipeline_config: Path) -> dict[str, Path]:
+    """Execute S4 strictly via NeMo Data Designer with row-level checkpoints."""
+    load_env_file()
+    dd, DataDesigner = _import_data_designer()
+    settings = load_designer_bridge_settings(pipeline_config)
+    api_key = require_env(settings.provider_api_key_env)
+    _ensure_provider_files(settings, api_key)
+
+    root = load_yaml(pipeline_config)
+    gen = root.get("generation") if isinstance(root.get("generation"), dict) else {}
+    output_dir = resolve_repo_path(str(gen.get("output_dir", "data/generated/s4_generation")))
+    output_dir.mkdir(parents=True, exist_ok=True)
+    max_docs = gen.get("max_docs")
+    if max_docs is not None:
+        max_docs = int(max_docs)
+
+    # Prefer parquet seed for Data Designer; fall back to converting JSONL.
+    seed_path = settings.seed_path
+    if seed_path.suffix == ".jsonl":
+        parquet_seed = seed_path.with_suffix(".parquet")
+        if not parquet_seed.is_file():
+            rows = read_jsonl(seed_path)
+            write_parquet(parquet_seed, rows)
+        seed_path = parquet_seed
+        # Rewrite settings seed for builder
+        object.__setattr__  # placate linters — we pass path explicitly below
+
+    prompts = read_jsonl(
+        seed_path.with_suffix(".jsonl")
+        if seed_path.with_suffix(".jsonl").is_file()
+        else resolve_repo_path(str(gen["input_jsonl"]))
+    )
+    if max_docs is not None:
+        prompts = prompts[:max_docs]
+    if not prompts:
+        raise DesignerConfigError("No prompt rows for Data Designer generation")
+
+    checkpoint = CheckpointStore(output_dir / "checkpoint.jsonl")
+    done = checkpoint.done_keys(accept_soft_fail=True)
+
+    pending: list[dict[str, Any]] = []
+    for row in prompts:
+        key = row_key_from_prompt(row)
+        req = request_hash(
+            [
+                row.get("system_prompt"),
+                row.get("user_prompt"),
+                settings.model_id,
+                settings.temperature,
+                settings.max_tokens,
+            ]
+        )
+        existing = checkpoint.get(key)
+        if existing and existing.status in {"ok", "soft_fail"} and existing.request_hash == req:
+            continue
+        pending.append(dict(row))
+
+    soft_failures: list[dict[str, Any]] = []
+    generated_new: list[dict[str, Any]] = []
+
+    if pending:
+        # Materialize pending seed shard for Data Designer (idempotent resume).
+        pending_seed = output_dir / "pending_seed.parquet"
+        write_parquet(pending_seed, pending)
+
+        max_parallel = gen.get("max_workers")
+        if max_parallel is not None:
+            max_parallel = int(max_parallel)
+
+        provider = build_model_provider(settings, api_key)
+        builder = _build_config_builder(
+            dd,
+            settings,
+            seed_path=pending_seed,
+            max_parallel_requests=max_parallel,
+        )
+
+        artifact_path = output_dir / "data_designer_artifacts"
+        artifact_path.mkdir(parents=True, exist_ok=True)
+        designer = DataDesigner(
+            model_providers=[provider],
+            artifact_path=str(artifact_path),
+        )
+        num_records = len(pending)
+        try:
+            # Health-check the named provider before spending the full batch.
+            designer.check_models(builder)
+            results = designer.create(
+                builder,
+                num_records=num_records,
+                dataset_name="s4_generation",
+                artifact_path=str(artifact_path),
+            )
+            dataset = results.load_dataset()
+            dd_rows = _dataframe_to_rows(dataset)
+        except Exception as exc:  # noqa: BLE001
+            registered = []
+            try:
+                # Never echo secrets from extra_headers / api_key into logs.
+                registered = [
+                    {
+                        "name": p.name,
+                        "endpoint": p.endpoint,
+                        "provider_type": p.provider_type,
+                        "auth_style": settings.auth_style,
+                        "has_extra_headers": bool(p.extra_headers),
+                    }
+                    for p in designer.model_provider_registry.providers
+                ]
+            except Exception:  # noqa: BLE001
+                registered = []
+            raise DesignerConfigError(
+                f"NeMo Data Designer generation failed: {exc}. "
+                f"Requested provider={settings.provider!r} endpoint={settings.provider_endpoint}. "
+                f"Registered providers={registered}. "
+                f"Auth style={settings.auth_style} (Sarvam needs subscription_key). "
+                f"Ensure {settings.provider_api_key_env} is set and "
+                "`data-designer` is installed (`uv sync`)."
+            ) from exc
+
+        if len(dd_rows) != len(pending):
+            # Align by index when seed order is preserved; otherwise fail closed.
+            raise DesignerConfigError(
+                f"Data Designer returned {len(dd_rows)} rows for {len(pending)} seeds"
+            )
+
+        for seed_row, dd_row in zip(pending, dd_rows):
+            text = str(dd_row.get(settings.output_column) or dd_row.get("generated_text") or "")
+            key = row_key_from_prompt(seed_row)
+            req = request_hash(
+                [
+                    seed_row.get("system_prompt"),
+                    seed_row.get("user_prompt"),
+                    settings.model_id,
+                    settings.temperature,
+                    settings.max_tokens,
+                ]
+            )
+            required = [str(x) for x in (seed_row.get("required_entities") or [])]
+            missing, stuffed = _coverage_and_stuffing(text, required)
+            reasons: list[str] = []
+            if missing:
+                reasons.append("missing_required_entities:" + ",".join(missing))
+            if stuffed:
+                reasons.append("entity_stuffing:" + ",".join(stuffed))
+            soft = bool(reasons)
+            uuid = str(seed_row["uuid"])
+            doc_slot = seed_row.get("doc_slot", 0)
+            out = dict(seed_row)
+            out.update(
+                {
+                    "document_id": f"{uuid}__{doc_slot}",
+                    "generated_text": text,
+                    "generator_provider": "data_designer",
+                    "generator_model": settings.model_id,
+                    "generator_finish_reason": "data_designer",
+                    "generator_prompt_tokens": None,
+                    "generator_completion_tokens": None,
+                    "entity_coverage_complete": len(missing) == 0,
+                    "missing_required_entities": missing,
+                    "entity_stuffing": len(stuffed) > 0,
+                    "stuffed_entity_types": stuffed,
+                    "generation_soft_fail": soft,
+                    "generation_soft_fail_reasons": reasons,
+                    "stage": "s4_generation",
+                }
+            )
+            checkpoint.append(
+                row_key=key,
+                status="soft_fail" if soft else "ok",
+                request_hash=req,
+                payload=out,
+                error=";".join(reasons) if reasons else None,
+            )
+            generated_new.append(out)
+            if soft:
+                soft_failures.append(
+                    {
+                        "uuid": out.get("uuid"),
+                        "document_id": out.get("document_id"),
+                        "doc_type_id": out.get("doc_type_id"),
+                        "document_language_code": out.get("document_language_code"),
+                        "missing_required_entities": missing,
+                        "stuffed_entity_types": stuffed,
+                        "reasons": reasons,
+                    }
+                )
+
+    # Rebuild full ordered outputs from checkpoint (idempotent).
+    by_key = {row_key_from_prompt(r): r for r in checkpoint.completed_payloads()}
+    outputs: list[dict[str, Any]] = []
+    for row in prompts:
+        key = row_key_from_prompt(row)
+        if key not in by_key:
+            raise DesignerConfigError(f"Missing checkpoint payload for {key}")
+        outputs.append(by_key[key])
+
+    soft_failures = [
+        {
+            "uuid": row.get("uuid"),
+            "document_id": row.get("document_id"),
+            "doc_type_id": row.get("doc_type_id"),
+            "document_language_code": row.get("document_language_code"),
+            "missing_required_entities": row.get("missing_required_entities") or [],
+            "stuffed_entity_types": row.get("stuffed_entity_types") or [],
+            "reasons": row.get("generation_soft_fail_reasons") or [],
+        }
+        for row in outputs
+        if row.get("generation_soft_fail")
+    ]
+
+    audit = {
+        "stage": "s4_generation",
+        "engine": "nemo_data_designer",
+        "timestamp_utc": datetime.now(timezone.utc).isoformat(),
+        "provider": settings.provider,
+        "model": settings.model_id,
+        "base_url": settings.provider_endpoint,
+        "rows_requested": len(prompts),
+        "rows_generated": len(outputs),
+        "rows_from_checkpoint": len(done),
+        "rows_newly_generated": len(generated_new),
+        "soft_failures": soft_failures,
+        "soft_fail_count": len(soft_failures),
+        "entity_coverage_complete_rate": (
+            sum(1 for row in outputs if row.get("entity_coverage_complete")) / len(outputs)
+            if outputs
+            else 0.0
+        ),
+        "mean_chars": (
+            sum(len(str(row.get("generated_text", ""))) for row in outputs) / len(outputs)
+            if outputs
+            else 0.0
+        ),
+        "checkpoint": str(output_dir / "checkpoint.jsonl"),
+    }
+
+    jsonl_path = output_dir / "documents.jsonl"
+    atomic_write_jsonl(jsonl_path, outputs)
+    parquet_path = output_dir / "documents.parquet"
+    write_parquet(parquet_path, outputs)
+    audit_json = output_dir / "audit.json"
+    write_json(audit_json, audit)
+    soft_path = output_dir / "soft_failures.jsonl"
+    atomic_write_jsonl(soft_path, soft_failures)
+    audit_md = output_dir / "audit.md"
+    audit_md.write_text(
+        "# Stage 4 — Generation Audit (NeMo Data Designer)\n\n"
+        f"- engine: **nemo_data_designer** (required)\n"
+        f"- model: `{audit['model']}`\n"
+        f"- rows_generated: **{audit['rows_generated']}**\n"
+        f"- rows_from_checkpoint: `{audit['rows_from_checkpoint']}`\n"
+        f"- soft_fail_count: **{audit['soft_fail_count']}**\n"
+        f"- entity_coverage_complete_rate: `{audit['entity_coverage_complete_rate']:.3f}`\n",
+        encoding="utf-8",
+    )
     return {
-        "role": "Optional S4 engine via NeMo Data Designer",
+        "jsonl": jsonl_path,
+        "parquet": parquet_path,
+        "audit_json": audit_json,
+        "audit_md": audit_md,
+        "soft_failures_jsonl": soft_path,
+        "checkpoint_jsonl": output_dir / "checkpoint.jsonl",
+    }
+
+
+def describe_bridge() -> dict[str, Any]:
+    return {
+        "role": "REQUIRED S4 engine via NeMo Data Designer",
         "seed": "S3 prompts parquet (persona + taxonomy + annotation rules)",
-        "when_to_use": "Wire NIM OpenAI-compatible provider into Data Designer, then call load_config_builder()",
-        "smoke_default": "main.designers.generator (Sarvam HTTP)",
-        "curator": "S7 uses FuzzyDeduplicationWorkflow via main.pipeline.nemo_curator_fuzzy",
+        "curator": "REQUIRED S7 backend via NeMo Curator FuzzyDeduplicationWorkflow",
+        "no_silent_fallback": True,
         "skills_aligned": [
-            "data-designer (seed datasets + LLMTextColumnConfig)",
-            "nemo-curator getting-started / fuzzy dedup docs",
+            "data-designer (seed datasets + LLMTextColumnConfig + create())",
+            "nemo-curator fuzzy dedup",
         ],
     }

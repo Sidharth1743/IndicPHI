@@ -37,10 +37,13 @@ exported as token-indexed NER JSON.
      │             │
      └──────┬──────┘
             ▼
-   S7–S8 dedup + balance (MinHash / NeMo Curator)
+   S7–S8 dedup + balance (**NeMo Curator** required + semantic near-dup)
             │
             ▼
    S9 GLiNER JSON + intrinsic metrics + failures.md
+            │
+            ▼
+   S10 persona-held-out train/eval split
 ```
 
 ## Package map
@@ -76,11 +79,15 @@ optional PHI types per doc) + annotation rules + format examples.
 Prompts require **all profile entities** as inline tags.
 
 ### S4 / S4b — Generation + translation
-- **S4:** Sarvam-105B HTTP (`reasoning` off, rate-limited). Soft-fails on
-  missing required entities / stuffing.
-- **S4b:** Translates to target language; **script purity** ratio must clear
-  a threshold (e.g. ≥ 0.35). Romanized / Latin-only output soft-fails and is
-  usually also failed by the judge.
+- **S4:** **NeMo Data Designer** is the required engine (`generation.engine:
+  data_designer`). Sarvam-105B is registered as a Designer provider
+  (`api-subscription-key`). Row-level checkpoints make resume idempotent.
+  Soft-fails on missing required entities / stuffing when Designer returns them.
+- **S4b:** Translates to target language with **ID tags fully protected** and
+  **name/place values** free to localize; **script purity** (incl. cross-Indic
+  script detection + `Ol_Chiki`→`Ol Chiki` aliases) must clear a threshold
+  (e.g. ≥ 0.35). Romanized / Latin-only output soft-fails and is usually also
+  failed by the judge.
 
 ### S5 — Linguistic judge
 Grok-4.3 chat completions (Azure Foundry). Scores dialect/script purity,
@@ -92,12 +99,18 @@ Checksum & format validators (notably Aadhaar Verhoeff), unknown entity
 types, PHI residue, DICS. Failures are hard-structural and fail-closed.
 
 ### S7–S8 — Curation
-Near-dup removal (Jaccard ≥ 0.8) via `cpu_minhash` (smoke) or
-`nemo_curator` FuzzyDeduplication workflows, plus language-aware balancing.
+Near-dup removal (Jaccard ≥ 0.8) **requires** `nemo_curator`
+FuzzyDeduplicationWorkflow on English-pivot / PHI-masked text, then a
+semantic near-dup pass (`main/pipeline/semantic_dedup.py`). `cpu_minhash`
+is disabled. Language balancing warns when equalize-to-min discards >20%.
 
 ### S9 — GLiNER format
 Inline tags → token spans; writes `gliner_docs.jsonl` / train JSON and
 intrinsic metrics. Orchestrator writes **`failures.md`** per run for audit.
+
+### S10 — Persona-held-out split
+All docs for a persona UUID go to train **or** eval (never both), stratified
+by language × doc_type × domain.
 
 ## Models & secrets
 
@@ -115,7 +128,7 @@ See `configs/nim.env.example`. Never commit `.env`.
 ./scripts/smoke_test.sh
 # data/generated/runs/<timestamp>/
 #   pipeline.resolved.yaml  manifest.json  failures.md
-#   s1_persona_sampling/ … s9_gliner_format/
+#   s1_persona_sampling/ … s9_gliner_format/  s10_split/
 # data/generated/runs/latest → <timestamp>
 ```
 

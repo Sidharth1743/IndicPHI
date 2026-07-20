@@ -66,8 +66,8 @@ Show a curated GLiNER sample:
 ### 6. NVIDIA angle (45s)
 
 - Personas: **Nemotron-Personas-India**  
-- Curation: **NeMo Curator** (or portable MinHash in smoke)  
-- Optional Data Designer bridge for S4
+- Generation: **NeMo Data Designer** (required S4 engine)  
+- Curation: **NeMo Curator** (required S7 backend; no cpu_minhash)
 
 ### 7. Close / ask (30s)
 

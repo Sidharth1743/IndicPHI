@@ -20,6 +20,12 @@ from typing import Any, Mapping, Sequence
 
 from main.llm.rate_limit import RateLimiter
 from main.llm.sarvam import SarvamClient, SarvamClientError
+from main.pipeline.checkpoint import (
+    CheckpointStore,
+    atomic_write_jsonl,
+    request_hash,
+    row_key_from_prompt,
+)
 from main.pipeline.config_io import REPO_ROOT, load_yaml, resolve_repo_path
 from main.pipeline.env import load_env_file, require_env
 from main.pipeline.io import read_jsonl, write_json, write_jsonl, write_parquet
@@ -213,6 +219,7 @@ def summarize_rows(
     *,
     client: SarvamClient,
     settings: SummarySettings,
+    checkpoint: CheckpointStore | None = None,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     selected = list(rows)
     if settings.max_docs is not None:
@@ -220,23 +227,59 @@ def summarize_rows(
     if not selected:
         raise SummaryError("No rows selected for persona summary")
 
-    workers = min(settings.max_workers, len(selected))
     results: dict[int, dict[str, Any]] = {}
-    with ThreadPoolExecutor(max_workers=workers) as pool:
-        futures = {
-            pool.submit(
-                _summarize_one, index, row, client=client, settings=settings
-            ): index
-            for index, row in enumerate(selected)
-        }
-        for future in as_completed(futures):
-            index = futures[future]
-            try:
-                results[index] = future.result()
-            except SummaryError:
-                for pending in futures:
-                    pending.cancel()
-                raise
+    pending: list[tuple[int, Mapping[str, Any], str]] = []
+    resumed = 0
+    for index, row in enumerate(selected):
+        key = row_key_from_prompt(row)
+        req = request_hash(
+            [
+                row.get("uuid"),
+                row.get("persona"),
+                row.get("cultural_background"),
+                settings.model,
+                settings.temperature,
+                settings.max_tokens,
+            ]
+        )
+        if checkpoint is not None:
+            existing = checkpoint.get(key)
+            if (
+                existing
+                and existing.status == "ok"
+                and existing.request_hash == req
+                and existing.payload
+            ):
+                results[index] = dict(existing.payload)
+                resumed += 1
+                continue
+        pending.append((index, row, req))
+
+    workers = min(settings.max_workers, max(1, len(pending))) if pending else 1
+    if pending:
+        with ThreadPoolExecutor(max_workers=workers) as pool:
+            futures = {
+                pool.submit(
+                    _summarize_one, index, row, client=client, settings=settings
+                ): (index, req)
+                for index, row, req in pending
+            }
+            for future in as_completed(futures):
+                index, req = futures[future]
+                try:
+                    out = future.result()
+                except SummaryError:
+                    for pending_fut in futures:
+                        pending_fut.cancel()
+                    raise
+                results[index] = out
+                if checkpoint is not None:
+                    checkpoint.append(
+                        row_key=row_key_from_prompt(selected[index]),
+                        status="ok",
+                        request_hash=req,
+                        payload=out,
+                    )
 
     outputs = [results[i] for i in range(len(selected))]
     audit = {
@@ -245,7 +288,9 @@ def summarize_rows(
         "model": settings.model,
         "rows_in": len(selected),
         "rows_out": len(outputs),
-        "max_workers": workers,
+        "rows_resumed_from_checkpoint": resumed,
+        "rows_newly_summarized": len(pending),
+        "max_workers": workers if pending else 0,
         "requests_per_minute": settings.requests_per_minute,
         "mean_summary_chars": (
             sum(len(row["persona_clinical_summary"]) for row in outputs) / len(outputs)
@@ -262,7 +307,7 @@ def write_outputs(
 ) -> dict[str, Path]:
     output_dir.mkdir(parents=True, exist_ok=True)
     jsonl_path = output_dir / "assignments_summarized.jsonl"
-    write_jsonl(jsonl_path, rows)
+    atomic_write_jsonl(jsonl_path, rows)
     parquet_path = output_dir / "assignments_summarized.parquet"
     write_parquet(parquet_path, rows)
     audit_json = output_dir / "audit.json"
@@ -308,7 +353,10 @@ def run(pipeline_config: Path) -> dict[str, Path]:
         api_key=api_key, base_url=settings.base_url, rate_limiter=limiter
     )
     rows = read_jsonl(settings.input_jsonl)
-    summarized, audit = summarize_rows(rows, client=client, settings=settings)
+    checkpoint = CheckpointStore(settings.output_dir / "checkpoint.jsonl")
+    summarized, audit = summarize_rows(
+        rows, client=client, settings=settings, checkpoint=checkpoint
+    )
     return write_outputs(summarized, audit, settings.output_dir)
 
 

@@ -24,6 +24,12 @@ from main.llm.rate_limit import RateLimiter
 from main.llm.sarvam import SarvamClient, SarvamClientError
 from main.llm.types import ChatResult
 from main.metrics.judge_metrics import label_distribution, pass_rate, positional_length_bias
+from main.pipeline.checkpoint import (
+    CheckpointStore,
+    atomic_write_jsonl,
+    request_hash,
+    row_key_from_prompt,
+)
 from main.pipeline.config_io import REPO_ROOT, load_yaml, resolve_repo_path
 from main.pipeline.env import load_env_file, require_env
 from main.pipeline.io import read_jsonl, write_json, write_jsonl, write_parquet
@@ -338,6 +344,7 @@ def judge_documents(
     *,
     client: _ChatClient,
     settings: JudgeSettings,
+    checkpoint: CheckpointStore | None = None,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     selected = list(rows)
     if settings.max_docs is not None:
@@ -349,10 +356,46 @@ def judge_documents(
     outputs: list[dict[str, Any]] = []
     soft_failures: list[dict[str, Any]] = []
     attempts_per_row = settings.network_retries + 1
+    resumed = 0
 
     for index, row in enumerate(selected):
         if "generated_text" not in row:
             raise JudgeError(f"Row {index} missing generated_text")
+
+        key = row_key_from_prompt(row)
+        req = request_hash(
+            [
+                row.get("generated_text"),
+                row.get("document_language_code"),
+                settings.model,
+                settings.pass_threshold,
+                sorted(allow_list),
+            ]
+        )
+        if checkpoint is not None:
+            existing = checkpoint.get(key)
+            if (
+                existing
+                and existing.status in {"ok", "soft_fail"}
+                and existing.request_hash == req
+                and existing.payload
+            ):
+                out = dict(existing.payload)
+                outputs.append(out)
+                if out.get("judge_soft_fail"):
+                    soft_failures.append(
+                        {
+                            "uuid": out.get("uuid"),
+                            "document_id": out.get("document_id"),
+                            "doc_type_id": out.get("doc_type_id"),
+                            "document_language_code": out.get(
+                                "document_language_code"
+                            ),
+                            "judge_error": out.get("judge_error"),
+                        }
+                    )
+                resumed += 1
+                continue
 
         result: ChatResult | None = None
         parsed: dict[str, Any] | None = None
@@ -394,6 +437,7 @@ def judge_documents(
                 ) from exc
 
         out = dict(row)
+        status = "ok"
         if parsed is not None and result is not None:
             out.update(parsed)
             out.update(
@@ -438,7 +482,16 @@ def judge_documents(
                     "stage": "s5_linguistic_judge",
                 }
             )
+            status = "soft_fail"
         outputs.append(out)
+        if checkpoint is not None:
+            checkpoint.append(
+                row_key=key,
+                status=status,
+                request_hash=req,
+                payload=out,
+                error=out.get("judge_error"),
+            )
 
     verdicts = [str(row["judge_verdict"]) for row in outputs]
     failures = [
@@ -467,6 +520,7 @@ def judge_documents(
         "timeout_s": settings.timeout_s,
         "network_retries": settings.network_retries,
         "rows_judged": len(outputs),
+        "rows_resumed_from_checkpoint": resumed,
         "pass_rate": pass_rate(verdicts),
         "label_distribution": label_distribution(verdicts),
         "positional_length_bias": positional_length_bias(outputs),
@@ -508,9 +562,9 @@ def write_outputs(
         "audit_json": output_dir / "audit.json",
         "audit_md": output_dir / "audit.md",
     }
-    write_jsonl(paths["all_jsonl"], rows)
-    write_jsonl(paths["passed_jsonl"], passed)
-    write_jsonl(paths["failed_jsonl"], failed)
+    atomic_write_jsonl(paths["all_jsonl"], rows)
+    atomic_write_jsonl(paths["passed_jsonl"], passed)
+    atomic_write_jsonl(paths["failed_jsonl"], failed)
     write_parquet(paths["parquet"], rows)
     write_json(paths["audit_json"], audit)
     soft_fail_path = output_dir / "soft_failures.jsonl"
@@ -562,7 +616,10 @@ def run(pipeline_config: Path) -> dict[str, Path]:
     )
     client = build_client(settings, api_key)
     rows = read_jsonl(settings.input_jsonl)
-    judged, audit = judge_documents(rows, client=client, settings=settings)
+    checkpoint = CheckpointStore(settings.output_dir / "checkpoint.jsonl")
+    judged, audit = judge_documents(
+        rows, client=client, settings=settings, checkpoint=checkpoint
+    )
     return write_outputs(judged, audit, settings.output_dir)
 
 

@@ -8,7 +8,9 @@ dependencies = [
     "data-designer>=0.7.0",
     "datasets>=5.0.0",
     "huggingface-hub>=1.0.0",
-    "nemo-curator>=1.0.0",
+    # Curator 1.2 fuzzy dedup requires RAPIDS 25.10.* (via this extra).
+    # Do NOT upgrade to RAPIDS 26.6 — API paths diverge (rapidsmpf.buffer gone).
+    "nemo-curator[deduplication-cuda12]==1.2.0",
     "pyarrow>=20.0.0",
     "pyyaml>=6.0.3",
 ]
@@ -22,6 +24,7 @@ s5-linguistic-judge = "main.designers.linguistic_judge:main"
 s6-deterministic-auditor = "main.designers.deterministic_auditor:main"
 s7-s8-curate = "main.pipeline.curate:main"
 s9-gliner-format = "main.pipeline.gliner_format:main"
+s10-split = "main.pipeline.split:main"
 
 [build-system]
 requires = ["hatchling"]

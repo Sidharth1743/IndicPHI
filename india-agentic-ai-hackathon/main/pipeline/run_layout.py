@@ -9,6 +9,7 @@ Every pipeline invocation writes under::
       s2_taxonomy/
       ...
       s9_gliner_format/
+      s10_split/
 
 Stages never overwrite a previous run; a new timestamp folder is created.
 """
@@ -39,6 +40,7 @@ STAGE_SPECS: tuple[tuple[str, str, str], ...] = (
     ("deterministic_auditor", "s6_deterministic_auditor", "audited.jsonl"),
     ("curation", "s7_s8_curation", "curated.jsonl"),
     ("gliner_format", "s9_gliner_format", "gliner_docs.jsonl"),
+    ("split", "s10_split", "train.jsonl"),
 )
 
 
@@ -149,6 +151,12 @@ def materialize_run_config(
     root["gliner_format"]["output_dir"] = str(
         (base / "s9_gliner_format").relative_to(REPO_ROOT)
     )
+
+    root.setdefault("split", {})
+    root["split"]["input_jsonl"] = str(
+        (base / "s9_gliner_format" / "gliner_docs.jsonl").relative_to(REPO_ROOT)
+    )
+    root["split"]["output_dir"] = str((base / "s10_split").relative_to(REPO_ROOT))
 
     if "data_designer" in root and isinstance(root["data_designer"], dict):
         root["data_designer"]["seed_path"] = str(

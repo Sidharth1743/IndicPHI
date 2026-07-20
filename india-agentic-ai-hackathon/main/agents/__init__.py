@@ -19,6 +19,7 @@ from main.designers import translator as s4b_translator
 from main.pipeline import curate as s7_s8_curate
 from main.pipeline import gliner_format as s9_gliner_format
 from main.pipeline import run_pipeline
+from main.pipeline import split as s10_split
 
 __all__ = [
     "s1_persona_sampler",
@@ -31,5 +32,6 @@ __all__ = [
     "s6_deterministic_auditor",
     "s7_s8_curate",
     "s9_gliner_format",
+    "s10_split",
     "run_pipeline",
 ]

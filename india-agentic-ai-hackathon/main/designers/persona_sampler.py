@@ -7,12 +7,18 @@ Design rules for this stage:
 - Keep every source column; only *add* pipeline provenance fields.
 - Match ``first_language`` via exact configured aliases only (no fuzzy match,
   no geographic fallback, no reassignment to fill quotas).
-- Fail hard if any language quota is under-filled after ``max_scan_rows``.
+- Seeded hash sampling: among exact alias matches found while scanning (up to
+  ``max_scan_rows``), rank by ``blake2b(f"{seed}:{uuid}")`` and keep the N
+  lowest hashes per language. When ``local_shard_path`` is unset, scan every
+  split shard (still capped by ``max_scan_rows``); when set, rank matches
+  within that shard only.
+- Fail hard if any language quota is under-filled after the scan.
 """
 
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import sys
 from collections import Counter
@@ -266,6 +272,11 @@ def _validate_source_columns(columns: Sequence[str], *, source: str) -> None:
         )
 
 
+def _persona_rank_key(seed: int, uuid: str) -> str:
+    """Deterministic rank key; lower blake2b hex digest wins."""
+    return hashlib.blake2b(f"{seed}:{uuid}".encode("utf-8"), digest_size=16).hexdigest()
+
+
 def sample_personas(
     settings: PersonaSamplingSettings,
     languages: Sequence[LanguageSpec],
@@ -279,14 +290,17 @@ def sample_personas(
 
     alias_index = build_alias_index(languages)
     quotas = {spec.code: settings.personas_per_language for spec in languages}
-    buckets: dict[str, list[dict[str, Any]]] = {spec.code: [] for spec in languages}
+    # Collect all exact-alias matches during the scan, then keep top-N by hash rank.
+    candidates: dict[str, list[tuple[str, dict[str, Any]]]] = {
+        spec.code: [] for spec in languages
+    }
 
     observed_first_language: Counter[str] = Counter()
     matched_counts: Counter[str] = Counter()
     scanned = 0
 
-    # Deterministic selection: fixed shard order, first N exact alias matches per language.
-    # ``seed`` is recorded on every row for provenance / later stratified stages.
+    # Seeded hash ranking: scan shards (all of them when local_shard_path is None),
+    # collect every exact alias match up to max_scan_rows, then keep lowest hashes.
     for shard_name, source_row in iter_source_rows(settings):
         if scanned >= settings.max_scan_rows:
             break
@@ -303,8 +317,13 @@ def sample_personas(
         spec = alias_index.get(first_language)
         if spec is None:
             continue
-        if len(buckets[spec.code]) >= quotas[spec.code]:
-            continue
+
+        uuid = source_row["uuid"]
+        if not isinstance(uuid, str):
+            raise PersonaSamplingError(
+                f"uuid must be str, got {type(uuid).__name__} "
+                f"at scan_index={scanned} shard={shard_name}"
+            )
 
         row = dict(source_row)
         row.update(
@@ -320,11 +339,14 @@ def sample_personas(
                 "stage": "s1_persona_sampling",
             }
         )
-        buckets[spec.code].append(row)
+        rank = _persona_rank_key(settings.seed, uuid)
+        candidates[spec.code].append((rank, row))
         matched_counts[spec.code] += 1
 
-        if all(len(buckets[code]) >= quotas[code] for code in quotas):
-            break
+    buckets: dict[str, list[dict[str, Any]]] = {}
+    for code, items in candidates.items():
+        items.sort(key=lambda item: (item[0], item[1]["uuid"]))
+        buckets[code] = [row for _, row in items[: quotas[code]]]
 
     underfilled = {
         code: {"have": len(buckets[code]), "need": quotas[code]}
@@ -341,7 +363,7 @@ def sample_personas(
 
     selected: list[dict[str, Any]] = []
     for spec in languages:
-        selected.extend(buckets[spec.code][: quotas[spec.code]])
+        selected.extend(buckets[spec.code])
     selected.sort(key=lambda item: (item["document_language_code"], item["uuid"]))
 
     audit = {
@@ -350,6 +372,7 @@ def sample_personas(
         "dataset_id": settings.dataset_id,
         "split": settings.split,
         "seed": settings.seed,
+        "sampling_method": "seeded_blake2b_hash_rank_across_shards",
         "personas_per_language": settings.personas_per_language,
         "docs_per_persona": settings.docs_per_persona,
         "languages_requested": [spec.code for spec in languages],
@@ -381,11 +404,15 @@ def _demographic_audit(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
     sex = Counter(str(row["sex"]) for row in rows)
     zone = Counter(str(row["zone"]) for row in rows)
     state = Counter(str(row["state"]) for row in rows)
+    occupation = Counter(str(row["occupation"]) for row in rows)
+    shards = Counter(str(row["persona_source_shard"]) for row in rows)
     ages = [int(row["age"]) for row in rows]
     return {
         "sex": dict(sex),
         "zone": dict(zone),
         "state_top20": dict(state.most_common(20)),
+        "occupation_top20": dict(occupation.most_common(20)),
+        "persona_source_shard": dict(shards.most_common()),
         "age_min": min(ages) if ages else None,
         "age_max": max(ages) if ages else None,
         "age_mean": (sum(ages) / len(ages)) if ages else None,
@@ -473,6 +500,8 @@ def _render_audit_markdown(audit: Mapping[str, Any]) -> str:
             f"- age: min=`{demographics['age_min']}` max=`{demographics['age_max']}` "
             f"mean=`{demographics['age_mean']}`",
             f"- state_top20: `{demographics['state_top20']}`",
+            f"- occupation_top20: `{demographics['occupation_top20']}`",
+            f"- persona_source_shard: `{demographics['persona_source_shard']}`",
             "",
             "## Observed first_language in scan (all values)",
             "",

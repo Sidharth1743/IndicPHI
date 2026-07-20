@@ -33,7 +33,7 @@ def _load_stage_runners() -> list[tuple[str, str, StageFn]]:
         taxonomy,
         translator,
     )
-    from main.pipeline import curate, gliner_format
+    from main.pipeline import curate, gliner_format, split
 
     return [
         ("s1_persona_sampling", "s1_persona_sampling", persona_sampler.run),
@@ -46,6 +46,7 @@ def _load_stage_runners() -> list[tuple[str, str, StageFn]]:
         ("s6_deterministic_auditor", "s6_deterministic_auditor", deterministic_auditor.run),
         ("s7_s8_curation", "s7_s8_curation", curate.run),
         ("s9_gliner_format", "s9_gliner_format", gliner_format.run),
+        ("s10_split", "s10_split", split.run),
     ]
 
 
@@ -62,6 +63,8 @@ def _preview_file(folder: Path) -> Path | None:
         "audited.jsonl",
         "curated.jsonl",
         "gliner_docs.jsonl",
+        "train.jsonl",
+        "eval.jsonl",
     ):
         candidate = folder / name
         if candidate.is_file():

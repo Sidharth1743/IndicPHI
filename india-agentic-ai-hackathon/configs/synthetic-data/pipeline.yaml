@@ -63,7 +63,10 @@ prompt_construction:
   language_codes: null
 
 generation:
-  # Generator: Sarvam-105B via Sarvam API (English pivot with inline tags).
+  # REQUIRED engine: NeMo Data Designer (no silent Sarvam-HTTP bypass).
+  engine: data_designer
+  # Model endpoint used by Data Designer provider registration.
+  # Generator model: Sarvam-105B via Sarvam API (English pivot with inline tags).
   # reasoning_effort: null is serialized as JSON null → reasoning OFF.
   # (Omitting the field leaves Sarvam default reasoning ON — do not omit.)
   # max_tokens: 16384 — enough for long Indic discharge/surgical notes with
@@ -147,10 +150,11 @@ curation:
   language_field: document_language_code
   max_docs: null
   dedup:
-    # cpu_minhash: portable Jaccard≥threshold (smoke / no GPU).
-    # nemo_curator: FuzzyDeduplicationWorkflow + TextDuplicatesRemovalWorkflow
-    #   (requires pip install nemo-curator, Ray, NVIDIA GPU). Explicit switch.
-    backend: cpu_minhash
+    # REQUIRED: NeMo Curator FuzzyDeduplicationWorkflow (Ray/GPU).
+    # cpu_minhash is disabled in this submission — do not switch silently.
+    backend: nemo_curator
+    # Dedup on English pivot when present, else PHI-tag-stripped surface text.
+    text_mode: english_pivot_or_masked
     jaccard_threshold: 0.8
     char_ngrams: 24
     num_bands: 20
@@ -164,6 +168,9 @@ curation:
     # null = equalize down to the scarcest language count after dedup.
     # Full run: set to ~5217 for 120k / 23 languages.
     target_docs_per_language: null
+    # Fail if any language has fewer than this many docs after dedup.
+    min_docs_per_language: null
+    allow_underfill: false
 
 gliner_format:
   input_jsonl: data/generated/s7_s8_curation/curated.jsonl
@@ -177,13 +184,27 @@ gliner_format:
   fail_on_token_misalign: true
   max_docs: null
 
-# Optional NeMo Data Designer bridge (S4). Default generation stays Sarvam HTTP.
+split:
+  input_jsonl: data/generated/s9_gliner_format/gliner_docs.jsonl
+  output_dir: data/generated/s10_split
+  eval_fraction: 0.15
+  seed: 42
+  persona_id_field: uuid
+  language_field: document_language_code
+
+# REQUIRED NeMo Data Designer bridge (S4). No silent HTTP bypass.
 data_designer:
+  required: true
+  engine: data_designer
   seed_path: data/generated/s3_prompts/prompts.parquet
   model_alias: generator
   model_id: sarvam-105b
   # Must match a configured Data Designer ModelProvider name.
   provider: sarvam
+  provider_endpoint: https://api.sarvam.ai/v1
+  provider_api_key_env: SARVAM_API_KEY
+  # Sarvam uses api-subscription-key (not Bearer).
+  auth_style: subscription_key
   temperature: 0.3
   max_tokens: 16384
   system_prompt_column: system_prompt

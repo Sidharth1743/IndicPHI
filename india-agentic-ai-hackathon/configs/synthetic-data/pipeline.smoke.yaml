@@ -71,6 +71,8 @@ prompt_construction:
   language_codes: null
 
 generation:
+  # REQUIRED: NeMo Data Designer (no silent Sarvam-HTTP bypass).
+  engine: data_designer
   provider: sarvam
   input_jsonl: data/generated/s3_prompts/prompts.jsonl
   output_dir: data/generated/s4_generation
@@ -142,7 +144,9 @@ curation:
   language_field: document_language_code
   max_docs: null
   dedup:
-    backend: cpu_minhash
+    # REQUIRED: NeMo Curator FuzzyDeduplicationWorkflow (cpu_minhash disabled).
+    backend: nemo_curator
+    text_mode: english_pivot_or_masked
     jaccard_threshold: 0.8
     char_ngrams: 24
     num_bands: 20
@@ -153,6 +157,8 @@ curation:
   balancing:
     enabled: true
     target_docs_per_language: null
+    min_docs_per_language: null
+    allow_underfill: false
 
 gliner_format:
   input_jsonl: data/generated/s7_s8_curation/curated.jsonl
@@ -164,3 +170,28 @@ gliner_format:
   gold_jsonl: null
   fail_on_token_misalign: true
   max_docs: null
+
+split:
+  input_jsonl: data/generated/s9_gliner_format/gliner_docs.jsonl
+  output_dir: data/generated/s10_split
+  eval_fraction: 0.15
+  seed: 42
+  persona_id_field: uuid
+  language_field: document_language_code
+
+# REQUIRED NeMo Data Designer bridge (S4).
+data_designer:
+  required: true
+  engine: data_designer
+  seed_path: data/generated/s3_prompts/prompts.parquet
+  model_alias: generator
+  model_id: sarvam-105b
+  provider: sarvam
+  provider_endpoint: https://api.sarvam.ai/v1
+  provider_api_key_env: SARVAM_API_KEY
+  auth_style: subscription_key
+  temperature: 0.3
+  max_tokens: 16384
+  system_prompt_column: system_prompt
+  user_prompt_column: user_prompt
+  output_column: generated_text

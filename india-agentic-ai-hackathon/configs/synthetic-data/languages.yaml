@@ -95,7 +95,7 @@ languages:
 
   - code: sat
     name: Santali
-    script: Ol_Chiki
+    script: Ol Chiki
     hf_first_language_aliases: [Santali]
 
   - code: sd

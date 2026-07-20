@@ -13,12 +13,6 @@ resolution-markers = [
     "python_full_version < '3.13' and sys_platform != 'emscripten' and sys_platform != 'win32'",
 ]
 
-[manifest]
-members = [
-    "indictrans2",
-    "nvidia-hack",
-]
-
 [[package]]
 name = "absl-py"
 version = "2.5.0"
@@ -1042,6 +1036,29 @@ wheels = [
 ]
 
 [[package]]
+name = "hackgrid-indic-phi"
+version = "0.1.0"
+source = { editable = "." }
+dependencies = [
+    { name = "data-designer" },
+    { name = "datasets" },
+    { name = "huggingface-hub" },
+    { name = "nemo-curator" },
+    { name = "pyarrow" },
+    { name = "pyyaml" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "data-designer", specifier = ">=0.7.0" },
+    { name = "datasets", specifier = ">=5.0.0" },
+    { name = "huggingface-hub", specifier = ">=1.0.0" },
+    { name = "nemo-curator", specifier = ">=1.0.0" },
+    { name = "pyarrow", specifier = ">=20.0.0" },
+    { name = "pyyaml", specifier = ">=6.0.3" },
+]
+
+[[package]]
 name = "hf-xet"
 version = "1.5.2"
 source = { registry = "https://pypi.org/simple" }
@@ -1156,11 +1173,6 @@ sdist = { url = "https://files.pythonhosted.org/packages/cd/63/9496c57188a2ee585
 wheels = [
     { url = "https://files.pythonhosted.org/packages/1e/5e/d4e9f1a599fb8e573b7b87160658329fbf28d19eac2718f51fc3def3aa5a/idna-3.18-py3-none-any.whl", hash = "sha256:7f952cbe720b688055e3f87de14f5c3e5fdaa8bc3928985c4077ca689de849a2", size = 65455, upload-time = "2026-06-02T14:34:06.319Z" },
 ]
-
-[[package]]
-name = "indictrans2"
-version = "0.1.0"
-source = { virtual = "IndicTrans2" }
 
 [[package]]
 name = "jieba"
@@ -1955,29 +1967,6 @@ source = { registry = "https://pypi.org/simple" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/46/e1/cdc1797eadf82d3a9a575a19b33fdc871a97edbec42c00b5b5e914f4aff4/nvidia_cusparselt_cu13-0.8.1-py3-none-manylinux2014_aarch64.whl", hash = "sha256:4dca476c50bf4780d46cd0bfbd82e2bc10a08e4fef7950917ce8d7578d22a23f", size = 221051344, upload-time = "2025-09-05T18:49:51.289Z" },
     { url = "https://files.pythonhosted.org/packages/34/7d/2661f2fb3ac4302f3a246f5fc030213ac60c1fe0bce84f9783dbd831dbb7/nvidia_cusparselt_cu13-0.8.1-py3-none-manylinux2014_x86_64.whl", hash = "sha256:786ce87568c303fadb5afcc7102d454cd3040d75f6f8626f5db460d1871f4dd0", size = 170148586, upload-time = "2025-09-05T18:50:50.248Z" },
-]
-
-[[package]]
-name = "nvidia-hack"
-version = "0.1.0"
-source = { editable = "." }
-dependencies = [
-    { name = "data-designer" },
-    { name = "datasets" },
-    { name = "huggingface-hub" },
-    { name = "nemo-curator" },
-    { name = "pyarrow" },
-    { name = "pyyaml" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "data-designer", specifier = ">=0.7.0" },
-    { name = "datasets", specifier = ">=5.0.0" },
-    { name = "huggingface-hub", specifier = ">=1.0.0" },
-    { name = "nemo-curator", specifier = ">=1.0.0" },
-    { name = "pyarrow", specifier = ">=20.0.0" },
-    { name = "pyyaml", specifier = ">=6.0.3" },
 ]
 
 [[package]]

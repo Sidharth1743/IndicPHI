@@ -1,12 +1,10 @@
-"""Stage 4 — Generate clinical text (Sarvam-105B via Sarvam API).
+"""Stage 4 — Generate clinical text via **NeMo Data Designer** (required).
 
-Default: model=sarvam-105b, max_tokens=16384 (quality headroom for long
-Indic clinical notes; not the 128k context ceiling), reasoning OFF via JSON
-``reasoning_effort: null`` (omitting the field leaves reasoning ON).
+Data Designer owns batching/parallelism over S3 seed prompts. The underlying
+model is configured in ``data_designer`` (typically Sarvam-105B through an
+OpenAI-compatible provider). Direct Sarvam HTTP is not a silent alternate path.
 
-Sarvam-105B Business plan: 120 req/min (not the ms-llm 1000 RPM tier).
-Throttle slightly under that and run concurrent workers. Truncated outputs
-(finish_reason=length) are rejected when ``reject_truncated`` is true.
+Row-level checkpoints live under the stage output dir (``checkpoint.jsonl``).
 """
 
 from __future__ import annotations
@@ -575,20 +573,27 @@ def write_outputs(
 
 
 def run(pipeline_config: Path) -> dict[str, Path]:
-    load_env_file()
-    settings = load_settings(pipeline_config)
-    api_key = require_env(settings.api_key_env)
-    limiter = (
-        RateLimiter(settings.requests_per_minute)
-        if settings.requests_per_minute is not None
-        else None
+    """Strict Data Designer path — raises if the package/config is missing."""
+    from main.pipeline.designer_config import (
+        DesignerConfigError,
+        run_data_designer_generation,
     )
-    client = SarvamClient(
-        api_key=api_key, base_url=settings.base_url, rate_limiter=limiter
-    )
-    prompts = load_prompts(settings.input_jsonl)
-    docs, audit = generate_documents(prompts, client=client, settings=settings)
-    return write_outputs(docs, audit, settings.output_dir)
+
+    root = load_yaml(pipeline_config)
+    engine = str(
+        (root.get("generation") or {}).get("engine")
+        or (root.get("data_designer") or {}).get("engine")
+        or "data_designer"
+    ).strip().lower()
+    if engine not in {"data_designer", "nemo_data_designer"}:
+        raise GenerationError(
+            f"Unsupported generation.engine={engine!r}. "
+            "This pipeline requires engine=data_designer (NeMo Data Designer)."
+        )
+    try:
+        return run_data_designer_generation(pipeline_config)
+    except DesignerConfigError as exc:
+        raise GenerationError(str(exc)) from exc
 
 
 def main(argv: Sequence[str] | None = None) -> int:

@@ -1,8 +1,8 @@
-"""CPU MinHash + LSH near-duplicate detection (Jaccard threshold).
+"""CPU MinHash + LSH near-duplicate detection (legacy helper).
 
-Parameter defaults align with NeMo Curator fuzzy-dedup guidance
-(char n-grams, banding). This module is the portable CPU path used by S7
-when ``curation.dedup.backend: cpu_minhash``.
+Kept for offline unit tests / experiments. Production S7 **requires**
+``curation.dedup.backend: nemo_curator``; ``cpu_minhash`` is rejected by
+``main.pipeline.curate``.
 """
 
 from __future__ import annotations
