@@ -88,6 +88,7 @@ generation:
   timeout_s: 600
   max_docs: null
   empty_content_retries: 2
+  repair_retries: 5
   reject_truncated: true
 
 translation:

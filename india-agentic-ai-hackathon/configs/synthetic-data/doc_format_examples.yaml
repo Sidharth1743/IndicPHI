@@ -7,7 +7,9 @@ examples:
     OPD Slip | [[HOSPITAL_NAME|District Hospital X]] | ID [[HOSPITAL_ID|DH-X-01]]
     Patient: [[PATIENT_NAME|...]] | DOB [[DOB|1992-03-14]] | Age: [[AGE|34]] | Gender: [[GENDER|Female]]
     Occupation: [[OCCUPATION|Teacher]] | MRN: [[MRN|OPD-2024-001]] | Doctor: [[DOCTOR_NAME|Dr. ...]]
-    District: [[DISTRICT|...]] | Chief complaint: <short clinical line>
+    Relative: [[RELATIVE_NAME|...]] | Phone: [[PHONE_NUMBER|98XXXXXXXX]]
+    Registrar EmpID: [[EMPLOYEE_ID|EMP-4412]] | District: [[DISTRICT|...]]
+    Chief complaint: <short clinical line matching assigned domain>
 
   prescription: |
     Example skeleton:
@@ -26,7 +28,7 @@ examples:
   automated_sms: |
     CRITICAL: keep the WHOLE SMS under ~400 characters / 2–4 sentences. Not a form dump.
     Example:
-    [[PATIENT_NAME|Meena Devi]]: appt [[APPOINTMENT_ID|APT-240521-01]] at [[HOSPITAL_NAME|PHC Kanpur]] on 21-May 10:30 with [[DOCTOR_NAME|Dr. Sharma]]. Confirm on [[PHONE_NUMBER|9876512340]].
+    [[PATIENT_NAME|Meena Devi]]: appt [[APPOINTMENT_ID|APT-240521-01]] at [[HOSPITAL_NAME|PHC Kanpur]] on 21-May 10:30 with [[DOCTOR_NAME|Dr. Sharma]]. Confirm on [[PHONE_NUMBER|9876512340]]. MRN [[MRN|MRN-2024-001]].
 
   hospital_billing: |
     Example skeleton:
@@ -51,7 +53,8 @@ examples:
   radiology_report: |
     Example skeleton:
     Imaging report — [[HOSPITAL_NAME|...]] | [[PATIENT_NAME|...]] [[AGE|45]] [[GENDER|Female]]
-    MRN [[MRN|...]] Encounter [[ENCOUNTER_ID|...]] | Findings: <radiology prose, untagged>
+    MRN [[MRN|...]] Encounter [[ENCOUNTER_ID|...]] | Reported by Dr [[DOCTOR_NAME|...]]
+    Findings: <radiology prose, untagged>
 
   er_triage_notes: |
     Example skeleton:
@@ -62,15 +65,17 @@ examples:
     Vitals / acuity: <short notes>
 
   telemedicine_transcript: |
-    Example skeleton — put device/network IDs ONLY in a short session header (once each),
-    then keep chat turns free of IP/IMEI/MAC/URL spam:
+    Example skeleton — put demographics + device/network IDs ONLY in a short
+    session header (once each), then keep chat turns free of ID/metadata spam:
     --- session ---
+    Patient [[PATIENT_NAME|...]] [[AGE|34]] [[GENDER|Female]]
     Appt [[APPOINTMENT_ID|...]] Portal [[URL|https://tele.example.in/visit]]
     Client IP [[IP_ADDRESS|103.21.244.12]] Device IMEI [[IMEI_NUMBER|356938035643809]]
-    MAC [[MAC_ADDRESS|A1:B2:C3:D4:E5:F6]]
+    MAC [[MAC_ADDRESS|A1:B2:C3:D4:E5:F6]] Phone [[PHONE_NUMBER|98XXXXXXXX]]
+    Email [[EMAIL_ADDRESS|...]] Hospital [[HOSPITAL_NAME|...]]
     --- chat ---
-    Patient [[PATIENT_NAME|...]] [[AGE|34]] [[GENDER|Female]] ([[PHONE_NUMBER|98XXXXXXXX]], [[EMAIL_ADDRESS|...]]): <symptom>
-    Dr [[DOCTOR_NAME|...]] ([[HOSPITAL_NAME|...]]): <advice>
+    Patient: <symptom turn — no AGE/GENDER/PHONE re-tags>
+    Dr [[DOCTOR_NAME|...]]: <advice turn>
 
   surgical_note: |
     Example skeleton:
@@ -81,11 +86,13 @@ examples:
     gender-plausible.
 
   lab_report: |
-    Example skeleton:
-    Lab report — [[HOSPITAL_NAME|...]] MRN [[MRN|...]]
-    [[PATIENT_NAME|...]] [[AGE|41]] [[GENDER|Male]] Ordered by [[DOCTOR_NAME|...]]
+    Example skeleton (English pivot; TYPE names stay ASCII forever):
+    Lab report — [[HOSPITAL_NAME|Barddhaman District Hospital]] District [[DISTRICT|Purba Bardhaman]]
+    MRN [[MRN|MRN-WB-2024-0815]] Patient ID [[PATIENT_ID|PID-WB-7781]]
+    [[PATIENT_NAME|Anjali Mondal]] [[AGE|27]] [[GENDER|Female]] Phone [[PHONE_NUMBER|9876543210]]
+    Ordered by [[DOCTOR_NAME|Dr. Riya Banerjee]]
     Results table (analyte values NOT tagged as PHI entities).
-
+    NEVER write [[রোগীর_নাম|…]] / [[এম.আর.এন|…]] — only PATIENT_NAME, MRN, etc.
   phc_register: |
     Example skeleton:
     PHC register — [[HOSPITAL_NAME|PHC ...]] Village [[VILLAGE|...]] District [[DISTRICT|...]]

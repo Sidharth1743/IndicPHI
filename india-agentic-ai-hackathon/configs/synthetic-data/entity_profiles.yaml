@@ -189,7 +189,6 @@ profiles:
       - DISTRICT
       - PHONE_NUMBER
       - PATIENT_ID
-      - STUDENT_ID
     optional: []
 
   phc_register:

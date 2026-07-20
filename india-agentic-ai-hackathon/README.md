@@ -25,8 +25,8 @@ fail-closed audit loop.
 | S2 | Taxonomy 14 doc types × 7 domains | `main/designers/taxonomy.py` |
 | S2b | Persona clinical summary (Sarvam-30B, row-checkpointed) | `main/designers/persona_summarizer.py` |
 | S3 | Prompt construction + entity profiles | `main/designers/prompt_builder.py` |
-| S4 | **NeMo Data Designer** generation (Sarvam-105B provider) | `main/pipeline/designer_config.py` |
-| S4b | Tag-preserving translation (ID vs name/place) | `main/designers/translator.py` |
+| S4 | **NeMo Data Designer** generation (Sarvam-105B) + tag/stuffing repair | `main/pipeline/designer_config.py` |
+| S4b | Tag-preserving translation + script repair | `main/designers/translator.py` |
 | S5 | Linguistic judge (Grok-4.3 / Azure Foundry, checkpointed) | `main/designers/linguistic_judge.py` |
 | S6 | Deterministic auditor (checksums, PHI residue, DICS) | `main/designers/deterministic_auditor.py` |
 | S7–S8 | **NeMo Curator** fuzzy dedup + semantic pass + balance | `main/pipeline/curate.py` |
@@ -51,7 +51,8 @@ uv sync   # installs data-designer + nemo-curator (required)
 ```
 
 Configs: `configs/synthetic-data/pipeline.yaml` (full),
-`pipeline.smoke.yaml` (10 docs), `pipeline.smoke.medium.yaml` (20 docs).
+`pipeline.smoke.yaml` (10 docs), `pipeline.smoke.medium.yaml` (20 docs),
+`pipeline.diversity.yaml` (23 languages ≈ 69 docs).
 
 Persona seed shard: `data/nemotron-personas-india/`
 (`nvidia/Nemotron-Personas-India` local parquet).
@@ -59,12 +60,13 @@ Persona seed shard: `data/nemotron-personas-india/`
 ## NVIDIA tooling (required)
 
 - **NeMo Data Designer (S4):** required engine (`generation.engine: data_designer`).
-  No silent Sarvam-HTTP bypass around Designer.
+  No silent Sarvam-HTTP bypass around Designer. Post-gen **repair** for missing
+  tags / stuffing via generator (`main/designers/repair.py`).
 - **NeMo Curator (S7):** required backend (`curation.dedup.backend: nemo_curator`).
   `cpu_minhash` is disabled. Semantic near-dup runs after Curator on English-pivot /
   PHI-masked text.
 - **Personas:** `nvidia/Nemotron-Personas-India`.
-
+- **Sarvam-105B:** generation + translation — 22 official Indic languages + English.
 ## Layout (organizer track + SDG reason)
 
 ```
@@ -91,8 +93,11 @@ No `notebooks/` (not used).
 Docs:
 
 - [`docs/architecture.md`](docs/architecture.md)
+- [`docs/idea.md`](docs/idea.md)
+- [`docs/plan.md`](docs/plan.md)
 - [`docs/demo-script.md`](docs/demo-script.md)
 - [`docs/evaluation-plan.md`](docs/evaluation-plan.md)
+- [`docs/diversification-120k.md`](docs/diversification-120k.md)
 - [`results/eval_report.md`](results/eval_report.md)
 - [`results/README.md`](results/README.md)
 

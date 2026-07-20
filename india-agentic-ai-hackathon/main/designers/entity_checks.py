@@ -5,7 +5,11 @@ from __future__ import annotations
 import re
 from typing import Sequence
 
+# Canonical tags: TYPE must be ASCII uppercase allow-list ids.
 _TAG_TYPE_RE = re.compile(r"\[\[([A-Z][A-Z0-9_]*)\|")
+# Any bracket pair — catches localized / illegal TYPE spellings.
+_ANY_TAG_RE = re.compile(r"\[\[([^\]|\n]+)\|([^\]]*)\]\]")
+_VALID_TYPE_RE = re.compile(r"^[A-Z][A-Z0-9_]*$")
 
 # Reject / retry when any TYPE appears more than this many times, or total tags
 # exceed required_count * multiplier. Speaker names may repeat in chat.
@@ -19,6 +23,28 @@ def entity_type_counts(text: str) -> dict[str, int]:
     for entity_id in _TAG_TYPE_RE.findall(text):
         tallies[entity_id] = tallies.get(entity_id, 0) + 1
     return tallies
+
+
+def has_valid_entity_tags(text: str) -> bool:
+    return _TAG_TYPE_RE.search(text) is not None
+
+
+def invalid_type_tags(text: str) -> list[str]:
+    """TYPE spellings that are not canonical ASCII allow-list ids.
+
+    Example failure: ``[[রোগীর_নাম|…]]`` — model localized the TYPE. Pipeline
+    only accepts ``[[PATIENT_NAME|…]]``.
+    """
+    bad: list[str] = []
+    seen: set[str] = set()
+    for typ, _value in _ANY_TAG_RE.findall(text):
+        typ = typ.strip()
+        if _VALID_TYPE_RE.match(typ):
+            continue
+        if typ not in seen:
+            seen.add(typ)
+            bad.append(typ)
+    return bad
 
 
 def missing_required_entities(text: str, required: Sequence[str]) -> list[str]:
@@ -61,3 +87,11 @@ def coverage_and_stuffing(
     return missing_required_entities(text, required), stuffing_violations(
         text, required
     )
+
+
+def tag_issues(
+    text: str, required: Sequence[str]
+) -> tuple[list[str], list[str], list[str]]:
+    """Return (missing, stuffed, invalid_type_spellings)."""
+    missing, stuffed = coverage_and_stuffing(text, required)
+    return missing, stuffed, invalid_type_tags(text)

@@ -11,9 +11,19 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
+from main.designers.repair import (
+    clear_upstream_soft_fail_fields,
+    issues_from_auditor_errors,
+    load_repair_settings_from_generation,
+    repair_document,
+    RepairSettings,
+)
 from main.entities.inline import extract_inline_spans
 from main.entities.schema import load_entity_specs
+from main.llm.rate_limit import RateLimiter
+from main.llm.sarvam import SarvamClient
 from main.pipeline.config_io import REPO_ROOT, load_yaml, resolve_repo_path
+from main.pipeline.env import load_env_file, require_env
 from main.pipeline.io import read_jsonl, write_json, write_jsonl, write_parquet
 from main.validators.checksums import validate_entity_value
 from main.validators.dics import compute_dics
@@ -284,6 +294,8 @@ def audit_corpus(
     rows: Sequence[Mapping[str, Any]],
     *,
     settings: AuditorSettings,
+    repair_client: SarvamClient | None = None,
+    repair_settings: RepairSettings | None = None,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     known = load_entity_specs(settings.entities_config)
     profiles = load_profiles(settings.entity_profiles_config)
@@ -294,13 +306,88 @@ def audit_corpus(
     if not selected:
         raise AuditorError("No rows selected for deterministic auditor")
 
+    max_repairs = (
+        repair_settings.max_repairs
+        if repair_settings is not None and repair_client is not None
+        else 0
+    )
+    repaired_count = 0
     outputs: list[dict[str, Any]] = []
     for row in selected:
+        working = dict(row)
         report = audit_document(
-            row, known_entities=known, profiles=profiles, settings=settings
+            working, known_entities=known, profiles=profiles, settings=settings
         )
-        out = dict(row)
+        repair_attempts = 0
+        for _round in range(max_repairs):
+            if report.get("auditor_pass"):
+                break
+            errors = [str(e) for e in (report.get("auditor_errors") or [])]
+            # Skip pure judge_failed — those belong to S5.
+            if errors == ["judge_failed"] or (
+                len(errors) == 1 and errors[0] == "judge_failed"
+            ):
+                break
+            issues = issues_from_auditor_errors(errors, row=working)
+            if not issues:
+                break
+            required = []
+            doc_type_id = str(working.get("doc_type_id") or "")
+            if doc_type_id in profiles:
+                req = profiles[doc_type_id]["required"]
+                opt = profiles[doc_type_id]["optional"]
+                required = list(dict.fromkeys([*req, *opt])) if settings.require_all_profile_entities else list(req)
+            check_script = any(
+                "script" in e or "translation_soft_fail" in e for e in errors
+            )
+            print(
+                f"[s6] repair {repair_attempts + 1}/{max_repairs} "
+                f"uuid={working.get('uuid')} errors={errors[:3]}",
+                file=sys.stderr,
+                flush=True,
+            )
+            one_shot = RepairSettings(
+                model=repair_settings.model,
+                temperature=repair_settings.temperature,
+                max_tokens=repair_settings.max_tokens,
+                reasoning_effort=repair_settings.reasoning_effort,
+                timeout_s=repair_settings.timeout_s,
+                max_repairs=1,
+            )
+            assert repair_client is not None and repair_settings is not None
+            fix = repair_document(
+                repair_client,
+                draft=str(working.get("generated_text") or ""),
+                row=working,
+                required=required,
+                issues=issues,
+                settings=one_shot,
+                check_script=check_script,
+            )
+            repair_attempts += 1
+            if not fix.text.strip():
+                break
+            working["generated_text"] = fix.text
+            clear_upstream_soft_fail_fields(working)
+            report = audit_document(
+                working, known_entities=known, profiles=profiles, settings=settings
+            )
+            if report.get("auditor_pass"):
+                repaired_count += 1
+                print(
+                    f"[s6] REPAIRED-THEN-PASS uuid={working.get('uuid')} "
+                    f"attempts={repair_attempts}",
+                    file=sys.stderr,
+                    flush=True,
+                )
+                break
+
+        out = dict(working)
         out.update(report)
+        out["auditor_repair_attempts"] = repair_attempts
+        out["auditor_repaired"] = bool(
+            repair_attempts and report.get("auditor_pass")
+        )
         outputs.append(out)
 
     passed = sum(1 for row in outputs if row["auditor_pass"])
@@ -311,6 +398,7 @@ def audit_corpus(
             "doc_type_id": row.get("doc_type_id"),
             "document_language_code": row.get("document_language_code"),
             "auditor_errors": row.get("auditor_errors"),
+            "auditor_repair_attempts": row.get("auditor_repair_attempts"),
         }
         for row in outputs
         if not row["auditor_pass"]
@@ -329,12 +417,20 @@ def audit_corpus(
         / len(outputs),
         "failures": failed_rows,
         "failure_count": len(failed_rows),
+        "auditor_repaired_count": repaired_count,
+        "quality_repair_max": max_repairs,
     }
     if failed_rows:
         print(
-            f"[s6] WARNING: {len(failed_rows)} auditor failure(s) logged "
+            f"[s6] WARNING: {len(failed_rows)} auditor failure(s) after repair logged "
             "— see failed.jsonl and audit failures",
             file=sys.stderr,
+        )
+    if repaired_count:
+        print(
+            f"[s6] repaired-to-pass: {repaired_count}",
+            file=sys.stderr,
+            flush=True,
         )
     return outputs, audit
 
@@ -390,6 +486,7 @@ def write_outputs(
 
 
 def run(pipeline_config: Path) -> dict[str, Path]:
+    load_env_file()
     settings = load_settings(pipeline_config)
     rows = read_jsonl(settings.input_jsonl, allow_empty=True)
     if not rows:
@@ -405,7 +502,28 @@ def run(pipeline_config: Path) -> dict[str, Path]:
             "note": "No judge-passed rows; wrote empty auditor outputs.",
         }
         return write_outputs([], audit, settings.output_dir)
-    audited, audit = audit_corpus(rows, settings=settings)
+
+    root = load_yaml(pipeline_config)
+    gen = root.get("generation") if isinstance(root.get("generation"), dict) else {}
+    repair_settings = (
+        load_repair_settings_from_generation(gen) if gen.get("model") else None
+    )
+    repair_client: SarvamClient | None = None
+    if repair_settings is not None and repair_settings.max_repairs > 0:
+        api_key = require_env(str(gen.get("api_key_env") or "SARVAM_API_KEY"))
+        rpm = gen.get("requests_per_minute")
+        limiter = RateLimiter(float(rpm)) if rpm is not None and float(rpm) > 0 else None
+        repair_client = SarvamClient(
+            api_key=api_key,
+            base_url=str(gen.get("base_url") or "https://api.sarvam.ai/v1"),
+            rate_limiter=limiter,
+        )
+    audited, audit = audit_corpus(
+        rows,
+        settings=settings,
+        repair_client=repair_client,
+        repair_settings=repair_settings,
+    )
     return write_outputs(audited, audit, settings.output_dir)
 
 

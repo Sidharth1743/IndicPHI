@@ -16,6 +16,13 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Mapping, Protocol, Sequence
 
+from main.designers.repair import (
+    clear_upstream_soft_fail_fields,
+    issues_from_judge_flags,
+    load_repair_settings_from_generation,
+    repair_document,
+    RepairSettings,
+)
 from main.llm.openai_compatible import (
     OpenAICompatibleClient,
     OpenAICompatibleClientError,
@@ -45,6 +52,8 @@ JUDGE_COLUMNS: tuple[str, ...] = (
     "judge_model",
     "judge_soft_fail",
     "judge_error",
+    "judge_repair_attempts",
+    "judge_repaired",
     "stage",
 )
 
@@ -345,6 +354,8 @@ def judge_documents(
     client: _ChatClient,
     settings: JudgeSettings,
     checkpoint: CheckpointStore | None = None,
+    repair_client: SarvamClient | None = None,
+    repair_settings: RepairSettings | None = None,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     selected = list(rows)
     if settings.max_docs is not None:
@@ -357,6 +368,12 @@ def judge_documents(
     soft_failures: list[dict[str, Any]] = []
     attempts_per_row = settings.network_retries + 1
     resumed = 0
+    repaired_count = 0
+    max_quality_repairs = (
+        repair_settings.max_repairs
+        if repair_settings is not None and repair_client is not None
+        else 0
+    )
 
     for index, row in enumerate(selected):
         if "generated_text" not in row:
@@ -397,46 +414,123 @@ def judge_documents(
                 resumed += 1
                 continue
 
+        working = dict(row)
         result: ChatResult | None = None
         parsed: dict[str, Any] | None = None
         last_error: Exception | None = None
-        for attempt in range(attempts_per_row):
-            try:
-                result = _call_judge(
-                    client,
-                    settings=settings,
-                    messages=build_judge_messages(row, allow_list=allow_list),
-                )
-                parsed = parse_judge_response(
-                    result.content, pass_threshold=settings.pass_threshold
-                )
-                last_error = None
-                break
-            except (
-                SarvamClientError,
-                OpenAICompatibleClientError,
-                JudgeError,
-                TimeoutError,
-                OSError,
-            ) as exc:
-                last_error = exc
-                if _is_retryable_judge_error(exc) and attempt < attempts_per_row - 1:
-                    delay = min(30.0, 2.0 ** attempt)
-                    print(
-                        f"[s5] retry {attempt + 1}/{attempts_per_row - 1} "
-                        f"uuid={row.get('uuid')} after {delay:.0f}s: {exc}",
-                        file=sys.stderr,
-                    )
-                    time.sleep(delay)
-                    continue
-                if _is_retryable_judge_error(exc):
-                    # Soft-fail this row so the rest of the corpus still judges.
-                    break
-                raise JudgeError(
-                    f"Judge failed at row {index} uuid={row.get('uuid')!r}: {exc}"
-                ) from exc
+        repair_attempts = 0
+        repaired = False
+        print(
+            f"[s5] judging {index + 1}/{len(selected)} "
+            f"uuid={working.get('uuid')} lang={working.get('document_language_code')} "
+            f"doc_type={working.get('doc_type_id')}",
+            file=sys.stderr,
+            flush=True,
+        )
 
-        out = dict(row)
+        for quality_round in range(max_quality_repairs + 1):
+            result = None
+            parsed = None
+            last_error = None
+            for attempt in range(attempts_per_row):
+                try:
+                    result = _call_judge(
+                        client,
+                        settings=settings,
+                        messages=build_judge_messages(working, allow_list=allow_list),
+                    )
+                    parsed = parse_judge_response(
+                        result.content, pass_threshold=settings.pass_threshold
+                    )
+                    last_error = None
+                    break
+                except (
+                    SarvamClientError,
+                    OpenAICompatibleClientError,
+                    JudgeError,
+                    TimeoutError,
+                    OSError,
+                ) as exc:
+                    last_error = exc
+                    if _is_retryable_judge_error(exc) and attempt < attempts_per_row - 1:
+                        delay = min(30.0, 2.0 ** attempt)
+                        print(
+                            f"[s5] retry {attempt + 1}/{attempts_per_row - 1} "
+                            f"uuid={working.get('uuid')} after {delay:.0f}s: {exc}",
+                            file=sys.stderr,
+                            flush=True,
+                        )
+                        time.sleep(delay)
+                        continue
+                    if _is_retryable_judge_error(exc):
+                        break
+                    raise JudgeError(
+                        f"Judge failed at row {index} uuid={working.get('uuid')!r}: {exc}"
+                    ) from exc
+
+            if parsed is None:
+                break
+
+            if parsed["judge_verdict"] == "pass":
+                if quality_round > 0:
+                    repaired = True
+                    repaired_count += 1
+                    print(
+                        f"[s5] REPAIRED-THEN-PASS uuid={working.get('uuid')} "
+                        f"rounds={repair_attempts} score={parsed['judge_score']}",
+                        file=sys.stderr,
+                        flush=True,
+                    )
+                break
+
+            flags = [str(f) for f in (parsed.get("judge_flags") or [])]
+            issues = issues_from_judge_flags(
+                flags,
+                reasoning=str(parsed.get("judge_reasoning") or ""),
+                row=working,
+            )
+            if (
+                quality_round >= max_quality_repairs
+                or not issues
+                or repair_client is None
+                or repair_settings is None
+            ):
+                break
+
+            required = [str(x) for x in (working.get("required_entities") or [])]
+            check_script = any(
+                f in {"dialect_script_impurity", "cross_language_entity_shift"}
+                for f in flags
+            )
+            print(
+                f"[s5] repair {quality_round + 1}/{max_quality_repairs} "
+                f"uuid={working.get('uuid')} flags={flags}",
+                file=sys.stderr,
+                flush=True,
+            )
+            one_shot = RepairSettings(
+                model=repair_settings.model,
+                temperature=repair_settings.temperature,
+                max_tokens=repair_settings.max_tokens,
+                reasoning_effort=repair_settings.reasoning_effort,
+                timeout_s=repair_settings.timeout_s,
+                max_repairs=1,
+            )
+            fix = repair_document(
+                repair_client,
+                draft=str(working.get("generated_text") or ""),
+                row=working,
+                required=required,
+                issues=issues,
+                settings=one_shot,
+                check_script=check_script,
+            )
+            repair_attempts += 1
+            if fix.text.strip():
+                working["generated_text"] = fix.text
+                clear_upstream_soft_fail_fields(working)
+
+        out = dict(working)
         status = "ok"
         if parsed is not None and result is not None:
             out.update(parsed)
@@ -446,23 +540,33 @@ def judge_documents(
                     "judge_model": result.model,
                     "judge_soft_fail": False,
                     "judge_error": None,
+                    "judge_repair_attempts": repair_attempts,
+                    "judge_repaired": repaired,
                     "stage": "s5_linguistic_judge",
                 }
+            )
+            print(
+                f"[s5] done {index + 1}/{len(selected)} "
+                f"verdict={out.get('judge_verdict')} score={out.get('judge_score')} "
+                f"repairs={repair_attempts}",
+                file=sys.stderr,
+                flush=True,
             )
         else:
             assert last_error is not None
             err = str(last_error)
             print(
-                f"[s5] SOFT-FAIL uuid={row.get('uuid')} doc_type={row.get('doc_type_id')} "
-                f"error={err}",
+                f"[s5] SOFT-FAIL uuid={working.get('uuid')} "
+                f"doc_type={working.get('doc_type_id')} error={err}",
                 file=sys.stderr,
+                flush=True,
             )
             soft_failures.append(
                 {
-                    "uuid": row.get("uuid"),
-                    "document_id": row.get("document_id"),
-                    "doc_type_id": row.get("doc_type_id"),
-                    "document_language_code": row.get("document_language_code"),
+                    "uuid": working.get("uuid"),
+                    "document_id": working.get("document_id"),
+                    "doc_type_id": working.get("doc_type_id"),
+                    "document_language_code": working.get("document_language_code"),
                     "judge_error": err,
                 }
             )
@@ -479,6 +583,8 @@ def judge_documents(
                     "judge_model": settings.model,
                     "judge_soft_fail": True,
                     "judge_error": err,
+                    "judge_repair_attempts": repair_attempts,
+                    "judge_repaired": False,
                     "stage": "s5_linguistic_judge",
                 }
             )
@@ -506,6 +612,7 @@ def judge_documents(
             "judge_rationale": row.get("judge_reasoning"),
             "judge_soft_fail": row.get("judge_soft_fail"),
             "judge_error": row.get("judge_error"),
+            "judge_repair_attempts": row.get("judge_repair_attempts"),
         }
         for row in outputs
         if str(row.get("judge_verdict")) != "pass"
@@ -528,6 +635,8 @@ def judge_documents(
         "failure_count": len(failures),
         "soft_failures": soft_failures,
         "soft_fail_count": len(soft_failures),
+        "judge_repaired_count": repaired_count,
+        "quality_repair_max": max_quality_repairs,
         "columns_added": list(JUDGE_COLUMNS),
     }
     if soft_failures:
@@ -538,11 +647,18 @@ def judge_documents(
         )
     if failures:
         print(
-            f"[s5] WARNING: {len(failures)} judge fail(s) logged "
+            f"[s5] WARNING: {len(failures)} judge fail(s) after repair logged "
             "— see failed.jsonl and audit failures",
             file=sys.stderr,
         )
+    if repaired_count:
+        print(
+            f"[s5] quality-repaired-to-pass: {repaired_count}",
+            file=sys.stderr,
+            flush=True,
+        )
     return outputs, audit
+
 
 
 def write_outputs(
@@ -599,6 +715,7 @@ def write_outputs(
         f"- rows_judged: **{audit['rows_judged']}**\n"
         f"- soft_fail_count: **{audit.get('soft_fail_count', 0)}**\n"
         f"- failure_count: **{audit.get('failure_count', 0)}**\n"
+        f"- judge_repaired_count: **{audit.get('judge_repaired_count', 0)}**\n"
         f"- pass_rate: **{audit['pass_rate']:.3f}**\n"
         f"- label_distribution: `{audit['label_distribution']}`\n"
         f"- positional_length_bias: `{audit['positional_length_bias']}`\n"
@@ -615,10 +732,30 @@ def run(pipeline_config: Path) -> dict[str, Path]:
         settings.api_key_env, fallbacks=settings.api_key_env_fallbacks
     )
     client = build_client(settings, api_key)
+    root = load_yaml(pipeline_config)
+    gen = root.get("generation") if isinstance(root.get("generation"), dict) else {}
+    repair_settings = (
+        load_repair_settings_from_generation(gen) if gen.get("model") else None
+    )
+    repair_client: SarvamClient | None = None
+    if repair_settings is not None and repair_settings.max_repairs > 0:
+        gen_key = require_env(str(gen.get("api_key_env") or "SARVAM_API_KEY"))
+        rpm = gen.get("requests_per_minute")
+        limiter = RateLimiter(float(rpm)) if rpm is not None and float(rpm) > 0 else None
+        repair_client = SarvamClient(
+            api_key=gen_key,
+            base_url=str(gen.get("base_url") or "https://api.sarvam.ai/v1"),
+            rate_limiter=limiter,
+        )
     rows = read_jsonl(settings.input_jsonl)
     checkpoint = CheckpointStore(settings.output_dir / "checkpoint.jsonl")
     judged, audit = judge_documents(
-        rows, client=client, settings=settings, checkpoint=checkpoint
+        rows,
+        client=client,
+        settings=settings,
+        checkpoint=checkpoint,
+        repair_client=repair_client,
+        repair_settings=repair_settings,
     )
     return write_outputs(judged, audit, settings.output_dir)
 

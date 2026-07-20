@@ -73,12 +73,26 @@ Same persona across forms keeps identity (DICS); entity *types* change with the 
 ## Pipeline path (one document)
 
 S1 Persona → S2 Cell (lang×doc×domain) → S2b Persona summary (Sarvam-30B) →
-S3 Prompt + entity profile → S4 English-pivot generation (Sarvam-105B) →
-S4b Tag-preserving translation → S5 Linguistic judge (Grok) →
-S6 Deterministic auditor → S7–S8 Dedup/balance → S9 GLiNER export
+S3 Prompt + entity profile + format/placement examples →
+S4 English-pivot generation (**NeMo Data Designer** + Sarvam-105B) →
+  ↻ repair missing tags / stuffing →
+S4b Tag-preserving translation → ↻ repair wrong script →
+S5 Linguistic judge (Grok) → S6 Deterministic auditor →
+S7–S8 **NeMo Curator** dedup + semantic + balance → S9 GLiNER → S10 split
 
-Sarvam invents wording. Config invents the seating chart. Python enforces that
-rare seats and rare entities actually get filled (`failures.md` audits soft-fails).
+Sarvam invents wording. Config invents the seating chart. Python enforces
+structure. Generator **repair** recovers known soft fails before drop.
+
+## Diversity profile (69-doc probe)
+
+`configs/synthetic-data/pipeline.diversity.yaml`: all 23 languages × 1 persona ×
+3 docs. Use to measure language/script yield and repair effectiveness before
+scaling to 120k.
+
+Observed (`20260720T192801`): **20/23** languages in curated set after equalize;
+repairs recovered several tag/script cases. Remaining gaps concentrated on
+low-resource scripts (`brx`, `sat`, `sd`) and S5 quality flags — addressed by
+stronger prompts + flag-targeted repair (3–5×).
 
 ## Why this does not collapse at 120k
 

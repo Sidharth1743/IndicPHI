@@ -20,6 +20,14 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
+from main.designers.entity_checks import tag_issues
+from main.designers.repair import (
+    issues_from_coverage,
+    load_repair_settings_from_generation,
+    repair_document,
+)
+from main.llm.rate_limit import RateLimiter
+from main.llm.sarvam import SarvamClient
 from main.pipeline.checkpoint import (
     CheckpointStore,
     atomic_write_jsonl,
@@ -327,24 +335,6 @@ def load_config_builder(pipeline_config: Path | None = None):
     return _build_config_builder(dd, settings, seed_path=settings.seed_path)
 
 
-def _coverage_and_stuffing(text: str, required: Sequence[str]) -> tuple[list[str], list[str]]:
-    import re
-
-    tag_re = re.compile(r"\[\[([A-Z][A-Z0-9_]*)\|")
-    present = set(tag_re.findall(text))
-    missing = [entity_id for entity_id in required if entity_id not in present]
-    counts: dict[str, int] = {}
-    for entity_id in tag_re.findall(text):
-        counts[entity_id] = counts.get(entity_id, 0) + 1
-    exempt = {"PATIENT_NAME", "DOCTOR_NAME"}
-    stuffed = [
-        entity_id
-        for entity_id, count in counts.items()
-        if entity_id not in exempt and count > 2
-    ]
-    return missing, stuffed
-
-
 def _dataframe_to_rows(dataset: Any) -> list[dict[str, Any]]:
     if hasattr(dataset, "to_dict"):
         records = dataset.to_dict(orient="records")
@@ -480,6 +470,23 @@ def run_data_designer_generation(pipeline_config: Path) -> dict[str, Path]:
                 f"Data Designer returned {len(dd_rows)} rows for {len(pending)} seeds"
             )
 
+        # Targeted generator repair for known cheap issues (missing tags / stuffing)
+        # instead of soft-failing immediately — cheaper than a full DD rebatch.
+        repair_settings = load_repair_settings_from_generation(gen)
+        repair_client: SarvamClient | None = None
+        if repair_settings.max_repairs > 0:
+            rpm = gen.get("requests_per_minute")
+            limiter = (
+                RateLimiter(float(rpm))
+                if rpm is not None and float(rpm) > 0
+                else None
+            )
+            repair_client = SarvamClient(
+                api_key=api_key,
+                base_url=str(gen.get("base_url") or settings.provider_endpoint),
+                rate_limiter=limiter,
+            )
+
         for seed_row, dd_row in zip(pending, dd_rows):
             text = str(dd_row.get(settings.output_column) or dd_row.get("generated_text") or "")
             key = row_key_from_prompt(seed_row)
@@ -493,8 +500,28 @@ def run_data_designer_generation(pipeline_config: Path) -> dict[str, Path]:
                 ]
             )
             required = [str(x) for x in (seed_row.get("required_entities") or [])]
-            missing, stuffed = _coverage_and_stuffing(text, required)
+            missing, stuffed, invalid = tag_issues(text, required)
+            repair_attempts = 0
+            repaired = False
+            repair_model: str | None = None
+            if (missing or stuffed or invalid) and repair_client is not None:
+                result = repair_document(
+                    repair_client,
+                    draft=text,
+                    row=seed_row,
+                    required=required,
+                    issues=issues_from_coverage(missing, stuffed, invalid),
+                    settings=repair_settings,
+                    check_script=False,
+                )
+                text = result.text
+                repair_attempts = result.attempts
+                repaired = result.repaired
+                repair_model = result.model
+                missing, stuffed, invalid = tag_issues(text, required)
             reasons: list[str] = []
+            if invalid:
+                reasons.append("invalid_type_tags:" + ",".join(invalid))
             if missing:
                 reasons.append("missing_required_entities:" + ",".join(missing))
             if stuffed:
@@ -507,17 +534,22 @@ def run_data_designer_generation(pipeline_config: Path) -> dict[str, Path]:
                 {
                     "document_id": f"{uuid}__{doc_slot}",
                     "generated_text": text,
-                    "generator_provider": "data_designer",
-                    "generator_model": settings.model_id,
+                    "generator_provider": (
+                        "data_designer+repair" if repaired else "data_designer"
+                    ),
+                    "generator_model": repair_model or settings.model_id,
                     "generator_finish_reason": "data_designer",
                     "generator_prompt_tokens": None,
                     "generator_completion_tokens": None,
-                    "entity_coverage_complete": len(missing) == 0,
+                    "entity_coverage_complete": len(missing) == 0 and len(invalid) == 0,
                     "missing_required_entities": missing,
+                    "invalid_type_tags": invalid,
                     "entity_stuffing": len(stuffed) > 0,
                     "stuffed_entity_types": stuffed,
                     "generation_soft_fail": soft,
                     "generation_soft_fail_reasons": reasons,
+                    "generation_repair_attempts": repair_attempts,
+                    "generation_repaired": repaired,
                     "stage": "s4_generation",
                 }
             )
@@ -578,6 +610,9 @@ def run_data_designer_generation(pipeline_config: Path) -> dict[str, Path]:
         "rows_newly_generated": len(generated_new),
         "soft_failures": soft_failures,
         "soft_fail_count": len(soft_failures),
+        "generation_repaired_count": sum(
+            1 for row in outputs if row.get("generation_repaired")
+        ),
         "entity_coverage_complete_rate": (
             sum(1 for row in outputs if row.get("entity_coverage_complete")) / len(outputs)
             if outputs
@@ -607,6 +642,7 @@ def run_data_designer_generation(pipeline_config: Path) -> dict[str, Path]:
         f"- rows_generated: **{audit['rows_generated']}**\n"
         f"- rows_from_checkpoint: `{audit['rows_from_checkpoint']}`\n"
         f"- soft_fail_count: **{audit['soft_fail_count']}**\n"
+        f"- generation_repaired_count: **{audit.get('generation_repaired_count', 0)}**\n"
         f"- entity_coverage_complete_rate: `{audit['entity_coverage_complete_rate']:.3f}`\n",
         encoding="utf-8",
     )

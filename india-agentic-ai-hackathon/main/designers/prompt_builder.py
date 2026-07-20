@@ -45,6 +45,7 @@ class AnnotationRules:
     pattern: str
     description: str
     rules: tuple[str, ...]
+    quality_good_vs_bad: str
 
 
 @dataclass(frozen=True)
@@ -200,10 +201,12 @@ def load_annotation_rules(path: Path) -> AnnotationRules:
         raise ValueError(f"'inline_format' needs pattern and description in {path}")
     if not isinstance(rules, list) or not rules:
         raise ValueError(f"'rules' list required in {path}")
+    quality = str(root.get("quality_good_vs_bad") or "").strip()
     return AnnotationRules(
         pattern=str(inline["pattern"]),
         description=str(inline["description"]).strip(),
         rules=tuple(str(item) for item in rules),
+        quality_good_vs_bad=quality,
     )
 
 
@@ -278,19 +281,34 @@ def build_system_prompt(
             example_lines.append(f"  {format_examples[entity_id]}")
     examples_block = "\n".join(example_lines)
     latin_ok = ", ".join(latin_ok_types)
+    quality_block = (
+        f"\n\nQuality bar (BAD vs GOOD — avoid known judge/auditor failures):\n"
+        f"{rules.quality_good_vs_bad.strip()}\n"
+        if rules.quality_good_vs_bad.strip()
+        else ""
+    )
     return (
         "You generate synthetic Indian clinical documents with inline surrogate "
         "PHI/PII annotations for dataset creation under DPDP-safe research use.\n\n"
+        "GENERATION STAGE = ENGLISH PIVOT: write clinical prose in English "
+        "(Latin script). A later pipeline stage translates prose into the target "
+        "Indic language/script. Do NOT write the document body in Bengali/Hindi/"
+        "Tamil/etc. at this stage.\n\n"
+        "CRITICAL — TYPE names are NEVER translated: always exact ASCII uppercase "
+        "allow-list ids, e.g. [[PATIENT_NAME|Anjali Mondal]] NOT "
+        "[[রোগীর_নাম|…]] or [[रोगी_नाम|…]] or [[PatientName|…]].\n\n"
         f"Inline annotation format: {rules.pattern}\n"
         f"{rules.description.strip()}\n\n"
         f"Rules:\n{bullet_rules}\n\n"
-        f"ENTITY TYPE ALLOW-LIST (use ONLY these TYPE names):\n{allow_list}\n\n"
+        f"ENTITY TYPE ALLOW-LIST (use ONLY these TYPE names — copy spelling exactly):\n"
+        f"{allow_list}\n\n"
         "Format examples (copy the bracket pattern; invent new synthetic values):\n"
         f"{examples_block}\n\n"
         "Latin/digits OK inside these entity values even for Indic documents: "
         f"{latin_ok}\n"
         "Do NOT invent types like DATE, TIME, APPOINTMENT_DATE, APPOINTMENT_TIME, "
         "POLICY_NUMBER, MEDICAL_RECORD_NUMBER. Put calendar dates/times in plain prose."
+        f"{quality_block}"
     )
 
 
@@ -431,10 +449,17 @@ def build_user_prompt(
         "GENERATION LANGUAGE: English (Latin script) — this is an English pivot "
         "draft. A later pipeline stage will translate clinical prose into "
         f"{target_lang}. Keep [[TYPE|value]] tags intact and valid.\n"
+        "CRITICAL: TYPE names are NEVER translated or localized — always exact "
+        "ASCII allow-list (PATIENT_NAME, MRN, …). Forbidden: [[রোগীর_নাম|…]], "
+        "[[रोगी_नाम|…]], [[PatientName|…]].\n"
         "ID-like tagged values stay Latin/digits. Drug names / labs stay untagged.\n"
-        f"DOMAIN ANCHOR: chief complaint, findings, and plan MUST match "
+        "DOMAIN ANCHOR: chief complaint, findings, and plan MUST match "
         f"{row['domain_name']} — do not default to unrelated TB/generic content "
-        "unless that is the assigned domain.\n\n"
+        "unless that is the assigned domain.\n"
+        "GEO ANCHOR: any DISTRICT/VILLAGE/HOSPITAL_NAME must be plausible for "
+        f"persona state={row['state']}, district={row['district']}.\n"
+        "NOTE: translation stage (not this draft) will put the body into "
+        f"{row['document_script']} for {row['document_language_name']}.\n\n"
         f"{length_hint}"
         f"{placement_hint}"
         "Persona anchors (must remain consistent; patient = this persona):\n"

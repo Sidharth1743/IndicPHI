@@ -11,7 +11,10 @@ inline_format:
 rules:
   - Use ONLY synthetic surrogate values. Never copy real people or real IDs.
   - Keep the same surrogate for the same entity type within one document (DICS).
-  - Write clinical prose in the assigned document language and script.
+  - At generation (English pivot): write clinical prose in English. TYPE names
+    stay exact ASCII allow-list forever (PATIENT_NAME, MRN, …). NEVER translate
+    or localize the TYPE token itself. A later stage translates prose to the
+    target Indic script.
   - ID-like entity values (Aadhaar, PAN, IFSC, MRN, phone, policy numbers, emails)
     MAY stay Latin/digits even in Indic documents — that is expected, not impurity.
   - Person/place names should prefer the document script when natural; Latin names are OK if culturally plausible.
@@ -33,5 +36,52 @@ rules:
   - Do not wrap non-PHI clinical prose (symptoms, meds, vitals, drug names) as entities.
   - Never tag currency/amounts (rupees, GST, totals, line-item rates) — leave as plain numbers.
   - Use 10-digit Indian mobiles (optional +91 / 91 prefix). Avoid toy patterns.
+  - Aadhaar must be 12 digits, leading 2–9, Verhoeff-valid (synthetic checksum OK).
   - automated_sms must stay short (≤ ~400 characters, 2–4 sentences) — never dump a full chart into an SMS.
   - Output ONLY the clinical document text — no markdown fences, no preamble, no postscript.
+
+# Shown in S3 system prompt so the model avoids known soft-fail modes first-pass.
+quality_good_vs_bad: |
+  Aim for PERFECT documents. Avoid these known failure modes:
+
+  BAD → dialect_script_impurity:
+    English (or wrong-script) clinical body when Gujarati/Tamil/Meitei/Ol Chiki/Arabic/… is required.
+  GOOD:
+    Full clinical prose in the assigned language AND exact script. Latin digits only inside ID tags
+    (Aadhaar, phone, MRN, IFSC, email). Drug/lab names may stay Latin.
+
+  BAD → instruction_drift:
+    Assigned domain is oncology but the note narrates generic TB / unrelated complaint.
+  GOOD:
+    Chief complaint, findings, and plan clearly match the assigned clinical domain.
+
+  BAD → surrogate_plausibility_collapse:
+    Persona district=Faridkot but VILLAGE/HOSPITAL in another state; ABHA local-part unrelated to PATIENT_NAME.
+  GOOD:
+    All places grounded in persona state+district; names and ABHA coherent with PATIENT_NAME.
+
+  BAD → domain_persona_mismatch:
+    Male persona with maternal delivery; age 70 with paediatric content.
+  GOOD:
+    Sex/age in narrative and tags match persona exactly; clinical story fits that persona.
+
+  BAD → missing tags / HOSPITAL_ID only:
+    Facility name in prose, only [[HOSPITAL_ID|…]] tagged; doctor name untagged.
+  GOOD:
+    [[HOSPITAL_NAME|…]] AND [[HOSPITAL_ID|…]]; [[DOCTOR_NAME|…]] whenever a doctor is mentioned.
+
+  BAD → entity stuffing / long SMS:
+    AGE/PHONE/EMAIL repeated every chat turn; SMS that is a full discharge dump.
+  GOOD:
+    Each TYPE once (twice max); SMS ≤ ~400 chars with every mandatory tag once.
+
+  BAD → invented types / bad checksums:
+    [[DATE|…]], [[POLICY_NUMBER|…]]; Aadhaar failing Verhoeff; toy phones like 1234567890.
+  GOOD:
+    Only allow-listed TYPEs; dates/money in plain prose; valid-looking synthetic Aadhaar/phone.
+
+  BAD → localized / translated TYPE names (kills tag protection):
+    [[রোগীর_নাম|Anjali]], [[रोगी_नाम|…]], [[PatientName|…]], [[एम.आर.एन|…]].
+  GOOD:
+    Exact ASCII allow-list only: [[PATIENT_NAME|Anjali Mondal]], [[MRN|MRN-…]].
+    Translate prose later — NEVER translate the TYPE token.

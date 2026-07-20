@@ -17,12 +17,18 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
-from main.designers.entity_checks import coverage_and_stuffing
+from main.designers.entity_checks import (
+    coverage_and_stuffing,
+    has_valid_entity_tags,
+    invalid_type_tags,
+)
 from main.designers.repair import (
+    RepairIssue,
+    RepairSettings,
+    issues_from_text,
     load_repair_settings_from_generation,
     repair_document,
     script_issue,
-    RepairSettings,
 )
 from main.llm.rate_limit import RateLimiter
 from main.llm.sarvam import SarvamClient, SarvamClientError
@@ -351,7 +357,10 @@ def build_translate_messages(
         "CRITICAL RULES:\n"
         "1) Preserve every placeholder like ⟦ID0⟧ exactly — do not translate, "
         "alter, or remove them.\n"
-        "2) Keep entity TYPE names inside [[TYPE|…]] tags exactly unchanged.\n"
+        "2) Keep entity TYPE names inside [[TYPE|…]] tags EXACT ASCII "
+        "unchanged forever (PATIENT_NAME, HOSPITAL_NAME, MRN, …). "
+        "NEVER translate/localize TYPE "
+        "(forbidden: রোগীর_নাম, रोगी_नाम, PatientName).\n"
         "3) Translate person names, place names, hospital names, and addresses "
         "into the target script when natural. Placeholders like ⟦NM0⟧ inside "
         "[[TYPE|⟦NM0⟧]] may be replaced with the translated value, but TYPE "
@@ -416,11 +425,79 @@ def _translate_one(
         return out
 
     protection = protect_tags(source)
+    tag_repair_attempts = 0
     if not protection.id_mapping and not protection.name_mapping:
-        raise TranslationError(
-            f"No [[TYPE|value]] tags found to protect at row {index} "
-            f"uuid={row.get('uuid')!r}"
-        )
+        # Often the model localized TYPE names (e.g. [[রোগীর_নাম|…]]) so the
+        # ASCII tag regex finds nothing. Soft-fail + repair — never abort run.
+        required = [str(x) for x in (row.get("required_entities") or [])]
+        # lab_report no longer requires STUDENT_ID; drop if baked into older prompts.
+        if str(row.get("doc_type_id") or "") == "lab_report":
+            required = [t for t in required if t != "STUDENT_ID"]
+        invalid = invalid_type_tags(source)
+        if repair_settings is not None and repair_settings.max_repairs > 0:
+            issues = issues_from_text(source, required)
+            if not issues:
+                issues = [
+                    RepairIssue(
+                        kind="invalid_type_tags",
+                        detail="no_valid_ascii_TYPE_tags",
+                    )
+                ]
+                if required:
+                    issues.append(
+                        RepairIssue(
+                            kind="missing_entities",
+                            detail=",".join(required),
+                        )
+                    )
+            repair = repair_document(
+                client,
+                draft=source,
+                row=row,
+                required=required,
+                issues=issues,
+                settings=repair_settings,
+                check_script=False,
+            )
+            tag_repair_attempts = repair.attempts
+            if repair.repaired and has_valid_entity_tags(repair.text):
+                print(
+                    f"[s4b] REPAIRED-TAGS uuid={row.get('uuid')} lang={lang} "
+                    f"doc_type={row.get('doc_type_id')} attempts={tag_repair_attempts} "
+                    f"invalid_was={invalid[:5]!r}",
+                    file=sys.stderr,
+                    flush=True,
+                )
+                source = repair.text
+                out["generated_text_en"] = source
+                protection = protect_tags(source)
+
+        if not protection.id_mapping and not protection.name_mapping:
+            err = "no_valid_entity_tags_to_protect"
+            if invalid:
+                err = f"{err};invalid_type_tags:{','.join(invalid)}"
+            print(
+                f"[s4b] SOFT-FAIL uuid={row.get('uuid')} lang={lang} "
+                f"doc_type={row.get('doc_type_id')} error={err}",
+                file=sys.stderr,
+                flush=True,
+            )
+            out.update(
+                {
+                    "generated_text": source,
+                    "translation_applied": False,
+                    "translation_script_ok": False,
+                    "translator_model": None,
+                    "translator_finish_reason": "no_valid_tags",
+                    "translation_attempts": 0,
+                    "translation_error": err,
+                    "translation_soft_fail": True,
+                    "translation_generator_repair_attempts": tag_repair_attempts,
+                    "translation_repaired_by_generator": False,
+                    "stage": "s4b_translation",
+                }
+            )
+            return out
 
     last_error: Exception | None = None
     last_restored: str | None = None
@@ -471,8 +548,8 @@ def _translate_one(
                     "translation_attempts": attempt + 1,
                     "translation_error": None,
                     "translation_soft_fail": False,
-                    "translation_generator_repair_attempts": 0,
-                    "translation_repaired_by_generator": False,
+                    "translation_generator_repair_attempts": tag_repair_attempts,
+                    "translation_repaired_by_generator": tag_repair_attempts > 0,
                     "stage": "s4b_translation",
                 }
             )
@@ -481,10 +558,133 @@ def _translate_one(
             last_error = exc
             continue
 
+    # Translate / restore failed both attempts (often: model dropped or
+    # localized a name/place TYPE like PATIENT_NAME). Soft-fail + optional
+    # generator rewrite — never abort the stage on one row.
     if last_restored is None:
-        raise TranslationError(
-            f"Translation failed at row {index} uuid={row.get('uuid')!r}: {last_error}"
-        ) from last_error
+        error_msg = f"tag_restore_or_translate_failed:{last_error}"
+        repair_attempts = 0
+        if repair_settings is not None and repair_settings.max_repairs > 0:
+            required = [str(x) for x in (row.get("required_entities") or [])]
+            if str(row.get("doc_type_id") or "") == "lab_report":
+                required = [t for t in required if t != "STUDENT_ID"]
+            repair = repair_document(
+                client,
+                draft=source,
+                row=row,
+                required=required,
+                issues=[
+                    RepairIssue(
+                        kind="invalid_type_tags",
+                        detail=(
+                            "translation_dropped_or_altered_TYPE_tags; "
+                            f"{last_error}"
+                        ),
+                    ),
+                    *(
+                        [
+                            RepairIssue(
+                                kind="missing_entities",
+                                detail=",".join(required),
+                            )
+                        ]
+                        if required
+                        else []
+                    ),
+                ],
+                settings=repair_settings,
+                check_script=False,
+            )
+            repair_attempts = repair.attempts
+            if repair.repaired and has_valid_entity_tags(repair.text):
+                # Re-try one protected translate from the repaired English pivot.
+                try:
+                    protection2 = protect_tags(repair.text)
+                    if protection2.id_mapping or protection2.name_mapping:
+                        result = client.chat_completion(
+                            model=settings.model,
+                            messages=build_translate_messages(
+                                protected_text=protection2.text,
+                                language_name=str(
+                                    row.get("document_language_name", "")
+                                ),
+                                language_code=lang,
+                                script=script,
+                                doc_type_name=str(row.get("doc_type_name", "")),
+                                retry_harder=True,
+                            ),
+                            temperature=settings.temperature,
+                            max_tokens=settings.max_tokens,
+                            reasoning_effort=settings.reasoning_effort,
+                            timeout_s=settings.timeout_s,
+                        )
+                        restored = restore_tags(
+                            result.content.strip(), protection2
+                        )
+                        ok, reason = evaluate_script_purity(
+                            restored, language_code=lang, script=script
+                        )
+                        if ok:
+                            print(
+                                f"[s4b] REPAIRED-TAGS+TRANSLATE "
+                                f"uuid={row.get('uuid')} lang={lang} "
+                                f"doc_type={row.get('doc_type_id')} "
+                                f"attempts={repair_attempts}",
+                                file=sys.stderr,
+                                flush=True,
+                            )
+                            out.update(
+                                {
+                                    "generated_text": restored,
+                                    "generated_text_en": repair.text,
+                                    "translation_applied": True,
+                                    "translation_script_ok": True,
+                                    "translator_model": result.model,
+                                    "translator_finish_reason": (
+                                        "generator_tag_repair_then_translate"
+                                    ),
+                                    "translation_attempts": 3,
+                                    "translation_error": None,
+                                    "translation_soft_fail": False,
+                                    "translation_generator_repair_attempts": (
+                                        tag_repair_attempts + repair_attempts
+                                    ),
+                                    "translation_repaired_by_generator": True,
+                                    "stage": "s4b_translation",
+                                }
+                            )
+                            return out
+                        error_msg = (
+                            f"{error_msg};post_repair_script_purity:{reason}"
+                        )
+                        last_restored = restored
+                except (SarvamClientError, TranslationError) as exc:
+                    error_msg = f"{error_msg};post_repair_translate:{exc}"
+
+        print(
+            f"[s4b] SOFT-FAIL uuid={row.get('uuid')} lang={lang} "
+            f"doc_type={row.get('doc_type_id')} error={error_msg}",
+            file=sys.stderr,
+            flush=True,
+        )
+        out.update(
+            {
+                "generated_text": last_restored or source,
+                "translation_applied": bool(last_restored),
+                "translation_script_ok": False,
+                "translator_model": last_model,
+                "translator_finish_reason": "tag_restore_failed",
+                "translation_attempts": 2,
+                "translation_error": error_msg,
+                "translation_soft_fail": True,
+                "translation_generator_repair_attempts": (
+                    tag_repair_attempts + repair_attempts
+                ),
+                "translation_repaired_by_generator": False,
+                "stage": "s4b_translation",
+            }
+        )
+        return out
 
     # Known cheap fix: wrong language/script → send English pivot to generator
     # for a full rewrite, then re-check purity (+ tag coverage). Avoids another
@@ -524,6 +724,7 @@ def _translate_one(
                     f"lang={lang} doc_type={row.get('doc_type_id')} "
                     f"attempts={repair_attempts}",
                     file=sys.stderr,
+                    flush=True,
                 )
                 out.update(
                     {
@@ -562,6 +763,7 @@ def _translate_one(
         f"[s4b] SOFT-FAIL uuid={row.get('uuid')} lang={lang} "
         f"doc_type={row.get('doc_type_id')} error={error_msg}",
         file=sys.stderr,
+        flush=True,
     )
     out.update(
         {
@@ -640,10 +842,33 @@ def translate_rows(
                 index, req = futures[future]
                 try:
                     out = future.result()
-                except TranslationError:
-                    for pending_fut in futures:
-                        pending_fut.cancel()
-                    raise
+                except Exception as exc:  # noqa: BLE001 — one row must not kill stage
+                    row = selected[index]
+                    err = f"row_exception:{exc}"
+                    print(
+                        f"[s4b] SOFT-FAIL uuid={row.get('uuid')} "
+                        f"lang={row.get('document_language_code')} "
+                        f"doc_type={row.get('doc_type_id')} error={err}",
+                        file=sys.stderr,
+                        flush=True,
+                    )
+                    out = dict(row)
+                    out.update(
+                        {
+                            "generated_text": row.get("generated_text"),
+                            "generated_text_en": row.get("generated_text"),
+                            "translation_applied": False,
+                            "translation_script_ok": False,
+                            "translator_model": None,
+                            "translator_finish_reason": "row_exception",
+                            "translation_attempts": 0,
+                            "translation_error": err,
+                            "translation_soft_fail": True,
+                            "translation_generator_repair_attempts": 0,
+                            "translation_repaired_by_generator": False,
+                            "stage": "s4b_translation",
+                        }
+                    )
                 results[index] = out
                 if checkpoint is not None:
                     if out.get("translation_soft_fail"):

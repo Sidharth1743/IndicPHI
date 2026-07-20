@@ -1,35 +1,20 @@
-# Medium smoke — 10 languages × 2 personas × 1 doc = 20 documents.
-# Seed 404 (priors: 202 → 20260719T191524, 303 → 20260719T211827). Soft-fails in failures.md.
-#
-# Noted failure modes from 20260719T211827 (watch on this seed):
-# - ml script purity on ID-heavy forms
-# - pa gender morphology (judge)
-# - Aadhaar Verhoeff failures
-# - invented TYPE tags (e.g. STATE) — must stay on taxonomy types only
+# Diversity profile — all 23 Eighth-Schedule languages (+ English).
+# 1 persona × 3 docs/persona = 69 documents. Exercises repair loop + language/script coverage.
+# allow_underfill=true so soft-fails do not equalize-away language diversity.
 
 targets:
-  total_docs: 20
-  languages: 10
+  total_docs: 69
+  languages: 23
   taxonomy_cells: 98
 
 persona_sampling:
   dataset_id: nvidia/Nemotron-Personas-India
   split: en_IN
-  seed: 404
-  personas_per_language: 2
-  docs_per_persona: 1
+  seed: 707
+  personas_per_language: 1
+  docs_per_persona: 3
   max_scan_rows: 250000
-  language_codes:
-    - hi
-    - en
-    - bn
-    - ta
-    - te
-    - mr
-    - gu
-    - kn
-    - ml
-    - pa
+  language_codes: null
   languages_config: configs/synthetic-data/languages.yaml
   output_dir: data/generated/s1_persona_sampling
   local_shard_path: data/nemotron-personas-india/en_IN-00000-of-00011.parquet
@@ -39,7 +24,7 @@ taxonomy:
   doc_types_config: configs/synthetic-data/doc_types.yaml
   domains_config: configs/synthetic-data/domains.yaml
   output_dir: data/generated/s2_taxonomy
-  seed: 404
+  seed: 707
   prefer_unique_cell_per_persona: true
   prefer_unique_doc_type_per_persona: true
   prefer_unique_domain_per_persona: true
@@ -55,7 +40,7 @@ persona_summary:
   max_tokens: 256
   reasoning_effort: null
   requests_per_minute: 110
-  max_workers: 12
+  max_workers: 24
   timeout_s: 120
   narrative_max_chars: 240
   max_docs: null
@@ -68,16 +53,27 @@ prompt_construction:
   annotation_rules_config: configs/synthetic-data/annotation_rules.yaml
   entity_format_examples_config: configs/synthetic-data/entity_format_examples.yaml
   doc_format_examples_config: configs/synthetic-data/doc_format_examples.yaml
+  # Keep full Nemotron columns in JSONL; do not dump lifestyle narratives into LLM prompts.
   include_persona_narrative_in_prompt: false
   persona_narrative_max_chars: 180
   require_all_profile_entities: true
   output_dir: data/generated/s3_prompts
+  # null = all rows from S2. Set an int for smoke subsets.
   max_docs: null
   language_codes: null
 
 generation:
-  # REQUIRED: NeMo Data Designer (no silent Sarvam-HTTP bypass).
+  # REQUIRED engine: NeMo Data Designer (no silent Sarvam-HTTP bypass).
   engine: data_designer
+  # Model endpoint used by Data Designer provider registration.
+  # Generator model: Sarvam-105B via Sarvam API (English pivot with inline tags).
+  # reasoning_effort: null is serialized as JSON null → reasoning OFF.
+  # (Omitting the field leaves Sarvam default reasoning ON — do not omit.)
+  # max_tokens: 16384 — enough for long Indic discharge/surgical notes with
+  # inline tags. Do NOT set near the 128k context window: that encourages
+  # runaway dumps and does not improve clinical quality.
+  # Sarvam-105B Business RPM = 120 (ms-llm default tier is 1000 — different).
+  # Throttle at 110 + max_workers for concurrent in-flight generations.
   provider: sarvam
   input_jsonl: data/generated/s3_prompts/prompts.jsonl
   output_dir: data/generated/s4_generation
@@ -88,7 +84,7 @@ generation:
   max_tokens: 16384
   reasoning_effort: null
   requests_per_minute: 110
-  max_workers: 12
+  max_workers: 24
   timeout_s: 600
   max_docs: null
   empty_content_retries: 3
@@ -106,12 +102,16 @@ translation:
   max_tokens: 16384
   reasoning_effort: null
   requests_per_minute: 110
-  max_workers: 12
+  max_workers: 24
   timeout_s: 600
   skip_language_codes: [en]
   max_docs: null
 
 linguistic_judge:
+  # Judge: Grok-4.3 via Azure Foundry OpenAI-compatible chat/completions.
+  # Auth: Authorization Bearer (AZURE_FOUNDRY_API_KEY; typo fallback listed).
+  # Account limits: 500 RPM / 500000 TPM — we throttle RPM only.
+  # Receives entity allow-list so valid TYPE names are not flagged invented.
   provider: azure_foundry
   input_jsonl: data/generated/s4b_translation/documents.jsonl
   output_dir: data/generated/s5_linguistic_judge
@@ -126,12 +126,14 @@ linguistic_judge:
   max_tokens_field: max_tokens
   reasoning_effort: null
   requests_per_minute: 500
-  timeout_s: 600
-  network_retries: 4
+  # Diversity runs: shorter timeout so one hung call cannot stall ~10–50 min silently.
+  timeout_s: 180
+  network_retries: 2
   pass_threshold: 0.7
   max_docs: null
 
 deterministic_auditor:
+  # Prefer judge-passed docs; set input to s5 passed.jsonl in normal runs.
   input_jsonl: data/generated/s5_linguistic_judge/passed.jsonl
   entities_config: configs/synthetic-data/entities.yaml
   entity_profiles_config: configs/synthetic-data/entity_profiles.yaml
@@ -150,21 +152,27 @@ curation:
   language_field: document_language_code
   max_docs: null
   dedup:
-    # REQUIRED: NeMo Curator FuzzyDeduplicationWorkflow (cpu_minhash disabled).
+    # REQUIRED: NeMo Curator FuzzyDeduplicationWorkflow (Ray/GPU).
+    # cpu_minhash is disabled in this submission — do not switch silently.
     backend: nemo_curator
+    # Dedup on English pivot when present, else PHI-tag-stripped surface text.
     text_mode: english_pivot_or_masked
     jaccard_threshold: 0.8
     char_ngrams: 24
     num_bands: 20
     rows_per_band: 5
+    # Curator banding default (used when backend=nemo_curator)
     minhashes_per_band: 13
     seed: 42
     curator_work_dir: artifacts/nemo_curator_dedup
   balancing:
     enabled: true
+    # null = equalize down to the scarcest language count after dedup.
+    # Full run: set to ~5217 for 120k / 23 languages.
     target_docs_per_language: null
+    # Fail if any language has fewer than this many docs after dedup.
     min_docs_per_language: null
-    allow_underfill: false
+    allow_underfill: true
 
 gliner_format:
   input_jsonl: data/generated/s7_s8_curation/curated.jsonl
@@ -173,6 +181,7 @@ gliner_format:
   entity_profiles_config: configs/synthetic-data/entity_profiles.yaml
   text_field: generated_text
   id_field: document_id
+  # Optional gold JSONL for span P/R/F1 (document_id + ner or spans).
   gold_jsonl: null
   fail_on_token_misalign: true
   max_docs: null
@@ -185,16 +194,18 @@ split:
   persona_id_field: uuid
   language_field: document_language_code
 
-# REQUIRED NeMo Data Designer bridge (S4).
+# REQUIRED NeMo Data Designer bridge (S4). No silent HTTP bypass.
 data_designer:
   required: true
   engine: data_designer
   seed_path: data/generated/s3_prompts/prompts.parquet
   model_alias: generator
   model_id: sarvam-105b
+  # Must match a configured Data Designer ModelProvider name.
   provider: sarvam
   provider_endpoint: https://api.sarvam.ai/v1
   provider_api_key_env: SARVAM_API_KEY
+  # Sarvam uses api-subscription-key (not Bearer).
   auth_style: subscription_key
   temperature: 0.3
   max_tokens: 16384
