@@ -17,6 +17,13 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
+from main.designers.entity_checks import coverage_and_stuffing
+from main.designers.repair import (
+    load_repair_settings_from_generation,
+    repair_document,
+    script_issue,
+    RepairSettings,
+)
 from main.llm.rate_limit import RateLimiter
 from main.llm.sarvam import SarvamClient, SarvamClientError
 from main.pipeline.checkpoint import (
@@ -112,6 +119,8 @@ TRANSLATION_COLUMNS: tuple[str, ...] = (
     "translation_attempts",
     "translation_error",
     "translation_soft_fail",
+    "translation_generator_repair_attempts",
+    "translation_repaired_by_generator",
     "stage",
 )
 
@@ -377,6 +386,7 @@ def _translate_one(
     *,
     client: SarvamClient,
     settings: TranslationSettings,
+    repair_settings: RepairSettings | None = None,
 ) -> dict[str, Any]:
     source = str(row.get("generated_text", ""))
     if not source.strip():
@@ -398,6 +408,8 @@ def _translate_one(
                 "translation_attempts": 0,
                 "translation_error": None,
                 "translation_soft_fail": False,
+                "translation_generator_repair_attempts": 0,
+                "translation_repaired_by_generator": False,
                 "stage": "s4b_translation",
             }
         )
@@ -459,6 +471,8 @@ def _translate_one(
                     "translation_attempts": attempt + 1,
                     "translation_error": None,
                     "translation_soft_fail": False,
+                    "translation_generator_repair_attempts": 0,
+                    "translation_repaired_by_generator": False,
                     "stage": "s4b_translation",
                 }
             )
@@ -472,13 +486,78 @@ def _translate_one(
             f"Translation failed at row {index} uuid={row.get('uuid')!r}: {last_error}"
         ) from last_error
 
-    # Soft-fail: keep best attempt for judge/auditor (do not abort the run).
-    # Always log — never silent. Script purity / Latin-ratio is the primary gate;
-    # langid is optional and only appended when importable.
+    # Known cheap fix: wrong language/script → send English pivot to generator
+    # for a full rewrite, then re-check purity (+ tag coverage). Avoids another
+    # doomed translate pass and is usually cheaper than dropping the doc.
     error_msg = str(last_error)
     langid_hint = optional_langid_score(last_restored, language_code=lang)
     if langid_hint and langid_hint not in error_msg:
         error_msg = f"{error_msg};{langid_hint}"
+
+    repair_attempts = 0
+    repaired = False
+    if repair_settings is not None and repair_settings.max_repairs > 0:
+        required = [str(x) for x in (row.get("required_entities") or [])]
+        purity_detail = error_msg
+        repair = repair_document(
+            client,
+            draft=source,  # English pivot — cleaner rewrite source
+            row=row,
+            required=required,
+            issues=[
+                script_issue(
+                    language_name=str(row.get("document_language_name") or ""),
+                    language_code=lang,
+                    script=script,
+                    purity_detail=purity_detail,
+                )
+            ],
+            settings=repair_settings,
+            check_script=True,
+        )
+        repair_attempts = repair.attempts
+        if repair.repaired:
+            missing, stuffed = coverage_and_stuffing(repair.text, required)
+            if not missing and not stuffed:
+                print(
+                    f"[s4b] REPAIRED-BY-GENERATOR uuid={row.get('uuid')} "
+                    f"lang={lang} doc_type={row.get('doc_type_id')} "
+                    f"attempts={repair_attempts}",
+                    file=sys.stderr,
+                )
+                out.update(
+                    {
+                        "generated_text": repair.text,
+                        "translation_applied": True,
+                        "translation_script_ok": True,
+                        "translator_model": repair.model or last_model,
+                        "translator_finish_reason": "generator_script_repair",
+                        "translation_attempts": 2,
+                        "translation_error": None,
+                        "translation_soft_fail": False,
+                        "translation_generator_repair_attempts": repair_attempts,
+                        "translation_repaired_by_generator": True,
+                        "stage": "s4b_translation",
+                    }
+                )
+                return out
+            repaired = False
+            error_msg = (
+                f"{error_msg};generator_repair_left_coverage:"
+                f"missing={missing};stuffed={stuffed}"
+            )
+        elif repair.text and repair.text != source:
+            # Keep best repair attempt for downstream audit if still impure.
+            ok, reason = evaluate_script_purity(
+                repair.text, language_code=lang, script=script
+            )
+            if ok:
+                last_restored = repair.text
+            error_msg = (
+                f"{error_msg};generator_repair_failed:"
+                f"{repair.error or reason or 'issues_remain'}"
+            )
+
     print(
         f"[s4b] SOFT-FAIL uuid={row.get('uuid')} lang={lang} "
         f"doc_type={row.get('doc_type_id')} error={error_msg}",
@@ -494,6 +573,8 @@ def _translate_one(
             "translation_attempts": 2,
             "translation_error": error_msg,
             "translation_soft_fail": True,
+            "translation_generator_repair_attempts": repair_attempts,
+            "translation_repaired_by_generator": repaired,
             "stage": "s4b_translation",
         }
     )
@@ -506,6 +587,7 @@ def translate_rows(
     client: SarvamClient,
     settings: TranslationSettings,
     checkpoint: CheckpointStore | None = None,
+    repair_settings: RepairSettings | None = None,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     selected = list(rows)
     if settings.max_docs is not None:
@@ -545,7 +627,12 @@ def translate_rows(
         with ThreadPoolExecutor(max_workers=workers) as pool:
             futures = {
                 pool.submit(
-                    _translate_one, index, row, client=client, settings=settings
+                    _translate_one,
+                    index,
+                    row,
+                    client=client,
+                    settings=settings,
+                    repair_settings=repair_settings,
                 ): (index, req)
                 for index, row, req in pending
             }
@@ -608,6 +695,9 @@ def translate_rows(
             for row in outputs
             if row.get("translation_applied") and not row.get("translation_script_ok")
         ),
+        "generator_repaired_count": sum(
+            1 for row in outputs if row.get("translation_repaired_by_generator")
+        ),
         "max_workers": workers if pending else 0,
         "requests_per_minute": settings.requests_per_minute,
         "skip_language_codes": list(settings.skip_language_codes),
@@ -651,6 +741,7 @@ def write_outputs(
         f"- rows_skipped: `{audit['rows_skipped']}`",
         f"- soft_fail_count: **{audit.get('soft_fail_count', 0)}**",
         f"- script_fail_count: `{audit.get('script_fail_count', 0)}`",
+        f"- generator_repaired_count: `{audit.get('generator_repaired_count', 0)}`",
         f"- max_workers: `{audit['max_workers']}`",
         "",
     ]
@@ -686,10 +777,19 @@ def run(pipeline_config: Path) -> dict[str, Path]:
     client = SarvamClient(
         api_key=api_key, base_url=settings.base_url, rate_limiter=limiter
     )
+    root = load_yaml(pipeline_config)
+    gen = root.get("generation") if isinstance(root.get("generation"), dict) else {}
+    repair_settings = (
+        load_repair_settings_from_generation(gen) if gen.get("model") else None
+    )
     rows = read_jsonl(settings.input_jsonl)
     checkpoint = CheckpointStore(settings.output_dir / "checkpoint.jsonl")
     translated, audit = translate_rows(
-        rows, client=client, settings=settings, checkpoint=checkpoint
+        rows,
+        client=client,
+        settings=settings,
+        checkpoint=checkpoint,
+        repair_settings=repair_settings,
     )
     return write_outputs(translated, audit, settings.output_dir)
 

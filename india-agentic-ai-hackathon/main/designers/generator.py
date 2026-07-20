@@ -11,7 +11,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import re
 import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
@@ -22,14 +21,17 @@ from typing import Any, Mapping, Sequence
 import pyarrow as pa
 import pyarrow.parquet as pq
 
+from main.designers.entity_checks import (
+    MAX_OCCURRENCES_PER_TYPE,
+    missing_required_entities as _missing_required_entities,
+    stuffing_violations as _stuffing_violations,
+)
 from main.llm.rate_limit import RateLimiter
 from main.llm.sarvam import SarvamClient, SarvamClientError
 from main.pipeline.config_io import REPO_ROOT, load_yaml, resolve_repo_path
 from main.pipeline.env import load_env_file, require_env
 
 DEFAULT_PIPELINE_CONFIG = REPO_ROOT / "configs" / "synthetic-data" / "pipeline.yaml"
-
-_TAG_TYPE_RE = re.compile(r"\[\[([A-Z][A-Z0-9_]*)\|")
 
 GENERATION_COLUMNS: tuple[str, ...] = (
     "document_id",
@@ -47,14 +49,6 @@ GENERATION_COLUMNS: tuple[str, ...] = (
     "generation_soft_fail_reasons",
     "stage",
 )
-
-# Reject / retry when any TYPE appears more than this many times, or total tags
-# exceed required_count * this multiplier (prevents dump-style completeness retries).
-# Speaker names may repeat naturally in multi-turn telemedicine chat — exclude them
-# from per-type stuffing (device/vehicle IDs and other PHI still capped).
-_MAX_OCCURRENCES_PER_TYPE = 2
-_MAX_TAG_MULTIPLIER = 2
-_STUFFING_EXEMPT_TYPES = frozenset({"PATIENT_NAME", "DOCTOR_NAME"})
 
 
 @dataclass(frozen=True)
@@ -169,49 +163,6 @@ def load_prompts(path: Path) -> list[dict[str, Any]]:
     return rows
 
 
-def _missing_required_entities(text: str, required: Sequence[str]) -> list[str]:
-    present = set(_TAG_TYPE_RE.findall(text))
-    return [entity_id for entity_id in required if entity_id not in present]
-
-
-def _entity_type_counts(text: str) -> dict[str, int]:
-    tallies: dict[str, int] = {}
-    for entity_id in _TAG_TYPE_RE.findall(text):
-        tallies[entity_id] = tallies.get(entity_id, 0) + 1
-    return tallies
-
-
-def _stuffing_violations(
-    text: str, required: Sequence[str]
-) -> list[str]:
-    """Return stuffed TYPE ids when tags are dumped/repeated unnaturally."""
-    counts = _entity_type_counts(text)
-    stuffed = [
-        entity_id
-        for entity_id, count in counts.items()
-        if entity_id not in _STUFFING_EXEMPT_TYPES
-        and count > _MAX_OCCURRENCES_PER_TYPE
-    ]
-    # Total-tag cap ignores exempt speaker repeats so chat docs are not punished.
-    countable = sum(
-        count
-        for entity_id, count in counts.items()
-        if entity_id not in _STUFFING_EXEMPT_TYPES
-    )
-    cap = max(len(required), 1) * _MAX_TAG_MULTIPLIER
-    if countable > cap:
-        for entity_id, count in counts.items():
-            if (
-                entity_id not in _STUFFING_EXEMPT_TYPES
-                and count > 1
-                and entity_id not in stuffed
-            ):
-                stuffed.append(entity_id)
-        if not stuffed:
-            stuffed.append(f"TOTAL_TAGS>{cap}")
-    return sorted(stuffed)
-
-
 def _generate_one(
     index: int,
     row: Mapping[str, Any],
@@ -246,7 +197,7 @@ def _generate_one(
                     retry_bits.append(
                         "Previous draft STUFFED / repeated tags for: "
                         f"{', '.join(stuffed_hint)}. Rewrite so each TYPE "
-                        f"appears at most {_MAX_OCCURRENCES_PER_TYPE} time(s), "
+                        f"appears at most {MAX_OCCURRENCES_PER_TYPE} time(s), "
                         "placed only where clinically natural (no dump lists)."
                     )
                 if retry_bits:

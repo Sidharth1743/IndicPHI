@@ -383,14 +383,30 @@ def build_user_prompt(
         )
 
     placement_hint = ""
-    if doc_type_id == "telemedicine_transcript":
+    if doc_type_id == "opd_slip":
+        placement_hint = (
+            "PLACEMENT (OPD header): First line MUST include BOTH "
+            "[[HOSPITAL_NAME|…]] (facility name) AND [[HOSPITAL_ID|…]] "
+            "(facility code) — never substitute one for the other.\n"
+            "Put [[EMPLOYEE_ID|…]] on the registrar/clerk line and "
+            "[[RELATIVE_NAME|…]] on the attendant/relative line. "
+            "Include [[DOB|YYYY-MM-DD]] and [[OCCUPATION|…]] with demographics.\n\n"
+        )
+    elif doc_type_id == "telemedicine_transcript":
         placement_hint = (
             "PLACEMENT (device/network): Put IP_ADDRESS, URL, IMEI_NUMBER, and "
             "MAC_ADDRESS exactly once each in a short session/metadata header. "
             "Do NOT repeat them in chat turns. Chat turns use patient/doctor/"
             "phone/email/appointment only.\n"
             "Also put AGE and GENDER exactly once in the session header "
-            "(e.g. Patient [[PATIENT_NAME|...]] [[AGE|34]] [[GENDER|Female]]).\n\n"
+            "(e.g. Patient [[PATIENT_NAME|...]] [[AGE|34]] [[GENDER|Female]]). "
+            "Do NOT re-tag AGE/GENDER/PHONE/EMAIL/HOSPITAL_NAME in every turn.\n\n"
+        )
+    elif doc_type_id == "radiology_report":
+        placement_hint = (
+            "PLACEMENT: Include [[DOCTOR_NAME|…]] as the reporting radiologist "
+            "(e.g. Reported by Dr [[DOCTOR_NAME|…]]) — do not leave the doctor "
+            "name as untagged prose.\n\n"
         )
     elif doc_type_id == "er_triage_notes":
         placement_hint = (
@@ -415,7 +431,10 @@ def build_user_prompt(
         "GENERATION LANGUAGE: English (Latin script) — this is an English pivot "
         "draft. A later pipeline stage will translate clinical prose into "
         f"{target_lang}. Keep [[TYPE|value]] tags intact and valid.\n"
-        "ID-like tagged values stay Latin/digits. Drug names / labs stay untagged.\n\n"
+        "ID-like tagged values stay Latin/digits. Drug names / labs stay untagged.\n"
+        f"DOMAIN ANCHOR: chief complaint, findings, and plan MUST match "
+        f"{row['domain_name']} — do not default to unrelated TB/generic content "
+        "unless that is the assigned domain.\n\n"
         f"{length_hint}"
         f"{placement_hint}"
         "Persona anchors (must remain consistent; patient = this persona):\n"
