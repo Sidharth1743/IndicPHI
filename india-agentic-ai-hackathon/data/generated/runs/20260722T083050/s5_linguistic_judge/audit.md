@@ -5,291 +5,35 @@
 - timeout_s: `600.0`
 - network_retries: `2`
 - rows_judged: **138**
-- soft_fail_count: **138**
-- failure_count: **138**
-- judge_repaired_count: **0**
-- pass_rate: **0.000**
-- label_distribution: `{'fail': 1.0}`
-- positional_length_bias: `{'pearson_r': 0.0, 'n': 138.0}`
-
-## Network soft-fails
-
-- `3a14ecc1de8648689a3311540c7cdd2e` · `surgical_note` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `3a14ecc1de8648689a3311540c7cdd2e` · `lab_report` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `3a14ecc1de8648689a3311540c7cdd2e` · `opd_slip` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `b55ee0c5013c4310a8939d0e6dd22e8d` · `surgical_note` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `b55ee0c5013c4310a8939d0e6dd22e8d` · `lab_report` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `b55ee0c5013c4310a8939d0e6dd22e8d` · `opd_slip` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `7cf3cf4f60be4edabe12ffd948079164` · `opd_slip` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `7cf3cf4f60be4edabe12ffd948079164` · `surgical_note` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `7cf3cf4f60be4edabe12ffd948079164` · `prescription` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `fdc875f657c1440c8e243a6845fb17a5` · `surgical_note` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `fdc875f657c1440c8e243a6845fb17a5` · `opd_slip` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `fdc875f657c1440c8e243a6845fb17a5` · `lab_report` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `3ceb8b6e61ba4069980e557280aa9ba0` · `opd_slip` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `3ceb8b6e61ba4069980e557280aa9ba0` · `prescription` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `3ceb8b6e61ba4069980e557280aa9ba0` · `insurance_claim` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `a0e6acd7770d41b5812edc8bbfbda7ee` · `surgical_note` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `a0e6acd7770d41b5812edc8bbfbda7ee` · `lab_report` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `a0e6acd7770d41b5812edc8bbfbda7ee` · `prescription` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `18473c8835b140ff8c0b5ed0d35a5271` · `opd_slip` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `18473c8835b140ff8c0b5ed0d35a5271` · `prescription` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `18473c8835b140ff8c0b5ed0d35a5271` · `insurance_claim` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `8116ee5699344b79a2c9c8d1e053dde5` · `asha_worker_note` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `8116ee5699344b79a2c9c8d1e053dde5` · `automated_sms` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `8116ee5699344b79a2c9c8d1e053dde5` · `insurance_claim` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `29189dcea56e4d3d9df1aa7573656171` · `radiology_report` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `29189dcea56e4d3d9df1aa7573656171` · `er_triage_notes` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `29189dcea56e4d3d9df1aa7573656171` · `telemedicine_transcript` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `f584cfd90471426ea809f549021f9a0f` · `radiology_report` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `f584cfd90471426ea809f549021f9a0f` · `er_triage_notes` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `f584cfd90471426ea809f549021f9a0f` · `telemedicine_transcript` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `1f7da27d8fe544a191d7adc016e62971` · `hospital_billing` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `1f7da27d8fe544a191d7adc016e62971` · `discharge_summary` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `1f7da27d8fe544a191d7adc016e62971` · `referral_letter` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `57e0ccc76318480b91dca7f2d464c122` · `hospital_billing` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `57e0ccc76318480b91dca7f2d464c122` · `discharge_summary` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `57e0ccc76318480b91dca7f2d464c122` · `referral_letter` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `00930e6ff6e94bbfb1ce26958434c1af` · `automated_sms` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `00930e6ff6e94bbfb1ce26958434c1af` · `insurance_claim` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `00930e6ff6e94bbfb1ce26958434c1af` · `hospital_billing` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `7e1fefa3b81344778d2739efd7575c6c` · `insurance_claim` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `7e1fefa3b81344778d2739efd7575c6c` · `automated_sms` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `7e1fefa3b81344778d2739efd7575c6c` · `hospital_billing` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `59e7e12eb3d44dfbacf8755ef02f52c7` · `opd_slip` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `59e7e12eb3d44dfbacf8755ef02f52c7` · `surgical_note` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `59e7e12eb3d44dfbacf8755ef02f52c7` · `prescription` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `9a97560e03a846c8929c9b78a488affb` · `surgical_note` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `9a97560e03a846c8929c9b78a488affb` · `lab_report` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `9a97560e03a846c8929c9b78a488affb` · `opd_slip` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `25a8008cbebf4abda209c7d28427bb99` · `prescription` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `25a8008cbebf4abda209c7d28427bb99` · `lab_report` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `25a8008cbebf4abda209c7d28427bb99` · `asha_worker_note` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `bfa3ca76f88b4b8f9ee3a47d5e04dae6` · `lab_report` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `bfa3ca76f88b4b8f9ee3a47d5e04dae6` · `opd_slip` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `bfa3ca76f88b4b8f9ee3a47d5e04dae6` · `phc_register` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `60ff3470cf8340efaa474e13896d8568` · `er_triage_notes` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `60ff3470cf8340efaa474e13896d8568` · `telemedicine_transcript` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `60ff3470cf8340efaa474e13896d8568` · `opd_slip` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `885a67d0071948ac8a8336b278e81003` · `er_triage_notes` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `885a67d0071948ac8a8336b278e81003` · `telemedicine_transcript` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `885a67d0071948ac8a8336b278e81003` · `opd_slip` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `07483932a3354f04a67c4b8846a2873f` · `opd_slip` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `07483932a3354f04a67c4b8846a2873f` · `phc_register` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `07483932a3354f04a67c4b8846a2873f` · `prescription` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `57bb67467d7c4747ac5af1eeb8f4a56a` · `surgical_note` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `57bb67467d7c4747ac5af1eeb8f4a56a` · `opd_slip` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `57bb67467d7c4747ac5af1eeb8f4a56a` · `prescription` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `13f43defce4c471ba920ef1ff92efba0` · `er_triage_notes` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `13f43defce4c471ba920ef1ff92efba0` · `telemedicine_transcript` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `13f43defce4c471ba920ef1ff92efba0` · `opd_slip` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `80435bdcef24479390d6e6ae0b2aeeb1` · `er_triage_notes` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `80435bdcef24479390d6e6ae0b2aeeb1` · `telemedicine_transcript` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `80435bdcef24479390d6e6ae0b2aeeb1` · `surgical_note` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `8a02e74c7f104c1fa9f00b8507bac016` · `discharge_summary` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `8a02e74c7f104c1fa9f00b8507bac016` · `referral_letter` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `8a02e74c7f104c1fa9f00b8507bac016` · `radiology_report` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `df61060159844e75aeafcafe43b1bc0d` · `discharge_summary` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `df61060159844e75aeafcafe43b1bc0d` · `referral_letter` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `df61060159844e75aeafcafe43b1bc0d` · `radiology_report` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `433eba4ea24144438f7866160103b297` · `discharge_summary` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `433eba4ea24144438f7866160103b297` · `referral_letter` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `433eba4ea24144438f7866160103b297` · `radiology_report` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `5c5a472d66774bdc9e232a4893422f0c` · `referral_letter` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `5c5a472d66774bdc9e232a4893422f0c` · `radiology_report` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `5c5a472d66774bdc9e232a4893422f0c` · `er_triage_notes` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `3ca088f3e9d4400e893c3f00c17d4ff5` · `automated_sms` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `3ca088f3e9d4400e893c3f00c17d4ff5` · `insurance_claim` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `3ca088f3e9d4400e893c3f00c17d4ff5` · `hospital_billing` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `8d7895d6831e4b31956f868182103764` · `prescription` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `8d7895d6831e4b31956f868182103764` · `asha_worker_note` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `8d7895d6831e4b31956f868182103764` · `automated_sms` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `0fbde0cc3f544c77b260ef63a5a3a8d8` · `surgical_note` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `0fbde0cc3f544c77b260ef63a5a3a8d8` · `lab_report` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `0fbde0cc3f544c77b260ef63a5a3a8d8` · `opd_slip` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `67bf2f4af82d452db4c95cd1c7f59330` · `opd_slip` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `67bf2f4af82d452db4c95cd1c7f59330` · `surgical_note` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `67bf2f4af82d452db4c95cd1c7f59330` · `prescription` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `7c5ed5ed53ea43189c76c8f6d4bef1a8` · `opd_slip` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `7c5ed5ed53ea43189c76c8f6d4bef1a8` · `surgical_note` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `7c5ed5ed53ea43189c76c8f6d4bef1a8` · `prescription` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `b18798ffecf04ecc87455c46e724894f` · `surgical_note` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `b18798ffecf04ecc87455c46e724894f` · `lab_report` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `b18798ffecf04ecc87455c46e724894f` · `phc_register` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `22ef884ce12247309d07fc3f601a3c59` · `prescription` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `22ef884ce12247309d07fc3f601a3c59` · `insurance_claim` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `22ef884ce12247309d07fc3f601a3c59` · `asha_worker_note` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `6e943dc3578249e38b9e61705d0912a9` · `automated_sms` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `6e943dc3578249e38b9e61705d0912a9` · `insurance_claim` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `6e943dc3578249e38b9e61705d0912a9` · `hospital_billing` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `0b19143502244d21a03f71ef838ab4ff` · `asha_worker_note` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `0b19143502244d21a03f71ef838ab4ff` · `automated_sms` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `0b19143502244d21a03f71ef838ab4ff` · `hospital_billing` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `e899bd99966c4ac6b77d784bae3482f0` · `phc_register` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `e899bd99966c4ac6b77d784bae3482f0` · `asha_worker_note` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `e899bd99966c4ac6b77d784bae3482f0` · `insurance_claim` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `825c4438c02440dc90d3ddec7ffec8ee` · `automated_sms` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `825c4438c02440dc90d3ddec7ffec8ee` · `hospital_billing` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `825c4438c02440dc90d3ddec7ffec8ee` · `discharge_summary` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `fe3a6e05b50a4eb1b679f5fba0c5440b` · `insurance_claim` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `fe3a6e05b50a4eb1b679f5fba0c5440b` · `hospital_billing` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `fe3a6e05b50a4eb1b679f5fba0c5440b` · `discharge_summary` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `829db9fbfeda404d89ff9b8a405b5e4d` · `opd_slip` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `829db9fbfeda404d89ff9b8a405b5e4d` · `prescription` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `829db9fbfeda404d89ff9b8a405b5e4d` · `insurance_claim` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `ce942a5fb5644181ac0db94b6c9c1314` · `asha_worker_note` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `ce942a5fb5644181ac0db94b6c9c1314` · `automated_sms` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `ce942a5fb5644181ac0db94b6c9c1314` · `insurance_claim` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `57a29898a6944b899059fb674d16f990` · `hospital_billing` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `57a29898a6944b899059fb674d16f990` · `discharge_summary` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `57a29898a6944b899059fb674d16f990` · `referral_letter` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `f0e00cbdb5dd4d33a122229e4883c598` · `hospital_billing` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `f0e00cbdb5dd4d33a122229e4883c598` · `discharge_summary` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `f0e00cbdb5dd4d33a122229e4883c598` · `referral_letter` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `6b15543bcd6545f5803d6887e2a48820` · `discharge_summary` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `6b15543bcd6545f5803d6887e2a48820` · `referral_letter` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `6b15543bcd6545f5803d6887e2a48820` · `radiology_report` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `bf0de98a0c63491c8877846b6f8dad65` · `discharge_summary` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `bf0de98a0c63491c8877846b6f8dad65` · `referral_letter` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
-- `bf0de98a0c63491c8877846b6f8dad65` · `radiology_report` · `OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>`
+- soft_fail_count: **0**
+- failure_count: **23**
+- judge_repaired_count: **16**
+- pass_rate: **0.833**
+- label_distribution: `{'fail': 0.16666666666666666, 'pass': 0.8333333333333334}`
+- positional_length_bias: `{'pearson_r': 0.022496294272354916, 'n': 138.0}`
 
 ## Failures (audited — not silent)
 
-- `3a14ecc1de8648689a3311540c7cdd2e` · `surgical_note` · `as` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `3a14ecc1de8648689a3311540c7cdd2e` · `lab_report` · `as` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `3a14ecc1de8648689a3311540c7cdd2e` · `opd_slip` · `as` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `b55ee0c5013c4310a8939d0e6dd22e8d` · `surgical_note` · `as` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `b55ee0c5013c4310a8939d0e6dd22e8d` · `lab_report` · `as` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `b55ee0c5013c4310a8939d0e6dd22e8d` · `opd_slip` · `as` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `7cf3cf4f60be4edabe12ffd948079164` · `opd_slip` · `bn` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `7cf3cf4f60be4edabe12ffd948079164` · `surgical_note` · `bn` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `7cf3cf4f60be4edabe12ffd948079164` · `prescription` · `bn` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `fdc875f657c1440c8e243a6845fb17a5` · `surgical_note` · `bn` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `fdc875f657c1440c8e243a6845fb17a5` · `opd_slip` · `bn` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `fdc875f657c1440c8e243a6845fb17a5` · `lab_report` · `bn` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `3ceb8b6e61ba4069980e557280aa9ba0` · `opd_slip` · `brx` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `3ceb8b6e61ba4069980e557280aa9ba0` · `prescription` · `brx` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `3ceb8b6e61ba4069980e557280aa9ba0` · `insurance_claim` · `brx` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `a0e6acd7770d41b5812edc8bbfbda7ee` · `surgical_note` · `brx` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `a0e6acd7770d41b5812edc8bbfbda7ee` · `lab_report` · `brx` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `a0e6acd7770d41b5812edc8bbfbda7ee` · `prescription` · `brx` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `18473c8835b140ff8c0b5ed0d35a5271` · `opd_slip` · `doi` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `18473c8835b140ff8c0b5ed0d35a5271` · `prescription` · `doi` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `18473c8835b140ff8c0b5ed0d35a5271` · `insurance_claim` · `doi` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `8116ee5699344b79a2c9c8d1e053dde5` · `asha_worker_note` · `doi` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `8116ee5699344b79a2c9c8d1e053dde5` · `automated_sms` · `doi` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `8116ee5699344b79a2c9c8d1e053dde5` · `insurance_claim` · `doi` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `29189dcea56e4d3d9df1aa7573656171` · `radiology_report` · `en` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `29189dcea56e4d3d9df1aa7573656171` · `er_triage_notes` · `en` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `29189dcea56e4d3d9df1aa7573656171` · `telemedicine_transcript` · `en` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `f584cfd90471426ea809f549021f9a0f` · `radiology_report` · `en` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `f584cfd90471426ea809f549021f9a0f` · `er_triage_notes` · `en` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `f584cfd90471426ea809f549021f9a0f` · `telemedicine_transcript` · `en` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `1f7da27d8fe544a191d7adc016e62971` · `hospital_billing` · `gu` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `1f7da27d8fe544a191d7adc016e62971` · `discharge_summary` · `gu` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `1f7da27d8fe544a191d7adc016e62971` · `referral_letter` · `gu` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `57e0ccc76318480b91dca7f2d464c122` · `hospital_billing` · `gu` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `57e0ccc76318480b91dca7f2d464c122` · `discharge_summary` · `gu` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `57e0ccc76318480b91dca7f2d464c122` · `referral_letter` · `gu` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `00930e6ff6e94bbfb1ce26958434c1af` · `automated_sms` · `hi` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `00930e6ff6e94bbfb1ce26958434c1af` · `insurance_claim` · `hi` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `00930e6ff6e94bbfb1ce26958434c1af` · `hospital_billing` · `hi` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `7e1fefa3b81344778d2739efd7575c6c` · `insurance_claim` · `hi` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `7e1fefa3b81344778d2739efd7575c6c` · `automated_sms` · `hi` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `7e1fefa3b81344778d2739efd7575c6c` · `hospital_billing` · `hi` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `59e7e12eb3d44dfbacf8755ef02f52c7` · `opd_slip` · `kn` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `59e7e12eb3d44dfbacf8755ef02f52c7` · `surgical_note` · `kn` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `59e7e12eb3d44dfbacf8755ef02f52c7` · `prescription` · `kn` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `9a97560e03a846c8929c9b78a488affb` · `surgical_note` · `kn` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `9a97560e03a846c8929c9b78a488affb` · `lab_report` · `kn` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `9a97560e03a846c8929c9b78a488affb` · `opd_slip` · `kn` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `25a8008cbebf4abda209c7d28427bb99` · `prescription` · `kok` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `25a8008cbebf4abda209c7d28427bb99` · `lab_report` · `kok` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `25a8008cbebf4abda209c7d28427bb99` · `asha_worker_note` · `kok` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `bfa3ca76f88b4b8f9ee3a47d5e04dae6` · `lab_report` · `kok` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `bfa3ca76f88b4b8f9ee3a47d5e04dae6` · `opd_slip` · `kok` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `bfa3ca76f88b4b8f9ee3a47d5e04dae6` · `phc_register` · `kok` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `60ff3470cf8340efaa474e13896d8568` · `er_triage_notes` · `ks` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `60ff3470cf8340efaa474e13896d8568` · `telemedicine_transcript` · `ks` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `60ff3470cf8340efaa474e13896d8568` · `opd_slip` · `ks` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `885a67d0071948ac8a8336b278e81003` · `er_triage_notes` · `ks` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `885a67d0071948ac8a8336b278e81003` · `telemedicine_transcript` · `ks` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `885a67d0071948ac8a8336b278e81003` · `opd_slip` · `ks` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `07483932a3354f04a67c4b8846a2873f` · `opd_slip` · `mai` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `07483932a3354f04a67c4b8846a2873f` · `phc_register` · `mai` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `07483932a3354f04a67c4b8846a2873f` · `prescription` · `mai` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `57bb67467d7c4747ac5af1eeb8f4a56a` · `surgical_note` · `mai` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `57bb67467d7c4747ac5af1eeb8f4a56a` · `opd_slip` · `mai` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `57bb67467d7c4747ac5af1eeb8f4a56a` · `prescription` · `mai` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `13f43defce4c471ba920ef1ff92efba0` · `er_triage_notes` · `ml` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `13f43defce4c471ba920ef1ff92efba0` · `telemedicine_transcript` · `ml` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `13f43defce4c471ba920ef1ff92efba0` · `opd_slip` · `ml` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `80435bdcef24479390d6e6ae0b2aeeb1` · `er_triage_notes` · `ml` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `80435bdcef24479390d6e6ae0b2aeeb1` · `telemedicine_transcript` · `ml` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `80435bdcef24479390d6e6ae0b2aeeb1` · `surgical_note` · `ml` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `8a02e74c7f104c1fa9f00b8507bac016` · `discharge_summary` · `mni` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `8a02e74c7f104c1fa9f00b8507bac016` · `referral_letter` · `mni` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `8a02e74c7f104c1fa9f00b8507bac016` · `radiology_report` · `mni` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `df61060159844e75aeafcafe43b1bc0d` · `discharge_summary` · `mni` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `df61060159844e75aeafcafe43b1bc0d` · `referral_letter` · `mni` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `df61060159844e75aeafcafe43b1bc0d` · `radiology_report` · `mni` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `433eba4ea24144438f7866160103b297` · `discharge_summary` · `mr` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `433eba4ea24144438f7866160103b297` · `referral_letter` · `mr` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `433eba4ea24144438f7866160103b297` · `radiology_report` · `mr` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `5c5a472d66774bdc9e232a4893422f0c` · `referral_letter` · `mr` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `5c5a472d66774bdc9e232a4893422f0c` · `radiology_report` · `mr` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `5c5a472d66774bdc9e232a4893422f0c` · `er_triage_notes` · `mr` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `3ca088f3e9d4400e893c3f00c17d4ff5` · `automated_sms` · `ne` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `3ca088f3e9d4400e893c3f00c17d4ff5` · `insurance_claim` · `ne` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `3ca088f3e9d4400e893c3f00c17d4ff5` · `hospital_billing` · `ne` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `8d7895d6831e4b31956f868182103764` · `prescription` · `ne` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `8d7895d6831e4b31956f868182103764` · `asha_worker_note` · `ne` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `8d7895d6831e4b31956f868182103764` · `automated_sms` · `ne` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `0fbde0cc3f544c77b260ef63a5a3a8d8` · `surgical_note` · `or` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `0fbde0cc3f544c77b260ef63a5a3a8d8` · `lab_report` · `or` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `0fbde0cc3f544c77b260ef63a5a3a8d8` · `opd_slip` · `or` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `67bf2f4af82d452db4c95cd1c7f59330` · `opd_slip` · `or` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `67bf2f4af82d452db4c95cd1c7f59330` · `surgical_note` · `or` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `67bf2f4af82d452db4c95cd1c7f59330` · `prescription` · `or` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `7c5ed5ed53ea43189c76c8f6d4bef1a8` · `opd_slip` · `pa` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `7c5ed5ed53ea43189c76c8f6d4bef1a8` · `surgical_note` · `pa` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `7c5ed5ed53ea43189c76c8f6d4bef1a8` · `prescription` · `pa` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `b18798ffecf04ecc87455c46e724894f` · `surgical_note` · `pa` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `b18798ffecf04ecc87455c46e724894f` · `lab_report` · `pa` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `b18798ffecf04ecc87455c46e724894f` · `phc_register` · `pa` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `22ef884ce12247309d07fc3f601a3c59` · `prescription` · `sa` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `22ef884ce12247309d07fc3f601a3c59` · `insurance_claim` · `sa` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `22ef884ce12247309d07fc3f601a3c59` · `asha_worker_note` · `sa` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `6e943dc3578249e38b9e61705d0912a9` · `automated_sms` · `sa` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `6e943dc3578249e38b9e61705d0912a9` · `insurance_claim` · `sa` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `6e943dc3578249e38b9e61705d0912a9` · `hospital_billing` · `sa` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `0b19143502244d21a03f71ef838ab4ff` · `asha_worker_note` · `sat` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `0b19143502244d21a03f71ef838ab4ff` · `automated_sms` · `sat` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `0b19143502244d21a03f71ef838ab4ff` · `hospital_billing` · `sat` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `e899bd99966c4ac6b77d784bae3482f0` · `phc_register` · `sat` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `e899bd99966c4ac6b77d784bae3482f0` · `asha_worker_note` · `sat` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `e899bd99966c4ac6b77d784bae3482f0` · `insurance_claim` · `sat` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `825c4438c02440dc90d3ddec7ffec8ee` · `automated_sms` · `sd` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `825c4438c02440dc90d3ddec7ffec8ee` · `hospital_billing` · `sd` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `825c4438c02440dc90d3ddec7ffec8ee` · `discharge_summary` · `sd` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `fe3a6e05b50a4eb1b679f5fba0c5440b` · `insurance_claim` · `sd` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `fe3a6e05b50a4eb1b679f5fba0c5440b` · `hospital_billing` · `sd` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `fe3a6e05b50a4eb1b679f5fba0c5440b` · `discharge_summary` · `sd` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `829db9fbfeda404d89ff9b8a405b5e4d` · `opd_slip` · `ta` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `829db9fbfeda404d89ff9b8a405b5e4d` · `prescription` · `ta` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `829db9fbfeda404d89ff9b8a405b5e4d` · `insurance_claim` · `ta` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `ce942a5fb5644181ac0db94b6c9c1314` · `asha_worker_note` · `ta` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `ce942a5fb5644181ac0db94b6c9c1314` · `automated_sms` · `ta` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `ce942a5fb5644181ac0db94b6c9c1314` · `insurance_claim` · `ta` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `57a29898a6944b899059fb674d16f990` · `hospital_billing` · `te` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `57a29898a6944b899059fb674d16f990` · `discharge_summary` · `te` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `57a29898a6944b899059fb674d16f990` · `referral_letter` · `te` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `f0e00cbdb5dd4d33a122229e4883c598` · `hospital_billing` · `te` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `f0e00cbdb5dd4d33a122229e4883c598` · `discharge_summary` · `te` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `f0e00cbdb5dd4d33a122229e4883c598` · `referral_letter` · `te` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `6b15543bcd6545f5803d6887e2a48820` · `discharge_summary` · `ur` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `6b15543bcd6545f5803d6887e2a48820` · `referral_letter` · `ur` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `6b15543bcd6545f5803d6887e2a48820` · `radiology_report` · `ur` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `bf0de98a0c63491c8877846b6f8dad65` · `discharge_summary` · `ur` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `bf0de98a0c63491c8877846b6f8dad65` · `referral_letter` · `ur` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
-- `bf0de98a0c63491c8877846b6f8dad65` · `radiology_report` · `ur` · score=0.0 soft=True · Soft-fail after 3 attempts (timeout/network). Logged — not silent. error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+- `fdc875f657c1440c8e243a6845fb17a5` · `surgical_note` · `bn` · score=0.6 soft=False · Male name 'Rahul Sharma' assigned to female patient with husband; persona-gender mismatch despite Bengali prose and valid tags.
+- `3ceb8b6e61ba4069980e557280aa9ba0` · `insurance_claim` · `brx` · score=0.25 soft=False · Narrative prose in Nepali/Hindi Devanagari, not Bodo; all other elements (tags, persona, domain) acceptable.
+- `a0e6acd7770d41b5812edc8bbfbda7ee` · `lab_report` · `brx` · score=0.25 soft=False · Clinical prose entirely in Hindi (wrong language) despite Bodo/Devanagari requirement; all tags, IDs, persona fit, and lab content otherwise valid and plausible.
+- `18473c8835b140ff8c0b5ed0d35a5271` · `opd_slip` · `doi` · score=0.55 soft=False · Prose uses standard Hindi vocabulary/grammar instead of Dogri; all entity tags, persona fit and clinical content otherwise valid.
+- `18473c8835b140ff8c0b5ed0d35a5271` · `insurance_claim` · `doi` · score=0.65 soft=False · DATE_OF_ADMISSION and DATE_OF_DISCHARGE outside allow-list; prose in Devanagari with partial Dogri lexical flavor but mostly standard Hindi medical phrasing.
+- `8116ee5699344b79a2c9c8d1e053dde5` · `automated_sms` · `doi` · score=0.45 soft=False · Male name 'रवि कुमार' for female persona; prose is Hindi not Dogri.
+- `8116ee5699344b79a2c9c8d1e053dde5` · `insurance_claim` · `doi` · score=0.38 soft=False · Male name Ramesh for female 48yo; Shimla hospital/district instead of Jammu J&K; otherwise Dogri prose + allowed tags
+- `25a8008cbebf4abda209c7d28427bb99` · `lab_report` · `kok` · score=0.42 soft=False · Female patient described with masculine verbs/pronouns (तो, करतो, राहतो); clinical prose is Marathi not Konkani despite Devanagari script.
+- `60ff3470cf8340efaa474e13896d8568` · `er_triage_notes` · `ks` · score=0.45 soft=False · Prose is Urdu (not Kashmiri) despite Arabic script and valid tags; minor lexical attempts at ks do not salvage narrative language match.
+- `885a67d0071948ac8a8336b278e81003` · `er_triage_notes` · `ks` · score=0.55 soft=False · Narrative prose mostly Urdu (e.g. 'رپورٹ نہیں کیا گیا', 'انکار کرتا ہے') rather than Kashmiri despite Arabic script and some lexical insertions; all entity tags valid and persona fit OK.
+- `8a02e74c7f104c1fa9f00b8507bac016` · `referral_letter` · `mni` · score=0.45 soft=False · Mixed English prose ('Dear colleague,', exam descriptions) violates Meitei requirement; DISTRICT tag uses Latin 'Thoubal' (wrong district + script) instead of Imphal East.
+- `df61060159844e75aeafcafe43b1bc0d` · `referral_letter` · `mni` · score=0.25 soft=False · Prose entirely English; expected Manipuri/Meitei script for clinical narrative.
+- `8d7895d6831e4b31956f868182103764` · `prescription` · `ne` · score=0.3 soft=False · Kathmandu/Nepal location+ABHA vs West Bengal/Darjiling persona; male name for female patient; entity/context implausibility.
+- `67bf2f4af82d452db4c95cd1c7f59330` · `opd_slip` · `or` · score=0.55 soft=False · Male name 'Ramesh Chandra Patra' + Khordha district contradict female/59/Nabarangapur persona; clinical prose otherwise Odia and allowed tags used correctly.
+- `6e943dc3578249e38b9e61705d0912a9` · `insurance_claim` · `sa` · score=0.2 soft=False · All clinical prose in English; Sanskrit Devanagari required for narrative.
+- `0b19143502244d21a03f71ef838ab4ff` · `automated_sms` · `sat` · score=0.3 soft=False · Prose entirely in English; expected Santali Ol Chiki script for SMS body.
+- `0b19143502244d21a03f71ef838ab4ff` · `hospital_billing` · `sat` · score=0.25 soft=False · All prose and item descriptions in English/Latin script; zero Santali Ol Chiki content despite explicit language requirement. Tags and maternal billing content otherwise mostly aligned with persona and allow-list.
+- `e899bd99966c4ac6b77d784bae3482f0` · `asha_worker_note` · `sat` · score=0.25 soft=False · All clinical prose in English/Latin script; expected Santali Ol Chiki throughout narrative.
+- `825c4438c02440dc90d3ddec7ffec8ee` · `automated_sms` · `sd` · score=0.35 soft=False · Prose language is Kashmiri (e.g. tuhund, chhu, manz) not Sindhi despite Arabic script; other elements (tags, length, persona fit) acceptable.
+- `825c4438c02440dc90d3ddec7ffec8ee` · `hospital_billing` · `sd` · score=0.35 soft=False · Prose mixes Devanagari intrusions (labels, patient name value) into expected Sindhi Arabic script; PATIENT_NAME uses wrong script despite allow-list tag.
+- `fe3a6e05b50a4eb1b679f5fba0c5440b` · `insurance_claim` · `sd` · score=0.3 soft=False · Clinical prose body uses Devanagari script with Hindi phrasing instead of required Sindhi Arabic script; only scattered tags and names use Arabic.
+- `fe3a6e05b50a4eb1b679f5fba0c5440b` · `hospital_billing` · `sd` · score=0.4 soft=False · Sindhi prose uses Devanagari script throughout instead of required Arabic script; all tags allowed, clinical content and persona fit otherwise plausible.
+- `f0e00cbdb5dd4d33a122229e4883c598` · `hospital_billing` · `te` · score=0.35 soft=False · Prose mixes Telugu with embedded prompt instructions/meta-commentary on TYPE rules and missing line items; all required tags present and script mostly correct but output is contaminated.

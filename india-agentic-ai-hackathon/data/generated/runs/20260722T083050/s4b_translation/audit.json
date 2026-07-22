@@ -1,52 +1,20 @@
 {
   "stage": "s4b_translation",
-  "timestamp_utc": "2026-07-22T03:35:20.686773+00:00",
+  "timestamp_utc": "2026-07-22T13:31:31.791437+00:00",
   "model": "sarvam-105b",
   "rows_in": 138,
   "rows_out": 138,
-  "rows_translated": 102,
-  "rows_skipped": 36,
-  "rows_resumed_from_checkpoint": 0,
-  "rows_newly_translated": 138,
+  "rows_translated": 119,
+  "rows_skipped": 19,
+  "rows_resumed_from_checkpoint": 101,
+  "rows_newly_translated": 37,
   "soft_failures": [
-    {
-      "uuid": "8a02e74c7f104c1fa9f00b8507bac016",
-      "document_id": "8a02e74c7f104c1fa9f00b8507bac016__2",
-      "doc_type_id": "radiology_report",
-      "document_language_code": "mni",
-      "translation_error": "Sarvam network error: <urlopen error [Errno -2] Name or service not known>",
-      "translation_script_ok": false
-    },
-    {
-      "uuid": "df61060159844e75aeafcafe43b1bc0d",
-      "document_id": "df61060159844e75aeafcafe43b1bc0d__0",
-      "doc_type_id": "discharge_summary",
-      "document_language_code": "mni",
-      "translation_error": "script_purity_failed:wrong_indic_script:Devanagari>Meitei attempt=1",
-      "translation_script_ok": false
-    },
     {
       "uuid": "df61060159844e75aeafcafe43b1bc0d",
       "document_id": "df61060159844e75aeafcafe43b1bc0d__1",
       "doc_type_id": "referral_letter",
       "document_language_code": "mni",
-      "translation_error": "script_purity_failed:wrong_indic_script:Devanagari>Meitei attempt=1",
-      "translation_script_ok": false
-    },
-    {
-      "uuid": "df61060159844e75aeafcafe43b1bc0d",
-      "document_id": "df61060159844e75aeafcafe43b1bc0d__2",
-      "doc_type_id": "radiology_report",
-      "document_language_code": "mni",
-      "translation_error": "Sarvam network error: <urlopen error [Errno -2] Name or service not known>",
-      "translation_script_ok": false
-    },
-    {
-      "uuid": "433eba4ea24144438f7866160103b297",
-      "document_id": "433eba4ea24144438f7866160103b297__2",
-      "doc_type_id": "radiology_report",
-      "document_language_code": "mr",
-      "translation_error": "tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>",
+      "translation_error": "tag_restore_or_translate_failed:timed out:Sarvam timeout after 300.0s: The read operation timed out attempt=4",
       "translation_script_ok": false
     },
     {
@@ -54,23 +22,7 @@
       "document_id": "6e943dc3578249e38b9e61705d0912a9__1",
       "doc_type_id": "insurance_claim",
       "document_language_code": "sa",
-      "translation_error": "tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>;post_repair_translate:Sarvam network error: <urlopen error [Errno -2] Name or service not known>",
-      "translation_script_ok": false
-    },
-    {
-      "uuid": "6e943dc3578249e38b9e61705d0912a9",
-      "document_id": "6e943dc3578249e38b9e61705d0912a9__2",
-      "doc_type_id": "hospital_billing",
-      "document_language_code": "sa",
-      "translation_error": "tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>;post_repair_translate:Sarvam network error: <urlopen error [Errno -2] Name or service not known>",
-      "translation_script_ok": false
-    },
-    {
-      "uuid": "0b19143502244d21a03f71ef838ab4ff",
-      "document_id": "0b19143502244d21a03f71ef838ab4ff__0",
-      "doc_type_id": "asha_worker_note",
-      "document_language_code": "sat",
-      "translation_error": "Sarvam network error: <urlopen error [Errno -2] Name or service not known>",
+      "translation_error": "tag_restore_or_translate_failed:timed out:Sarvam timeout after 300.0s: The read operation timed out attempt=4;post_repair_translate:Sarvam timeout after 300.0s: The read operation timed out",
       "translation_script_ok": false
     },
     {
@@ -78,7 +30,7 @@
       "document_id": "0b19143502244d21a03f71ef838ab4ff__1",
       "doc_type_id": "automated_sms",
       "document_language_code": "sat",
-      "translation_error": "Sarvam network error: <urlopen error [Errno -2] Name or service not known>",
+      "translation_error": "tag_restore_or_translate_failed:timed out:Sarvam timeout after 300.0s: The read operation timed out attempt=4",
       "translation_script_ok": false
     },
     {
@@ -86,15 +38,7 @@
       "document_id": "0b19143502244d21a03f71ef838ab4ff__2",
       "doc_type_id": "hospital_billing",
       "document_language_code": "sat",
-      "translation_error": "tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>",
-      "translation_script_ok": false
-    },
-    {
-      "uuid": "e899bd99966c4ac6b77d784bae3482f0",
-      "document_id": "e899bd99966c4ac6b77d784bae3482f0__0",
-      "doc_type_id": "phc_register",
-      "document_language_code": "sat",
-      "translation_error": "tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>",
+      "translation_error": "tag_restore_or_translate_failed:timed out:Sarvam timeout after 300.0s: The read operation timed out attempt=4",
       "translation_script_ok": false
     },
     {
@@ -102,15 +46,7 @@
       "document_id": "e899bd99966c4ac6b77d784bae3482f0__1",
       "doc_type_id": "asha_worker_note",
       "document_language_code": "sat",
-      "translation_error": "Sarvam network error: <urlopen error [Errno -2] Name or service not known>",
-      "translation_script_ok": false
-    },
-    {
-      "uuid": "e899bd99966c4ac6b77d784bae3482f0",
-      "document_id": "e899bd99966c4ac6b77d784bae3482f0__2",
-      "doc_type_id": "insurance_claim",
-      "document_language_code": "sat",
-      "translation_error": "tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>",
+      "translation_error": "tag_restore_or_translate_failed:timed out:Sarvam timeout after 300.0s: The read operation timed out attempt=4",
       "translation_script_ok": false
     },
     {
@@ -118,7 +54,7 @@
       "document_id": "825c4438c02440dc90d3ddec7ffec8ee__0",
       "doc_type_id": "automated_sms",
       "document_language_code": "sd",
-      "translation_error": "tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>",
+      "translation_error": "tag_restore_or_translate_failed:timed out:Sarvam timeout after 300.0s: The read operation timed out attempt=4",
       "translation_script_ok": false
     },
     {
@@ -126,7 +62,7 @@
       "document_id": "825c4438c02440dc90d3ddec7ffec8ee__1",
       "doc_type_id": "hospital_billing",
       "document_language_code": "sd",
-      "translation_error": "tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>",
+      "translation_error": "dedicated_script_purity_failed:wrong_indic_script:Devanagari>Arabic",
       "translation_script_ok": false
     },
     {
@@ -134,7 +70,7 @@
       "document_id": "825c4438c02440dc90d3ddec7ffec8ee__2",
       "doc_type_id": "discharge_summary",
       "document_language_code": "sd",
-      "translation_error": "tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>",
+      "translation_error": "tag_restore_or_translate_failed:timed out:Sarvam timeout after 300.0s: The read operation timed out attempt=4",
       "translation_script_ok": false
     },
     {
@@ -142,7 +78,7 @@
       "document_id": "fe3a6e05b50a4eb1b679f5fba0c5440b__0",
       "doc_type_id": "insurance_claim",
       "document_language_code": "sd",
-      "translation_error": "tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>;post_repair_translate:Sarvam network error: <urlopen error [Errno -2] Name or service not known>",
+      "translation_error": "tag_restore_or_translate_failed:timed out:Sarvam timeout after 300.0s: The read operation timed out attempt=4;post_repair_translate:Sarvam timeout after 300.0s: The read operation timed out",
       "translation_script_ok": false
     },
     {
@@ -150,7 +86,7 @@
       "document_id": "fe3a6e05b50a4eb1b679f5fba0c5440b__1",
       "doc_type_id": "hospital_billing",
       "document_language_code": "sd",
-      "translation_error": "tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>;post_repair_translate:Sarvam network error: <urlopen error [Errno -2] Name or service not known>",
+      "translation_error": "dedicated_script_purity_failed:wrong_indic_script:Devanagari>Arabic;generator_repair_failed:Sarvam timeout after 600.0s: The read operation timed out",
       "translation_script_ok": false
     },
     {
@@ -158,7 +94,7 @@
       "document_id": "fe3a6e05b50a4eb1b679f5fba0c5440b__2",
       "doc_type_id": "discharge_summary",
       "document_language_code": "sd",
-      "translation_error": "tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>",
+      "translation_error": "tag_restore_or_translate_failed:timed out:Sarvam timeout after 300.0s: The read operation timed out attempt=4",
       "translation_script_ok": false
     },
     {
@@ -166,31 +102,7 @@
       "document_id": "829db9fbfeda404d89ff9b8a405b5e4d__0",
       "doc_type_id": "opd_slip",
       "document_language_code": "ta",
-      "translation_error": "tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>",
-      "translation_script_ok": false
-    },
-    {
-      "uuid": "829db9fbfeda404d89ff9b8a405b5e4d",
-      "document_id": "829db9fbfeda404d89ff9b8a405b5e4d__1",
-      "doc_type_id": "prescription",
-      "document_language_code": "ta",
-      "translation_error": "tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>",
-      "translation_script_ok": false
-    },
-    {
-      "uuid": "829db9fbfeda404d89ff9b8a405b5e4d",
-      "document_id": "829db9fbfeda404d89ff9b8a405b5e4d__2",
-      "doc_type_id": "insurance_claim",
-      "document_language_code": "ta",
-      "translation_error": "tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>;post_repair_translate:Sarvam network error: <urlopen error [Errno -2] Name or service not known>",
-      "translation_script_ok": false
-    },
-    {
-      "uuid": "ce942a5fb5644181ac0db94b6c9c1314",
-      "document_id": "ce942a5fb5644181ac0db94b6c9c1314__0",
-      "doc_type_id": "asha_worker_note",
-      "document_language_code": "ta",
-      "translation_error": "tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>",
+      "translation_error": "tag_restore_or_translate_failed:timed out:Sarvam timeout after 300.0s: The read operation timed out attempt=4",
       "translation_script_ok": false
     },
     {
@@ -198,79 +110,7 @@
       "document_id": "ce942a5fb5644181ac0db94b6c9c1314__1",
       "doc_type_id": "automated_sms",
       "document_language_code": "ta",
-      "translation_error": "tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>",
-      "translation_script_ok": false
-    },
-    {
-      "uuid": "ce942a5fb5644181ac0db94b6c9c1314",
-      "document_id": "ce942a5fb5644181ac0db94b6c9c1314__2",
-      "doc_type_id": "insurance_claim",
-      "document_language_code": "ta",
-      "translation_error": "tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>",
-      "translation_script_ok": false
-    },
-    {
-      "uuid": "57a29898a6944b899059fb674d16f990",
-      "document_id": "57a29898a6944b899059fb674d16f990__0",
-      "doc_type_id": "hospital_billing",
-      "document_language_code": "te",
-      "translation_error": "tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>",
-      "translation_script_ok": false
-    },
-    {
-      "uuid": "57a29898a6944b899059fb674d16f990",
-      "document_id": "57a29898a6944b899059fb674d16f990__1",
-      "doc_type_id": "discharge_summary",
-      "document_language_code": "te",
-      "translation_error": "tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>",
-      "translation_script_ok": false
-    },
-    {
-      "uuid": "57a29898a6944b899059fb674d16f990",
-      "document_id": "57a29898a6944b899059fb674d16f990__2",
-      "doc_type_id": "referral_letter",
-      "document_language_code": "te",
-      "translation_error": "tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>",
-      "translation_script_ok": false
-    },
-    {
-      "uuid": "f0e00cbdb5dd4d33a122229e4883c598",
-      "document_id": "f0e00cbdb5dd4d33a122229e4883c598__0",
-      "doc_type_id": "hospital_billing",
-      "document_language_code": "te",
-      "translation_error": "tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>;post_repair_translate:Sarvam network error: <urlopen error [Errno -2] Name or service not known>",
-      "translation_script_ok": false
-    },
-    {
-      "uuid": "f0e00cbdb5dd4d33a122229e4883c598",
-      "document_id": "f0e00cbdb5dd4d33a122229e4883c598__1",
-      "doc_type_id": "discharge_summary",
-      "document_language_code": "te",
-      "translation_error": "tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>",
-      "translation_script_ok": false
-    },
-    {
-      "uuid": "f0e00cbdb5dd4d33a122229e4883c598",
-      "document_id": "f0e00cbdb5dd4d33a122229e4883c598__2",
-      "doc_type_id": "referral_letter",
-      "document_language_code": "te",
-      "translation_error": "tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>;post_repair_translate:Sarvam network error: <urlopen error [Errno -2] Name or service not known>",
-      "translation_script_ok": false
-    },
-    {
-      "uuid": "6b15543bcd6545f5803d6887e2a48820",
-      "document_id": "6b15543bcd6545f5803d6887e2a48820__0",
-      "doc_type_id": "discharge_summary",
-      "document_language_code": "ur",
-      "translation_error": "tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>",
-      "translation_script_ok": false
-    },
-    {
-      "uuid": "6b15543bcd6545f5803d6887e2a48820",
-      "document_id": "6b15543bcd6545f5803d6887e2a48820__1",
-      "doc_type_id": "referral_letter",
-      "document_language_code": "ur",
-      "translation_error": "tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>",
+      "translation_error": "tag_restore_or_translate_failed:timed out:Sarvam timeout after 300.0s: The read operation timed out attempt=4",
       "translation_script_ok": false
     },
     {
@@ -278,23 +118,7 @@
       "document_id": "6b15543bcd6545f5803d6887e2a48820__2",
       "doc_type_id": "radiology_report",
       "document_language_code": "ur",
-      "translation_error": "tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>",
-      "translation_script_ok": false
-    },
-    {
-      "uuid": "bf0de98a0c63491c8877846b6f8dad65",
-      "document_id": "bf0de98a0c63491c8877846b6f8dad65__0",
-      "doc_type_id": "discharge_summary",
-      "document_language_code": "ur",
-      "translation_error": "tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>",
-      "translation_script_ok": false
-    },
-    {
-      "uuid": "bf0de98a0c63491c8877846b6f8dad65",
-      "document_id": "bf0de98a0c63491c8877846b6f8dad65__1",
-      "doc_type_id": "referral_letter",
-      "document_language_code": "ur",
-      "translation_error": "tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>",
+      "translation_error": "tag_restore_or_translate_failed:timed out:Sarvam timeout after 300.0s: The read operation timed out attempt=4",
       "translation_script_ok": false
     },
     {
@@ -302,12 +126,12 @@
       "document_id": "bf0de98a0c63491c8877846b6f8dad65__2",
       "doc_type_id": "radiology_report",
       "document_language_code": "ur",
-      "translation_error": "tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>",
+      "translation_error": "tag_restore_or_translate_failed:timed out:Sarvam timeout after 300.0s: The read operation timed out attempt=4",
       "translation_script_ok": false
     }
   ],
-  "soft_fail_count": 37,
-  "script_fail_count": 7,
+  "soft_fail_count": 15,
+  "script_fail_count": 2,
   "generator_repaired_count": 0,
   "max_workers": 24,
   "requests_per_minute": 110.0,

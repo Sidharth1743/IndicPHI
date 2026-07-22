@@ -1,0 +1,3 @@
+{"uuid": "1f7da27d8fe544a191d7adc016e62971", "document_id": "1f7da27d8fe544a191d7adc016e62971__2", "doc_type_id": "referral_letter", "document_language_code": "gu", "auditor_errors": ["dics_below_threshold:0.0"], "auditor_repair_attempts": 0}
+{"uuid": "57e0ccc76318480b91dca7f2d464c122", "document_id": "57e0ccc76318480b91dca7f2d464c122__0", "doc_type_id": "hospital_billing", "document_language_code": "gu", "auditor_errors": ["span_alignment_failure", "boundary_corruption_rate:0.05"], "auditor_repair_attempts": 1}
+{"uuid": "829db9fbfeda404d89ff9b8a405b5e4d", "document_id": "829db9fbfeda404d89ff9b8a405b5e4d__2", "doc_type_id": "insurance_claim", "document_language_code": "ta", "auditor_errors": ["dics_below_threshold:0.0"], "auditor_repair_attempts": 2}

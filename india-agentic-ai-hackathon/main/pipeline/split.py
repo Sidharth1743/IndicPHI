@@ -278,8 +278,12 @@ def run(pipeline_config: Path) -> dict[str, Path]:
             "timestamp_utc": datetime.now(timezone.utc).isoformat(),
             "input_jsonl": str(settings.input_jsonl),
             "rows_in": 0,
+            "personas_in": 0,
             "train_rows": 0,
             "eval_rows": 0,
+            "eval_personas": 0,
+            "train_personas": 0,
+            "eval_fraction_actual_docs": 0.0,
             "note": "No input rows; wrote empty split outputs.",
         }
         return write_outputs([], [], audit, settings.output_dir)
