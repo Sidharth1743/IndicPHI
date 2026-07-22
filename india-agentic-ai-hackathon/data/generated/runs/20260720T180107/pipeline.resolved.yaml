@@ -1,0 +1,181 @@
+targets:
+  total_docs: 20
+  languages: 10
+  taxonomy_cells: 98
+persona_sampling:
+  dataset_id: nvidia/Nemotron-Personas-India
+  split: en_IN
+  seed: 404
+  personas_per_language: 2
+  docs_per_persona: 1
+  max_scan_rows: 250000
+  language_codes:
+  - hi
+  - en
+  - bn
+  - ta
+  - te
+  - mr
+  - gu
+  - kn
+  - ml
+  - pa
+  languages_config: configs/synthetic-data/languages.yaml
+  output_dir: data/generated/runs/20260720T180107/s1_persona_sampling
+  local_shard_path: data/nemotron-personas-india/en_IN-00000-of-00011.parquet
+taxonomy:
+  input_jsonl: data/generated/runs/20260720T180107/s1_persona_sampling/personas.jsonl
+  doc_types_config: configs/synthetic-data/doc_types.yaml
+  domains_config: configs/synthetic-data/domains.yaml
+  output_dir: data/generated/runs/20260720T180107/s2_taxonomy
+  seed: 404
+  prefer_unique_cell_per_persona: true
+  prefer_unique_doc_type_per_persona: true
+  prefer_unique_domain_per_persona: true
+persona_summary:
+  input_jsonl: data/generated/runs/20260720T180107/s2_taxonomy/assignments.jsonl
+  output_dir: data/generated/runs/20260720T180107/s2b_persona_summary
+  model: sarvam-30b
+  base_url: https://api.sarvam.ai/v1
+  api_key_env: SARVAM_API_KEY
+  temperature: 0.2
+  max_tokens: 256
+  reasoning_effort: null
+  requests_per_minute: 110
+  max_workers: 12
+  timeout_s: 120
+  narrative_max_chars: 240
+  max_docs: null
+prompt_construction:
+  input_jsonl: data/generated/runs/20260720T180107/s2b_persona_summary/assignments_summarized.jsonl
+  entities_config: configs/synthetic-data/entities.yaml
+  entity_profiles_config: configs/synthetic-data/entity_profiles.yaml
+  annotation_rules_config: configs/synthetic-data/annotation_rules.yaml
+  entity_format_examples_config: configs/synthetic-data/entity_format_examples.yaml
+  doc_format_examples_config: configs/synthetic-data/doc_format_examples.yaml
+  include_persona_narrative_in_prompt: false
+  persona_narrative_max_chars: 180
+  require_all_profile_entities: true
+  output_dir: data/generated/runs/20260720T180107/s3_prompts
+  max_docs: null
+  language_codes: null
+generation:
+  engine: data_designer
+  provider: sarvam
+  input_jsonl: data/generated/runs/20260720T180107/s3_prompts/prompts.jsonl
+  output_dir: data/generated/runs/20260720T180107/s4_generation
+  model: sarvam-105b
+  base_url: https://api.sarvam.ai/v1
+  api_key_env: SARVAM_API_KEY
+  temperature: 0.3
+  max_tokens: 16384
+  reasoning_effort: null
+  requests_per_minute: 110
+  max_workers: 12
+  timeout_s: 600
+  max_docs: null
+  empty_content_retries: 3
+  reject_truncated: true
+translation:
+  input_jsonl: data/generated/runs/20260720T180107/s4_generation/documents.jsonl
+  output_dir: data/generated/runs/20260720T180107/s4b_translation
+  model: sarvam-105b
+  base_url: https://api.sarvam.ai/v1
+  api_key_env: SARVAM_API_KEY
+  temperature: 0.2
+  max_tokens: 16384
+  reasoning_effort: null
+  requests_per_minute: 110
+  max_workers: 12
+  timeout_s: 600
+  skip_language_codes:
+  - en
+  max_docs: null
+linguistic_judge:
+  provider: azure_foundry
+  input_jsonl: data/generated/runs/20260720T180107/s4b_translation/documents.jsonl
+  output_dir: data/generated/runs/20260720T180107/s5_linguistic_judge
+  model: grok-4.3
+  base_url: https://ambedkar-interpreter-resource.services.ai.azure.com/openai/v1
+  api_key_env: AZURE_FOUNDRY_API_KEY
+  api_key_env_fallbacks:
+  - AZURE_FOUNDARY_API_KEY
+  entities_config: configs/synthetic-data/entities.yaml
+  temperature: 0.0
+  max_tokens: 2048
+  max_tokens_field: max_tokens
+  reasoning_effort: null
+  requests_per_minute: 500
+  timeout_s: 600
+  network_retries: 4
+  pass_threshold: 0.7
+  max_docs: null
+deterministic_auditor:
+  input_jsonl: data/generated/runs/20260720T180107/s5_linguistic_judge/passed.jsonl
+  entities_config: configs/synthetic-data/entities.yaml
+  entity_profiles_config: configs/synthetic-data/entity_profiles.yaml
+  output_dir: data/generated/runs/20260720T180107/s6_deterministic_auditor
+  require_judge_pass: true
+  min_dics: 1.0
+  max_boundary_corruption_rate: 0.01
+  require_all_profile_entities: true
+  max_docs: null
+curation:
+  input_jsonl: data/generated/runs/20260720T180107/s6_deterministic_auditor/passed.jsonl
+  output_dir: data/generated/runs/20260720T180107/s7_s8_curation
+  text_field: generated_text
+  id_field: document_id
+  language_field: document_language_code
+  max_docs: null
+  dedup:
+    backend: nemo_curator
+    text_mode: english_pivot_or_masked
+    jaccard_threshold: 0.8
+    char_ngrams: 24
+    num_bands: 20
+    rows_per_band: 5
+    minhashes_per_band: 13
+    seed: 42
+    curator_work_dir: data/generated/runs/20260720T180107/artifacts/nemo_curator_dedup
+  balancing:
+    enabled: true
+    target_docs_per_language: null
+    min_docs_per_language: null
+    allow_underfill: false
+gliner_format:
+  input_jsonl: data/generated/runs/20260720T180107/s7_s8_curation/curated.jsonl
+  output_dir: data/generated/runs/20260720T180107/s9_gliner_format
+  entities_config: configs/synthetic-data/entities.yaml
+  entity_profiles_config: configs/synthetic-data/entity_profiles.yaml
+  text_field: generated_text
+  id_field: document_id
+  gold_jsonl: null
+  fail_on_token_misalign: true
+  max_docs: null
+split:
+  input_jsonl: data/generated/runs/20260720T180107/s9_gliner_format/gliner_docs.jsonl
+  output_dir: data/generated/runs/20260720T180107/s10_split
+  eval_fraction: 0.15
+  seed: 42
+  persona_id_field: uuid
+  language_field: document_language_code
+data_designer:
+  required: true
+  engine: data_designer
+  seed_path: data/generated/runs/20260720T180107/s3_prompts/prompts.parquet
+  model_alias: generator
+  model_id: sarvam-105b
+  provider: sarvam
+  provider_endpoint: https://api.sarvam.ai/v1
+  provider_api_key_env: SARVAM_API_KEY
+  auth_style: subscription_key
+  temperature: 0.3
+  max_tokens: 16384
+  system_prompt_column: system_prompt
+  user_prompt_column: user_prompt
+  output_column: generated_text
+run:
+  run_id: 20260720T180107
+  created_utc: '2026-07-20T12:31:07.713138+00:00'
+  base_config: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/configs/synthetic-data/pipeline.smoke.medium.yaml
+  runs_root: data/generated/runs

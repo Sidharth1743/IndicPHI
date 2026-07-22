@@ -1,0 +1,109 @@
+{
+  "stage": "s4_generation",
+  "engine": "nemo_data_designer",
+  "timestamp_utc": "2026-07-20T16:10:52.984349+00:00",
+  "provider": "sarvam",
+  "model": "sarvam-105b",
+  "base_url": "https://api.sarvam.ai/v1",
+  "rows_requested": 69,
+  "rows_generated": 69,
+  "rows_from_checkpoint": 0,
+  "rows_newly_generated": 69,
+  "soft_failures": [
+    {
+      "uuid": "8b08baf3bcbf412eaace2d648074de01",
+      "document_id": "8b08baf3bcbf412eaace2d648074de01__2",
+      "doc_type_id": "lab_report",
+      "document_language_code": "bn",
+      "missing_required_entities": [
+        "PATIENT_NAME",
+        "AGE",
+        "GENDER",
+        "HOSPITAL_NAME",
+        "MRN",
+        "DOCTOR_NAME",
+        "DISTRICT",
+        "PHONE_NUMBER",
+        "PATIENT_ID",
+        "STUDENT_ID"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:PATIENT_NAME,AGE,GENDER,HOSPITAL_NAME,MRN,DOCTOR_NAME,DISTRICT,PHONE_NUMBER,PATIENT_ID,STUDENT_ID"
+      ]
+    },
+    {
+      "uuid": "8027a62865e6486cba6cb4978d8de433",
+      "document_id": "8027a62865e6486cba6cb4978d8de433__2",
+      "doc_type_id": "radiology_report",
+      "document_language_code": "doi",
+      "missing_required_entities": [
+        "DISTRICT"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:DISTRICT"
+      ]
+    },
+    {
+      "uuid": "f584cfd90471426ea809f549021f9a0f",
+      "document_id": "f584cfd90471426ea809f549021f9a0f__2",
+      "doc_type_id": "radiology_report",
+      "document_language_code": "en",
+      "missing_required_entities": [
+        "DISTRICT",
+        "PHONE_NUMBER",
+        "HOSPITAL_ID",
+        "ABHA_ID"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:DISTRICT,PHONE_NUMBER,HOSPITAL_ID,ABHA_ID"
+      ]
+    },
+    {
+      "uuid": "a90ec50b35a04cb3a09db6ca09ff1a37",
+      "document_id": "a90ec50b35a04cb3a09db6ca09ff1a37__1",
+      "doc_type_id": "lab_report",
+      "document_language_code": "kn",
+      "missing_required_entities": [
+        "STUDENT_ID"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:STUDENT_ID"
+      ]
+    },
+    {
+      "uuid": "944cf9bf2c4d48b2974bb723f704bded",
+      "document_id": "944cf9bf2c4d48b2974bb723f704bded__0",
+      "doc_type_id": "referral_letter",
+      "document_language_code": "sat",
+      "missing_required_entities": [
+        "MRN"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:MRN"
+      ]
+    },
+    {
+      "uuid": "6dae1a15538348f3a3bc29a4111088bc",
+      "document_id": "6dae1a15538348f3a3bc29a4111088bc__0",
+      "doc_type_id": "opd_slip",
+      "document_language_code": "te",
+      "missing_required_entities": [
+        "HOSPITAL_NAME"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:HOSPITAL_NAME"
+      ]
+    }
+  ],
+  "soft_fail_count": 6,
+  "generation_repaired_count": 4,
+  "entity_coverage_complete_rate": 0.9130434782608695,
+  "mean_chars": 2206.927536231884,
+  "checkpoint": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/s4_generation/checkpoint.jsonl"
+}

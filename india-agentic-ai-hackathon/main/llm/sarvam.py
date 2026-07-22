@@ -88,6 +88,13 @@ class SarvamClient:
             ) from exc
         except urllib.error.URLError as exc:
             raise SarvamClientError(f"Sarvam network error: {exc}") from exc
+        except TimeoutError as exc:
+            # urlopen raises bare TimeoutError on read timeout (not URLError).
+            raise SarvamClientError(
+                f"Sarvam timeout after {timeout_s}s: {exc}"
+            ) from exc
+        except OSError as exc:
+            raise SarvamClientError(f"Sarvam OS/network error: {exc}") from exc
 
         try:
             choice = body["choices"][0]

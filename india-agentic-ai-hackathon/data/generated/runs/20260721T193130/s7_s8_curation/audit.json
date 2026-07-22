@@ -1,0 +1,180 @@
+{
+  "stage": "s7_s8_curation",
+  "timestamp_utc": "2026-07-21T17:51:59.167057+00:00",
+  "rows_in": 122,
+  "dedup": {
+    "backend": "nemo_curator",
+    "rows_in": 122,
+    "rows_kept": 122,
+    "rows_dropped": 0,
+    "duplicate_ids_found": false,
+    "work_dir": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T193130/artifacts/nemo_curator_dedup",
+    "text_mode": "english_pivot_or_masked",
+    "template_fingerprints": {
+      "unique": 122,
+      "total": 122
+    },
+    "dropped_template_fingerprints": [
+      "Radiology report — [[HOSPITAL_NAME]] | [[PATIENT_NAME]] [[AGE]] [[GENDER]] MRN [[MRN]] Encounter [[ENCOUNTER_ID]] | Reported by Dr [[DOCTOR_NAME]] [[DISTRICT]] | [[PHONE_NUMBER]] | [[HOSPITAL_ID]] | [[ABHA_ID]] Findings: Ultrasound examination of abdomen performed on 15th August 2024 demonstrates a singleton gestation at 28 weeks with estimated fetal weight of 1200 grams. The placenta is anterior with grade 2 maturity. Amniotic fluid index measured at 12 cm, which is within normal limits. Fetal biometry shows appropriate growth parameters for gestational age. No gross anomalies detected in fetal anatomy. Doppler studies of umbilical artery and middle cerebral artery show normal waveforms. Maternal uterus appears enlarged with no evidence of fibroids or masses. Gallbladder is visualized with sludge but no stones. Kidneys are normal in size and echogenicity. No free fluid detected in peritoneal cavity. Impression: Normal third-trimester pregnancy with appropriate fetal growth and amniotic fluid volume. Recommend routine obstetric follow-up.",
+      "TPA Claim Form for Reimbursement Policy Number: [[INSURANCE_POLICY_NUMBER]] Claimant Details: Patient Name: [[PATIENT_NAME]] Age: [[AGE]] Gender: [[GENDER]] Aadhaar Number: [[AADHAAR_NUMBER]] District: [[DISTRICT]] Phone Number: [[PHONE_NUMBER]] Hospital Details: Hospital Name: [[HOSPITAL_NAME]] District: [[DISTRICT]] Clinical Summary: ᱨᱩᱜᱤ ᱫᱚ ᱕᱖ ᱥᱮᱨᱢᱟ ᱨᱮᱱ ᱢᱤᱫ ᱠᱚᱲᱟ ᱵᱩᱞᱩᱝ ᱵᱮᱱᱟᱣ ᱠᱟᱹᱢᱤᱭᱟᱹ ᱠᱟᱱᱟᱭ, ᱩᱱᱤ ᱫᱚ ᱓ ᱪᱟᱸᱫᱚ ᱠᱷᱚᱱ ᱠᱷᱩᱜ ᱥᱟᱶᱛᱮ ᱡᱚᱨ ᱟᱨ ᱟᱹᱰᱤ ᱵᱟᱹᱲᱛᱤ ᱦᱟᱢᱟᱞ ᱠᱚᱢᱚᱜ ᱨᱮᱭᱟᱜ ᱮᱴᱠᱮᱴᱚᱬᱮ ᱛᱟᱦᱮᱸ ᱠᱟᱱᱟ ᱾ ᱩᱱᱤᱭᱟᱜ ᱠᱟᱹᱢᱤ ᱫᱚ ᱵᱩᱞᱩᱝ ᱯᱩᱠᱷᱨᱤ ᱨᱮ ᱠᱟᱹᱢᱤ ᱠᱟᱱᱟ, ᱡᱟᱦᱟᱸ ᱫᱚ ᱫᱷᱩᱲᱤ ᱟᱱᱟᱜ ᱴᱷᱟᱶ ᱠᱟᱱᱟ ᱾ ᱢᱟᱲᱟᱝ ᱛᱮᱱᱟᱜ ᱨᱟᱱ ᱢᱩᱨᱜᱟᱹᱱ ᱱᱟᱜᱟᱢ ᱨᱮ ᱧᱮᱞ ᱟᱠᱟᱱᱟ ᱡᱮ ᱩᱱᱤᱭᱟᱜ Type 2 Diabetes Mellitus ᱫᱚ ᱴᱷᱤᱠ ᱥᱟᱹᱦᱤᱡ ᱵᱟᱝ ᱠᱚᱱᱴᱨᱳᱞ ᱟᱠᱟᱱᱟ ᱾ ᱵᱤᱱᱤᱰ ᱚᱠᱛᱚ ᱨᱮ, ᱩᱱᱤ ᱫᱚ ᱟᱹᱰᱤ ᱱᱟᱱᱦᱟ ᱜᱮ ᱛᱟᱦᱮᱸ ᱠᱟᱱᱟᱭ, ᱩᱱᱤᱭᱟᱜ ᱞᱚᱞᱚ ᱓᱘ᱹ᱕°C ᱛᱟᱦᱮᱸ ᱠᱟᱱᱟ, ᱦᱟᱨᱴ ᱨᱮᱭᱟᱜ ᱫᱷᱚᱲᱫᱷᱚᱲ ᱵᱟᱹᱲᱛᱤ ᱛᱟᱦᱮᱸ ᱠᱟᱱᱟ, ᱟᱨ ᱠᱚᱲᱟᱢ ᱨᱮ ᱟᱲᱟᱝ ᱟᱸᱡᱚᱢ ᱚᱠᱛᱚ ᱨᱮ ᱞᱟᱛᱟᱨ ᱥᱮᱫ ᱠᱷᱚᱱ ᱟᱲᱟᱝ ᱠᱚ ᱟᱸᱡᱚᱢ ᱞᱮᱱᱟ ᱾ ᱠᱷᱩᱜ ᱨᱮᱭᱟᱜ ᱵᱤᱱᱤᱰ ᱨᱮ ᱟᱭᱢᱟ acid-fast bacilli ᱧᱮᱞ ᱞᱮᱱᱟ ᱾ ᱠᱚᱲᱟᱢ ᱨᱮᱭᱟᱜ X-ray ᱨᱮ ᱡᱚᱡᱚᱢ ᱯᱟᱦᱴᱟ ᱨᱮᱭᱟᱜ ᱪᱮᱛᱟᱱ ᱞᱳᱵᱽ ᱨᱮ ᱠᱷᱟᱹᱞᱤ ᱴᱷᱟᱶ ᱧᱮᱞ ᱞᱮᱱᱟ ᱾ HbA1c ᱫᱚ ᱙ᱹ᱒% ᱛᱟᱦᱮᱸ ᱠᱟᱱᱟ ᱾ ᱨᱩᱜᱤ ᱫᱚ Pulmonary Tuberculosis ᱥᱟᱶᱛᱮ Type 2 Diabetes Mellitus ᱨᱮᱭᱟᱜ ᱮᱴᱠᱮᱴᱚᱬᱮ ᱢᱮᱱᱛᱮ ᱵᱟᱰᱟᱭ ᱧᱟᱢ ᱟᱠᱟᱱᱟ ᱾ ᱩᱱᱤ ᱫᱚ anti-tubercular therapy (ATT) ᱟᱨ insulin sliding scale ᱮᱛᱚᱦᱚᱵ ᱞᱟᱹᱜᱤᱫ ᱵᱷᱩᱨᱛᱤ ᱞᱮᱱᱟ ᱾ ᱩᱱᱤ ᱫᱚ ᱵᱷᱩᱨᱛᱤ ᱨᱮᱭᱟᱜ ᱑᱔ ᱢᱟᱦᱟᱸ ᱛᱟᱭᱚᱢ ATT ᱨᱮᱭᱟᱜ ᱫᱚᱥᱟᱨ ᱦᱟᱹᱴᱤᱧ ᱟᱨ ᱢᱚᱪᱟ ᱛᱮ ᱡᱚᱢ ᱨᱟᱱ ᱥᱟᱶᱛᱮ ᱪᱷᱩᱴᱤ ᱮᱢ ᱦᱩᱭ ᱟᱫᱮᱭᱟ ᱾ ᱵᱷᱩᱨᱛᱤ ᱞᱟᱹᱜᱤᱫ ᱡᱚᱛᱚ ᱛᱮ ᱔᱕,᱐᱐᱐ ᱴᱟᱠᱟ ᱠᱞᱮᱢ ᱦᱩᱭ ᱟᱠᱟᱱᱟ ᱾ Financial Information: Bank Account Number: [[BANK_ACCOUNT_NUMBER]] IFSC Code: [[IFSC_CODE]] Bank Routing Number: [[BANK_ROUTING_NUMBER]] PAN Number: [[PAN_NUMBER]] Credit Card Number: [[CREDIT_CARD_NUMBER]] CVV: [[CVV]] PIN: [[PIN]] Vehicle Details for Ambulance/RTA Claim: Vehicle Registration Number: [[VEHICLE_REGISTRATION]]",
+      "TPA ಕ್ಲೈಮ್ — ಪಾಲಿಸಿ [[INSURANCE_POLICY_NUMBER]] [[PATIENT_NAME]] [[AGE]] [[GENDER]] ಆಧಾರ [[AADHAAR_NUMBER]] ಆಸ್ಪತ್ರೆ [[HOSPITAL_NAME]] ಜಿಲ್ಲೆ [[DISTRICT]] ಮೋಟಾರ್ / RTA ವಾಹನ [[VEHICLE_REGISTRATION]] (ಒಮ್ಮೆ ಮಾತ್ರ). PAN [[PAN_NUMBER]] IFSC [[IFSC_CODE]] ಖಾತೆ [[BANK_ACCOUNT_NUMBER]] ಬ್ಯಾಂಕ್ ರೂಟಿಂಗ್ [[BANK_ROUTING_NUMBER]] ಕ್ರೆಡಿಟ್ ಕಾರ್ಡ್ [[CREDIT_CARD_NUMBER]] CVV [[CVV]] PIN [[PIN]] ಸಂಪರ್ಕ [[PHONE_NUMBER]] ರೋಗಿಯು ಮೂರು ವಾರಗಳ ಕಾಲ ನಿರಂತರ ಕೆಮ್ಮು, ಕಡಿಮೆ ಜ್ವರ, ರಾತ್ರಿ ಬೆವರುವಿಕೆ ಮತ್ತು ತೂಕ ಇಳಿಕೆಯೊಂದಿಗೆ ಬಂದರು. ಎದೆಯ ಎಕ್ಸ್-ರೇ ಬಲ ಮೇಲ್ಭಾಗದ ಹಾಲೆ ಒಳನುಸುಳುವಿಕೆಯನ್ನು ತೋರಿಸುತ್ತದೆ. ಕಫ AFB ಪಾಸಿಟಿವ್. ಶ್ವಾಸಕೋಶದ ಕ್ಷಯರೋಗ ಎಂದು ರೋಗನಿರ್ಣಯ ಮಾಡಲಾಯಿತು. ಹಾಗೆಯೇ ಆತಂಕದ ಲಕ್ಷಣಗಳು, ಹೃದಯ ಬಡಿತದ ಏರುಪೇರು ಮತ್ತು ನಿದ್ರೆಯ ಅಡಚಣೆಗಳನ್ನು ವರದಿ ಮಾಡಿದ್ದಾರೆ. ಐಸೋನಿಯಾಜಿಡ್, ರಿಫಾಂಪಿಸಿನ್, ಪೈರಾಜಿನ್ಮೈಡ್ ಮತ್ತು ಎಥಾಂಬ್ಯುಟಾಲ್ ಔಷಧಿಗಳೊಂದಿಗೆ DOTS ಚಿಕಿತ್ಸೆಯನ್ನು ಪ್ರಾರಂಭಿಸಲಾಯಿತು. ಆತಂಕಕ್ಕಾಗಿ ದಿನಕ್ಕೆ 50mg ಸೆರ್ಟ್ರಾಲೈನ್ ಸೂಚಿಸಲಾಯಿತು. ಚಿಕಿತ್ಸೆಯ ಅನುಸರಣೆ ಮತ್ತು ಅಡ್ಡಪರಿಣಾಮಗಳ ಮೇಲ್ವಿಚಾರಣೆಯ ಬಗ್ಗೆ ರೋಗಿಗೆ ಶಿಕ್ಷಣ ನೀಡಲಾಯಿತು. 2 ವಾರಗಳಲ್ಲಿ ಫಾಲೋ-ಅಪ್ ನಿಗದಿಪಡಿಸಲಾಗಿದೆ. ಔಷಧಿಗಳು ಮತ್ತು ಸಮಾಲೋಚನಾ ಶುಲ್ಕಗಳನ್ನು ಒಳಗೊಂಡಂತೆ 2 ತಿಂಗಳ ಚಿಕಿತ್ಸೆಯ ಒಟ್ಟು ಅಂದಾಜು ವೆಚ್ಚ: INR 15000.",
+      "[[PATIENT_NAME]]: ᱟᱢᱟᱜ ᱟᱯᱚᱭᱮᱱᱴᱢᱮᱱᱴ [[APPOINTMENT_ID]] ᱨᱮ [[HOSPITAL_NAME]] ᱨᱮ 21-May 10:30 ᱥᱟᱶᱛᱮ [[DOCTOR_NAME]]. [[PHONE_NUMBER]] ᱨᱮ ᱠᱚᱱᱯᱷᱟᱨᱢ ᱢᱮ. MRN [[MRN]].",
+      "او پی ڈی سلپ | [[HOSPITAL_NAME]] | آئی ڈی [[HOSPITAL_ID]] مریضہ: [[PATIENT_NAME]] | تاریخِ پیدائش [[DOB]] | عمر: [[AGE]] | صنف: [[GENDER]] پیشہ: [[OCCUPATION]] | میڈیکل ریکارڈ نمبر: [[MRN]] | معالج: [[DOCTOR_NAME]] رشتہ دار: [[RELATIVE_NAME]] | فون: [[PHONE_NUMBER]] رجسٹرار ایمپلائی آئی ڈی: [[EMPLOYEE_ID]] | ضلع: [[DISTRICT]] بنیادی شکایت: 3 ہفتوں سے مسلسل کھانسی، وزن میں کمی اور تھکن، ہائی بلڈ پریشر کی تاریخ موجودہ بیماری کی ہسٹری: مریضہ 21 دنوں سے کھانسی کے ساتھ آ رہی ہے، شروع میں خشک تھی، پھر پیلے رنگ کے بلغم کے ساتھ پیدا ہونے لگی۔ مریضہ شام کے وقت ہلکے درجے کے بخار، رات کو پسینہ آنے اور گزشتہ ماہ کے دوران تقریباً 5 کلوگرام وزن میں بتدریج کمی کی اطلاع دیتی ہے۔ مریضہ کو 2 سال سے ہائی بلڈ پریشر کی شکایت ہے، وہ فی الحال دوا لے رہی ہے لیکن بے قاعدہ ادویات کے استعمال کا اعتراف کرتی ہے۔ ذیابیطس کی کوئی ہسٹری نہیں ہے۔ معائنہ: مریضہ کی عمومی حالت انتہائی کمزور معلوم ہوتی ہے۔ درجہ حرارت 37.8°C، بلڈ پریشر 145/90 mmHg، نبض 98 فی منٹ، سانس کی رفتار 22 فی منٹ۔ سینے کے معائنے سے دائیں اوپری حصے میں سانس کی آوازوں میں کمی اور کبھی کبھار رونچی (rhonchi) کا پتہ چلتا ہے۔ انگلیوں کے کلبنگ (انگلیوں کا مڑنا) کا کوئی مشاہدہ نہیں کیا گیا۔ تحقیقات: AFB کے لیے بلغم کا ٹیسٹ مثبت آیا ہے۔ HbA1c 6.2%. سینے کا ایکس رے دائیں اوپری حصے میں انفلٹریٹس (infiltrates) ظاہر کرتا ہے۔ تشخیص: پلمونری تپِ دق (Pulmonary Tuberculosis) مع ہائی بلڈ پریشر علاج کا منصوبہ: ٹی بی کے لیے DOTS طریقہ علاج شروع کر دیا گیا ہے۔ باقاعدگی سے بلڈ پریشر کی دوائیں جاری رکھنے کا مشورہ دیا گیا۔ علاج کی پابندی کی اہمیت پر کونسلنگ کی گئی۔ 2 ہفتوں میں فالو اپ کا وقت مقرر کیا گیا ہے۔ اگلی ملاقات: آج سے 2 ہفتے۔",
+      "حوالو [[REFERRAL_ID]] کان [[HOSPITAL_NAME]] / [[DOCTOR_NAME]] بابت [[PATIENT_NAME]], [[AGE]] / [[GENDER]], ضلعو [[DISTRICT]] سبب: شديد ساڄي پاسي جو بونانھون حصو ميداني درد، شڪي اپينڊيڪٽومي سان محترم سرجيڪل ٽيم، مان حوالو پيش ڪريان ٿو [[PATIENT_NAME]], 22 ساله مرد تعميراتي ورڪر، جنهن اسان جي ايمرجنسي ڊپارٽمينٽ ۾ پيش ٿيو 12 ڪلاڪن تائين شديد ساڄي پاسي جو بونانھون حصو ميداني درد سان. مريض ٻڌائي ٿو درد جنهن ناف جي چوڌاري شروع ٿيو ۽ ساڄي پاسي جو بونانھون حصو منتقل ٿيو، متعلقه الٽي ۽ گهٽ درجي جو تپ. معائنو ڪرڻ تي، [[PATIENT_NAME]] تپ سان آهي درجو حرارت 38.2°C، دل جي رفتار 98 bpm، ۽ بلڊ پريشر 120/80 mmHg سان. ميداني معائنو ظاهر ڪري ٿو ساڄي پاسي جو بونانھون حصو نرمي ۽ حفاظت سان، ري-باؤنڊ نرمي سان. لیبارٽري جاچون ظاهر ڪن ٿيون ليউকوسائٽوسس WBC تعداد 14.5 x 10^9/L سان، ۽ CRP 8.2 mg/L سان. [[PATIENT_NAME]] سان [[MRN]] آهي، ۽ [[PHONE_NUMBER]] تي رابطو ڪري سگهجي ٿو. جنهن جو پي [[RELATIVE_NAME]] وڌيڪ معلومات لاء دستياب آهي. مريض جا [[PASSPORT_NUMBER]] ۽ [[DRIVING_LICENCE]] سڃاڻپ لاء دستياب آهن. طبي پيشڪش ۽ لیبارٽري جاچون جي روشني ۾، مان تڪڙي سرجيڪل جائزو لاء عرض ڪريان ٿو ممڪن اپينڊيڪٽومي لاء. مريض ٻي صورت ۾ صحت منند آهي، بغير ڪنهن خاص طبي تاريخ جي. هن معاملي ۾ تڪڙي ڌیان لاء توهان جا ٿورا مڃان. احترام سان، [[DOCTOR_NAME]] MBBS, MD (General Medicine) ضلعي اسپتال ڀاونگر",
+      "रेफरल [[REFERRAL_ID]] थमां [[HOSPITAL_NAME]] / [[DOCTOR_NAME]] विषय: [[PATIENT_NAME]], [[AGE]] / [[GENDER]], ज़िला [[DISTRICT]] कारण: लगातार पेट दा दर्द ते बिना कारण वजन घट्ट होना जिसदे लेई ऑन्कोलॉजिकल मूल्यांकन दी जरूरत ऐ प्यारे ऑन्कोलॉजी टीम, असीं सिफारिश करदे आं [[PATIENT_NAME]], इक 27 साल दी जनानी, जेह्ड़ी जम्मू ज़िले दी निवासी ऐ, पूरे कैंसर संबंधी मूल्यांकन लेई। मरीज च 3 महीने दा इतिहास ऐ जेह्दे च बधदा पेट दा दर्द, रुक-रुक कर बुखार, ते सामान्य भूख होने दे बावजूद लगभग 8 किलो वजन घट्ट होआ ऐ। क्लिनिकल जांच च पेट दे एपिगैस्ट्रिक इलाके च हल्का दर्द पता लग्गेआ ऐ, ते कोई बी हाथ कन्नै महसूस होने आह्ली गाँठ नेईं ऐ। शुरुआती जांच च, जेह्दे च पूरा खून दी गिनती, जिगर दे कम्म दी जांच, ते पेट दा अल्ट्रासाउंड शामल न, हल्का एनीमिया (Hb 9.8 g/dL) ते जिगर दा बडा होना दस्सन गे न। मरीज दा [[MRN]] तुहाड़े संदर्भ लेई कन्नै लाया गेआ ऐ। [[RELATIVE_NAME]] (पति) मरीज कन्नै आंदा ऐ ते दस्सदा ऐ जे ओह्‌दे च थकान बद्धी रही ऐ ते कदी-कदी रात गी पसीना बी आंदा ऐ। मरीज दा [[PHONE_NUMBER]] अगले संपर्क लेई उपलब्ध ऐ। [[PATIENT_NAME]] दे कोल पछान लेई इक मान्य [[PASSPORT_NUMBER]] ते [[DRIVING_LICENCE]] न। ओह्‌दी [[ABHA_ID]] राश्ट्रीय सेहत ID सिस्टम च दर्ज ऐ। चिंताजनक क्लिनिकल लक्षणें ते शुरुआती जांच गी देखदे होए, असीं जरूरी ऑन्कोलॉजिकल मूल्यांकन दी अनुरोध करदे आं, जेह्दे च CT scan of abdomen, tumor markers, ते मुमकिन टिश्यू बायोप्सी शामल न। मरीज दा [[ABHA_ADDRESS]] डिजिटल सेहत रिकार्ड लेई उपलब्ध ऐ। कृपया कुसै बी होर जरूरी जानकारी लेई [[HOSPITAL_NAME]] कन्नै तालमेल बिठाओ। भवदीय, [[DOCTOR_NAME]] सामान्य चिकित्सा विभाग सरकारी मेडिकल कॉलेज जम्मू",
+      "ബിൽ — [[HOSPITAL_NAME]] | രോഗി [[PATIENT_NAME]] | MRN [[MRN]] വിലാസം ജില്ല [[DISTRICT]] പിൻ [[PIN_CODE]] ആംബുലൻസ് വാഹനം [[VEHICLE_REGISTRATION]] തീയതി: 15 ഓഗസ്റ്റ് 2024 രോഗിയുടെ വിവരങ്ങൾ: പേര്: [[PATIENT_NAME]] പ്രായം: [[AGE]] ലിംഗം: [[GENDER]] ആധാർ: [[AADHAAR_NUMBER]] ഫോൺ: [[PHONE_NUMBER]] ഇൻഷുറൻസ്: [[INSURANCE_POLICY_NUMBER]] നികുതി ഐഡി: [[TAX_ID]] ആശുപത്രി സമ്പർക്കം: ലാൻഡ്‌ലൈൻ: [[TELEPHONE_LANDLINE]] പ്രവേശന വിവരങ്ങൾ: പ്രവേശന നമ്പർ: [[ADMISSION_NUMBER]] കിടക്ക നമ്പർ: [[BED_NUMBER]] എൻകൗണ്ടർ ഐഡി: [[ENCOUNTER_ID]] രോഗനിർണ്ണയം: നിർജ്ജലീകരണത്തോടു കൂടിയ അക്യൂട്ട് ഗ്യാസ്ട്രോഎൻറൈറ്റിസ് നടത്തിയ ചികിത്സകളും സേവനങ്ങളും: 1. ജനറൽ മെഡിസിൻ സ്പെഷ്യലിസ്റ്റുമായുള്ള കൺസൾട്ടേഷൻ - ഡോ. അഞ്ജലി നായർ 2. കംപ്ലീറ്റ് ബ്ലഡ് കൗണ്ട് (CBC) 3. രക്തത്തിലെ പഞ്ചസാര (ഫാസ്റ്റിംഗ്, പോസ്റ്റ്പ്രാൻഡിയൽ) 4. സെറം ഇലക്ട്രോലൈറ്റുകൾ 5. ഇൻട്രാവീനസ് ഫ്ലൂയിഡ് തെറാപ്പി (നോർമൽ സലൈൻ 1L) 6. ആന്റി-എമെറ്റിക് മരുന്നിന്റെ നൽകൽ 7. ആന്റി-ഡയറിയൽ മരുന്നിന്റെ കുറിപ്പടി നിർദ്ദേശിച്ച മരുന്നുകൾ: - ഓറൽ റീഹൈഡ്രേഷൻ സൊല്യൂഷൻ (ORS) പാക്കറ്റുകൾ - 5 - സിങ്ക് ഗുളികകൾ - 10 എണ്ണം - മെട്രോണിഡാസോൾ 400mg - 7 ഗുളികകൾ - പാരാസിറ്റമോൾ 500mg - 10 ഗുളികകൾ ബില്ലിംഗ് സംഗ്രഹം: കൺസൾട്ടേഷൻ ചാർജ്: ₹800 ലാബോറട്ടറി പരിശോധനകൾ: ₹1,200 മരുന്നുകൾ: ₹650 IV ഫ്ലൂയിഡുകൾ: ₹300 നഴ്സിംഗ് ചാർജ്: ₹400 ആകെ തുക: ₹3,350 പേയ്‌മെന്റ് സ്റ്റാറ്റസ്: പൂർണ്ണമായും അടച്ചു വിടുതൽ തീയതി: 17 ഓഗസ്റ്റ് 2024 ഭക്ഷണക്രമ നിർദ്ദേശങ്ങളോടെയും 24 ഓഗസ്റ്റ് 2024-ലേക്ക് നിശ്ചയിച്ചിട്ടുള്ള തുടർപരിശോധനയോടും കൂടി സുസ്ഥിരമായ അവസ്ഥയിൽ വിട്ടയച്ചു."
+    ],
+    "semantic_dedup": {
+      "backend": "hashed_ngram_bag",
+      "threshold": 0.92,
+      "rows_in": 122,
+      "rows_usable": 122,
+      "pairs_checked": 6650,
+      "dropped": 8,
+      "dropped_ids": [
+        "5c5f54dc693d4f069c0816187c102d74__0",
+        "80435bdcef24479390d6e6ae0b2aeeb1__2",
+        "c98c2d51b4ea4d0c947d6dfc0ee57383__1",
+        "c98c2d51b4ea4d0c947d6dfc0ee57383__2",
+        "d77cc494ad214600a1c700a1fb8e47c3__2",
+        "d89930b893984d4b96fbd0b492413321__0",
+        "e9f9b9a22bcb47f28198db61b9bd4966__2",
+        "f584cfd90471426ea809f549021f9a0f__1"
+      ],
+      "clusters": [
+        {
+          "kept": "0cb542c8c62e4d52ac1c51fcfb93a238__0",
+          "dropped": [
+            "5c5f54dc693d4f069c0816187c102d74__0",
+            "e9f9b9a22bcb47f28198db61b9bd4966__2"
+          ]
+        },
+        {
+          "kept": "5c5f54dc693d4f069c0816187c102d74__1",
+          "dropped": [
+            "f584cfd90471426ea809f549021f9a0f__1"
+          ]
+        },
+        {
+          "kept": "fe2793cf648244fa8cc427adc569983a__0",
+          "dropped": [
+            "d89930b893984d4b96fbd0b492413321__0"
+          ]
+        },
+        {
+          "kept": "5afdbf29e52249fc95146ec7db5e2023__2",
+          "dropped": [
+            "80435bdcef24479390d6e6ae0b2aeeb1__2"
+          ]
+        },
+        {
+          "kept": "c03b2ff49ffa439380a254bb9f8972f7__0",
+          "dropped": [
+            "c98c2d51b4ea4d0c947d6dfc0ee57383__1"
+          ]
+        },
+        {
+          "kept": "8b77264c0f7747c59ec191e95202ff7f__1",
+          "dropped": [
+            "c98c2d51b4ea4d0c947d6dfc0ee57383__2"
+          ]
+        },
+        {
+          "kept": "9952571815ae4558a362507fc4a9539f__0",
+          "dropped": [
+            "d77cc494ad214600a1c700a1fb8e47c3__2"
+          ]
+        }
+      ]
+    },
+    "curator_kept_before_semantic": 122
+  },
+  "balancing": {
+    "enabled": true,
+    "equalize_mode": true,
+    "target_docs_per_language": 2,
+    "min_docs_per_language": null,
+    "allow_underfill": true,
+    "pre_balance_counts": {
+      "as": 5,
+      "bn": 5,
+      "brx": 2,
+      "doi": 5,
+      "en": 5,
+      "gu": 6,
+      "hi": 5,
+      "kn": 5,
+      "kok": 5,
+      "ks": 6,
+      "mai": 6,
+      "ml": 5,
+      "mni": 2,
+      "mr": 5,
+      "ne": 6,
+      "or": 5,
+      "pa": 6,
+      "sa": 6,
+      "sat": 3,
+      "sd": 4,
+      "ta": 6,
+      "te": 6,
+      "ur": 5
+    },
+    "per_language": {
+      "as": 2,
+      "bn": 2,
+      "brx": 2,
+      "doi": 2,
+      "en": 2,
+      "gu": 2,
+      "hi": 2,
+      "kn": 2,
+      "kok": 2,
+      "ks": 2,
+      "mai": 2,
+      "ml": 2,
+      "mni": 2,
+      "mr": 2,
+      "ne": 2,
+      "or": 2,
+      "pa": 2,
+      "sa": 2,
+      "sat": 2,
+      "sd": 2,
+      "ta": 2,
+      "te": 2,
+      "ur": 2
+    },
+    "discarded_by_balance": 68,
+    "discard_ratio": 0.5965,
+    "rows_out": 46,
+    "underfilled": {},
+    "warning": "large_balance_discard: discarded 68/114 rows (59.6%) while equalizing to 2 docs/language"
+  },
+  "language_counts_out": {
+    "as": 2,
+    "bn": 2,
+    "brx": 2,
+    "doi": 2,
+    "en": 2,
+    "gu": 2,
+    "hi": 2,
+    "kn": 2,
+    "kok": 2,
+    "ks": 2,
+    "mai": 2,
+    "ml": 2,
+    "mni": 2,
+    "mr": 2,
+    "ne": 2,
+    "or": 2,
+    "pa": 2,
+    "sa": 2,
+    "sat": 2,
+    "sd": 2,
+    "ta": 2,
+    "te": 2,
+    "ur": 2
+  },
+  "rows_out": 46
+}

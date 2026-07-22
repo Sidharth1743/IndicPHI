@@ -1,0 +1,30 @@
+{
+  "stage": "s3_prompt_construction",
+  "timestamp_utc": "2026-07-21T07:36:02.445584+00:00",
+  "input_jsonl": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T130558/s2b_persona_summary/assignments_summarized.jsonl",
+  "rows_in": 2,
+  "rows_out": 2,
+  "max_docs": 2,
+  "language_codes": [
+    "bn",
+    "brx"
+  ],
+  "include_persona_narrative_in_prompt": false,
+  "doc_type_counts": {
+    "asha_worker_note": 1,
+    "discharge_summary": 1
+  },
+  "language_counts": {
+    "bn": 1,
+    "brx": 1
+  },
+  "mean_user_prompt_chars": 3324.0,
+  "mean_system_prompt_chars": 8925,
+  "columns_added": [
+    "system_prompt",
+    "user_prompt",
+    "required_entities",
+    "optional_entities",
+    "stage"
+  ]
+}

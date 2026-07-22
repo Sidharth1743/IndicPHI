@@ -1,0 +1,68 @@
+{
+  "stage": "s6_deterministic_auditor",
+  "timestamp_utc": "2026-07-21T17:51:31.004178+00:00",
+  "rows_audited": 127,
+  "rows_passed": 122,
+  "rows_failed": 5,
+  "pass_rate": 0.9606299212598425,
+  "mean_dics": 1.0,
+  "mean_ecr": 1.0,
+  "mean_bcr": 0.0,
+  "failures": [
+    {
+      "uuid": "fe2793cf648244fa8cc427adc569983a",
+      "document_id": "fe2793cf648244fa8cc427adc569983a__2",
+      "doc_type_id": "hospital_billing",
+      "document_language_code": "as",
+      "auditor_errors": [
+        "unknown_entity_types:ADDRESS_NUMBER",
+        "phi_residue:2"
+      ],
+      "auditor_repair_attempts": 5
+    },
+    {
+      "uuid": "e2083507b6fc4542853ff740cac47edf",
+      "document_id": "e2083507b6fc4542853ff740cac47edf__0",
+      "doc_type_id": "hospital_billing",
+      "document_language_code": "bn",
+      "auditor_errors": [
+        "unknown_entity_types:RECEIPT_NUMBER"
+      ],
+      "auditor_repair_attempts": 1
+    },
+    {
+      "uuid": "62bbda52de29443287ee799e3f265919",
+      "document_id": "62bbda52de29443287ee799e3f265919__1",
+      "doc_type_id": "hospital_billing",
+      "document_language_code": "hi",
+      "auditor_errors": [
+        "phi_residue:1",
+        "script_purity:target_script_ratio:0.000<0.35"
+      ],
+      "auditor_repair_attempts": 5
+    },
+    {
+      "uuid": "efe93c7f20fc46b7aa8ef936a09c90c6",
+      "document_id": "efe93c7f20fc46b7aa8ef936a09c90c6__2",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "mr",
+      "auditor_errors": [
+        "format:PAN_NUMBER:pan_format"
+      ],
+      "auditor_repair_attempts": 5
+    },
+    {
+      "uuid": "e9f9b9a22bcb47f28198db61b9bd4966",
+      "document_id": "e9f9b9a22bcb47f28198db61b9bd4966__0",
+      "doc_type_id": "hospital_billing",
+      "document_language_code": "sd",
+      "auditor_errors": [
+        "unknown_entity_types:CONTACT_EMAIL,EMAIL"
+      ],
+      "auditor_repair_attempts": 3
+    }
+  ],
+  "failure_count": 5,
+  "auditor_repaired_count": 16,
+  "quality_repair_max": 5
+}

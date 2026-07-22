@@ -1,0 +1,587 @@
+{
+  "data_designer": {
+    "columns": [
+      {
+        "name": "generated_text",
+        "drop": false,
+        "column_type": "llm-text",
+        "skip": null,
+        "propagate_skip": true,
+        "prompt": "{{user_prompt}}",
+        "model_alias": "generator",
+        "system_prompt": "{{system_prompt}}",
+        "multi_modal_context": null,
+        "tool_alias": null,
+        "with_trace": "none",
+        "extract_reasoning_content": false
+      },
+      {
+        "name": "uuid",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "professional_persona",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "linguistic_persona",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "sports_persona",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "arts_persona",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "travel_persona",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "culinary_persona",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "persona",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "cultural_background",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "linguistic_background",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "skills_and_expertise",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "skills_and_expertise_list",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "hobbies_and_interests",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "hobbies_and_interests_list",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "career_goals_and_ambitions",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "sex",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "age",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "marital_status",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "education_level",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "education_degree",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "occupation",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "first_language",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "second_language",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "third_language",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "zone",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "state",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "district",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "country",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "document_language_code",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "document_language_name",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "document_script",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "docs_per_persona",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "persona_source_dataset",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "persona_source_split",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "persona_source_shard",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "sample_seed",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "stage",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "doc_slot",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "doc_type_id",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "doc_type_name",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "domain_id",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "domain_name",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "taxonomy_cell_id",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "assignment_seed",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "persona_clinical_summary",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "persona_summary_model",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "system_prompt",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "user_prompt",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "required_entities",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      },
+      {
+        "name": "optional_entities",
+        "drop": false,
+        "column_type": "seed-dataset",
+        "skip": null,
+        "propagate_skip": true
+      }
+    ],
+    "model_configs": [
+      {
+        "alias": "nvidia-text",
+        "model": "nvidia/nemotron-3-nano-30b-a3b",
+        "inference_parameters": {
+          "generation_type": "chat-completion",
+          "max_parallel_requests": 4,
+          "timeout": null,
+          "extra_body": null,
+          "temperature": 1.0,
+          "top_p": 1.0,
+          "max_tokens": null
+        },
+        "provider": "nvidia",
+        "skip_health_check": false
+      },
+      {
+        "alias": "nvidia-reasoning",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "inference_parameters": {
+          "generation_type": "chat-completion",
+          "max_parallel_requests": 4,
+          "timeout": null,
+          "extra_body": {
+            "reasoning_effort": "medium"
+          },
+          "temperature": 1.0,
+          "top_p": 0.95,
+          "max_tokens": null
+        },
+        "provider": "nvidia",
+        "skip_health_check": false
+      },
+      {
+        "alias": "nvidia-vision",
+        "model": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+        "inference_parameters": {
+          "generation_type": "chat-completion",
+          "max_parallel_requests": 4,
+          "timeout": null,
+          "extra_body": null,
+          "temperature": 0.6,
+          "top_p": 0.95,
+          "max_tokens": null
+        },
+        "provider": "nvidia",
+        "skip_health_check": false
+      },
+      {
+        "alias": "nvidia-embedding",
+        "model": "nvidia/llama-nemotron-embed-1b-v2",
+        "inference_parameters": {
+          "generation_type": "embedding",
+          "max_parallel_requests": 4,
+          "timeout": null,
+          "extra_body": {
+            "input_type": "query"
+          },
+          "encoding_format": "float",
+          "dimensions": null
+        },
+        "provider": "nvidia",
+        "skip_health_check": false
+      },
+      {
+        "alias": "openai-text",
+        "model": "gpt-4.1",
+        "inference_parameters": {
+          "generation_type": "chat-completion",
+          "max_parallel_requests": 4,
+          "timeout": null,
+          "extra_body": null,
+          "temperature": 0.85,
+          "top_p": 0.95,
+          "max_tokens": null
+        },
+        "provider": "openai",
+        "skip_health_check": false
+      },
+      {
+        "alias": "openai-reasoning",
+        "model": "gpt-5",
+        "inference_parameters": {
+          "generation_type": "chat-completion",
+          "max_parallel_requests": 4,
+          "timeout": null,
+          "extra_body": {
+            "reasoning_effort": "medium"
+          },
+          "temperature": null,
+          "top_p": null,
+          "max_tokens": null
+        },
+        "provider": "openai",
+        "skip_health_check": false
+      },
+      {
+        "alias": "openai-vision",
+        "model": "gpt-5",
+        "inference_parameters": {
+          "generation_type": "chat-completion",
+          "max_parallel_requests": 4,
+          "timeout": null,
+          "extra_body": {
+            "reasoning_effort": "medium"
+          },
+          "temperature": null,
+          "top_p": null,
+          "max_tokens": null
+        },
+        "provider": "openai",
+        "skip_health_check": false
+      },
+      {
+        "alias": "openai-embedding",
+        "model": "text-embedding-3-large",
+        "inference_parameters": {
+          "generation_type": "embedding",
+          "max_parallel_requests": 4,
+          "timeout": null,
+          "extra_body": null,
+          "encoding_format": "float",
+          "dimensions": null
+        },
+        "provider": "openai",
+        "skip_health_check": false
+      },
+      {
+        "alias": "openrouter-text",
+        "model": "nvidia/nemotron-3-nano-30b-a3b",
+        "inference_parameters": {
+          "generation_type": "chat-completion",
+          "max_parallel_requests": 4,
+          "timeout": null,
+          "extra_body": null,
+          "temperature": 1.0,
+          "top_p": 1.0,
+          "max_tokens": null
+        },
+        "provider": "openrouter",
+        "skip_health_check": false
+      },
+      {
+        "alias": "openrouter-reasoning",
+        "model": "openai/gpt-oss-20b",
+        "inference_parameters": {
+          "generation_type": "chat-completion",
+          "max_parallel_requests": 4,
+          "timeout": null,
+          "extra_body": null,
+          "temperature": 0.35,
+          "top_p": 0.95,
+          "max_tokens": null
+        },
+        "provider": "openrouter",
+        "skip_health_check": false
+      },
+      {
+        "alias": "openrouter-vision",
+        "model": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+        "inference_parameters": {
+          "generation_type": "chat-completion",
+          "max_parallel_requests": 4,
+          "timeout": null,
+          "extra_body": null,
+          "temperature": 0.6,
+          "top_p": 0.95,
+          "max_tokens": null
+        },
+        "provider": "openrouter",
+        "skip_health_check": false
+      },
+      {
+        "alias": "openrouter-embedding",
+        "model": "openai/text-embedding-3-large",
+        "inference_parameters": {
+          "generation_type": "embedding",
+          "max_parallel_requests": 4,
+          "timeout": null,
+          "extra_body": null,
+          "encoding_format": "float",
+          "dimensions": null
+        },
+        "provider": "openrouter",
+        "skip_health_check": false
+      },
+      {
+        "alias": "generator",
+        "model": "sarvam-105b",
+        "inference_parameters": {
+          "generation_type": "chat-completion",
+          "max_parallel_requests": 12,
+          "timeout": null,
+          "extra_body": {
+            "reasoning_effort": null
+          },
+          "temperature": 0.3,
+          "top_p": null,
+          "max_tokens": 16384
+        },
+        "provider": "sarvam",
+        "skip_health_check": false
+      }
+    ],
+    "tool_configs": [],
+    "seed_config": {
+      "source": {
+        "seed_type": "local",
+        "path": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T180107/s4_generation/pending_seed.parquet"
+      },
+      "sampling_strategy": "ordered",
+      "selection_strategy": null
+    },
+    "constraints": null,
+    "profilers": null,
+    "processors": null
+  },
+  "library_version": "0.8.0"
+}

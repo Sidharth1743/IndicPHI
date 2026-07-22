@@ -27,15 +27,22 @@ examples:
 
   automated_sms: |
     CRITICAL: keep the WHOLE SMS under ~400 characters / 2–4 sentences. Not a form dump.
+    MUST tag [[APPOINTMENT_ID|…]] whenever an appointment is mentioned.
     Example:
     [[PATIENT_NAME|Meena Devi]]: appt [[APPOINTMENT_ID|APT-240521-01]] at [[HOSPITAL_NAME|PHC Kanpur]] on 21-May 10:30 with [[DOCTOR_NAME|Dr. Sharma]]. Confirm on [[PHONE_NUMBER|9876512340]]. MRN [[MRN|MRN-2024-001]].
 
   hospital_billing: |
-    Example skeleton:
-    Invoice — [[HOSPITAL_NAME|...]] | Patient [[PATIENT_NAME|...]] | MRN [[MRN|...]]
-    Address district [[DISTRICT|...]] PIN [[PIN_CODE|110001]]
-    Ambulance / parking vehicle [[VEHICLE_REGISTRATION|PB10AB1234]] (exactly once).
+    Example skeleton (English pivot; wrap facility/geo as tags — never plain-only):
+    Invoice — [[HOSPITAL_NAME|Barddhaman District Hospital]] District [[DISTRICT|Purba Bardhaman]]
+    PIN [[PIN_CODE|713101]] Patient [[PATIENT_NAME|Anjali Mondal]] MRN [[MRN|MRN-WB-2024-0815]]
+    Address [[RESIDENTIAL_ADDRESS|12 Station Road, Barddhaman]] Phone [[PHONE_NUMBER|9876543210]]
+    Email [[EMAIL_ADDRESS|anjali.mondal@example.com]] PAN [[PAN_NUMBER|ABCDE1234F]]
+    Landline [[TELEPHONE_LANDLINE|0342-1234567]] Vehicle [[VEHICLE_REGISTRATION|WB40AB1234]] (once)
+    Aadhaar [[AADHAAR_NUMBER|291512345678]] Policy [[INSURANCE_POLICY_NUMBER|POL-WB-7781]] GSTIN [[TAX_ID|19ABCDE1234F1Z5]]
+    Receipt No. INV-2024-0815 (plain prose — NOT a TYPE). State line as plain prose (NOT [[STATE|…]]).
     Line items with amounts (no entity tags on procedure names).
+    TYPE aliases forbidden: ADDRESS_NUMBER→RESIDENTIAL_ADDRESS; EMAIL/CONTACT_EMAIL→EMAIL_ADDRESS;
+    RECEIPT_NUMBER→plain; STATE→plain or DISTRICT.
 
   discharge_summary: |
     Example skeleton:

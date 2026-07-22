@@ -1,0 +1,203 @@
+{
+  "stage": "s2_taxonomy",
+  "timestamp_utc": "2026-07-20T08:34:54.642263+00:00",
+  "input_jsonl": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T140451/s1_persona_sampling/personas.jsonl",
+  "seed": 101,
+  "personas_in": 10,
+  "documents_out": 10,
+  "doc_types": 14,
+  "domains": 7,
+  "taxonomy_cells": 98,
+  "prefer_unique_cell_per_persona": true,
+  "prefer_unique_doc_type_per_persona": true,
+  "prefer_unique_domain_per_persona": true,
+  "by_language": {
+    "bn": {
+      "docs": 1,
+      "cells_touched": 1,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "asha_worker_note": 1
+      },
+      "domain_counts": {
+        "tb_ncd": 1
+      },
+      "cell_counts": {
+        "asha_worker_note__tb_ncd": 1
+      }
+    },
+    "en": {
+      "docs": 1,
+      "cells_touched": 1,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "telemedicine_transcript": 1
+      },
+      "domain_counts": {
+        "psychiatry_behavioral": 1
+      },
+      "cell_counts": {
+        "telemedicine_transcript__psychiatry_behavioral": 1
+      }
+    },
+    "gu": {
+      "docs": 1,
+      "cells_touched": 1,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "er_triage_notes": 1
+      },
+      "domain_counts": {
+        "maternal_health": 1
+      },
+      "cell_counts": {
+        "er_triage_notes__maternal_health": 1
+      }
+    },
+    "hi": {
+      "docs": 1,
+      "cells_touched": 1,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "automated_sms": 1
+      },
+      "domain_counts": {
+        "general_medicine": 1
+      },
+      "cell_counts": {
+        "automated_sms__general_medicine": 1
+      }
+    },
+    "kn": {
+      "docs": 1,
+      "cells_touched": 1,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "asha_worker_note": 1
+      },
+      "domain_counts": {
+        "oncology_chronic": 1
+      },
+      "cell_counts": {
+        "asha_worker_note__oncology_chronic": 1
+      }
+    },
+    "ml": {
+      "docs": 1,
+      "cells_touched": 1,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "automated_sms": 1
+      },
+      "domain_counts": {
+        "psychiatry_behavioral": 1
+      },
+      "cell_counts": {
+        "automated_sms__psychiatry_behavioral": 1
+      }
+    },
+    "mr": {
+      "docs": 1,
+      "cells_touched": 1,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "radiology_report": 1
+      },
+      "domain_counts": {
+        "tb_ncd": 1
+      },
+      "cell_counts": {
+        "radiology_report__tb_ncd": 1
+      }
+    },
+    "pa": {
+      "docs": 1,
+      "cells_touched": 1,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "radiology_report": 1
+      },
+      "domain_counts": {
+        "tb_ncd": 1
+      },
+      "cell_counts": {
+        "radiology_report__tb_ncd": 1
+      }
+    },
+    "ta": {
+      "docs": 1,
+      "cells_touched": 1,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "radiology_report": 1
+      },
+      "domain_counts": {
+        "general_medicine": 1
+      },
+      "cell_counts": {
+        "radiology_report__general_medicine": 1
+      }
+    },
+    "te": {
+      "docs": 1,
+      "cells_touched": 1,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "automated_sms": 1
+      },
+      "domain_counts": {
+        "tb_ncd": 1
+      },
+      "cell_counts": {
+        "automated_sms__tb_ncd": 1
+      }
+    }
+  },
+  "global_doc_type_counts": {
+    "asha_worker_note": 2,
+    "telemedicine_transcript": 1,
+    "er_triage_notes": 1,
+    "automated_sms": 3,
+    "radiology_report": 3
+  },
+  "global_domain_counts": {
+    "tb_ncd": 4,
+    "psychiatry_behavioral": 2,
+    "maternal_health": 1,
+    "general_medicine": 2,
+    "oncology_chronic": 1
+  },
+  "persona_unique_cells_histogram": {
+    "1": 10
+  },
+  "columns_added": [
+    "doc_slot",
+    "doc_type_id",
+    "doc_type_name",
+    "domain_id",
+    "domain_name",
+    "taxonomy_cell_id",
+    "assignment_seed",
+    "stage"
+  ]
+}

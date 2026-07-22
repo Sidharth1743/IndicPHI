@@ -456,7 +456,15 @@ def build_user_prompt(
         "DOMAIN ANCHOR: chief complaint, findings, and plan MUST match "
         f"{row['domain_name']} — do not default to unrelated TB/generic content "
         "unless that is the assigned domain.\n"
-        "GEO ANCHOR: any DISTRICT/VILLAGE/HOSPITAL_NAME must be plausible for "
+        + (
+            "MATERNAL SAFETY: clinical content must be age-plausible for persona "
+            f"age={row.get('age')}. Routine ANC/delivery typically ages 18–40; "
+            "ages 40–42 → high-risk ANC/PNC/contraception — never invent extreme "
+            "late pregnancy as a routine story.\n"
+            if str(row.get("domain_id") or "") == "maternal_health"
+            else ""
+        )
+        + "GEO ANCHOR: any DISTRICT/VILLAGE/HOSPITAL_NAME must be plausible for "
         f"persona state={row['state']}, district={row['district']}.\n"
         "NOTE: translation stage (not this draft) will put the body into "
         f"{row['document_script']} for {row['document_language_name']}.\n\n"

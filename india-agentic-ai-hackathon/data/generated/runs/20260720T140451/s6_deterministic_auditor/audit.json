@@ -1,0 +1,24 @@
+{
+  "stage": "s6_deterministic_auditor",
+  "timestamp_utc": "2026-07-20T08:58:24.658527+00:00",
+  "rows_audited": 8,
+  "rows_passed": 7,
+  "rows_failed": 1,
+  "pass_rate": 0.875,
+  "mean_dics": 1.0,
+  "mean_ecr": 0.9886363636363636,
+  "mean_bcr": 0.0,
+  "failures": [
+    {
+      "uuid": "e7e83d4610764345b6bfc1814beba784",
+      "document_id": "e7e83d4610764345b6bfc1814beba784__0",
+      "doc_type_id": "radiology_report",
+      "document_language_code": "mr",
+      "auditor_errors": [
+        "missing_required:DOCTOR_NAME",
+        "upstream_generation_soft_fail:missing_required_entities:DOCTOR_NAME"
+      ]
+    }
+  ],
+  "failure_count": 1
+}

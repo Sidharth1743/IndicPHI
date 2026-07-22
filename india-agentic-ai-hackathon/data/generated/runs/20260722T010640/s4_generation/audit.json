@@ -1,0 +1,10 @@
+{
+  "stage": "s4_generation",
+  "engine": "nemo_data_designer",
+  "salvaged": true,
+  "rows_generated": 138,
+  "rows_added_by_salvage": 87,
+  "checkpoint_done_before": 51,
+  "soft_fail_count": 6,
+  "entity_coverage_complete_rate": 0.9637681159420289
+}

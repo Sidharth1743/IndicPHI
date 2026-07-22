@@ -6,11 +6,13 @@ import argparse
 import math
 import sys
 from collections import Counter
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
+from main.designers.entity_checks import normalize_inline_entity_tags
 from main.designers.repair import (
     clear_upstream_soft_fail_fields,
     issues_from_auditor_errors,
@@ -49,6 +51,7 @@ class AuditorSettings:
     min_dics: float
     max_boundary_corruption_rate: float
     require_all_profile_entities: bool
+    max_workers: int = 24
 
 
 class AuditorError(RuntimeError):
@@ -91,6 +94,7 @@ def load_settings(pipeline_config: Path) -> AuditorSettings:
         require_all_profile_entities=bool(
             block.get("require_all_profile_entities", True)
         ),
+        max_workers=max(1, int(block.get("max_workers", 24))),
     )
 
 
@@ -135,7 +139,10 @@ def audit_document(
     profiles: Mapping[str, Mapping[str, tuple[str, ...]]],
     settings: AuditorSettings,
 ) -> dict[str, Any]:
-    text = str(row.get("generated_text", ""))
+    raw_text = str(row.get("generated_text", ""))
+    text, norm_notes = normalize_inline_entity_tags(
+        raw_text, known_types=tuple(known_entities)
+    )
     if not text.strip():
         return {
             "auditor_pass": False,
@@ -286,6 +293,8 @@ def audit_document(
         "format_checks": checked,
         "format_failures": format_failures,
         "inline_span_count": len(spans),
+        "entity_tag_normalize_notes": norm_notes,
+        "generated_text_normalized": text if norm_notes else None,
         "stage": "s6_deterministic_auditor",
     }
 
@@ -312,18 +321,18 @@ def audit_corpus(
         else 0
     )
     repaired_count = 0
-    outputs: list[dict[str, Any]] = []
-    for row in selected:
+
+    def _audit_one(index: int, row: Mapping[str, Any]) -> tuple[int, dict[str, Any], bool]:
         working = dict(row)
         report = audit_document(
             working, known_entities=known, profiles=profiles, settings=settings
         )
         repair_attempts = 0
+        row_repaired = False
         for _round in range(max_repairs):
             if report.get("auditor_pass"):
                 break
             errors = [str(e) for e in (report.get("auditor_errors") or [])]
-            # Skip pure judge_failed — those belong to S5.
             if errors == ["judge_failed"] or (
                 len(errors) == 1 and errors[0] == "judge_failed"
             ):
@@ -336,7 +345,11 @@ def audit_corpus(
             if doc_type_id in profiles:
                 req = profiles[doc_type_id]["required"]
                 opt = profiles[doc_type_id]["optional"]
-                required = list(dict.fromkeys([*req, *opt])) if settings.require_all_profile_entities else list(req)
+                required = (
+                    list(dict.fromkeys([*req, *opt]))
+                    if settings.require_all_profile_entities
+                    else list(req)
+                )
             check_script = any(
                 "script" in e or "translation_soft_fail" in e for e in errors
             )
@@ -373,7 +386,7 @@ def audit_corpus(
                 working, known_entities=known, profiles=profiles, settings=settings
             )
             if report.get("auditor_pass"):
-                repaired_count += 1
+                row_repaired = True
                 print(
                     f"[s6] REPAIRED-THEN-PASS uuid={working.get('uuid')} "
                     f"attempts={repair_attempts}",
@@ -384,11 +397,41 @@ def audit_corpus(
 
         out = dict(working)
         out.update(report)
+        normalized = report.get("generated_text_normalized")
+        if normalized:
+            out["generated_text"] = normalized
         out["auditor_repair_attempts"] = repair_attempts
-        out["auditor_repaired"] = bool(
-            repair_attempts and report.get("auditor_pass")
-        )
-        outputs.append(out)
+        out["auditor_repaired"] = bool(repair_attempts and report.get("auditor_pass"))
+        return index, out, row_repaired
+
+    workers = min(settings.max_workers, max(1, len(selected)))
+    print(
+        f"[s6] start rows={len(selected)} workers={workers} "
+        f"max_repairs={max_repairs}",
+        file=sys.stderr,
+        flush=True,
+    )
+    outputs_by_index: dict[int, dict[str, Any]] = {}
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        futures = {
+            pool.submit(_audit_one, index, row): index
+            for index, row in enumerate(selected)
+        }
+        done = 0
+        for future in as_completed(futures):
+            index, out, row_repaired = future.result()
+            outputs_by_index[index] = out
+            if row_repaired:
+                repaired_count += 1
+            done += 1
+            if done == 1 or done % 10 == 0 or done == len(selected):
+                print(
+                    f"[s6] progress {done}/{len(selected)} "
+                    f"uuid={out.get('uuid')} pass={bool(out.get('auditor_pass'))}",
+                    file=sys.stderr,
+                    flush=True,
+                )
+    outputs = [outputs_by_index[i] for i in range(len(selected))]
 
     passed = sum(1 for row in outputs if row["auditor_pass"])
     failed_rows = [

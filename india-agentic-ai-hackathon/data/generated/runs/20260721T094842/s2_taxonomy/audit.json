@@ -1,0 +1,559 @@
+{
+  "stage": "s2_taxonomy",
+  "timestamp_utc": "2026-07-21T04:18:44.918453+00:00",
+  "input_jsonl": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T094842/s1_persona_sampling/personas.jsonl",
+  "seed": 1301,
+  "personas_in": 23,
+  "documents_out": 69,
+  "doc_types": 14,
+  "domains": 7,
+  "taxonomy_cells": 98,
+  "prefer_unique_cell_per_persona": true,
+  "prefer_unique_doc_type_per_persona": true,
+  "prefer_unique_domain_per_persona": true,
+  "by_language": {
+    "as": {
+      "docs": 3,
+      "cells_touched": 3,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "prescription": 1,
+        "lab_report": 1,
+        "asha_worker_note": 1
+      },
+      "domain_counts": {
+        "surgical": 1,
+        "oncology_chronic": 1,
+        "general_medicine": 1
+      },
+      "cell_counts": {
+        "prescription__surgical": 1,
+        "asha_worker_note__general_medicine": 1,
+        "lab_report__oncology_chronic": 1
+      }
+    },
+    "bn": {
+      "docs": 3,
+      "cells_touched": 3,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "hospital_billing": 1,
+        "discharge_summary": 1,
+        "referral_letter": 1
+      },
+      "domain_counts": {
+        "psychiatry_behavioral": 1,
+        "general_medicine": 1,
+        "tb_ncd": 1
+      },
+      "cell_counts": {
+        "hospital_billing__psychiatry_behavioral": 1,
+        "discharge_summary__general_medicine": 1,
+        "referral_letter__tb_ncd": 1
+      }
+    },
+    "brx": {
+      "docs": 3,
+      "cells_touched": 3,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "asha_worker_note": 1,
+        "phc_register": 1,
+        "automated_sms": 1
+      },
+      "domain_counts": {
+        "general_medicine": 1,
+        "tb_ncd": 1,
+        "surgical": 1
+      },
+      "cell_counts": {
+        "asha_worker_note__general_medicine": 1,
+        "automated_sms__surgical": 1,
+        "phc_register__tb_ncd": 1
+      }
+    },
+    "doi": {
+      "docs": 3,
+      "cells_touched": 3,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "telemedicine_transcript": 1,
+        "surgical_note": 1,
+        "lab_report": 1
+      },
+      "domain_counts": {
+        "general_medicine": 1,
+        "maternal_health": 1,
+        "tb_ncd": 1
+      },
+      "cell_counts": {
+        "telemedicine_transcript__general_medicine": 1,
+        "surgical_note__maternal_health": 1,
+        "lab_report__tb_ncd": 1
+      }
+    },
+    "en": {
+      "docs": 3,
+      "cells_touched": 3,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "prescription": 1,
+        "lab_report": 1,
+        "asha_worker_note": 1
+      },
+      "domain_counts": {
+        "tb_ncd": 1,
+        "surgical": 1,
+        "general_medicine": 1
+      },
+      "cell_counts": {
+        "prescription__tb_ncd": 1,
+        "asha_worker_note__general_medicine": 1,
+        "lab_report__surgical": 1
+      }
+    },
+    "gu": {
+      "docs": 3,
+      "cells_touched": 3,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "automated_sms": 1,
+        "insurance_claim": 1,
+        "hospital_billing": 1
+      },
+      "domain_counts": {
+        "oncology_chronic": 1,
+        "psychiatry_behavioral": 1,
+        "general_medicine": 1
+      },
+      "cell_counts": {
+        "automated_sms__oncology_chronic": 1,
+        "hospital_billing__general_medicine": 1,
+        "insurance_claim__psychiatry_behavioral": 1
+      }
+    },
+    "hi": {
+      "docs": 3,
+      "cells_touched": 3,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "referral_letter": 1,
+        "radiology_report": 1,
+        "er_triage_notes": 1
+      },
+      "domain_counts": {
+        "oncology_chronic": 1,
+        "general_medicine": 1,
+        "maternal_health": 1
+      },
+      "cell_counts": {
+        "referral_letter__oncology_chronic": 1,
+        "radiology_report__general_medicine": 1,
+        "er_triage_notes__maternal_health": 1
+      }
+    },
+    "kn": {
+      "docs": 3,
+      "cells_touched": 3,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "opd_slip": 1,
+        "phc_register": 1,
+        "prescription": 1
+      },
+      "domain_counts": {
+        "maternal_health": 1,
+        "tb_ncd": 1,
+        "general_medicine": 1
+      },
+      "cell_counts": {
+        "opd_slip__maternal_health": 1,
+        "prescription__general_medicine": 1,
+        "phc_register__tb_ncd": 1
+      }
+    },
+    "kok": {
+      "docs": 3,
+      "cells_touched": 3,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "automated_sms": 1,
+        "insurance_claim": 1,
+        "hospital_billing": 1
+      },
+      "domain_counts": {
+        "general_medicine": 1,
+        "tb_ncd": 1,
+        "surgical": 1
+      },
+      "cell_counts": {
+        "automated_sms__general_medicine": 1,
+        "hospital_billing__surgical": 1,
+        "insurance_claim__tb_ncd": 1
+      }
+    },
+    "ks": {
+      "docs": 3,
+      "cells_touched": 3,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "prescription": 1,
+        "insurance_claim": 1,
+        "asha_worker_note": 1
+      },
+      "domain_counts": {
+        "oncology_chronic": 1,
+        "psychiatry_behavioral": 1,
+        "general_medicine": 1
+      },
+      "cell_counts": {
+        "prescription__oncology_chronic": 1,
+        "asha_worker_note__general_medicine": 1,
+        "insurance_claim__psychiatry_behavioral": 1
+      }
+    },
+    "mai": {
+      "docs": 3,
+      "cells_touched": 3,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "prescription": 1,
+        "lab_report": 1,
+        "asha_worker_note": 1
+      },
+      "domain_counts": {
+        "general_medicine": 1,
+        "tb_ncd": 1,
+        "surgical": 1
+      },
+      "cell_counts": {
+        "prescription__general_medicine": 1,
+        "asha_worker_note__surgical": 1,
+        "lab_report__tb_ncd": 1
+      }
+    },
+    "ml": {
+      "docs": 3,
+      "cells_touched": 3,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "hospital_billing": 1,
+        "discharge_summary": 1,
+        "referral_letter": 1
+      },
+      "domain_counts": {
+        "surgical": 1,
+        "general_medicine": 1,
+        "tb_ncd": 1
+      },
+      "cell_counts": {
+        "hospital_billing__surgical": 1,
+        "discharge_summary__general_medicine": 1,
+        "referral_letter__tb_ncd": 1
+      }
+    },
+    "mni": {
+      "docs": 3,
+      "cells_touched": 3,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "telemedicine_transcript": 1,
+        "surgical_note": 1,
+        "lab_report": 1
+      },
+      "domain_counts": {
+        "surgical": 1,
+        "general_medicine": 1,
+        "maternal_health": 1
+      },
+      "cell_counts": {
+        "telemedicine_transcript__surgical": 1,
+        "surgical_note__general_medicine": 1,
+        "lab_report__maternal_health": 1
+      }
+    },
+    "mr": {
+      "docs": 3,
+      "cells_touched": 3,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "prescription": 1,
+        "lab_report": 1,
+        "asha_worker_note": 1
+      },
+      "domain_counts": {
+        "oncology_chronic": 1,
+        "psychiatry_behavioral": 1,
+        "general_medicine": 1
+      },
+      "cell_counts": {
+        "prescription__oncology_chronic": 1,
+        "asha_worker_note__general_medicine": 1,
+        "lab_report__psychiatry_behavioral": 1
+      }
+    },
+    "ne": {
+      "docs": 3,
+      "cells_touched": 3,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "opd_slip": 1,
+        "surgical_note": 1,
+        "prescription": 1
+      },
+      "domain_counts": {
+        "general_medicine": 1,
+        "tb_ncd": 1,
+        "surgical": 1
+      },
+      "cell_counts": {
+        "opd_slip__general_medicine": 1,
+        "prescription__surgical": 1,
+        "surgical_note__tb_ncd": 1
+      }
+    },
+    "or": {
+      "docs": 3,
+      "cells_touched": 3,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "telemedicine_transcript": 1,
+        "opd_slip": 1,
+        "surgical_note": 1
+      },
+      "domain_counts": {
+        "general_medicine": 1,
+        "tb_ncd": 1,
+        "surgical": 1
+      },
+      "cell_counts": {
+        "opd_slip__tb_ncd": 1,
+        "telemedicine_transcript__general_medicine": 1,
+        "surgical_note__surgical": 1
+      }
+    },
+    "pa": {
+      "docs": 3,
+      "cells_touched": 3,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "radiology_report": 1,
+        "er_triage_notes": 1,
+        "telemedicine_transcript": 1
+      },
+      "domain_counts": {
+        "oncology_chronic": 1,
+        "general_medicine": 1,
+        "maternal_health": 1
+      },
+      "cell_counts": {
+        "radiology_report__oncology_chronic": 1,
+        "er_triage_notes__general_medicine": 1,
+        "telemedicine_transcript__maternal_health": 1
+      }
+    },
+    "sa": {
+      "docs": 3,
+      "cells_touched": 3,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "prescription": 1,
+        "lab_report": 1,
+        "asha_worker_note": 1
+      },
+      "domain_counts": {
+        "oncology_chronic": 1,
+        "psychiatry_behavioral": 1,
+        "general_medicine": 1
+      },
+      "cell_counts": {
+        "prescription__oncology_chronic": 1,
+        "asha_worker_note__general_medicine": 1,
+        "lab_report__psychiatry_behavioral": 1
+      }
+    },
+    "sat": {
+      "docs": 3,
+      "cells_touched": 3,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "referral_letter": 1,
+        "radiology_report": 1,
+        "er_triage_notes": 1
+      },
+      "domain_counts": {
+        "tb_ncd": 1,
+        "general_medicine": 1,
+        "surgical": 1
+      },
+      "cell_counts": {
+        "referral_letter__tb_ncd": 1,
+        "radiology_report__general_medicine": 1,
+        "er_triage_notes__surgical": 1
+      }
+    },
+    "sd": {
+      "docs": 3,
+      "cells_touched": 3,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "opd_slip": 1,
+        "surgical_note": 1,
+        "prescription": 1
+      },
+      "domain_counts": {
+        "tb_ncd": 1,
+        "surgical": 1,
+        "general_medicine": 1
+      },
+      "cell_counts": {
+        "opd_slip__tb_ncd": 1,
+        "prescription__general_medicine": 1,
+        "surgical_note__surgical": 1
+      }
+    },
+    "ta": {
+      "docs": 3,
+      "cells_touched": 3,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "radiology_report": 1,
+        "er_triage_notes": 1,
+        "telemedicine_transcript": 1
+      },
+      "domain_counts": {
+        "tb_ncd": 1,
+        "general_medicine": 1,
+        "surgical": 1
+      },
+      "cell_counts": {
+        "radiology_report__tb_ncd": 1,
+        "er_triage_notes__general_medicine": 1,
+        "telemedicine_transcript__surgical": 1
+      }
+    },
+    "te": {
+      "docs": 3,
+      "cells_touched": 3,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "automated_sms": 1,
+        "insurance_claim": 1,
+        "hospital_billing": 1
+      },
+      "domain_counts": {
+        "oncology_chronic": 1,
+        "psychiatry_behavioral": 1,
+        "general_medicine": 1
+      },
+      "cell_counts": {
+        "automated_sms__oncology_chronic": 1,
+        "hospital_billing__general_medicine": 1,
+        "insurance_claim__psychiatry_behavioral": 1
+      }
+    },
+    "ur": {
+      "docs": 3,
+      "cells_touched": 3,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "referral_letter": 1,
+        "radiology_report": 1,
+        "er_triage_notes": 1
+      },
+      "domain_counts": {
+        "surgical": 1,
+        "general_medicine": 1,
+        "maternal_health": 1
+      },
+      "cell_counts": {
+        "referral_letter__surgical": 1,
+        "radiology_report__general_medicine": 1,
+        "er_triage_notes__maternal_health": 1
+      }
+    }
+  },
+  "global_doc_type_counts": {
+    "prescription": 9,
+    "lab_report": 7,
+    "asha_worker_note": 7,
+    "hospital_billing": 5,
+    "discharge_summary": 2,
+    "referral_letter": 5,
+    "phc_register": 2,
+    "automated_sms": 4,
+    "telemedicine_transcript": 5,
+    "surgical_note": 5,
+    "insurance_claim": 4,
+    "radiology_report": 5,
+    "er_triage_notes": 5,
+    "opd_slip": 4
+  },
+  "global_domain_counts": {
+    "surgical": 13,
+    "oncology_chronic": 8,
+    "general_medicine": 23,
+    "psychiatry_behavioral": 6,
+    "tb_ncd": 13,
+    "maternal_health": 6
+  },
+  "persona_unique_cells_histogram": {
+    "3": 23
+  },
+  "columns_added": [
+    "doc_slot",
+    "doc_type_id",
+    "doc_type_name",
+    "domain_id",
+    "domain_name",
+    "taxonomy_cell_id",
+    "assignment_seed",
+    "stage"
+  ]
+}

@@ -72,6 +72,37 @@ def _preview_file(folder: Path) -> Path | None:
     return None
 
 
+def _cancel_requested(root: Path) -> bool:
+    return (root / ".cancel").is_file()
+
+
+def _write_run_results(
+    root: Path,
+    *,
+    run_id: str,
+    status: str,
+    stages: list[dict[str, object]],
+    base_config: Path | None = None,
+    resolved_config: Path | None = None,
+) -> None:
+    payload: dict[str, object] = {
+        "run_id": run_id,
+        "status": status,
+        "stages": stages,
+        "stage_specs": [
+            {"block": b, "folder": f, "primary": p} for b, f, p in STAGE_SPECS
+        ],
+    }
+    if base_config is not None:
+        payload["base_config"] = str(base_config)
+    if resolved_config is not None:
+        payload["resolved_config"] = str(resolved_config)
+    (root / "run_results.json").write_text(
+        json.dumps(payload, indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+
+
 def run_pipeline(
     *,
     base_config: Path,
@@ -95,7 +126,29 @@ def run_pipeline(
     runners = _load_stage_runners()
     started_resume = from_stage is None
 
+    # Seed progress file so the demo UI can attach immediately.
+    _write_run_results(
+        root,
+        run_id=run_id,
+        status="running",
+        stages=results,
+        base_config=base_config,
+        resolved_config=resolved_config,
+    )
+
     for label, folder_name, runner in runners:
+        if _cancel_requested(root):
+            print("[run] cancelled by user", file=sys.stderr)
+            _write_run_results(
+                root,
+                run_id=run_id,
+                status="cancelled",
+                stages=results,
+                base_config=base_config,
+                resolved_config=resolved_config,
+            )
+            return 2
+
         if not started_resume:
             if from_stage in {label, folder_name}:
                 started_resume = True
@@ -119,14 +172,13 @@ def run_pipeline(
                     "finished_utc": datetime.now(timezone.utc).isoformat(),
                 }
             )
-            (root / "run_results.json").write_text(
-                json.dumps(
-                    {"run_id": run_id, "status": "failed", "stages": results},
-                    indent=2,
-                    ensure_ascii=False,
-                )
-                + "\n",
-                encoding="utf-8",
+            _write_run_results(
+                root,
+                run_id=run_id,
+                status="failed",
+                stages=results,
+                base_config=base_config,
+                resolved_config=resolved_config,
             )
             try:
                 failures_path = write_failures_report(root)
@@ -147,6 +199,15 @@ def run_pipeline(
             "preview": str(preview) if preview else None,
         }
         results.append(entry)
+        # Incremental write so the demo UI can light stages as they finish.
+        _write_run_results(
+            root,
+            run_id=run_id,
+            status="running",
+            stages=results,
+            base_config=base_config,
+            resolved_config=resolved_config,
+        )
         print(f"[{label}] OK → {stage_folder}")
         for key, path in paths.items():
             print(f"  {key}: {path}")
@@ -155,24 +216,13 @@ def run_pipeline(
             print(f"[run] stop_after={stop_after}")
             break
 
-    status = "ok"
-    (root / "run_results.json").write_text(
-        json.dumps(
-            {
-                "run_id": run_id,
-                "status": status,
-                "base_config": str(base_config),
-                "resolved_config": str(resolved_config),
-                "stages": results,
-                "stage_specs": [
-                    {"block": b, "folder": f, "primary": p} for b, f, p in STAGE_SPECS
-                ],
-            },
-            indent=2,
-            ensure_ascii=False,
-        )
-        + "\n",
-        encoding="utf-8",
+    _write_run_results(
+        root,
+        run_id=run_id,
+        status="ok",
+        stages=results,
+        base_config=base_config,
+        resolved_config=resolved_config,
     )
     print(f"\n[run] complete → {root}")
     print(f"[run] latest symlink → {root.parent / 'latest'}")

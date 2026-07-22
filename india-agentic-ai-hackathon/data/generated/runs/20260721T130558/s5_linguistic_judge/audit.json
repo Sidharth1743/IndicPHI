@@ -1,0 +1,75 @@
+{
+  "stage": "s5_linguistic_judge",
+  "timestamp_utc": "2026-07-21T07:41:26.659665+00:00",
+  "provider": "azure_foundry",
+  "model": "grok-4.3",
+  "base_url": "https://ambedkar-interpreter-resource.services.ai.azure.com/openai/v1",
+  "requests_per_minute": 500.0,
+  "timeout_s": 600.0,
+  "network_retries": 4,
+  "rows_judged": 2,
+  "rows_resumed_from_checkpoint": 0,
+  "pass_rate": 0.0,
+  "label_distribution": {
+    "fail": 1.0
+  },
+  "positional_length_bias": {
+    "pearson_r": 0.0,
+    "n": 2.0
+  },
+  "failures": [
+    {
+      "uuid": "7bf3bb21a61f42a2b7508e16d069b22f",
+      "document_id": "7bf3bb21a61f42a2b7508e16d069b22f__0",
+      "doc_type_id": "asha_worker_note",
+      "document_language_code": "bn",
+      "judge_verdict": "fail",
+      "judge_score": 0.68,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Odia script in 'হিতଧିକାରୀ' label breaks Bengali prose requirement; single instance but still impurity in clinical note.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "aacd23f3495f49f988205edb97f1e20e",
+      "document_id": "aacd23f3495f49f988205edb97f1e20e__0",
+      "doc_type_id": "discharge_summary",
+      "document_language_code": "brx",
+      "judge_verdict": "fail",
+      "judge_score": 0.45,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Prose is Hindi (not Bodo) despite correct Devanagari script and valid entity tags.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    }
+  ],
+  "failure_count": 2,
+  "soft_failures": [],
+  "soft_fail_count": 0,
+  "judge_repaired_count": 0,
+  "en_pivot_repair_count": 0,
+  "quality_repair_max": 5,
+  "repair_multi_constraint": false,
+  "repair_via_english_pivot": false,
+  "must_work_languages": [],
+  "rare_script_languages": [],
+  "columns_added": [
+    "judge_verdict",
+    "judge_score",
+    "judge_reasoning",
+    "judge_flags",
+    "judge_provider",
+    "judge_model",
+    "judge_soft_fail",
+    "judge_error",
+    "judge_repair_attempts",
+    "judge_repaired",
+    "stage"
+  ]
+}

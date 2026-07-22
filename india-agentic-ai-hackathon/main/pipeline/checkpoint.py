@@ -13,6 +13,7 @@ import hashlib
 import json
 import os
 import tempfile
+import threading
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
@@ -36,6 +37,7 @@ class CheckpointStore:
         self.path = path
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self._by_key: dict[str, CheckpointRecord] = {}
+        self._lock = threading.Lock()
         if self.path.is_file():
             self._load()
 
@@ -58,17 +60,19 @@ class CheckpointStore:
                 self._by_key[record.row_key] = record
 
     def get(self, row_key: str) -> CheckpointRecord | None:
-        return self._by_key.get(row_key)
+        with self._lock:
+            return self._by_key.get(row_key)
 
     def done_keys(self, *, accept_soft_fail: bool = True) -> set[str]:
         accepted = {"ok", "skipped"}
         if accept_soft_fail:
             accepted.add("soft_fail")
-        return {
-            key
-            for key, record in self._by_key.items()
-            if record.status in accepted
-        }
+        with self._lock:
+            return {
+                key
+                for key, record in self._by_key.items()
+                if record.status in accepted
+            }
 
     def append(
         self,
@@ -98,11 +102,12 @@ class CheckpointStore:
             },
             ensure_ascii=False,
         )
-        with self.path.open("a", encoding="utf-8") as handle:
-            handle.write(line + "\n")
-            handle.flush()
-            os.fsync(handle.fileno())
-        self._by_key[row_key] = record
+        with self._lock:
+            with self.path.open("a", encoding="utf-8") as handle:
+                handle.write(line + "\n")
+                handle.flush()
+                os.fsync(handle.fileno())
+            self._by_key[row_key] = record
         return record
 
     def completed_payloads(
@@ -111,10 +116,10 @@ class CheckpointStore:
         keys = self.done_keys(accept_soft_fail=accept_soft_fail)
         # Preserve insertion order of last-seen keys as loaded from file order
         # by sorting on updated_utc then key.
-        records = [self._by_key[k] for k in keys]
+        with self._lock:
+            records = [self._by_key[k] for k in keys]
         records.sort(key=lambda r: (r.updated_utc, r.row_key))
         return [dict(r.payload) for r in records]
-
 
 def request_hash(parts: Sequence[Any]) -> str:
     """Stable blake2b digest of request-defining fields."""

@@ -1,0 +1,88 @@
+{
+  "stage": "s4_generation",
+  "engine": "nemo_data_designer",
+  "timestamp_utc": "2026-07-20T12:31:38.882404+00:00",
+  "provider": "sarvam",
+  "model": "sarvam-105b",
+  "base_url": "https://api.sarvam.ai/v1",
+  "rows_requested": 20,
+  "rows_generated": 20,
+  "rows_from_checkpoint": 0,
+  "rows_newly_generated": 20,
+  "soft_failures": [
+    {
+      "uuid": "12e31823de794a7ba4bbdd82d74370f3",
+      "document_id": "12e31823de794a7ba4bbdd82d74370f3__0",
+      "doc_type_id": "telemedicine_transcript",
+      "document_language_code": "bn",
+      "missing_required_entities": [],
+      "stuffed_entity_types": [
+        "AGE",
+        "GENDER",
+        "PHONE_NUMBER",
+        "EMAIL_ADDRESS",
+        "HOSPITAL_NAME"
+      ],
+      "reasons": [
+        "entity_stuffing:AGE,GENDER,PHONE_NUMBER,EMAIL_ADDRESS,HOSPITAL_NAME"
+      ]
+    },
+    {
+      "uuid": "6368e3f4fd8448f69e688a500e614e9a",
+      "document_id": "6368e3f4fd8448f69e688a500e614e9a__0",
+      "doc_type_id": "opd_slip",
+      "document_language_code": "bn",
+      "missing_required_entities": [
+        "HOSPITAL_NAME"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:HOSPITAL_NAME"
+      ]
+    },
+    {
+      "uuid": "b2958cfe1a8946b88be2780178fdfa1a",
+      "document_id": "b2958cfe1a8946b88be2780178fdfa1a__0",
+      "doc_type_id": "opd_slip",
+      "document_language_code": "hi",
+      "missing_required_entities": [
+        "HOSPITAL_NAME"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:HOSPITAL_NAME"
+      ]
+    },
+    {
+      "uuid": "28085860cdbd4188a9769b9902f6890d",
+      "document_id": "28085860cdbd4188a9769b9902f6890d__0",
+      "doc_type_id": "opd_slip",
+      "document_language_code": "mr",
+      "missing_required_entities": [
+        "HOSPITAL_NAME"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:HOSPITAL_NAME"
+      ]
+    },
+    {
+      "uuid": "92bfd5dd40004d968c6c58538433407c",
+      "document_id": "92bfd5dd40004d968c6c58538433407c__0",
+      "doc_type_id": "opd_slip",
+      "document_language_code": "ta",
+      "missing_required_entities": [
+        "HOSPITAL_NAME",
+        "EMPLOYEE_ID"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:HOSPITAL_NAME,EMPLOYEE_ID"
+      ]
+    }
+  ],
+  "soft_fail_count": 5,
+  "entity_coverage_complete_rate": 0.8,
+  "mean_chars": 1349.5,
+  "checkpoint": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T180107/s4_generation/checkpoint.jsonl"
+}

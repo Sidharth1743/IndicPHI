@@ -1,0 +1,47 @@
+{
+  "stage": "s4_generation",
+  "engine": "nemo_data_designer",
+  "timestamp_utc": "2026-07-21T14:12:33.976865+00:00",
+  "provider": "sarvam",
+  "model": "sarvam-105b",
+  "base_url": "https://api.sarvam.ai/v1",
+  "rows_requested": 138,
+  "rows_generated": 138,
+  "rows_from_checkpoint": 0,
+  "rows_newly_generated": 138,
+  "soft_failures": [
+    {
+      "uuid": "d89930b893984d4b96fbd0b492413321",
+      "document_id": "d89930b893984d4b96fbd0b492413321__1",
+      "doc_type_id": "automated_sms",
+      "document_language_code": "kn",
+      "missing_required_entities": [
+        "APPOINTMENT_ID"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:APPOINTMENT_ID"
+      ]
+    },
+    {
+      "uuid": "1e23bb4e93b0465fa42494aee52e02ef",
+      "document_id": "1e23bb4e93b0465fa42494aee52e02ef__0",
+      "doc_type_id": "hospital_billing",
+      "document_language_code": "mni",
+      "missing_required_entities": [
+        "HOSPITAL_NAME",
+        "DISTRICT",
+        "PIN_CODE"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:HOSPITAL_NAME,DISTRICT,PIN_CODE"
+      ]
+    }
+  ],
+  "soft_fail_count": 2,
+  "generation_repaired_count": 10,
+  "entity_coverage_complete_rate": 0.9855072463768116,
+  "mean_chars": 1176.072463768116,
+  "checkpoint": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T193130/s4_generation/checkpoint.jsonl"
+}

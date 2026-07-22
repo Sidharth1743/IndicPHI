@@ -1,0 +1,45 @@
+{
+  "stage": "s6_deterministic_auditor",
+  "timestamp_utc": "2026-07-20T12:40:15.125826+00:00",
+  "rows_audited": 15,
+  "rows_passed": 12,
+  "rows_failed": 3,
+  "pass_rate": 0.8,
+  "mean_dics": 1.0,
+  "mean_ecr": 0.9846153846153847,
+  "mean_bcr": 0.0,
+  "failures": [
+    {
+      "uuid": "12e31823de794a7ba4bbdd82d74370f3",
+      "document_id": "12e31823de794a7ba4bbdd82d74370f3__0",
+      "doc_type_id": "telemedicine_transcript",
+      "document_language_code": "bn",
+      "auditor_errors": [
+        "entity_stuffing_total_tags:30>24",
+        "entity_stuffing:AGE,EMAIL_ADDRESS,GENDER,HOSPITAL_NAME,PHONE_NUMBER",
+        "upstream_generation_soft_fail:entity_stuffing:AGE,GENDER,PHONE_NUMBER,EMAIL_ADDRESS,HOSPITAL_NAME"
+      ]
+    },
+    {
+      "uuid": "6368e3f4fd8448f69e688a500e614e9a",
+      "document_id": "6368e3f4fd8448f69e688a500e614e9a__0",
+      "doc_type_id": "opd_slip",
+      "document_language_code": "bn",
+      "auditor_errors": [
+        "missing_required:HOSPITAL_NAME",
+        "upstream_generation_soft_fail:missing_required_entities:HOSPITAL_NAME"
+      ]
+    },
+    {
+      "uuid": "92bfd5dd40004d968c6c58538433407c",
+      "document_id": "92bfd5dd40004d968c6c58538433407c__0",
+      "doc_type_id": "opd_slip",
+      "document_language_code": "ta",
+      "auditor_errors": [
+        "missing_required:HOSPITAL_NAME,EMPLOYEE_ID",
+        "upstream_generation_soft_fail:missing_required_entities:HOSPITAL_NAME,EMPLOYEE_ID"
+      ]
+    }
+  ],
+  "failure_count": 3
+}

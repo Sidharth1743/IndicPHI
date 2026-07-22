@@ -46,6 +46,10 @@ class RepairSettings:
     reasoning_effort: str | None
     timeout_s: float
     max_repairs: int
+    # Undo: set generation.repair_multi_constraint: false
+    multi_constraint: bool = False
+    # Undo: set generation.repair_via_english_pivot: false
+    via_english_pivot: bool = False
 
 
 @dataclass(frozen=True)
@@ -128,6 +132,49 @@ def issues_from_judge_flags(
         else:
             issues.append(RepairIssue(kind=flag, detail=reasoning or flag))
     return issues
+
+
+def merge_repair_issues(
+    accumulated: Sequence[RepairIssue],
+    new: Sequence[RepairIssue],
+) -> list[RepairIssue]:
+    """Union issues by kind so later rounds keep earlier constraints."""
+    by_kind: dict[str, RepairIssue] = {}
+    for issue in list(accumulated) + list(new):
+        prev = by_kind.get(issue.kind)
+        if prev is None:
+            by_kind[issue.kind] = issue
+            continue
+        # Keep the richer detail when both exist.
+        detail = prev.detail
+        if issue.detail and issue.detail not in detail:
+            detail = f"{detail} | {issue.detail}" if detail else issue.detail
+        by_kind[issue.kind] = RepairIssue(kind=issue.kind, detail=detail)
+    return list(by_kind.values())
+
+
+def _stability_guard_block(*, english_pivot: bool) -> str:
+    """Anti-oscillation rules: fix current issues without undoing others."""
+    if english_pivot:
+        lang_line = (
+            "- OUTPUT LANGUAGE: English (Latin) pivot ONLY. A later stage "
+            "translates prose. Do NOT write Indic body in this repair.\n"
+        )
+    else:
+        lang_line = (
+            "- Keep the assigned target language AND exact target script for "
+            "all clinical prose. Do NOT fall back to English to 'fix' tags.\n"
+        )
+    return (
+        "STABILITY GUARDS (must hold while fixing the issues below — "
+        "do not trade one failure for another):\n"
+        f"{lang_line}"
+        "- Keep every [[TYPE|value]] with EXACT ASCII allow-list TYPE names "
+        "(PATIENT_NAME, MRN, …). Never localize TYPE.\n"
+        "- Do not invent TYPE names (no DATE/TIME/APPOINTMENT_DATE/POLICY_NUMBER).\n"
+        "- Keep persona sex/age/state/district and the assigned clinical domain.\n"
+        "- Do not strip mandatory tags to shorten the note.\n"
+    )
 
 
 def issues_from_auditor_errors(
@@ -299,7 +346,8 @@ def _repair_instructions(issues: Sequence[RepairIssue]) -> str:
             bits.append(
                 "DOMAIN×PERSONA MISMATCH — clinical content conflicts with sex/age. "
                 f"Detail: {issue.detail}. Match persona sex and age exactly "
-                "(no male maternal delivery; no paediatric content for adults)."
+                "(no male maternal delivery; no paediatric content for adults; "
+                "no unsafe extreme-age routine pregnancy)."
             )
         elif issue.kind == "cross_language_entity_shift":
             bits.append(
@@ -348,6 +396,7 @@ def build_repair_messages(
     issues: Sequence[RepairIssue],
     required: Sequence[str],
     english_pivot: bool = False,
+    multi_constraint: bool = False,
 ) -> list[dict[str, str]]:
     lang_name = str(row.get("document_language_name") or "")
     lang_code = str(row.get("document_language_code") or "")
@@ -368,7 +417,9 @@ def build_repair_messages(
         "English (Latin) pivot document with correct tags — a later stage "
         "translates prose to the target language.\n"
         "6) When fixing language/script after translation, rewrite the whole "
-        "body into the exact target script — keep TYPE names English."
+        "body into the exact target script — keep TYPE names English.\n"
+        "7) Never fix one issue by causing another (e.g. do not English-rewrite "
+        "to fix tags if the body must stay in the target script)."
     )
     mandatory = ", ".join(required) if required else "(none listed)"
     anchors = (
@@ -389,12 +440,18 @@ def build_repair_messages(
             f"Target language: {lang_name} (code={lang_code}, script={script})\n"
             "Rewrite clinical prose into that exact script; keep TYPE names ASCII.\n"
         )
+    stability = (
+        f"\n{_stability_guard_block(english_pivot=english_pivot)}\n"
+        if multi_constraint
+        else ""
+    )
     user = (
         f"Document type: {doc_type}\n"
         f"Clinical domain: {domain}\n"
         f"{lang_block}"
         f"Persona anchors (MUST stay consistent): {anchors}\n"
-        f"Mandatory TYPEs (each ≥ once): {mandatory}\n\n"
+        f"Mandatory TYPEs (each ≥ once): {mandatory}\n"
+        f"{stability}"
         f"REPAIR INSTRUCTIONS (follow ALL):\n{_repair_instructions(issues)}\n\n"
         f"Previous draft to repair:\n{draft}"
     )
@@ -512,6 +569,7 @@ def repair_document(
                     issues=remaining,
                     required=required,
                     english_pivot=not check_script,
+                    multi_constraint=settings.multi_constraint,
                 ),
                 temperature=settings.temperature,
                 max_tokens=settings.max_tokens,
@@ -612,4 +670,7 @@ def load_repair_settings_from_generation(block: Mapping[str, Any]) -> RepairSett
         reasoning_effort=reasoning,
         timeout_s=float(block.get("timeout_s", 180)),
         max_repairs=max_repairs,
+        # Defaults False = prior behavior. Enable in diversity.yaml; undo by false.
+        multi_constraint=bool(block.get("repair_multi_constraint", False)),
+        via_english_pivot=bool(block.get("repair_via_english_pivot", False)),
     )

@@ -1,0 +1,520 @@
+{
+  "stage": "s5_linguistic_judge",
+  "timestamp_utc": "2026-07-21T08:49:13.488503+00:00",
+  "provider": "azure_foundry",
+  "model": "grok-4.3",
+  "base_url": "https://ambedkar-interpreter-resource.services.ai.azure.com/openai/v1",
+  "requests_per_minute": 500.0,
+  "timeout_s": 180.0,
+  "network_retries": 2,
+  "rows_judged": 138,
+  "rows_resumed_from_checkpoint": 0,
+  "pass_rate": 0.782608695652174,
+  "label_distribution": {
+    "fail": 0.21739130434782608,
+    "pass": 0.782608695652174
+  },
+  "positional_length_bias": {
+    "pearson_r": -0.030672033123976688,
+    "n": 138.0
+  },
+  "failures": [
+    {
+      "uuid": "8b77264c0f7747c59ec191e95202ff7f",
+      "document_id": "8b77264c0f7747c59ec191e95202ff7f__0",
+      "doc_type_id": "automated_sms",
+      "document_language_code": "brx",
+      "judge_verdict": "fail",
+      "judge_score": 0.35,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Prose uses Eastern Nagari/Assamese script and phrasing instead of required Bodo Devanagari; language not Bodo.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "8b77264c0f7747c59ec191e95202ff7f",
+      "document_id": "8b77264c0f7747c59ec191e95202ff7f__2",
+      "doc_type_id": "hospital_billing",
+      "document_language_code": "brx",
+      "judge_verdict": "fail",
+      "judge_score": 0.3,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Clinical narrative prose is Hindi, not Bodo; all other elements (persona, entities, length, domain) align.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "fac14bf3d91143958fc1e8190e25c390",
+      "document_id": "fac14bf3d91143958fc1e8190e25c390__1",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "brx",
+      "judge_verdict": "fail",
+      "judge_score": 0.3,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Prose uses Hindi vocabulary in Devanagari; expected Bodo language despite correct script and allowed ID tags.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "0cb542c8c62e4d52ac1c51fcfb93a238",
+      "document_id": "0cb542c8c62e4d52ac1c51fcfb93a238__2",
+      "doc_type_id": "er_triage_notes",
+      "document_language_code": "doi",
+      "judge_verdict": "fail",
+      "judge_score": 0.15,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "All clinical prose in English; expected Dogri Devanagari narrative absent.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "85cdb818ce5740ed85a9bfb29cf57098",
+      "document_id": "85cdb818ce5740ed85a9bfb29cf57098__2",
+      "doc_type_id": "er_triage_notes",
+      "document_language_code": "gu",
+      "judge_verdict": "fail",
+      "judge_score": 0.45,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Prose uses Romanized English-Gujarati mix instead of required Gujarati script; all entity types valid and persona fit ok.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "8c410a2e98134e9a91f1d50d5811a470",
+      "document_id": "8c410a2e98134e9a91f1d50d5811a470__2",
+      "doc_type_id": "er_triage_notes",
+      "document_language_code": "gu",
+      "judge_verdict": "fail",
+      "judge_score": 0.2,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Clinical narrative prose entirely in English instead of Gujarati script.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "fc0833a3fd3a4916849cba96e415af4b",
+      "document_id": "fc0833a3fd3a4916849cba96e415af4b__0",
+      "doc_type_id": "hospital_billing",
+      "document_language_code": "kok",
+      "judge_verdict": "fail",
+      "judge_score": 0.6,
+      "judge_flags": [
+        "domain_persona_mismatch"
+      ],
+      "judge_rationale": "49yo female with postpartum hemorrhage after normal delivery violates maternal-health persona anchors.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "99d8e2b0dd9e42e6b270e50cb12c26c5",
+      "document_id": "99d8e2b0dd9e42e6b270e50cb12c26c5__2",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "ks",
+      "judge_verdict": "fail",
+      "judge_score": 0.25,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "All clinical prose and form narrative in English; expected Kashmiri (Arabic script).",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "9fe1a2291cd5496b92e09e133ea65d85",
+      "document_id": "9fe1a2291cd5496b92e09e133ea65d85__0",
+      "doc_type_id": "lab_report",
+      "document_language_code": "mai",
+      "judge_verdict": "fail",
+      "judge_score": 0.35,
+      "judge_flags": [
+        "dialect_script_impurity",
+        "cross_language_entity_shift"
+      ],
+      "judge_rationale": "Prose in Hindi not Maithili; entity values (HOSPITAL_NAME, PATIENT_NAME, DISTRICT) use Bengali script instead of Devanagari.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "17f9c3d0179e4aa5a9546ec050612896",
+      "document_id": "17f9c3d0179e4aa5a9546ec050612896__2",
+      "doc_type_id": "hospital_billing",
+      "document_language_code": "ml",
+      "judge_verdict": "fail",
+      "judge_score": 0.6,
+      "judge_flags": [
+        "domain_persona_mismatch",
+        "surrogate_plausibility_collapse"
+      ],
+      "judge_rationale": "District set to Ernakulam (with Kozhikode PIN) violating persona anchor; minor internal location inconsistency.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "80435bdcef24479390d6e6ae0b2aeeb1",
+      "document_id": "80435bdcef24479390d6e6ae0b2aeeb1__2",
+      "doc_type_id": "hospital_billing",
+      "document_language_code": "ml",
+      "judge_verdict": "fail",
+      "judge_score": 0.55,
+      "judge_flags": [
+        "surrogate_plausibility_collapse",
+        "instruction_drift"
+      ],
+      "judge_rationale": "District/hospital/PIN/vehicle details conflict with persona (Thiruvananthapuram) and internally inconsistent; otherwise correct Malayalam script and allowed entity types.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "1e23bb4e93b0465fa42494aee52e02ef",
+      "document_id": "1e23bb4e93b0465fa42494aee52e02ef__0",
+      "doc_type_id": "hospital_billing",
+      "document_language_code": "mni",
+      "judge_verdict": "fail",
+      "judge_score": 0.35,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "All narrative labels, structure and prose in English/Latin script; expected Manipuri Meitei script for clinical billing document.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "1e23bb4e93b0465fa42494aee52e02ef",
+      "document_id": "1e23bb4e93b0465fa42494aee52e02ef__1",
+      "doc_type_id": "discharge_summary",
+      "document_language_code": "mni",
+      "judge_verdict": "fail",
+      "judge_score": 0.2,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "All clinical prose in English; expected Manipuri/Meitei script for narrative.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "1e23bb4e93b0465fa42494aee52e02ef",
+      "document_id": "1e23bb4e93b0465fa42494aee52e02ef__2",
+      "doc_type_id": "referral_letter",
+      "document_language_code": "mni",
+      "judge_verdict": "fail",
+      "judge_score": 0.25,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "All clinical prose in English; expected Manipuri/Meitei script not used. All entity types allowed and persona/domain fit.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "d15c31be6c8e40a393e6e6f4f9562ea3",
+      "document_id": "d15c31be6c8e40a393e6e6f4f9562ea3__0",
+      "doc_type_id": "hospital_billing",
+      "document_language_code": "mni",
+      "judge_verdict": "fail",
+      "judge_score": 0.25,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "All clinical prose and invoice narrative in English; expected Manipuri Meitei script not used.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "d15c31be6c8e40a393e6e6f4f9562ea3",
+      "document_id": "d15c31be6c8e40a393e6e6f4f9562ea3__1",
+      "doc_type_id": "discharge_summary",
+      "document_language_code": "mni",
+      "judge_verdict": "fail",
+      "judge_score": 0.25,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Clinical prose in English instead of required Manipuri Meitei script; all entity types allowed and persona fit intact.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "d15c31be6c8e40a393e6e6f4f9562ea3",
+      "document_id": "d15c31be6c8e40a393e6e6f4f9562ea3__2",
+      "doc_type_id": "referral_letter",
+      "document_language_code": "mni",
+      "judge_verdict": "fail",
+      "judge_score": 0.25,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Prose almost entirely English; only one Meitei token present despite mni/Meitei requirement.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "24405a884af14bcba6e9c3657baebf83",
+      "document_id": "24405a884af14bcba6e9c3657baebf83__0",
+      "doc_type_id": "radiology_report",
+      "document_language_code": "pa",
+      "judge_verdict": "fail",
+      "judge_score": 0.45,
+      "judge_flags": [
+        "domain_persona_mismatch",
+        "surrogate_plausibility_collapse",
+        "instruction_drift"
+      ],
+      "judge_rationale": "Male-coded name (Singh) with Female gender; district=Amritsar vs Barnala persona; otherwise correct Gurmukhi prose and valid tags.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "22ef884ce12247309d07fc3f601a3c59",
+      "document_id": "22ef884ce12247309d07fc3f601a3c59__2",
+      "doc_type_id": "phc_register",
+      "document_language_code": "sa",
+      "judge_verdict": "fail",
+      "judge_score": 0.45,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Prose language is Hindi (modern register) not Sanskrit despite Devanagari script and correct entity tags.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "6e943dc3578249e38b9e61705d0912a9",
+      "document_id": "6e943dc3578249e38b9e61705d0912a9__2",
+      "doc_type_id": "phc_register",
+      "document_language_code": "sa",
+      "judge_verdict": "fail",
+      "judge_score": 0.35,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Prose is Hindi (modern register) not Sanskrit; all other constraints met.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "49e7eef3f6644cc689038f044f77f052",
+      "document_id": "49e7eef3f6644cc689038f044f77f052__0",
+      "doc_type_id": "opd_slip",
+      "document_language_code": "sat",
+      "judge_verdict": "fail",
+      "judge_score": 0.2,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Clinical prose entirely in English; expected Santali Ol Chiki script not used.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "49e7eef3f6644cc689038f044f77f052",
+      "document_id": "49e7eef3f6644cc689038f044f77f052__1",
+      "doc_type_id": "phc_register",
+      "document_language_code": "sat",
+      "judge_verdict": "fail",
+      "judge_score": 0.2,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Clinical prose entirely in English instead of required Santali Ol Chiki; all other elements (tags, persona, content) acceptable.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "49e7eef3f6644cc689038f044f77f052",
+      "document_id": "49e7eef3f6644cc689038f044f77f052__2",
+      "doc_type_id": "prescription",
+      "document_language_code": "sat",
+      "judge_verdict": "fail",
+      "judge_score": 0.2,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "All clinical prose in English/Latin; no Santali Ol Chiki narrative as required for expected language.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "c98c2d51b4ea4d0c947d6dfc0ee57383",
+      "document_id": "c98c2d51b4ea4d0c947d6dfc0ee57383__1",
+      "doc_type_id": "automated_sms",
+      "document_language_code": "sat",
+      "judge_verdict": "fail",
+      "judge_score": 0.2,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Prose uses Bengali script instead of required Santali Ol Chiki; all other elements (entities, persona, length) acceptable.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "c98c2d51b4ea4d0c947d6dfc0ee57383",
+      "document_id": "c98c2d51b4ea4d0c947d6dfc0ee57383__2",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "sat",
+      "judge_verdict": "fail",
+      "judge_score": 0.2,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Clinical narrative prose entirely in English; expected Santali Ol Chiki script for all body text.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "5c09bf9c92bb4474a1a128379f250e86",
+      "document_id": "5c09bf9c92bb4474a1a128379f250e86__0",
+      "doc_type_id": "hospital_billing",
+      "document_language_code": "sd",
+      "judge_verdict": "fail",
+      "judge_score": 0.55,
+      "judge_flags": [
+        "instruction_drift",
+        "length_violation"
+      ],
+      "judge_rationale": "Sindhi Arabic-script prose matches expectation and persona fit is good, but content is a long clinical narrative rather than billing/invoice format; includes excess chart-style details without charges or itemization.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "5c09bf9c92bb4474a1a128379f250e86",
+      "document_id": "5c09bf9c92bb4474a1a128379f250e86__1",
+      "doc_type_id": "discharge_summary",
+      "document_language_code": "sd",
+      "judge_verdict": "fail",
+      "judge_score": 0.35,
+      "judge_flags": [
+        "dialect_script_impurity",
+        "domain_persona_mismatch"
+      ],
+      "judge_rationale": "Narrative prose uses Devanagari instead of required Arabic script for Sindhi; age 47 with normal vaginal delivery and PPH is implausible geriatric maternal case.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "5c09bf9c92bb4474a1a128379f250e86",
+      "document_id": "5c09bf9c92bb4474a1a128379f250e86__2",
+      "doc_type_id": "referral_letter",
+      "document_language_code": "sd",
+      "judge_verdict": "fail",
+      "judge_score": 0.3,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "All clinical prose in Devanagari; expected Sindhi Arabic script. No other mismatches.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "e9f9b9a22bcb47f28198db61b9bd4966",
+      "document_id": "e9f9b9a22bcb47f28198db61b9bd4966__1",
+      "doc_type_id": "discharge_summary",
+      "document_language_code": "sd",
+      "judge_verdict": "fail",
+      "judge_score": 0.45,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Clinical prose uses Devanagari script instead of required Arabic script for Sindhi; all entity types allowed, persona/domain fit, length and content otherwise plausible.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "e9f9b9a22bcb47f28198db61b9bd4966",
+      "document_id": "e9f9b9a22bcb47f28198db61b9bd4966__2",
+      "doc_type_id": "referral_letter",
+      "document_language_code": "sd",
+      "judge_verdict": "fail",
+      "judge_score": 0.35,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Clinical prose uses Devanagari script with Hindi framing instead of required Sindhi Arabic script; all entities valid and persona/domain fit otherwise.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    }
+  ],
+  "failure_count": 30,
+  "soft_failures": [],
+  "soft_fail_count": 0,
+  "judge_repaired_count": 20,
+  "en_pivot_repair_count": 185,
+  "quality_repair_max": 5,
+  "repair_multi_constraint": true,
+  "repair_via_english_pivot": true,
+  "must_work_languages": [
+    "hi",
+    "ta",
+    "te",
+    "bn",
+    "mr",
+    "gu",
+    "kn",
+    "ml",
+    "pa",
+    "or",
+    "as",
+    "ur"
+  ],
+  "rare_script_languages": [
+    "brx",
+    "mni",
+    "sat"
+  ],
+  "columns_added": [
+    "judge_verdict",
+    "judge_score",
+    "judge_reasoning",
+    "judge_flags",
+    "judge_provider",
+    "judge_model",
+    "judge_soft_fail",
+    "judge_error",
+    "judge_repair_attempts",
+    "judge_repaired",
+    "stage"
+  ]
+}

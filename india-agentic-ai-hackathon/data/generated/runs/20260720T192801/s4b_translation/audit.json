@@ -1,0 +1,165 @@
+{
+  "stage": "s4b_translation",
+  "timestamp_utc": "2026-07-20T14:05:14.626135+00:00",
+  "model": "sarvam-105b",
+  "rows_in": 69,
+  "rows_out": 69,
+  "rows_translated": 66,
+  "rows_skipped": 3,
+  "rows_resumed_from_checkpoint": 0,
+  "rows_newly_translated": 69,
+  "soft_failures": [
+    {
+      "uuid": "2a0042e543f7400299209a84f31ceab7",
+      "document_id": "2a0042e543f7400299209a84f31ceab7__0",
+      "doc_type_id": "er_triage_notes",
+      "document_language_code": "brx",
+      "translation_error": "script_purity_failed:target_script_ratio:0.000<0.35 attempt=1;generator_repair_failed:Sarvam HTTP 500: {\"error\":{\"message\":\"Model call failed: Error code: 400 - {'status': 400, 'title': 'Bad Request', 'detail': \\\"Function id '267194f7-f0a1-43cc-814b-83e44d440f2c': DEGRADED function cannot be invoked\\\"}\",\"code\":\"model_call_failed\",\"request_id\":\"20260720_c32f2a23-00ee-4269-9470-76dbde8dce2c\"}}",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "442b760204fb4430b6745545930228cd",
+      "document_id": "442b760204fb4430b6745545930228cd__2",
+      "doc_type_id": "prescription",
+      "document_language_code": "ks",
+      "translation_error": "script_purity_failed:target_script_ratio:0.000<0.35 attempt=1;generator_repair_failed:target_script_ratio:0.000<0.35",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "51fc0c57ffcc40c6ae5d2fb055d07030",
+      "document_id": "51fc0c57ffcc40c6ae5d2fb055d07030__1",
+      "doc_type_id": "opd_slip",
+      "document_language_code": "mni",
+      "translation_error": "script_purity_failed:target_script_ratio:0.000<0.35 attempt=1;generator_repair_failed:wrong_indic_script:Devanagari>Meitei",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "51fc0c57ffcc40c6ae5d2fb055d07030",
+      "document_id": "51fc0c57ffcc40c6ae5d2fb055d07030__2",
+      "doc_type_id": "phc_register",
+      "document_language_code": "mni",
+      "translation_error": "script_purity_failed:target_script_ratio:0.000<0.35 attempt=1;generator_repair_failed:Sarvam HTTP 500: {\"error\":{\"message\":\"Model call failed: Error code: 400 - {'status': 400, 'title': 'Bad Request', 'detail': \\\"Function id '267194f7-f0a1-43cc-814b-83e44d440f2c': DEGRADED function cannot be invoked\\\"}\",\"code\":\"model_call_failed\",\"request_id\":\"20260720_9236bae5-964f-4d80-98b8-e617a994c551\"}}",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "01f011a8da4d401ca4ff9810f7a35a19",
+      "document_id": "01f011a8da4d401ca4ff9810f7a35a19__1",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "or",
+      "translation_error": "script_purity_failed:target_script_ratio:0.000<0.35 attempt=1;generator_repair_failed:target_script_ratio:0.002<0.35",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "944cf9bf2c4d48b2974bb723f704bded",
+      "document_id": "944cf9bf2c4d48b2974bb723f704bded__0",
+      "doc_type_id": "referral_letter",
+      "document_language_code": "sat",
+      "translation_error": "script_purity_failed:target_script_ratio:0.000<0.35 attempt=1;generator_repair_failed:wrong_indic_script:Devanagari>Ol Chiki",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "944cf9bf2c4d48b2974bb723f704bded",
+      "document_id": "944cf9bf2c4d48b2974bb723f704bded__1",
+      "doc_type_id": "radiology_report",
+      "document_language_code": "sat",
+      "translation_error": "script_purity_failed:target_script_ratio:0.000<0.35 attempt=1;generator_repair_failed:target_script_ratio:0.047<0.35",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "944cf9bf2c4d48b2974bb723f704bded",
+      "document_id": "944cf9bf2c4d48b2974bb723f704bded__2",
+      "doc_type_id": "er_triage_notes",
+      "document_language_code": "sat",
+      "translation_error": "script_purity_failed:target_script_ratio:0.000<0.35 attempt=1;generator_repair_failed:target_script_ratio:0.343<0.35",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "68da8d4342bc4e28a1a4cd69a55cc86f",
+      "document_id": "68da8d4342bc4e28a1a4cd69a55cc86f__1",
+      "doc_type_id": "telemedicine_transcript",
+      "document_language_code": "sd",
+      "translation_error": "script_purity_failed:wrong_indic_script:Devanagari>Arabic attempt=1;generator_repair_failed:wrong_indic_script:Devanagari>Arabic",
+      "translation_script_ok": false
+    }
+  ],
+  "soft_fail_count": 9,
+  "script_fail_count": 9,
+  "generator_repaired_count": 5,
+  "max_workers": 24,
+  "requests_per_minute": 110.0,
+  "skip_language_codes": [
+    "en"
+  ],
+  "columns_added": [
+    "generated_text_en",
+    "generated_text",
+    "translation_applied",
+    "translation_script_ok",
+    "translator_model",
+    "translator_finish_reason",
+    "translation_attempts",
+    "translation_error",
+    "translation_soft_fail",
+    "translation_generator_repair_attempts",
+    "translation_repaired_by_generator",
+    "stage"
+  ],
+  "tag_protection": {
+    "id_entity_types": [
+      "AADHAAR_NUMBER",
+      "ABHA_ADDRESS",
+      "ABHA_ID",
+      "ADMISSION_NUMBER",
+      "AGE",
+      "APPOINTMENT_ID",
+      "BANK_ACCOUNT_NUMBER",
+      "BANK_ROUTING_NUMBER",
+      "BED_NUMBER",
+      "BPL_RATION_CARD",
+      "CREDIT_CARD_NUMBER",
+      "CVV",
+      "DOB",
+      "DRIVING_LICENCE",
+      "EMAIL_ADDRESS",
+      "EMPLOYEE_ID",
+      "ENCOUNTER_ID",
+      "GENDER",
+      "HOSPITAL_ID",
+      "IFSC_CODE",
+      "IMEI_NUMBER",
+      "INSURANCE_POLICY_NUMBER",
+      "IP_ADDRESS",
+      "MAC_ADDRESS",
+      "MRN",
+      "PAN_NUMBER",
+      "PASSPORT_NUMBER",
+      "PATIENT_ID",
+      "PHONE_NUMBER",
+      "PIN",
+      "PIN_CODE",
+      "REFERRAL_ID",
+      "STUDENT_ID",
+      "TAX_ID",
+      "TELEPHONE_LANDLINE",
+      "URL",
+      "VEHICLE_REGISTRATION",
+      "VOTER_ID",
+      "WARD_NUMBER"
+    ],
+    "name_place_entity_types": [
+      "ASHA_WORKER_NAME",
+      "CASTE",
+      "DISTRICT",
+      "DOCTOR_NAME",
+      "HOSPITAL_NAME",
+      "OCCUPATION",
+      "PATIENT_NAME",
+      "RELATIVE_NAME",
+      "RELIGION",
+      "RESIDENTIAL_ADDRESS",
+      "VILLAGE"
+    ],
+    "langid_hook": "optional_if_installed",
+    "primary_purity_gate": "script_purity_latin_ratio"
+  }
+}

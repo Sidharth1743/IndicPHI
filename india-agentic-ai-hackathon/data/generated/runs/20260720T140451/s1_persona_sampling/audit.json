@@ -1,0 +1,308 @@
+{
+  "stage": "s1_persona_sampling",
+  "timestamp_utc": "2026-07-20T08:34:54.386840+00:00",
+  "dataset_id": "nvidia/Nemotron-Personas-India",
+  "split": "en_IN",
+  "seed": 101,
+  "sampling_method": "seeded_blake2b_hash_rank_across_shards",
+  "personas_per_language": 1,
+  "docs_per_persona": 1,
+  "languages_requested": [
+    "hi",
+    "en",
+    "bn",
+    "ta",
+    "te",
+    "mr",
+    "gu",
+    "kn",
+    "ml",
+    "pa"
+  ],
+  "rows_scanned": 90910,
+  "max_scan_rows": 250000,
+  "personas_selected": 10,
+  "expected_documents_downstream": 10,
+  "by_language": {
+    "hi": {
+      "name": "Hindi",
+      "script": "Devanagari",
+      "aliases": [
+        "Hindi"
+      ],
+      "selected": 1,
+      "matched_during_scan": 38165
+    },
+    "en": {
+      "name": "English",
+      "script": "Latin",
+      "aliases": [
+        "English"
+      ],
+      "selected": 1,
+      "matched_during_scan": 14
+    },
+    "bn": {
+      "name": "Bengali",
+      "script": "Bengali",
+      "aliases": [
+        "Bengali"
+      ],
+      "selected": 1,
+      "matched_during_scan": 7719
+    },
+    "ta": {
+      "name": "Tamil",
+      "script": "Tamil",
+      "aliases": [
+        "Tamil"
+      ],
+      "selected": 1,
+      "matched_during_scan": 5918
+    },
+    "te": {
+      "name": "Telugu",
+      "script": "Telugu",
+      "aliases": [
+        "Telugu"
+      ],
+      "selected": 1,
+      "matched_during_scan": 6729
+    },
+    "mr": {
+      "name": "Marathi",
+      "script": "Devanagari",
+      "aliases": [
+        "Marathi"
+      ],
+      "selected": 1,
+      "matched_during_scan": 5184
+    },
+    "gu": {
+      "name": "Gujarati",
+      "script": "Gujarati",
+      "aliases": [
+        "Gujarati"
+      ],
+      "selected": 1,
+      "matched_during_scan": 4419
+    },
+    "kn": {
+      "name": "Kannada",
+      "script": "Kannada",
+      "aliases": [
+        "Kannada"
+      ],
+      "selected": 1,
+      "matched_during_scan": 3474
+    },
+    "ml": {
+      "name": "Malayalam",
+      "script": "Malayalam",
+      "aliases": [
+        "Malayalam"
+      ],
+      "selected": 1,
+      "matched_during_scan": 3106
+    },
+    "pa": {
+      "name": "Punjabi",
+      "script": "Gurmukhi",
+      "aliases": [
+        "Punjabi"
+      ],
+      "selected": 1,
+      "matched_during_scan": 2740
+    }
+  },
+  "observed_first_language": {
+    "Hindi": 38165,
+    "Bengali": 7719,
+    "Telugu": 6729,
+    "Tamil": 5918,
+    "Marathi": 5184,
+    "Gujarati": 4419,
+    "Urdu": 3739,
+    "Kannada": 3474,
+    "Malayalam": 3106,
+    "Odia": 2967,
+    "Punjabi": 2740,
+    "Assamese": 1178,
+    "Maithili": 867,
+    "Bhili / Bhilodi": 713,
+    "Santali": 520,
+    "Kashmiri": 431,
+    "Nepali": 230,
+    "Sindhi": 205,
+    "Konkani": 203,
+    "Gondi": 192,
+    "Dogri": 188,
+    "Tulu": 184,
+    "Kurukh / Oraon": 152,
+    "Khandeshi": 133,
+    "Manipuri": 128,
+    "Ho": 111,
+    "Bodo": 110,
+    "Khasi": 90,
+    "Mundari": 76,
+    "Tripuri": 70,
+    "Garo": 66,
+    "Halabi": 56,
+    "Korku": 54,
+    "Lushai / Mizo": 53,
+    "Kui": 51,
+    "Miri / Mishing": 48,
+    "Munda": 44,
+    "Koya": 35,
+    "Karbi / Mikir": 34,
+    "Bhotia": 29,
+    "Nissi / Dafla": 24,
+    "Konyak": 24,
+    "Savara": 23,
+    "Mao": 20,
+    "Kharia": 19,
+    "Khond / Kondh": 19,
+    "Malto": 18,
+    "Thado": 18,
+    "Ao": 18,
+    "Kisan": 16,
+    "Lotha": 16,
+    "Tangkhul": 15,
+    "English": 14,
+    "Kolami": 13,
+    "Dimasa": 12,
+    "Tibetan": 12,
+    "Adi": 11,
+    "Angami": 11,
+    "Rabha": 9,
+    "Lahnda": 9,
+    "Coorgi / Kodagu": 8,
+    "Chakru / Chokri": 8,
+    "Yimchungre": 7,
+    "Kinnauri": 7,
+    "Sangtam": 7,
+    "Hmar": 6,
+    "Kuki": 6,
+    "Koda / Kora": 5,
+    "Wancho": 5,
+    "Khiemnungan": 5,
+    "Zemi": 5,
+    "Kabui": 5,
+    "Liangmei": 5,
+    "Zeliang": 5,
+    "Phom": 4,
+    "Anal": 4,
+    "Jatapu": 4,
+    "Zou": 4,
+    "Mogh": 4,
+    "Konda": 4,
+    "Parji": 4,
+    "Paite": 4,
+    "Mishmi": 4,
+    "Khezha": 4,
+    "Koch": 4,
+    "Rengma": 3,
+    "Tangsa": 3,
+    "Chang": 3,
+    "Lakher": 3,
+    "Nicobarese": 3,
+    "Pochury": 3,
+    "Pawi": 3,
+    "Maram": 3,
+    "Bishnupuriya": 2,
+    "Halam": 2,
+    "Sanskrit": 2,
+    "Arabic / Arbi": 2,
+    "Vaiphei": 2,
+    "Deori": 2,
+    "Afghani / Kabuli / Pashto": 2,
+    "Gadaba": 1,
+    "Sherpa": 1,
+    "Lalung": 1,
+    "Monpa": 1,
+    "Limbu": 1,
+    "Nocte": 1,
+    "Tamang": 1,
+    "Sema": 1,
+    "Lepcha": 1,
+    "Rai": 1,
+    "Shina": 1,
+    "Ladakhi": 1
+  },
+  "demographics": {
+    "sex": {
+      "Female": 5,
+      "Male": 5
+    },
+    "zone": {
+      "Rural": 6,
+      "Urban": 4
+    },
+    "state_top20": {
+      "West Bengal": 1,
+      "Goa": 1,
+      "Gujarat": 1,
+      "Delhi": 1,
+      "Karnataka": 1,
+      "Kerala": 1,
+      "Maharashtra": 1,
+      "Haryana": 1,
+      "Tamil Nadu": 1,
+      "Andhra Pradesh": 1
+    },
+    "occupation_top20": {
+      "No Occupation / Retired / Homemaker": 6,
+      "Market-Oriented Crop and Animal Producers, Other": 1,
+      "Guard, Passenger Train": 1,
+      "System Administration Assistant": 1,
+      "Taster (Food)": 1
+    },
+    "persona_source_shard": {
+      "en_IN-00000-of-00011.parquet": 10
+    },
+    "age_min": 19,
+    "age_max": 56,
+    "age_mean": 34.0
+  },
+  "source_columns_preserved": [
+    "uuid",
+    "professional_persona",
+    "linguistic_persona",
+    "sports_persona",
+    "arts_persona",
+    "travel_persona",
+    "culinary_persona",
+    "persona",
+    "cultural_background",
+    "linguistic_background",
+    "skills_and_expertise",
+    "skills_and_expertise_list",
+    "hobbies_and_interests",
+    "hobbies_and_interests_list",
+    "career_goals_and_ambitions",
+    "sex",
+    "age",
+    "marital_status",
+    "education_level",
+    "education_degree",
+    "occupation",
+    "first_language",
+    "second_language",
+    "third_language",
+    "zone",
+    "state",
+    "district",
+    "country"
+  ],
+  "pipeline_columns_added": [
+    "document_language_code",
+    "document_language_name",
+    "document_script",
+    "docs_per_persona",
+    "persona_source_dataset",
+    "persona_source_split",
+    "persona_source_shard",
+    "sample_seed",
+    "stage"
+  ]
+}

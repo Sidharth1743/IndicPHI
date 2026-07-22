@@ -1,0 +1,2 @@
+{"uuid": "89d785f5c9f64f119b428efc6d0c259e", "document_id": "89d785f5c9f64f119b428efc6d0c259e__0", "doc_type_id": "telemedicine_transcript", "document_language_code": "bn", "translation_error": "script_purity_failed:target_script_ratio:0.136<0.35 attempt=1", "translation_script_ok": false}
+{"uuid": "396f437fcf6a45e6b7f38f4fe5cf5e48", "document_id": "396f437fcf6a45e6b7f38f4fe5cf5e48__0", "doc_type_id": "prescription", "document_language_code": "gu", "translation_error": "script_purity_failed:target_script_ratio:0.000<0.35 attempt=1", "translation_script_ok": false}

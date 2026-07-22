@@ -1,0 +1,65 @@
+{
+  "stage": "s5_linguistic_judge",
+  "timestamp_utc": "2026-07-20T08:58:24.626168+00:00",
+  "provider": "azure_foundry",
+  "model": "grok-4.3",
+  "base_url": "https://ambedkar-interpreter-resource.services.ai.azure.com/openai/v1",
+  "requests_per_minute": 500.0,
+  "timeout_s": 600.0,
+  "network_retries": 4,
+  "rows_judged": 10,
+  "rows_resumed_from_checkpoint": 0,
+  "pass_rate": 0.8,
+  "label_distribution": {
+    "fail": 0.2,
+    "pass": 0.8
+  },
+  "positional_length_bias": {
+    "pearson_r": 0.2594746790899271,
+    "n": 10.0
+  },
+  "failures": [
+    {
+      "uuid": "6549c3143bf44b4d81915ab4b5eea4ef",
+      "document_id": "6549c3143bf44b4d81915ab4b5eea4ef__0",
+      "doc_type_id": "er_triage_notes",
+      "document_language_code": "gu",
+      "judge_verdict": "fail",
+      "judge_score": 0.3,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Clinical prose body is English-dominant; only isolated Gujarati fragments present despite gu/Gujarati requirement.",
+      "judge_soft_fail": false,
+      "judge_error": null
+    },
+    {
+      "uuid": "f6d9e443342646fdb70285e45d2a3a48",
+      "document_id": "f6d9e443342646fdb70285e45d2a3a48__0",
+      "doc_type_id": "automated_sms",
+      "document_language_code": "te",
+      "judge_verdict": "fail",
+      "judge_score": 0.6,
+      "judge_flags": [
+        "cross_language_entity_shift"
+      ],
+      "judge_rationale": "PATIENT_NAME value in Latin script; prose otherwise Telugu but entity shift violates script expectation for document.",
+      "judge_soft_fail": false,
+      "judge_error": null
+    }
+  ],
+  "failure_count": 2,
+  "soft_failures": [],
+  "soft_fail_count": 0,
+  "columns_added": [
+    "judge_verdict",
+    "judge_score",
+    "judge_reasoning",
+    "judge_flags",
+    "judge_provider",
+    "judge_model",
+    "judge_soft_fail",
+    "judge_error",
+    "stage"
+  ]
+}

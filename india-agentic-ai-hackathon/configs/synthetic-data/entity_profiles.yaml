@@ -79,7 +79,10 @@ profiles:
       - TAX_ID
       - TELEPHONE_LANDLINE
       - VEHICLE_REGISTRATION
-    optional: []
+    optional:
+      - EMAIL_ADDRESS
+      - RESIDENTIAL_ADDRESS
+      - PAN_NUMBER
 
   discharge_summary:
     required:

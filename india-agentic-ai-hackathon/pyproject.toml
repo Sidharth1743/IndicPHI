@@ -7,12 +7,14 @@ requires-python = ">=3.12"
 dependencies = [
     "data-designer>=0.7.0",
     "datasets>=5.0.0",
+    "fastapi>=0.115.0",
     "huggingface-hub>=1.0.0",
     # Curator 1.2 fuzzy dedup requires RAPIDS 25.10.* (via this extra).
     # Do NOT upgrade to RAPIDS 26.6 — API paths diverge (rapidsmpf.buffer gone).
     "nemo-curator[deduplication-cuda12]==1.2.0",
     "pyarrow>=20.0.0",
     "pyyaml>=6.0.3",
+    "uvicorn>=0.32.0",
 ]
 
 [project.scripts]

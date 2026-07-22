@@ -1,0 +1,19 @@
+{
+  "stage": "s7_s8_curation",
+  "timestamp_utc": "2026-07-21T07:41:26.681642+00:00",
+  "rows_in": 0,
+  "dedup": {
+    "backend": "nemo_curator",
+    "text_mode": "english_pivot_or_masked",
+    "rows_in": 0,
+    "rows_kept": 0,
+    "rows_dropped": 0
+  },
+  "balancing": {
+    "enabled": true,
+    "rows_out": 0
+  },
+  "language_counts_out": {},
+  "rows_out": 0,
+  "note": "No auditor-passed rows; wrote empty curation outputs."
+}

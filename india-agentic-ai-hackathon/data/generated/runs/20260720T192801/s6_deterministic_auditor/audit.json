@@ -1,0 +1,62 @@
+{
+  "stage": "s6_deterministic_auditor",
+  "timestamp_utc": "2026-07-20T14:44:46.027946+00:00",
+  "rows_audited": 42,
+  "rows_passed": 37,
+  "rows_failed": 5,
+  "pass_rate": 0.8809523809523809,
+  "mean_dics": 1.0,
+  "mean_ecr": 0.987012987012987,
+  "mean_bcr": 0.0,
+  "failures": [
+    {
+      "uuid": "3c0199017c7c4f00bbb3de4770ce25fc",
+      "document_id": "3c0199017c7c4f00bbb3de4770ce25fc__1",
+      "doc_type_id": "hospital_billing",
+      "document_language_code": "as",
+      "auditor_errors": [
+        "format:AADHAAR_NUMBER:aadhaar_verhoeff",
+        "phi_residue:1"
+      ]
+    },
+    {
+      "uuid": "8b08baf3bcbf412eaace2d648074de01",
+      "document_id": "8b08baf3bcbf412eaace2d648074de01__1",
+      "doc_type_id": "surgical_note",
+      "document_language_code": "bn",
+      "auditor_errors": [
+        "missing_required:DOCTOR_NAME,HOSPITAL_NAME,ADMISSION_NUMBER,WARD_NUMBER,BED_NUMBER",
+        "upstream_generation_soft_fail:missing_required_entities:DOCTOR_NAME,HOSPITAL_NAME,ADMISSION_NUMBER,WARD_NUMBER,BED_NUMBER"
+      ]
+    },
+    {
+      "uuid": "72db01dc59584f27949df74b76c51edf",
+      "document_id": "72db01dc59584f27949df74b76c51edf__2",
+      "doc_type_id": "radiology_report",
+      "document_language_code": "mai",
+      "auditor_errors": [
+        "missing_required:HOSPITAL_ID",
+        "upstream_generation_soft_fail:missing_required_entities:HOSPITAL_ID"
+      ]
+    },
+    {
+      "uuid": "259f783314be4a6ca9979240d0de82cd",
+      "document_id": "259f783314be4a6ca9979240d0de82cd__0",
+      "doc_type_id": "telemedicine_transcript",
+      "document_language_code": "ne",
+      "auditor_errors": [
+        "format:PHONE_NUMBER:phone_format"
+      ]
+    },
+    {
+      "uuid": "c8cbb5811e2a4a05bfe15b06b2be3a52",
+      "document_id": "c8cbb5811e2a4a05bfe15b06b2be3a52__1",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "ur",
+      "auditor_errors": [
+        "format:AADHAAR_NUMBER:aadhaar_verhoeff"
+      ]
+    }
+  ],
+  "failure_count": 5
+}

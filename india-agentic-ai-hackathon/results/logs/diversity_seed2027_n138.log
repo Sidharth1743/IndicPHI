@@ -1,0 +1,1018 @@
+[run] run_id=20260721T111651
+[run] folder=/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651
+[run] config=/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/pipeline.resolved.yaml
+
+=== s1_persona_sampling ===
+[s1_persona_sampling] OK → /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s1_persona_sampling
+  jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s1_persona_sampling/personas.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s1_persona_sampling/personas.parquet
+  audit_json: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s1_persona_sampling/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s1_persona_sampling/audit.md
+  preview_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/samples/s1_personas_preview.jsonl
+
+=== s2_taxonomy ===
+[s2_taxonomy] OK → /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s2_taxonomy
+  jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s2_taxonomy/assignments.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s2_taxonomy/assignments.parquet
+  audit_json: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s2_taxonomy/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s2_taxonomy/audit.md
+  preview_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/samples/s2_taxonomy_preview.jsonl
+
+=== s2b_persona_summary ===
+[s2b_persona_summary] OK → /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s2b_persona_summary
+  jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s2b_persona_summary/assignments_summarized.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s2b_persona_summary/assignments_summarized.parquet
+  audit_json: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s2b_persona_summary/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s2b_persona_summary/audit.md
+
+=== s3_prompt_construction ===
+[s3_prompt_construction] OK → /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s3_prompts
+  jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s3_prompts/prompts.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s3_prompts/prompts.parquet
+  audit_json: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s3_prompts/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s3_prompts/audit.md
+  preview_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/samples/s3_prompts_preview.jsonl
+
+=== s4_generation ===
+[11:18:10] [INFO] 🩺 Running health checks for models...
+[11:18:10] [INFO]   |-- 👀 Checking 'sarvam-105b' in provider named 'sarvam' for model alias 'generator'...
+[11:18:11] [INFO]   |-- ✅ Passed!
+[11:18:11] [INFO] OpenTelemetry metrics available at http://127.0.0.1:9464/metrics
+[11:18:11] [INFO] 🎨 Creating Data Designer dataset
+[11:18:11] [INFO]   |-- 🔒 Jinja rendering engine: secure
+[11:18:11] [INFO] ✅ Validation passed
+[11:18:11] [INFO] ⛓️ Sorting column configs into a Directed Acyclic Graph
+[11:18:11] [INFO] 🩺 Running health checks for models...
+[11:18:11] [INFO]   |-- 👀 Checking 'sarvam-105b' in provider named 'sarvam' for model alias 'generator'...
+[11:18:11] [INFO]   |-- ✅ Passed!
+[11:18:11] [INFO] ⚡ Using async task-queue builder
+[11:18:11] [INFO] 📝 llm-text model config for column 'generated_text'
+[11:18:11] [INFO]   |-- model: 'sarvam-105b'
+[11:18:11] [INFO]   |-- model alias: 'generator'
+[11:18:11] [INFO]   |-- model provider: 'sarvam'
+[11:18:11] [INFO]   |-- inference parameters:
+[11:18:11] [INFO]   |  |-- generation_type=chat-completion
+[11:18:11] [INFO]   |  |-- max_parallel_requests=24
+[11:18:11] [INFO]   |  |-- extra_body={'reasoning_effort': None}
+[11:18:11] [INFO]   |  |-- temperature=0.30
+[11:18:11] [INFO]   |  |-- max_tokens=16384
+[11:18:11] [INFO] ⚡️ Async generation: 1 column(s) (column 'generated_text'), 138 tasks across 1 row group(s)
+[11:18:11] [INFO] 🚀 (1/1) Dispatching with 138 records
+[11:18:11] [INFO] 🌱 (1/1) Sampling 138 records from seed dataset
+[11:18:11] [INFO]   |-- seed dataset size: 138 records
+[11:18:11] [INFO]   |-- sampling strategy: ordered
+[11:18:17] [INFO] 📊 Progress [5.5s]:
+[11:18:17] [INFO]   |-- 🌧️ column 'generated_text': 10/138 (7%) 1.8 rec/s
+[11:18:22] [INFO] 📊 Progress [10.7s]:
+[11:18:22] [INFO]   |-- 🌧️ column 'generated_text': 29/138 (21%) 2.7 rec/s
+[11:18:27] [INFO] 📊 Progress [15.9s]:
+[11:18:27] [INFO]   |-- 🌦️ column 'generated_text': 44/138 (32%) 2.8 rec/s
+[11:18:32] [INFO] 📊 Progress [21.1s]:
+[11:18:32] [INFO]   |-- 🌦️ column 'generated_text': 60/138 (43%) 2.8 rec/s
+[11:18:37] [INFO] 📊 Progress [26.2s]:
+[11:18:37] [INFO]   |-- ⛅ column 'generated_text': 72/138 (52%) 2.7 rec/s
+[11:18:43] [INFO] 📊 Progress [31.4s]:
+[11:18:43] [INFO]   |-- ⛅ column 'generated_text': 80/138 (58%) 2.5 rec/s
+[11:18:48] [INFO] 📊 Progress [37.0s]:
+[11:18:48] [INFO]   |-- ⛅ column 'generated_text': 95/138 (69%) 2.6 rec/s
+[11:18:54] [INFO] 📊 Progress [42.5s]:
+[11:18:54] [INFO]   |-- 🌤️ column 'generated_text': 108/138 (78%) 2.5 rec/s
+[11:18:59] [INFO] 📊 Progress [47.5s]:
+[11:18:59] [INFO]   |-- 🌤️ column 'generated_text': 126/138 (91%) 2.6 rec/s
+[11:19:11] [INFO] 📊 Progress [60.1s]:
+[11:19:11] [INFO]   |-- 🌤️ column 'generated_text': 132/138 (96%) 2.2 rec/s
+[11:19:43] [INFO] 🔄 (1/1) Salvaging 6 deferred task(s)
+[11:19:46] [INFO] 📊 Progress [95.1s]:
+[11:19:46] [INFO]   |-- 🌤️ column 'generated_text': 133/138 (96%) 1.4 rec/s
+[11:19:52] [INFO] 📊 Progress [100.4s]:
+[11:19:52] [INFO]   |-- 🌤️ column 'generated_text': 135/138 (98%) 1.3 rec/s
+[11:20:52] [INFO] 📊 Progress [161.2s]:
+[11:20:52] [INFO]   |-- ☀️ column 'generated_text': 138/138 (100%) 0.9 rec/s
+[11:20:52] [INFO] ✅ Async generation complete [161.2s]: 138 ok, 0 failed across 1 column(s)
+[11:20:54] [INFO] 📊 Model usage summary:
+[11:20:54] [INFO]   |-- model: sarvam-105b
+[11:20:54] [INFO]   |-- tokens: input=526743, output=55654, total=582397, tps=3583
+[11:20:54] [INFO]   |-- requests: success=138, failed=7, total=145, rpm=53
+[11:20:54] [INFO] 📐 Measuring dataset column statistics:
+[11:20:54] [INFO]   |-- 📝 column: 'generated_text'
+[s4_generation] OK → /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s4_generation
+  jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s4_generation/documents.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s4_generation/documents.parquet
+  audit_json: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s4_generation/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s4_generation/audit.md
+  soft_failures_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s4_generation/soft_failures.jsonl
+  checkpoint_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s4_generation/checkpoint.jsonl
+
+=== s4b_translation ===
+[s4b] REPAIRED-BY-GENERATOR uuid=8b77264c0f7747c59ec191e95202ff7f lang=brx doc_type=insurance_claim attempts=1
+[s4b] SOFT-FAIL uuid=18a30340943543c59236f8f4e9379b8d lang=ks doc_type=automated_sms error=script_purity_failed:wrong_indic_script:Devanagari>Arabic attempt=1;generator_repair_failed:ok
+[s4b] SOFT-FAIL uuid=85cdb818ce5740ed85a9bfb29cf57098 lang=gu doc_type=er_triage_notes error=script_purity_failed:target_script_ratio:0.000<0.35 attempt=1
+[s4b] REPAIRED-BY-GENERATOR uuid=0cb542c8c62e4d52ac1c51fcfb93a238 lang=doi doc_type=er_triage_notes attempts=5
+[s4b] SOFT-FAIL uuid=8c410a2e98134e9a91f1d50d5811a470 lang=gu doc_type=er_triage_notes error=script_purity_failed:target_script_ratio:0.000<0.35 attempt=1;generator_repair_failed:target_script_ratio:0.000<0.35
+[s4b] SOFT-FAIL uuid=99d8e2b0dd9e42e6b270e50cb12c26c5 lang=ks doc_type=asha_worker_note error=script_purity_failed:target_script_ratio:0.000<0.35 attempt=1;generator_repair_failed:target_script_ratio:0.000<0.35
+[s4b] SOFT-FAIL uuid=18a30340943543c59236f8f4e9379b8d lang=ks doc_type=asha_worker_note error=script_purity_failed:target_script_ratio:0.000<0.35 attempt=1;generator_repair_failed:ok
+[s4b] SOFT-FAIL uuid=c03b2ff49ffa439380a254bb9f8972f7 lang=kok doc_type=hospital_billing error=script_purity_failed:target_script_ratio:0.000<0.35 attempt=1;generator_repair_failed:target_script_ratio:0.000<0.35
+[s4b] SOFT-FAIL uuid=d15c31be6c8e40a393e6e6f4f9562ea3 lang=mni doc_type=discharge_summary error=script_purity_failed:target_script_ratio:0.000<0.35 attempt=1;generator_repair_failed:target_script_ratio:0.000<0.35
+[s4b] SOFT-FAIL uuid=1e23bb4e93b0465fa42494aee52e02ef lang=mni doc_type=discharge_summary error=script_purity_failed:target_script_ratio:0.000<0.35 attempt=1
+[s4b] REPAIRED-BY-GENERATOR uuid=c98c2d51b4ea4d0c947d6dfc0ee57383 lang=sat doc_type=asha_worker_note attempts=1
+[s4b] SOFT-FAIL uuid=6319018329714b92a0a64f8228dc39b6 lang=ne doc_type=prescription error=script_purity_failed:target_script_ratio:0.082<0.35 attempt=1;generator_repair_failed:ok
+[s4b] SOFT-FAIL uuid=1e23bb4e93b0465fa42494aee52e02ef lang=mni doc_type=referral_letter error=script_purity_failed:target_script_ratio:0.328<0.35 attempt=1;generator_repair_failed:target_script_ratio:0.000<0.35
+[s4b] SOFT-FAIL uuid=1e23bb4e93b0465fa42494aee52e02ef lang=mni doc_type=hospital_billing error=script_purity_failed:target_script_ratio:0.000<0.35 attempt=1;generator_repair_failed:target_script_ratio:0.000<0.35
+[s4b] SOFT-FAIL uuid=d15c31be6c8e40a393e6e6f4f9562ea3 lang=mni doc_type=hospital_billing error=script_purity_failed:target_script_ratio:0.000<0.35 attempt=1;generator_repair_failed:target_script_ratio:0.000<0.35
+[s4b] SOFT-FAIL uuid=d15c31be6c8e40a393e6e6f4f9562ea3 lang=mni doc_type=referral_letter error=script_purity_failed:target_script_ratio:0.000<0.35 attempt=1;generator_repair_failed:target_script_ratio:0.000<0.35
+[s4b] SOFT-FAIL uuid=49e7eef3f6644cc689038f044f77f052 lang=sat doc_type=phc_register error=script_purity_failed:target_script_ratio:0.000<0.35 attempt=1
+[s4b] SOFT-FAIL uuid=49e7eef3f6644cc689038f044f77f052 lang=sat doc_type=prescription error=script_purity_failed:target_script_ratio:0.000<0.35 attempt=1;generator_repair_failed:target_script_ratio:0.000<0.35
+[s4b] REPAIRED-BY-GENERATOR uuid=9952571815ae4558a362507fc4a9539f lang=ur doc_type=prescription attempts=2
+[s4b] SOFT-FAIL uuid=5c09bf9c92bb4474a1a128379f250e86 lang=sd doc_type=discharge_summary error=script_purity_failed:wrong_indic_script:Devanagari>Arabic attempt=1;generator_repair_failed:wrong_indic_script:Devanagari>Arabic
+[s4b] SOFT-FAIL uuid=e9f9b9a22bcb47f28198db61b9bd4966 lang=sd doc_type=discharge_summary error=script_purity_failed:wrong_indic_script:Devanagari>Arabic attempt=1;generator_repair_failed:wrong_indic_script:Devanagari>Arabic
+[s4b] SOFT-FAIL uuid=e9f9b9a22bcb47f28198db61b9bd4966 lang=sd doc_type=referral_letter error=script_purity_failed:wrong_indic_script:Devanagari>Arabic attempt=1;generator_repair_failed:target_script_ratio:0.011<0.35
+[s4b] SOFT-FAIL uuid=99d8e2b0dd9e42e6b270e50cb12c26c5 lang=ks doc_type=insurance_claim error=script_purity_failed:target_script_ratio:0.000<0.35 attempt=1
+[s4b] SOFT-FAIL uuid=c98c2d51b4ea4d0c947d6dfc0ee57383 lang=sat doc_type=automated_sms error=script_purity_failed:wrong_indic_script:Devanagari>Ol Chiki attempt=1;generator_repair_failed:wrong_indic_script:Devanagari>Ol Chiki
+[s4b] SOFT-FAIL uuid=c98c2d51b4ea4d0c947d6dfc0ee57383 lang=sat doc_type=insurance_claim error=script_purity_failed:target_script_ratio:0.000<0.35 attempt=1;generator_repair_failed:target_script_ratio:0.000<0.35
+[s4b] SOFT-FAIL uuid=49e7eef3f6644cc689038f044f77f052 lang=sat doc_type=opd_slip error=Missing NM placeholder restore for ⟦NM6⟧;generator_repair_failed:target_script_ratio:0.000<0.35
+[s4b] WARNING: 22 translation soft-fail(s) logged — see audit soft_failures
+[s4b_translation] OK → /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s4b_translation
+  jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s4b_translation/documents.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s4b_translation/documents.parquet
+  audit_json: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s4b_translation/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s4b_translation/audit.md
+  soft_failures_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s4b_translation/soft_failures.jsonl
+
+=== s5_linguistic_judge ===
+[s5] judging 1/138 uuid=5afdbf29e52249fc95146ec7db5e2023 lang=as doc_type=automated_sms
+[s5] repair 1/5 uuid=5afdbf29e52249fc95146ec7db5e2023 flags=['surrogate_plausibility_collapse'] via=en_pivot+translate
+[s5] REPAIRED-THEN-PASS uuid=5afdbf29e52249fc95146ec7db5e2023 rounds=1 score=0.9
+[s5] done 1/138 verdict=pass score=0.9 repairs=1
+[s5] judging 2/138 uuid=5afdbf29e52249fc95146ec7db5e2023 lang=as doc_type=insurance_claim
+[s5] done 2/138 verdict=pass score=0.9 repairs=0
+[s5] judging 3/138 uuid=5afdbf29e52249fc95146ec7db5e2023 lang=as doc_type=hospital_billing
+[s5] done 3/138 verdict=pass score=0.9 repairs=0
+[s5] judging 4/138 uuid=fe2793cf648244fa8cc427adc569983a lang=as doc_type=insurance_claim
+[s5] repair 1/5 uuid=fe2793cf648244fa8cc427adc569983a flags=['instruction_drift', 'dialect_script_impurity'] accumulated=['dialect_script_impurity', 'instruction_drift'] via=en_pivot+translate
+[s5] REPAIRED-THEN-PASS uuid=fe2793cf648244fa8cc427adc569983a rounds=1 score=0.93
+[s5] done 4/138 verdict=pass score=0.93 repairs=1
+[s5] judging 5/138 uuid=fe2793cf648244fa8cc427adc569983a lang=as doc_type=automated_sms
+[s5] done 5/138 verdict=pass score=0.92 repairs=0
+[s5] judging 6/138 uuid=fe2793cf648244fa8cc427adc569983a lang=as doc_type=hospital_billing
+[s5] done 6/138 verdict=pass score=0.9 repairs=0
+[s5] judging 7/138 uuid=52013037170a43faa2b7bbe425373b47 lang=bn doc_type=hospital_billing
+[s5] done 7/138 verdict=pass score=0.92 repairs=0
+[s5] judging 8/138 uuid=52013037170a43faa2b7bbe425373b47 lang=bn doc_type=discharge_summary
+[s5] done 8/138 verdict=pass score=0.95 repairs=0
+[s5] judging 9/138 uuid=52013037170a43faa2b7bbe425373b47 lang=bn doc_type=referral_letter
+[s5] done 9/138 verdict=pass score=0.92 repairs=0
+[s5] judging 10/138 uuid=e2083507b6fc4542853ff740cac47edf lang=bn doc_type=hospital_billing
+[s5] done 10/138 verdict=pass score=0.95 repairs=0
+[s5] judging 11/138 uuid=e2083507b6fc4542853ff740cac47edf lang=bn doc_type=discharge_summary
+[s5] done 11/138 verdict=pass score=0.95 repairs=0
+[s5] judging 12/138 uuid=e2083507b6fc4542853ff740cac47edf lang=bn doc_type=referral_letter
+[s5] done 12/138 verdict=pass score=0.92 repairs=0
+[s5] judging 13/138 uuid=8b77264c0f7747c59ec191e95202ff7f lang=brx doc_type=automated_sms
+[s5] repair 1/5 uuid=8b77264c0f7747c59ec191e95202ff7f flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=8b77264c0f7747c59ec191e95202ff7f err=script_purity_failed:wrong_indic_script:Bengali>Devanagari
+[s5] repair 2/5 uuid=8b77264c0f7747c59ec191e95202ff7f flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=8b77264c0f7747c59ec191e95202ff7f err=script_purity_failed:wrong_indic_script:Bengali>Devanagari
+[s5] repair 3/5 uuid=8b77264c0f7747c59ec191e95202ff7f flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=8b77264c0f7747c59ec191e95202ff7f err=script_purity_failed:wrong_indic_script:Bengali>Devanagari
+[s5] repair 4/5 uuid=8b77264c0f7747c59ec191e95202ff7f flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=8b77264c0f7747c59ec191e95202ff7f err=script_purity_failed:wrong_indic_script:Bengali>Devanagari
+[s5] repair 5/5 uuid=8b77264c0f7747c59ec191e95202ff7f flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=8b77264c0f7747c59ec191e95202ff7f err=script_purity_failed:wrong_indic_script:Bengali>Devanagari
+[s5] done 13/138 verdict=fail score=0.35 repairs=5
+[s5] judging 14/138 uuid=8b77264c0f7747c59ec191e95202ff7f lang=brx doc_type=insurance_claim
+[s5] repair 1/5 uuid=8b77264c0f7747c59ec191e95202ff7f flags=['dialect_script_impurity', 'domain_persona_mismatch'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=8b77264c0f7747c59ec191e95202ff7f err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 2/5 uuid=8b77264c0f7747c59ec191e95202ff7f flags=['dialect_script_impurity', 'instruction_drift'] accumulated=['dialect_script_impurity', 'domain_persona_mismatch', 'instruction_drift'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=8b77264c0f7747c59ec191e95202ff7f err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 3/5 uuid=8b77264c0f7747c59ec191e95202ff7f flags=['dialect_script_impurity'] accumulated=['dialect_script_impurity', 'domain_persona_mismatch', 'instruction_drift'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=8b77264c0f7747c59ec191e95202ff7f err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 4/5 uuid=8b77264c0f7747c59ec191e95202ff7f flags=['dialect_script_impurity'] accumulated=['dialect_script_impurity', 'domain_persona_mismatch', 'instruction_drift'] via=en_pivot+translate
+[s5] REPAIRED-THEN-PASS uuid=8b77264c0f7747c59ec191e95202ff7f rounds=4 score=0.85
+[s5] done 14/138 verdict=pass score=0.85 repairs=4
+[s5] judging 15/138 uuid=8b77264c0f7747c59ec191e95202ff7f lang=brx doc_type=hospital_billing
+[s5] repair 1/5 uuid=8b77264c0f7747c59ec191e95202ff7f flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] repair 2/5 uuid=8b77264c0f7747c59ec191e95202ff7f flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] repair 3/5 uuid=8b77264c0f7747c59ec191e95202ff7f flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] repair 4/5 uuid=8b77264c0f7747c59ec191e95202ff7f flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] repair 5/5 uuid=8b77264c0f7747c59ec191e95202ff7f flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] done 15/138 verdict=fail score=0.3 repairs=5
+[s5] judging 16/138 uuid=fac14bf3d91143958fc1e8190e25c390 lang=brx doc_type=prescription
+[s5] repair 1/5 uuid=fac14bf3d91143958fc1e8190e25c390 flags=['dialect_script_impurity', 'instruction_drift'] via=en_pivot+translate
+[s5] repair 2/5 uuid=fac14bf3d91143958fc1e8190e25c390 flags=['dialect_script_impurity', 'surrogate_plausibility_collapse'] accumulated=['dialect_script_impurity', 'instruction_drift', 'surrogate_plausibility_collapse'] via=en_pivot+translate
+[s5] repair 3/5 uuid=fac14bf3d91143958fc1e8190e25c390 flags=['dialect_script_impurity'] accumulated=['dialect_script_impurity', 'instruction_drift', 'surrogate_plausibility_collapse'] via=en_pivot+translate
+[s5] repair 4/5 uuid=fac14bf3d91143958fc1e8190e25c390 flags=['dialect_script_impurity'] accumulated=['dialect_script_impurity', 'instruction_drift', 'surrogate_plausibility_collapse'] via=en_pivot+translate
+[s5] repair 5/5 uuid=fac14bf3d91143958fc1e8190e25c390 flags=['dialect_script_impurity'] accumulated=['dialect_script_impurity', 'instruction_drift', 'surrogate_plausibility_collapse'] via=en_pivot+translate
+[s5] REPAIRED-THEN-PASS uuid=fac14bf3d91143958fc1e8190e25c390 rounds=5 score=0.9
+[s5] done 16/138 verdict=pass score=0.9 repairs=5
+[s5] judging 17/138 uuid=fac14bf3d91143958fc1e8190e25c390 lang=brx doc_type=insurance_claim
+[s5] repair 1/5 uuid=fac14bf3d91143958fc1e8190e25c390 flags=['dialect_script_impurity', 'surrogate_plausibility_collapse'] via=en_pivot+translate
+[s5] repair 2/5 uuid=fac14bf3d91143958fc1e8190e25c390 flags=['dialect_script_impurity'] accumulated=['dialect_script_impurity', 'surrogate_plausibility_collapse'] via=en_pivot+translate
+[s5] repair 3/5 uuid=fac14bf3d91143958fc1e8190e25c390 flags=['dialect_script_impurity'] accumulated=['dialect_script_impurity', 'surrogate_plausibility_collapse'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=fac14bf3d91143958fc1e8190e25c390 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 4/5 uuid=fac14bf3d91143958fc1e8190e25c390 flags=['dialect_script_impurity'] accumulated=['dialect_script_impurity', 'surrogate_plausibility_collapse'] via=en_pivot+translate
+[s5] repair 5/5 uuid=fac14bf3d91143958fc1e8190e25c390 flags=['dialect_script_impurity'] accumulated=['dialect_script_impurity', 'surrogate_plausibility_collapse'] via=en_pivot+translate
+[s5] done 17/138 verdict=fail score=0.3 repairs=5
+[s5] judging 18/138 uuid=fac14bf3d91143958fc1e8190e25c390 lang=brx doc_type=asha_worker_note
+[s5] done 18/138 verdict=pass score=0.85 repairs=0
+[s5] judging 19/138 uuid=0cb542c8c62e4d52ac1c51fcfb93a238 lang=doi doc_type=referral_letter
+[s5] done 19/138 verdict=pass score=0.9 repairs=0
+[s5] judging 20/138 uuid=0cb542c8c62e4d52ac1c51fcfb93a238 lang=doi doc_type=radiology_report
+[s5] done 20/138 verdict=pass score=0.9 repairs=0
+[s5] judging 21/138 uuid=0cb542c8c62e4d52ac1c51fcfb93a238 lang=doi doc_type=er_triage_notes
+[s5] repair 1/5 uuid=0cb542c8c62e4d52ac1c51fcfb93a238 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=0cb542c8c62e4d52ac1c51fcfb93a238 err=script_purity_failed:target_script_ratio:0.010<0.35
+[s5] repair 2/5 uuid=0cb542c8c62e4d52ac1c51fcfb93a238 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=0cb542c8c62e4d52ac1c51fcfb93a238 err=script_purity_failed:target_script_ratio:0.010<0.35
+[s5] repair 3/5 uuid=0cb542c8c62e4d52ac1c51fcfb93a238 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=0cb542c8c62e4d52ac1c51fcfb93a238 err=script_purity_failed:target_script_ratio:0.008<0.35
+[s5] repair 4/5 uuid=0cb542c8c62e4d52ac1c51fcfb93a238 flags=['dialect_script_impurity', 'instruction_drift'] via=en_pivot+translate
+[s5] en_pivot translate failed uuid=0cb542c8c62e4d52ac1c51fcfb93a238 err=no_valid_entity_tags_to_protect
+[s5] repair 5/5 uuid=0cb542c8c62e4d52ac1c51fcfb93a238 flags=['dialect_script_impurity', 'instruction_drift'] via=en_pivot+translate
+[s5] en_pivot translate failed uuid=0cb542c8c62e4d52ac1c51fcfb93a238 err=no_valid_entity_tags_to_protect
+[s5] done 21/138 verdict=fail score=0.15 repairs=5
+[s5] judging 22/138 uuid=5c5f54dc693d4f069c0816187c102d74 lang=doi doc_type=referral_letter
+[s5] done 22/138 verdict=pass score=0.88 repairs=0
+[s5] judging 23/138 uuid=5c5f54dc693d4f069c0816187c102d74 lang=doi doc_type=radiology_report
+[s5] done 23/138 verdict=pass score=0.9 repairs=0
+[s5] judging 24/138 uuid=5c5f54dc693d4f069c0816187c102d74 lang=doi doc_type=er_triage_notes
+[s5] done 24/138 verdict=pass score=0.88 repairs=0
+[s5] judging 25/138 uuid=a215dd216aff46e7add35a2cb913a177 lang=en doc_type=referral_letter
+[s5] repair 1/5 uuid=a215dd216aff46e7add35a2cb913a177 flags=['invented_entity_type']
+[s5] repair 2/5 uuid=a215dd216aff46e7add35a2cb913a177 flags=['invented_entity_type']
+[s5] repair 3/5 uuid=a215dd216aff46e7add35a2cb913a177 flags=['invented_entity_type']
+[s5] repair 4/5 uuid=a215dd216aff46e7add35a2cb913a177 flags=['surrogate_plausibility_collapse'] accumulated=['invented_entity_type', 'surrogate_plausibility_collapse']
+[s5] REPAIRED-THEN-PASS uuid=a215dd216aff46e7add35a2cb913a177 rounds=4 score=0.92
+[s5] done 25/138 verdict=pass score=0.92 repairs=4
+[s5] judging 26/138 uuid=a215dd216aff46e7add35a2cb913a177 lang=en doc_type=radiology_report
+[s5] done 26/138 verdict=pass score=0.95 repairs=0
+[s5] judging 27/138 uuid=a215dd216aff46e7add35a2cb913a177 lang=en doc_type=er_triage_notes
+[s5] done 27/138 verdict=pass score=0.95 repairs=0
+[s5] judging 28/138 uuid=f584cfd90471426ea809f549021f9a0f lang=en doc_type=referral_letter
+[s5] done 28/138 verdict=pass score=0.92 repairs=0
+[s5] judging 29/138 uuid=f584cfd90471426ea809f549021f9a0f lang=en doc_type=radiology_report
+[s5] done 29/138 verdict=pass score=0.92 repairs=0
+[s5] judging 30/138 uuid=f584cfd90471426ea809f549021f9a0f lang=en doc_type=er_triage_notes
+[s5] done 30/138 verdict=pass score=0.95 repairs=0
+[s5] judging 31/138 uuid=85cdb818ce5740ed85a9bfb29cf57098 lang=gu doc_type=referral_letter
+[s5] done 31/138 verdict=pass score=0.9 repairs=0
+[s5] judging 32/138 uuid=85cdb818ce5740ed85a9bfb29cf57098 lang=gu doc_type=radiology_report
+[s5] done 32/138 verdict=pass score=0.9 repairs=0
+[s5] judging 33/138 uuid=85cdb818ce5740ed85a9bfb29cf57098 lang=gu doc_type=er_triage_notes
+[s5] repair 1/5 uuid=85cdb818ce5740ed85a9bfb29cf57098 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=85cdb818ce5740ed85a9bfb29cf57098 err=script_purity_failed:target_script_ratio:0.061<0.35
+[s5] repair 2/5 uuid=85cdb818ce5740ed85a9bfb29cf57098 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=85cdb818ce5740ed85a9bfb29cf57098 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 3/5 uuid=85cdb818ce5740ed85a9bfb29cf57098 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=85cdb818ce5740ed85a9bfb29cf57098 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 4/5 uuid=85cdb818ce5740ed85a9bfb29cf57098 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=85cdb818ce5740ed85a9bfb29cf57098 err=script_purity_failed:target_script_ratio:0.042<0.35
+[s5] repair 5/5 uuid=85cdb818ce5740ed85a9bfb29cf57098 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=85cdb818ce5740ed85a9bfb29cf57098 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] done 33/138 verdict=fail score=0.45 repairs=5
+[s5] judging 34/138 uuid=8c410a2e98134e9a91f1d50d5811a470 lang=gu doc_type=referral_letter
+[s5] repair 1/5 uuid=8c410a2e98134e9a91f1d50d5811a470 flags=['cross_language_entity_shift'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=8c410a2e98134e9a91f1d50d5811a470 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 2/5 uuid=8c410a2e98134e9a91f1d50d5811a470 flags=['dialect_script_impurity'] accumulated=['cross_language_entity_shift', 'dialect_script_impurity'] via=en_pivot+translate
+[s5] REPAIRED-THEN-PASS uuid=8c410a2e98134e9a91f1d50d5811a470 rounds=2 score=0.88
+[s5] done 34/138 verdict=pass score=0.88 repairs=2
+[s5] judging 35/138 uuid=8c410a2e98134e9a91f1d50d5811a470 lang=gu doc_type=radiology_report
+[s5] done 35/138 verdict=pass score=0.95 repairs=0
+[s5] judging 36/138 uuid=8c410a2e98134e9a91f1d50d5811a470 lang=gu doc_type=er_triage_notes
+[s5] repair 1/5 uuid=8c410a2e98134e9a91f1d50d5811a470 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=8c410a2e98134e9a91f1d50d5811a470 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 2/5 uuid=8c410a2e98134e9a91f1d50d5811a470 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=8c410a2e98134e9a91f1d50d5811a470 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 3/5 uuid=8c410a2e98134e9a91f1d50d5811a470 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=8c410a2e98134e9a91f1d50d5811a470 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 4/5 uuid=8c410a2e98134e9a91f1d50d5811a470 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=8c410a2e98134e9a91f1d50d5811a470 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 5/5 uuid=8c410a2e98134e9a91f1d50d5811a470 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=8c410a2e98134e9a91f1d50d5811a470 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] done 36/138 verdict=fail score=0.2 repairs=5
+[s5] judging 37/138 uuid=62bbda52de29443287ee799e3f265919 lang=hi doc_type=automated_sms
+[s5] done 37/138 verdict=pass score=0.9 repairs=0
+[s5] judging 38/138 uuid=62bbda52de29443287ee799e3f265919 lang=hi doc_type=hospital_billing
+[s5] done 38/138 verdict=pass score=0.9 repairs=0
+[s5] judging 39/138 uuid=62bbda52de29443287ee799e3f265919 lang=hi doc_type=discharge_summary
+[s5] done 39/138 verdict=pass score=0.9 repairs=0
+[s5] judging 40/138 uuid=9b16854e981048c59b1bc1efd2685bdf lang=hi doc_type=insurance_claim
+[s5] repair 1/5 uuid=9b16854e981048c59b1bc1efd2685bdf flags=['instruction_drift', 'length_violation', 'surrogate_plausibility_collapse'] via=en_pivot+translate
+[s5] repair 2/5 uuid=9b16854e981048c59b1bc1efd2685bdf flags=['invented_entity_type'] accumulated=['instruction_drift', 'invented_entity_type', 'length_violation', 'surrogate_plausibility_collapse'] via=en_pivot+translate
+[s5] REPAIRED-THEN-PASS uuid=9b16854e981048c59b1bc1efd2685bdf rounds=2 score=0.85
+[s5] done 40/138 verdict=pass score=0.85 repairs=2
+[s5] judging 41/138 uuid=9b16854e981048c59b1bc1efd2685bdf lang=hi doc_type=automated_sms
+[s5] done 41/138 verdict=pass score=0.85 repairs=0
+[s5] judging 42/138 uuid=9b16854e981048c59b1bc1efd2685bdf lang=hi doc_type=hospital_billing
+[s5] done 42/138 verdict=pass score=0.95 repairs=0
+[s5] judging 43/138 uuid=911448710ce34ff686d217211c009ba8 lang=kn doc_type=automated_sms
+[s5] done 43/138 verdict=pass score=0.9 repairs=0
+[s5] judging 44/138 uuid=911448710ce34ff686d217211c009ba8 lang=kn doc_type=insurance_claim
+[s5] done 44/138 verdict=pass score=0.9 repairs=0
+[s5] judging 45/138 uuid=911448710ce34ff686d217211c009ba8 lang=kn doc_type=hospital_billing
+[s5] done 45/138 verdict=pass score=0.92 repairs=0
+[s5] judging 46/138 uuid=d89930b893984d4b96fbd0b492413321 lang=kn doc_type=insurance_claim
+[s5] done 46/138 verdict=pass score=0.9 repairs=0
+[s5] judging 47/138 uuid=d89930b893984d4b96fbd0b492413321 lang=kn doc_type=automated_sms
+[s5] done 47/138 verdict=pass score=0.9 repairs=0
+[s5] judging 48/138 uuid=d89930b893984d4b96fbd0b492413321 lang=kn doc_type=hospital_billing
+[s5] repair 1/5 uuid=d89930b893984d4b96fbd0b492413321 flags=['instruction_drift'] via=en_pivot+translate
+[s5] repair 2/5 uuid=d89930b893984d4b96fbd0b492413321 flags=['instruction_drift', 'length_violation'] via=en_pivot+translate
+[s5] REPAIRED-THEN-PASS uuid=d89930b893984d4b96fbd0b492413321 rounds=2 score=0.9
+[s5] done 48/138 verdict=pass score=0.9 repairs=2
+[s5] judging 49/138 uuid=c03b2ff49ffa439380a254bb9f8972f7 lang=kok doc_type=automated_sms
+[s5] done 49/138 verdict=pass score=0.9 repairs=0
+[s5] judging 50/138 uuid=c03b2ff49ffa439380a254bb9f8972f7 lang=kok doc_type=hospital_billing
+[s5] repair 1/5 uuid=c03b2ff49ffa439380a254bb9f8972f7 flags=['dialect_script_impurity', 'instruction_drift'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=c03b2ff49ffa439380a254bb9f8972f7 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 2/5 uuid=c03b2ff49ffa439380a254bb9f8972f7 flags=['dialect_script_impurity'] accumulated=['dialect_script_impurity', 'instruction_drift'] via=en_pivot+translate
+[s5] REPAIRED-THEN-PASS uuid=c03b2ff49ffa439380a254bb9f8972f7 rounds=2 score=0.9
+[s5] done 50/138 verdict=pass score=0.9 repairs=2
+[s5] judging 51/138 uuid=c03b2ff49ffa439380a254bb9f8972f7 lang=kok doc_type=discharge_summary
+[s5] repair 1/5 uuid=c03b2ff49ffa439380a254bb9f8972f7 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] repair 2/5 uuid=c03b2ff49ffa439380a254bb9f8972f7 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=c03b2ff49ffa439380a254bb9f8972f7 err=script_purity_failed:target_script_ratio:0.274<0.35
+[s5] repair 3/5 uuid=c03b2ff49ffa439380a254bb9f8972f7 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] REPAIRED-THEN-PASS uuid=c03b2ff49ffa439380a254bb9f8972f7 rounds=3 score=0.85
+[s5] done 51/138 verdict=pass score=0.85 repairs=3
+[s5] judging 52/138 uuid=fc0833a3fd3a4916849cba96e415af4b lang=kok doc_type=hospital_billing
+[s5] repair 1/5 uuid=fc0833a3fd3a4916849cba96e415af4b flags=['domain_persona_mismatch', 'invented_entity_type'] via=en_pivot+translate
+[s5] repair 2/5 uuid=fc0833a3fd3a4916849cba96e415af4b flags=['domain_persona_mismatch'] accumulated=['domain_persona_mismatch', 'invented_entity_type'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=fc0833a3fd3a4916849cba96e415af4b err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 3/5 uuid=fc0833a3fd3a4916849cba96e415af4b flags=['dialect_script_impurity', 'domain_persona_mismatch', 'surrogate_plausibility_collapse'] accumulated=['dialect_script_impurity', 'domain_persona_mismatch', 'invented_entity_type', 'surrogate_plausibility_collapse'] via=en_pivot+translate
+[s5] repair 4/5 uuid=fc0833a3fd3a4916849cba96e415af4b flags=['domain_persona_mismatch'] accumulated=['dialect_script_impurity', 'domain_persona_mismatch', 'invented_entity_type', 'surrogate_plausibility_collapse'] via=en_pivot+translate
+[s5] repair 5/5 uuid=fc0833a3fd3a4916849cba96e415af4b flags=['domain_persona_mismatch'] accumulated=['dialect_script_impurity', 'domain_persona_mismatch', 'invented_entity_type', 'surrogate_plausibility_collapse'] via=en_pivot+translate
+[s5] done 52/138 verdict=fail score=0.6 repairs=5
+[s5] judging 53/138 uuid=fc0833a3fd3a4916849cba96e415af4b lang=kok doc_type=discharge_summary
+[s5] done 53/138 verdict=pass score=0.9 repairs=0
+[s5] judging 54/138 uuid=fc0833a3fd3a4916849cba96e415af4b lang=kok doc_type=referral_letter
+[s5] done 54/138 verdict=pass score=0.9 repairs=0
+[s5] judging 55/138 uuid=18a30340943543c59236f8f4e9379b8d lang=ks doc_type=asha_worker_note
+[s5] done 55/138 verdict=pass score=0.9 repairs=0
+[s5] judging 56/138 uuid=18a30340943543c59236f8f4e9379b8d lang=ks doc_type=phc_register
+[s5] done 56/138 verdict=pass score=0.9 repairs=0
+[s5] judging 57/138 uuid=18a30340943543c59236f8f4e9379b8d lang=ks doc_type=automated_sms
+[s5] done 57/138 verdict=pass score=0.92 repairs=0
+[s5] judging 58/138 uuid=99d8e2b0dd9e42e6b270e50cb12c26c5 lang=ks doc_type=phc_register
+[s5] done 58/138 verdict=pass score=0.92 repairs=0
+[s5] judging 59/138 uuid=99d8e2b0dd9e42e6b270e50cb12c26c5 lang=ks doc_type=asha_worker_note
+[s5] repair 1/5 uuid=99d8e2b0dd9e42e6b270e50cb12c26c5 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] REPAIRED-THEN-PASS uuid=99d8e2b0dd9e42e6b270e50cb12c26c5 rounds=1 score=0.9
+[s5] done 59/138 verdict=pass score=0.9 repairs=1
+[s5] judging 60/138 uuid=99d8e2b0dd9e42e6b270e50cb12c26c5 lang=ks doc_type=insurance_claim
+[s5] repair 1/5 uuid=99d8e2b0dd9e42e6b270e50cb12c26c5 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=99d8e2b0dd9e42e6b270e50cb12c26c5 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 2/5 uuid=99d8e2b0dd9e42e6b270e50cb12c26c5 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=99d8e2b0dd9e42e6b270e50cb12c26c5 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 3/5 uuid=99d8e2b0dd9e42e6b270e50cb12c26c5 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=99d8e2b0dd9e42e6b270e50cb12c26c5 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 4/5 uuid=99d8e2b0dd9e42e6b270e50cb12c26c5 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=99d8e2b0dd9e42e6b270e50cb12c26c5 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 5/5 uuid=99d8e2b0dd9e42e6b270e50cb12c26c5 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=99d8e2b0dd9e42e6b270e50cb12c26c5 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] done 60/138 verdict=fail score=0.25 repairs=5
+[s5] judging 61/138 uuid=06e5b5bd12f94faa9d94346297ac87a6 lang=mai doc_type=prescription
+[s5] done 61/138 verdict=pass score=0.9 repairs=0
+[s5] judging 62/138 uuid=06e5b5bd12f94faa9d94346297ac87a6 lang=mai doc_type=lab_report
+[s5] repair 1/5 uuid=06e5b5bd12f94faa9d94346297ac87a6 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] repair 2/5 uuid=06e5b5bd12f94faa9d94346297ac87a6 flags=['length_violation', 'surrogate_plausibility_collapse', 'instruction_drift'] accumulated=['dialect_script_impurity', 'instruction_drift', 'length_violation', 'surrogate_plausibility_collapse'] via=en_pivot+translate
+[s5] REPAIRED-THEN-PASS uuid=06e5b5bd12f94faa9d94346297ac87a6 rounds=2 score=0.85
+[s5] done 62/138 verdict=pass score=0.85 repairs=2
+[s5] judging 63/138 uuid=06e5b5bd12f94faa9d94346297ac87a6 lang=mai doc_type=asha_worker_note
+[s5] done 63/138 verdict=pass score=0.9 repairs=0
+[s5] judging 64/138 uuid=9fe1a2291cd5496b92e09e133ea65d85 lang=mai doc_type=lab_report
+[s5] repair 1/5 uuid=9fe1a2291cd5496b92e09e133ea65d85 flags=['instruction_drift', 'dialect_script_impurity', 'cross_language_entity_shift'] accumulated=['cross_language_entity_shift', 'dialect_script_impurity', 'instruction_drift'] via=en_pivot+translate
+[s5] repair 2/5 uuid=9fe1a2291cd5496b92e09e133ea65d85 flags=['instruction_drift', 'dialect_script_impurity'] accumulated=['cross_language_entity_shift', 'dialect_script_impurity', 'instruction_drift'] via=en_pivot+translate
+[s5] repair 3/5 uuid=9fe1a2291cd5496b92e09e133ea65d85 flags=['dialect_script_impurity', 'instruction_drift'] accumulated=['cross_language_entity_shift', 'dialect_script_impurity', 'instruction_drift'] via=en_pivot+translate
+[s5] repair 4/5 uuid=9fe1a2291cd5496b92e09e133ea65d85 flags=['dialect_script_impurity', 'instruction_drift'] accumulated=['cross_language_entity_shift', 'dialect_script_impurity', 'instruction_drift'] via=en_pivot+translate
+[s5] repair 5/5 uuid=9fe1a2291cd5496b92e09e133ea65d85 flags=['dialect_script_impurity'] accumulated=['cross_language_entity_shift', 'dialect_script_impurity', 'instruction_drift'] via=en_pivot+translate
+[s5] done 64/138 verdict=fail score=0.35 repairs=5
+[s5] judging 65/138 uuid=9fe1a2291cd5496b92e09e133ea65d85 lang=mai doc_type=opd_slip
+[s5] done 65/138 verdict=pass score=0.9 repairs=0
+[s5] judging 66/138 uuid=9fe1a2291cd5496b92e09e133ea65d85 lang=mai doc_type=phc_register
+[s5] done 66/138 verdict=pass score=0.95 repairs=0
+[s5] judging 67/138 uuid=17f9c3d0179e4aa5a9546ec050612896 lang=ml doc_type=asha_worker_note
+[s5] done 67/138 verdict=pass score=0.92 repairs=0
+[s5] judging 68/138 uuid=17f9c3d0179e4aa5a9546ec050612896 lang=ml doc_type=automated_sms
+[s5] done 68/138 verdict=pass score=0.92 repairs=0
+[s5] judging 69/138 uuid=17f9c3d0179e4aa5a9546ec050612896 lang=ml doc_type=hospital_billing
+[s5] repair 1/5 uuid=17f9c3d0179e4aa5a9546ec050612896 flags=['domain_persona_mismatch', 'surrogate_plausibility_collapse'] via=en_pivot+translate
+[s5] repair 2/5 uuid=17f9c3d0179e4aa5a9546ec050612896 flags=['domain_persona_mismatch', 'surrogate_plausibility_collapse'] via=en_pivot+translate
+[s5] en_pivot translate failed uuid=17f9c3d0179e4aa5a9546ec050612896 err=translate_failed:Translation under-counted [[DOCTOR_NAME|…]] tags: found=0 expected>=1
+[s5] repair 3/5 uuid=17f9c3d0179e4aa5a9546ec050612896 flags=['dialect_script_impurity'] accumulated=['dialect_script_impurity', 'domain_persona_mismatch', 'surrogate_plausibility_collapse'] via=en_pivot+translate
+[s5] repair 4/5 uuid=17f9c3d0179e4aa5a9546ec050612896 flags=['surrogate_plausibility_collapse', 'domain_persona_mismatch', 'instruction_drift'] accumulated=['dialect_script_impurity', 'domain_persona_mismatch', 'instruction_drift', 'surrogate_plausibility_collapse'] via=en_pivot+translate
+[s5] repair 5/5 uuid=17f9c3d0179e4aa5a9546ec050612896 flags=['instruction_drift', 'surrogate_plausibility_collapse'] accumulated=['dialect_script_impurity', 'domain_persona_mismatch', 'instruction_drift', 'surrogate_plausibility_collapse'] via=en_pivot+translate
+[s5] done 69/138 verdict=fail score=0.6 repairs=5
+[s5] judging 70/138 uuid=80435bdcef24479390d6e6ae0b2aeeb1 lang=ml doc_type=asha_worker_note
+[s5] done 70/138 verdict=pass score=0.9 repairs=0
+[s5] judging 71/138 uuid=80435bdcef24479390d6e6ae0b2aeeb1 lang=ml doc_type=automated_sms
+[s5] done 71/138 verdict=pass score=0.92 repairs=0
+[s5] judging 72/138 uuid=80435bdcef24479390d6e6ae0b2aeeb1 lang=ml doc_type=hospital_billing
+[s5] repair 1/5 uuid=80435bdcef24479390d6e6ae0b2aeeb1 flags=['instruction_drift', 'domain_persona_mismatch', 'surrogate_plausibility_collapse'] accumulated=['domain_persona_mismatch', 'instruction_drift', 'surrogate_plausibility_collapse'] via=en_pivot+translate
+[s5] repair 2/5 uuid=80435bdcef24479390d6e6ae0b2aeeb1 flags=['instruction_drift', 'surrogate_plausibility_collapse'] accumulated=['domain_persona_mismatch', 'instruction_drift', 'surrogate_plausibility_collapse'] via=en_pivot+translate
+[s5] repair 3/5 uuid=80435bdcef24479390d6e6ae0b2aeeb1 flags=['domain_persona_mismatch', 'surrogate_plausibility_collapse'] accumulated=['domain_persona_mismatch', 'instruction_drift', 'surrogate_plausibility_collapse'] via=en_pivot+translate
+[s5] repair 4/5 uuid=80435bdcef24479390d6e6ae0b2aeeb1 flags=['instruction_drift', 'surrogate_plausibility_collapse'] accumulated=['domain_persona_mismatch', 'instruction_drift', 'surrogate_plausibility_collapse'] via=en_pivot+translate
+[s5] repair 5/5 uuid=80435bdcef24479390d6e6ae0b2aeeb1 flags=['instruction_drift', 'surrogate_plausibility_collapse'] accumulated=['domain_persona_mismatch', 'instruction_drift', 'surrogate_plausibility_collapse'] via=en_pivot+translate
+[s5] done 72/138 verdict=fail score=0.55 repairs=5
+[s5] judging 73/138 uuid=1e23bb4e93b0465fa42494aee52e02ef lang=mni doc_type=hospital_billing
+[s5] repair 1/5 uuid=1e23bb4e93b0465fa42494aee52e02ef flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=1e23bb4e93b0465fa42494aee52e02ef err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 2/5 uuid=1e23bb4e93b0465fa42494aee52e02ef flags=['dialect_script_impurity', 'instruction_drift'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=1e23bb4e93b0465fa42494aee52e02ef err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 3/5 uuid=1e23bb4e93b0465fa42494aee52e02ef flags=['dialect_script_impurity', 'instruction_drift'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=1e23bb4e93b0465fa42494aee52e02ef err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 4/5 uuid=1e23bb4e93b0465fa42494aee52e02ef flags=['dialect_script_impurity'] accumulated=['dialect_script_impurity', 'instruction_drift'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=1e23bb4e93b0465fa42494aee52e02ef err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 5/5 uuid=1e23bb4e93b0465fa42494aee52e02ef flags=['dialect_script_impurity'] accumulated=['dialect_script_impurity', 'instruction_drift'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=1e23bb4e93b0465fa42494aee52e02ef err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] done 73/138 verdict=fail score=0.35 repairs=5
+[s5] judging 74/138 uuid=1e23bb4e93b0465fa42494aee52e02ef lang=mni doc_type=discharge_summary
+[s5] repair 1/5 uuid=1e23bb4e93b0465fa42494aee52e02ef flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=1e23bb4e93b0465fa42494aee52e02ef err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 2/5 uuid=1e23bb4e93b0465fa42494aee52e02ef flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=1e23bb4e93b0465fa42494aee52e02ef err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 3/5 uuid=1e23bb4e93b0465fa42494aee52e02ef flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=1e23bb4e93b0465fa42494aee52e02ef err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 4/5 uuid=1e23bb4e93b0465fa42494aee52e02ef flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=1e23bb4e93b0465fa42494aee52e02ef err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 5/5 uuid=1e23bb4e93b0465fa42494aee52e02ef flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=1e23bb4e93b0465fa42494aee52e02ef err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] done 74/138 verdict=fail score=0.2 repairs=5
+[s5] judging 75/138 uuid=1e23bb4e93b0465fa42494aee52e02ef lang=mni doc_type=referral_letter
+[s5] repair 1/5 uuid=1e23bb4e93b0465fa42494aee52e02ef flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=1e23bb4e93b0465fa42494aee52e02ef err=script_purity_failed:target_script_ratio:0.343<0.35
+[s5] repair 2/5 uuid=1e23bb4e93b0465fa42494aee52e02ef flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=1e23bb4e93b0465fa42494aee52e02ef err=script_purity_failed:target_script_ratio:0.316<0.35
+[s5] repair 3/5 uuid=1e23bb4e93b0465fa42494aee52e02ef flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=1e23bb4e93b0465fa42494aee52e02ef err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 4/5 uuid=1e23bb4e93b0465fa42494aee52e02ef flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=1e23bb4e93b0465fa42494aee52e02ef err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 5/5 uuid=1e23bb4e93b0465fa42494aee52e02ef flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=1e23bb4e93b0465fa42494aee52e02ef err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] done 75/138 verdict=fail score=0.25 repairs=5
+[s5] judging 76/138 uuid=d15c31be6c8e40a393e6e6f4f9562ea3 lang=mni doc_type=hospital_billing
+[s5] repair 1/5 uuid=d15c31be6c8e40a393e6e6f4f9562ea3 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=d15c31be6c8e40a393e6e6f4f9562ea3 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 2/5 uuid=d15c31be6c8e40a393e6e6f4f9562ea3 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=d15c31be6c8e40a393e6e6f4f9562ea3 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 3/5 uuid=d15c31be6c8e40a393e6e6f4f9562ea3 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=d15c31be6c8e40a393e6e6f4f9562ea3 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 4/5 uuid=d15c31be6c8e40a393e6e6f4f9562ea3 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=d15c31be6c8e40a393e6e6f4f9562ea3 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 5/5 uuid=d15c31be6c8e40a393e6e6f4f9562ea3 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=d15c31be6c8e40a393e6e6f4f9562ea3 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] done 76/138 verdict=fail score=0.25 repairs=5
+[s5] judging 77/138 uuid=d15c31be6c8e40a393e6e6f4f9562ea3 lang=mni doc_type=discharge_summary
+[s5] repair 1/5 uuid=d15c31be6c8e40a393e6e6f4f9562ea3 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] repair 2/5 uuid=d15c31be6c8e40a393e6e6f4f9562ea3 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=d15c31be6c8e40a393e6e6f4f9562ea3 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 3/5 uuid=d15c31be6c8e40a393e6e6f4f9562ea3 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=d15c31be6c8e40a393e6e6f4f9562ea3 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 4/5 uuid=d15c31be6c8e40a393e6e6f4f9562ea3 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=d15c31be6c8e40a393e6e6f4f9562ea3 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 5/5 uuid=d15c31be6c8e40a393e6e6f4f9562ea3 flags=['dialect_script_impurity', 'instruction_drift'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=d15c31be6c8e40a393e6e6f4f9562ea3 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] done 77/138 verdict=fail score=0.25 repairs=5
+[s5] judging 78/138 uuid=d15c31be6c8e40a393e6e6f4f9562ea3 lang=mni doc_type=referral_letter
+[s5] repair 1/5 uuid=d15c31be6c8e40a393e6e6f4f9562ea3 flags=['dialect_script_impurity', 'instruction_drift'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=d15c31be6c8e40a393e6e6f4f9562ea3 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 2/5 uuid=d15c31be6c8e40a393e6e6f4f9562ea3 flags=['dialect_script_impurity'] accumulated=['dialect_script_impurity', 'instruction_drift'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=d15c31be6c8e40a393e6e6f4f9562ea3 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 3/5 uuid=d15c31be6c8e40a393e6e6f4f9562ea3 flags=['dialect_script_impurity', 'surrogate_plausibility_collapse'] accumulated=['dialect_script_impurity', 'instruction_drift', 'surrogate_plausibility_collapse'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=d15c31be6c8e40a393e6e6f4f9562ea3 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 4/5 uuid=d15c31be6c8e40a393e6e6f4f9562ea3 flags=['dialect_script_impurity', 'surrogate_plausibility_collapse'] accumulated=['dialect_script_impurity', 'instruction_drift', 'surrogate_plausibility_collapse'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=d15c31be6c8e40a393e6e6f4f9562ea3 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 5/5 uuid=d15c31be6c8e40a393e6e6f4f9562ea3 flags=['dialect_script_impurity', 'surrogate_plausibility_collapse', 'instruction_drift'] accumulated=['dialect_script_impurity', 'instruction_drift', 'surrogate_plausibility_collapse'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=d15c31be6c8e40a393e6e6f4f9562ea3 err=script_purity_failed:target_script_ratio:0.002<0.35
+[s5] done 78/138 verdict=fail score=0.25 repairs=5
+[s5] judging 79/138 uuid=92bd0bf2eb344ae9817ad6c5c3e89f31 lang=mr doc_type=asha_worker_note
+[s5] done 79/138 verdict=pass score=0.92 repairs=0
+[s5] judging 80/138 uuid=92bd0bf2eb344ae9817ad6c5c3e89f31 lang=mr doc_type=phc_register
+[s5] done 80/138 verdict=pass score=0.93 repairs=0
+[s5] judging 81/138 uuid=92bd0bf2eb344ae9817ad6c5c3e89f31 lang=mr doc_type=automated_sms
+[s5] done 81/138 verdict=pass score=0.92 repairs=0
+[s5] judging 82/138 uuid=efe93c7f20fc46b7aa8ef936a09c90c6 lang=mr doc_type=phc_register
+[s5] done 82/138 verdict=pass score=0.9 repairs=0
+[s5] judging 83/138 uuid=efe93c7f20fc46b7aa8ef936a09c90c6 lang=mr doc_type=asha_worker_note
+[s5] done 83/138 verdict=pass score=0.9 repairs=0
+[s5] judging 84/138 uuid=efe93c7f20fc46b7aa8ef936a09c90c6 lang=mr doc_type=insurance_claim
+[s5] done 84/138 verdict=pass score=0.92 repairs=0
+[s5] judging 85/138 uuid=6319018329714b92a0a64f8228dc39b6 lang=ne doc_type=opd_slip
+[s5] done 85/138 verdict=pass score=0.92 repairs=0
+[s5] judging 86/138 uuid=6319018329714b92a0a64f8228dc39b6 lang=ne doc_type=surgical_note
+[s5] done 86/138 verdict=pass score=0.9 repairs=0
+[s5] judging 87/138 uuid=6319018329714b92a0a64f8228dc39b6 lang=ne doc_type=prescription
+[s5] done 87/138 verdict=pass score=0.9 repairs=0
+[s5] judging 88/138 uuid=fbabf2b833cf4467a53a6be7025793c0 lang=ne doc_type=surgical_note
+[s5] done 88/138 verdict=pass score=0.9 repairs=0
+[s5] judging 89/138 uuid=fbabf2b833cf4467a53a6be7025793c0 lang=ne doc_type=opd_slip
+[s5] done 89/138 verdict=pass score=0.93 repairs=0
+[s5] judging 90/138 uuid=fbabf2b833cf4467a53a6be7025793c0 lang=ne doc_type=lab_report
+[s5] done 90/138 verdict=pass score=0.9 repairs=0
+[s5] judging 91/138 uuid=e7613a99c76549bb86fc88e40ba962b5 lang=or doc_type=opd_slip
+[s5] done 91/138 verdict=pass score=0.92 repairs=0
+[s5] judging 92/138 uuid=e7613a99c76549bb86fc88e40ba962b5 lang=or doc_type=prescription
+[s5] done 92/138 verdict=pass score=0.9 repairs=0
+[s5] judging 93/138 uuid=e7613a99c76549bb86fc88e40ba962b5 lang=or doc_type=lab_report
+[s5] repair 1/5 uuid=e7613a99c76549bb86fc88e40ba962b5 flags=['instruction_drift', 'surrogate_plausibility_collapse'] via=en_pivot+translate
+[s5] REPAIRED-THEN-PASS uuid=e7613a99c76549bb86fc88e40ba962b5 rounds=1 score=0.9
+[s5] done 93/138 verdict=pass score=0.9 repairs=1
+[s5] judging 94/138 uuid=f64651bbe52e4c86b23c9a11c76682d9 lang=or doc_type=surgical_note
+[s5] done 94/138 verdict=pass score=0.9 repairs=0
+[s5] judging 95/138 uuid=f64651bbe52e4c86b23c9a11c76682d9 lang=or doc_type=lab_report
+[s5] done 95/138 verdict=pass score=0.93 repairs=0
+[s5] judging 96/138 uuid=f64651bbe52e4c86b23c9a11c76682d9 lang=or doc_type=opd_slip
+[s5] repair 1/5 uuid=f64651bbe52e4c86b23c9a11c76682d9 flags=['length_violation', 'domain_persona_mismatch'] accumulated=['domain_persona_mismatch', 'length_violation'] via=en_pivot+translate
+[s5] repair 2/5 uuid=f64651bbe52e4c86b23c9a11c76682d9 flags=['domain_persona_mismatch', 'dialect_script_impurity'] accumulated=['dialect_script_impurity', 'domain_persona_mismatch', 'length_violation'] via=en_pivot+translate
+[s5] repair 3/5 uuid=f64651bbe52e4c86b23c9a11c76682d9 flags=['domain_persona_mismatch'] accumulated=['dialect_script_impurity', 'domain_persona_mismatch', 'length_violation'] via=en_pivot+translate
+[s5] REPAIRED-THEN-PASS uuid=f64651bbe52e4c86b23c9a11c76682d9 rounds=3 score=0.9
+[s5] done 96/138 verdict=pass score=0.9 repairs=3
+[s5] judging 97/138 uuid=22eae34bd622448286f2f69f2f795893 lang=pa doc_type=radiology_report
+[s5] done 97/138 verdict=pass score=0.92 repairs=0
+[s5] judging 98/138 uuid=22eae34bd622448286f2f69f2f795893 lang=pa doc_type=er_triage_notes
+[s5] repair 1/5 uuid=22eae34bd622448286f2f69f2f795893 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=22eae34bd622448286f2f69f2f795893 err=script_purity_failed:target_script_ratio:0.142<0.35
+[s5] repair 2/5 uuid=22eae34bd622448286f2f69f2f795893 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] REPAIRED-THEN-PASS uuid=22eae34bd622448286f2f69f2f795893 rounds=2 score=0.9
+[s5] done 98/138 verdict=pass score=0.9 repairs=2
+[s5] judging 99/138 uuid=22eae34bd622448286f2f69f2f795893 lang=pa doc_type=telemedicine_transcript
+[s5] done 99/138 verdict=pass score=0.92 repairs=0
+[s5] judging 100/138 uuid=24405a884af14bcba6e9c3657baebf83 lang=pa doc_type=radiology_report
+[s5] repair 1/5 uuid=24405a884af14bcba6e9c3657baebf83 flags=['domain_persona_mismatch', 'surrogate_plausibility_collapse'] via=en_pivot+translate
+[s5] repair 2/5 uuid=24405a884af14bcba6e9c3657baebf83 flags=['domain_persona_mismatch', 'instruction_drift'] accumulated=['domain_persona_mismatch', 'instruction_drift', 'surrogate_plausibility_collapse'] via=en_pivot+translate
+[s5] repair 3/5 uuid=24405a884af14bcba6e9c3657baebf83 flags=['domain_persona_mismatch', 'surrogate_plausibility_collapse', 'instruction_drift'] accumulated=['domain_persona_mismatch', 'instruction_drift', 'surrogate_plausibility_collapse'] via=en_pivot+translate
+[s5] repair 4/5 uuid=24405a884af14bcba6e9c3657baebf83 flags=['domain_persona_mismatch'] accumulated=['domain_persona_mismatch', 'instruction_drift', 'surrogate_plausibility_collapse'] via=en_pivot+translate
+[s5] repair 5/5 uuid=24405a884af14bcba6e9c3657baebf83 flags=['domain_persona_mismatch'] accumulated=['domain_persona_mismatch', 'instruction_drift', 'surrogate_plausibility_collapse'] via=en_pivot+translate
+[s5] done 100/138 verdict=fail score=0.45 repairs=5
+[s5] judging 101/138 uuid=24405a884af14bcba6e9c3657baebf83 lang=pa doc_type=er_triage_notes
+[s5] done 101/138 verdict=pass score=0.88 repairs=0
+[s5] judging 102/138 uuid=24405a884af14bcba6e9c3657baebf83 lang=pa doc_type=telemedicine_transcript
+[s5] done 102/138 verdict=pass score=0.92 repairs=0
+[s5] judging 103/138 uuid=22ef884ce12247309d07fc3f601a3c59 lang=sa doc_type=lab_report
+[s5] done 103/138 verdict=pass score=0.9 repairs=0
+[s5] judging 104/138 uuid=22ef884ce12247309d07fc3f601a3c59 lang=sa doc_type=opd_slip
+[s5] done 104/138 verdict=pass score=0.85 repairs=0
+[s5] judging 105/138 uuid=22ef884ce12247309d07fc3f601a3c59 lang=sa doc_type=phc_register
+[s5] repair 1/5 uuid=22ef884ce12247309d07fc3f601a3c59 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] repair 2/5 uuid=22ef884ce12247309d07fc3f601a3c59 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] repair 3/5 uuid=22ef884ce12247309d07fc3f601a3c59 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] repair 4/5 uuid=22ef884ce12247309d07fc3f601a3c59 flags=['dialect_script_impurity', 'instruction_drift'] via=en_pivot+translate
+[s5] repair 5/5 uuid=22ef884ce12247309d07fc3f601a3c59 flags=['dialect_script_impurity'] accumulated=['dialect_script_impurity', 'instruction_drift'] via=en_pivot+translate
+[s5] done 105/138 verdict=fail score=0.45 repairs=5
+[s5] judging 106/138 uuid=6e943dc3578249e38b9e61705d0912a9 lang=sa doc_type=prescription
+[s5] done 106/138 verdict=pass score=0.85 repairs=0
+[s5] judging 107/138 uuid=6e943dc3578249e38b9e61705d0912a9 lang=sa doc_type=asha_worker_note
+[s5] done 107/138 verdict=pass score=0.9 repairs=0
+[s5] judging 108/138 uuid=6e943dc3578249e38b9e61705d0912a9 lang=sa doc_type=phc_register
+[s5] repair 1/5 uuid=6e943dc3578249e38b9e61705d0912a9 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] repair 2/5 uuid=6e943dc3578249e38b9e61705d0912a9 flags=['dialect_script_impurity', 'cross_language_entity_shift'] accumulated=['cross_language_entity_shift', 'dialect_script_impurity'] via=en_pivot+translate
+[s5] repair 3/5 uuid=6e943dc3578249e38b9e61705d0912a9 flags=['dialect_script_impurity'] accumulated=['cross_language_entity_shift', 'dialect_script_impurity'] via=en_pivot+translate
+[s5] repair 4/5 uuid=6e943dc3578249e38b9e61705d0912a9 flags=['dialect_script_impurity', 'instruction_drift'] accumulated=['cross_language_entity_shift', 'dialect_script_impurity', 'instruction_drift'] via=en_pivot+translate
+[s5] repair 5/5 uuid=6e943dc3578249e38b9e61705d0912a9 flags=['dialect_script_impurity', 'instruction_drift'] accumulated=['cross_language_entity_shift', 'dialect_script_impurity', 'instruction_drift'] via=en_pivot+translate
+[s5] done 108/138 verdict=fail score=0.35 repairs=5
+[s5] judging 109/138 uuid=49e7eef3f6644cc689038f044f77f052 lang=sat doc_type=opd_slip
+[s5] repair 1/5 uuid=49e7eef3f6644cc689038f044f77f052 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=49e7eef3f6644cc689038f044f77f052 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 2/5 uuid=49e7eef3f6644cc689038f044f77f052 flags=['dialect_script_impurity', 'surrogate_plausibility_collapse', 'length_violation'] accumulated=['dialect_script_impurity', 'length_violation', 'surrogate_plausibility_collapse'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=49e7eef3f6644cc689038f044f77f052 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 3/5 uuid=49e7eef3f6644cc689038f044f77f052 flags=['dialect_script_impurity'] accumulated=['dialect_script_impurity', 'length_violation', 'surrogate_plausibility_collapse'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=49e7eef3f6644cc689038f044f77f052 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 4/5 uuid=49e7eef3f6644cc689038f044f77f052 flags=['dialect_script_impurity', 'instruction_drift'] accumulated=['dialect_script_impurity', 'instruction_drift', 'length_violation', 'surrogate_plausibility_collapse'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=49e7eef3f6644cc689038f044f77f052 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 5/5 uuid=49e7eef3f6644cc689038f044f77f052 flags=['dialect_script_impurity'] accumulated=['dialect_script_impurity', 'instruction_drift', 'length_violation', 'surrogate_plausibility_collapse'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=49e7eef3f6644cc689038f044f77f052 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] done 109/138 verdict=fail score=0.2 repairs=5
+[s5] judging 110/138 uuid=49e7eef3f6644cc689038f044f77f052 lang=sat doc_type=phc_register
+[s5] repair 1/5 uuid=49e7eef3f6644cc689038f044f77f052 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=49e7eef3f6644cc689038f044f77f052 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 2/5 uuid=49e7eef3f6644cc689038f044f77f052 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=49e7eef3f6644cc689038f044f77f052 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 3/5 uuid=49e7eef3f6644cc689038f044f77f052 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=49e7eef3f6644cc689038f044f77f052 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 4/5 uuid=49e7eef3f6644cc689038f044f77f052 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=49e7eef3f6644cc689038f044f77f052 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 5/5 uuid=49e7eef3f6644cc689038f044f77f052 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=49e7eef3f6644cc689038f044f77f052 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] done 110/138 verdict=fail score=0.2 repairs=5
+[s5] judging 111/138 uuid=49e7eef3f6644cc689038f044f77f052 lang=sat doc_type=prescription
+[s5] repair 1/5 uuid=49e7eef3f6644cc689038f044f77f052 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=49e7eef3f6644cc689038f044f77f052 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 2/5 uuid=49e7eef3f6644cc689038f044f77f052 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=49e7eef3f6644cc689038f044f77f052 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 3/5 uuid=49e7eef3f6644cc689038f044f77f052 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=49e7eef3f6644cc689038f044f77f052 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 4/5 uuid=49e7eef3f6644cc689038f044f77f052 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=49e7eef3f6644cc689038f044f77f052 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 5/5 uuid=49e7eef3f6644cc689038f044f77f052 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=49e7eef3f6644cc689038f044f77f052 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] done 111/138 verdict=fail score=0.2 repairs=5
+[s5] judging 112/138 uuid=c98c2d51b4ea4d0c947d6dfc0ee57383 lang=sat doc_type=asha_worker_note
+[s5] done 112/138 verdict=pass score=0.9 repairs=0
+[s5] judging 113/138 uuid=c98c2d51b4ea4d0c947d6dfc0ee57383 lang=sat doc_type=automated_sms
+[s5] repair 1/5 uuid=c98c2d51b4ea4d0c947d6dfc0ee57383 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate failed uuid=c98c2d51b4ea4d0c947d6dfc0ee57383 err=translate_failed:Translation lost protected ID tag '[[PHONE_NUMBER|9876543210]]'
+[s5] repair 2/5 uuid=c98c2d51b4ea4d0c947d6dfc0ee57383 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=c98c2d51b4ea4d0c947d6dfc0ee57383 err=script_purity_failed:wrong_indic_script:Devanagari>Ol Chiki
+[s5] repair 3/5 uuid=c98c2d51b4ea4d0c947d6dfc0ee57383 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=c98c2d51b4ea4d0c947d6dfc0ee57383 err=script_purity_failed:wrong_indic_script:Devanagari>Ol Chiki
+[s5] repair 4/5 uuid=c98c2d51b4ea4d0c947d6dfc0ee57383 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=c98c2d51b4ea4d0c947d6dfc0ee57383 err=script_purity_failed:wrong_indic_script:Devanagari>Ol Chiki
+[s5] repair 5/5 uuid=c98c2d51b4ea4d0c947d6dfc0ee57383 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=c98c2d51b4ea4d0c947d6dfc0ee57383 err=script_purity_failed:wrong_indic_script:Devanagari>Ol Chiki
+[s5] done 113/138 verdict=fail score=0.2 repairs=5
+[s5] judging 114/138 uuid=c98c2d51b4ea4d0c947d6dfc0ee57383 lang=sat doc_type=insurance_claim
+[s5] repair 1/5 uuid=c98c2d51b4ea4d0c947d6dfc0ee57383 flags=['dialect_script_impurity', 'instruction_drift'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=c98c2d51b4ea4d0c947d6dfc0ee57383 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 2/5 uuid=c98c2d51b4ea4d0c947d6dfc0ee57383 flags=['dialect_script_impurity'] accumulated=['dialect_script_impurity', 'instruction_drift'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=c98c2d51b4ea4d0c947d6dfc0ee57383 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 3/5 uuid=c98c2d51b4ea4d0c947d6dfc0ee57383 flags=['dialect_script_impurity'] accumulated=['dialect_script_impurity', 'instruction_drift'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=c98c2d51b4ea4d0c947d6dfc0ee57383 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 4/5 uuid=c98c2d51b4ea4d0c947d6dfc0ee57383 flags=['dialect_script_impurity'] accumulated=['dialect_script_impurity', 'instruction_drift'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=c98c2d51b4ea4d0c947d6dfc0ee57383 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 5/5 uuid=c98c2d51b4ea4d0c947d6dfc0ee57383 flags=['dialect_script_impurity'] accumulated=['dialect_script_impurity', 'instruction_drift'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=c98c2d51b4ea4d0c947d6dfc0ee57383 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] done 114/138 verdict=fail score=0.2 repairs=5
+[s5] judging 115/138 uuid=5c09bf9c92bb4474a1a128379f250e86 lang=sd doc_type=hospital_billing
+[s5] repair 1/5 uuid=5c09bf9c92bb4474a1a128379f250e86 flags=['instruction_drift', 'dialect_script_impurity'] accumulated=['dialect_script_impurity', 'instruction_drift'] via=en_pivot+translate
+[s5] repair 2/5 uuid=5c09bf9c92bb4474a1a128379f250e86 flags=['dialect_script_impurity'] accumulated=['dialect_script_impurity', 'instruction_drift'] via=en_pivot+translate
+[s5] repair 3/5 uuid=5c09bf9c92bb4474a1a128379f250e86 flags=['instruction_drift', 'dialect_script_impurity'] accumulated=['dialect_script_impurity', 'instruction_drift'] via=en_pivot+translate
+[s5] repair 4/5 uuid=5c09bf9c92bb4474a1a128379f250e86 flags=['instruction_drift', 'dialect_script_impurity'] accumulated=['dialect_script_impurity', 'instruction_drift'] via=en_pivot+translate
+[s5] repair 5/5 uuid=5c09bf9c92bb4474a1a128379f250e86 flags=['instruction_drift', 'domain_persona_mismatch'] accumulated=['dialect_script_impurity', 'domain_persona_mismatch', 'instruction_drift'] via=en_pivot+translate
+[s5] done 115/138 verdict=fail score=0.55 repairs=5
+[s5] judging 116/138 uuid=5c09bf9c92bb4474a1a128379f250e86 lang=sd doc_type=discharge_summary
+[s5] repair 1/5 uuid=5c09bf9c92bb4474a1a128379f250e86 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=5c09bf9c92bb4474a1a128379f250e86 err=script_purity_failed:wrong_indic_script:Devanagari>Arabic
+[s5] repair 2/5 uuid=5c09bf9c92bb4474a1a128379f250e86 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=5c09bf9c92bb4474a1a128379f250e86 err=script_purity_failed:wrong_indic_script:Devanagari>Arabic
+[s5] repair 3/5 uuid=5c09bf9c92bb4474a1a128379f250e86 flags=['dialect_script_impurity', 'domain_persona_mismatch'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=5c09bf9c92bb4474a1a128379f250e86 err=script_purity_failed:wrong_indic_script:Devanagari>Arabic
+[s5] repair 4/5 uuid=5c09bf9c92bb4474a1a128379f250e86 flags=['dialect_script_impurity'] accumulated=['dialect_script_impurity', 'domain_persona_mismatch'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=5c09bf9c92bb4474a1a128379f250e86 err=script_purity_failed:wrong_indic_script:Devanagari>Arabic
+[s5] repair 5/5 uuid=5c09bf9c92bb4474a1a128379f250e86 flags=['dialect_script_impurity'] accumulated=['dialect_script_impurity', 'domain_persona_mismatch'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=5c09bf9c92bb4474a1a128379f250e86 err=script_purity_failed:wrong_indic_script:Devanagari>Arabic
+[s5] done 116/138 verdict=fail score=0.35 repairs=5
+[s5] judging 117/138 uuid=5c09bf9c92bb4474a1a128379f250e86 lang=sd doc_type=referral_letter
+[s5] repair 1/5 uuid=5c09bf9c92bb4474a1a128379f250e86 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] repair 2/5 uuid=5c09bf9c92bb4474a1a128379f250e86 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] repair 3/5 uuid=5c09bf9c92bb4474a1a128379f250e86 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=5c09bf9c92bb4474a1a128379f250e86 err=script_purity_failed:target_script_ratio:0.000<0.35
+[s5] repair 4/5 uuid=5c09bf9c92bb4474a1a128379f250e86 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] repair 5/5 uuid=5c09bf9c92bb4474a1a128379f250e86 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=5c09bf9c92bb4474a1a128379f250e86 err=script_purity_failed:wrong_indic_script:Devanagari>Arabic
+[s5] done 117/138 verdict=fail score=0.3 repairs=5
+[s5] judging 118/138 uuid=e9f9b9a22bcb47f28198db61b9bd4966 lang=sd doc_type=hospital_billing
+[s5] repair 1/5 uuid=e9f9b9a22bcb47f28198db61b9bd4966 flags=['dialect_script_impurity', 'surrogate_plausibility_collapse'] via=en_pivot+translate
+[s5] repair 2/5 uuid=e9f9b9a22bcb47f28198db61b9bd4966 flags=['dialect_script_impurity', 'instruction_drift'] accumulated=['dialect_script_impurity', 'instruction_drift', 'surrogate_plausibility_collapse'] via=en_pivot+translate
+[s5] repair 3/5 uuid=e9f9b9a22bcb47f28198db61b9bd4966 flags=['dialect_script_impurity', 'instruction_drift'] accumulated=['dialect_script_impurity', 'instruction_drift', 'surrogate_plausibility_collapse'] via=en_pivot+translate
+[s5] REPAIRED-THEN-PASS uuid=e9f9b9a22bcb47f28198db61b9bd4966 rounds=3 score=0.82
+[s5] done 118/138 verdict=pass score=0.82 repairs=3
+[s5] judging 119/138 uuid=e9f9b9a22bcb47f28198db61b9bd4966 lang=sd doc_type=discharge_summary
+[s5] repair 1/5 uuid=e9f9b9a22bcb47f28198db61b9bd4966 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=e9f9b9a22bcb47f28198db61b9bd4966 err=script_purity_failed:wrong_indic_script:Devanagari>Arabic
+[s5] repair 2/5 uuid=e9f9b9a22bcb47f28198db61b9bd4966 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=e9f9b9a22bcb47f28198db61b9bd4966 err=script_purity_failed:wrong_indic_script:Devanagari>Arabic
+[s5] repair 3/5 uuid=e9f9b9a22bcb47f28198db61b9bd4966 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=e9f9b9a22bcb47f28198db61b9bd4966 err=script_purity_failed:wrong_indic_script:Devanagari>Arabic
+[s5] repair 4/5 uuid=e9f9b9a22bcb47f28198db61b9bd4966 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=e9f9b9a22bcb47f28198db61b9bd4966 err=script_purity_failed:wrong_indic_script:Devanagari>Arabic
+[s5] repair 5/5 uuid=e9f9b9a22bcb47f28198db61b9bd4966 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=e9f9b9a22bcb47f28198db61b9bd4966 err=script_purity_failed:wrong_indic_script:Devanagari>Arabic
+[s5] done 119/138 verdict=fail score=0.45 repairs=5
+[s5] judging 120/138 uuid=e9f9b9a22bcb47f28198db61b9bd4966 lang=sd doc_type=referral_letter
+[s5] repair 1/5 uuid=e9f9b9a22bcb47f28198db61b9bd4966 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=e9f9b9a22bcb47f28198db61b9bd4966 err=script_purity_failed:wrong_indic_script:Devanagari>Arabic
+[s5] repair 2/5 uuid=e9f9b9a22bcb47f28198db61b9bd4966 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=e9f9b9a22bcb47f28198db61b9bd4966 err=script_purity_failed:wrong_indic_script:Devanagari>Arabic
+[s5] repair 3/5 uuid=e9f9b9a22bcb47f28198db61b9bd4966 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=e9f9b9a22bcb47f28198db61b9bd4966 err=script_purity_failed:wrong_indic_script:Devanagari>Arabic
+[s5] repair 4/5 uuid=e9f9b9a22bcb47f28198db61b9bd4966 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=e9f9b9a22bcb47f28198db61b9bd4966 err=script_purity_failed:wrong_indic_script:Devanagari>Arabic
+[s5] repair 5/5 uuid=e9f9b9a22bcb47f28198db61b9bd4966 flags=['dialect_script_impurity'] via=en_pivot+translate
+[s5] en_pivot translate soft uuid=e9f9b9a22bcb47f28198db61b9bd4966 err=script_purity_failed:wrong_indic_script:Devanagari>Arabic
+[s5] done 120/138 verdict=fail score=0.35 repairs=5
+[s5] judging 121/138 uuid=11301505248f4aa28475e15b8555b672 lang=ta doc_type=asha_worker_note
+[s5] done 121/138 verdict=pass score=0.9 repairs=0
+[s5] judging 122/138 uuid=11301505248f4aa28475e15b8555b672 lang=ta doc_type=phc_register
+[s5] done 122/138 verdict=pass score=0.9 repairs=0
+[s5] judging 123/138 uuid=11301505248f4aa28475e15b8555b672 lang=ta doc_type=automated_sms
+[s5] repair 1/5 uuid=11301505248f4aa28475e15b8555b672 flags=['invented_entity_type'] via=en_pivot+translate
+[s5] REPAIRED-THEN-PASS uuid=11301505248f4aa28475e15b8555b672 rounds=1 score=0.9
+[s5] done 123/138 verdict=pass score=0.9 repairs=1
+[s5] judging 124/138 uuid=9f392beb854145aab180a6990e99779d lang=ta doc_type=phc_register
+[s5] repair 1/5 uuid=9f392beb854145aab180a6990e99779d flags=['dialect_script_impurity', 'cross_language_entity_shift'] accumulated=['cross_language_entity_shift', 'dialect_script_impurity'] via=en_pivot+translate
+[s5] REPAIRED-THEN-PASS uuid=9f392beb854145aab180a6990e99779d rounds=1 score=0.9
+[s5] done 124/138 verdict=pass score=0.9 repairs=1
+[s5] judging 125/138 uuid=9f392beb854145aab180a6990e99779d lang=ta doc_type=asha_worker_note
+[s5] done 125/138 verdict=pass score=0.9 repairs=0
+[s5] judging 126/138 uuid=9f392beb854145aab180a6990e99779d lang=ta doc_type=insurance_claim
+[s5] done 126/138 verdict=pass score=0.92 repairs=0
+[s5] judging 127/138 uuid=200f6b68373b4d389065d55262ec7847 lang=te doc_type=asha_worker_note
+[s5] done 127/138 verdict=pass score=0.92 repairs=0
+[s5] judging 128/138 uuid=200f6b68373b4d389065d55262ec7847 lang=te doc_type=phc_register
+[s5] done 128/138 verdict=pass score=0.9 repairs=0
+[s5] judging 129/138 uuid=200f6b68373b4d389065d55262ec7847 lang=te doc_type=automated_sms
+[s5] done 129/138 verdict=pass score=0.85 repairs=0
+[s5] judging 130/138 uuid=64ccf4937c134083910a24e651a7f14c lang=te doc_type=phc_register
+[s5] repair 1/5 uuid=64ccf4937c134083910a24e651a7f14c flags=['domain_persona_mismatch'] via=en_pivot+translate
+[s5] repair 2/5 uuid=64ccf4937c134083910a24e651a7f14c flags=['domain_persona_mismatch'] via=en_pivot+translate
+[s5] REPAIRED-THEN-PASS uuid=64ccf4937c134083910a24e651a7f14c rounds=2 score=0.92
+[s5] done 130/138 verdict=pass score=0.92 repairs=2
+[s5] judging 131/138 uuid=64ccf4937c134083910a24e651a7f14c lang=te doc_type=asha_worker_note
+[s5] repair 1/5 uuid=64ccf4937c134083910a24e651a7f14c flags=['instruction_drift', 'invented_entity_type'] via=en_pivot+translate
+[s5] REPAIRED-THEN-PASS uuid=64ccf4937c134083910a24e651a7f14c rounds=1 score=0.9
+[s5] done 131/138 verdict=pass score=0.9 repairs=1
+[s5] judging 132/138 uuid=64ccf4937c134083910a24e651a7f14c lang=te doc_type=insurance_claim
+[s5] done 132/138 verdict=pass score=0.9 repairs=0
+[s5] judging 133/138 uuid=9952571815ae4558a362507fc4a9539f lang=ur doc_type=opd_slip
+[s5] done 133/138 verdict=pass score=0.9 repairs=0
+[s5] judging 134/138 uuid=9952571815ae4558a362507fc4a9539f lang=ur doc_type=surgical_note
+[s5] done 134/138 verdict=pass score=0.92 repairs=0
+[s5] judging 135/138 uuid=9952571815ae4558a362507fc4a9539f lang=ur doc_type=prescription
+[s5] done 135/138 verdict=pass score=0.9 repairs=0
+[s5] judging 136/138 uuid=d77cc494ad214600a1c700a1fb8e47c3 lang=ur doc_type=surgical_note
+[s5] done 136/138 verdict=pass score=0.9 repairs=0
+[s5] judging 137/138 uuid=d77cc494ad214600a1c700a1fb8e47c3 lang=ur doc_type=lab_report
+[s5] done 137/138 verdict=pass score=0.9 repairs=0
+[s5] judging 138/138 uuid=d77cc494ad214600a1c700a1fb8e47c3 lang=ur doc_type=opd_slip
+[s5] done 138/138 verdict=pass score=0.92 repairs=0
+[s5] WARNING: 30 judge fail(s) after repair logged — see failed.jsonl and audit failures
+[s5] MUST-WORK language fail(s): 5 (treat as system bug) langs=['gu', 'ml', 'pa']
+[s5] rare-script fail(s): 14 (expected capacity loss) langs=['brx', 'mni', 'sat']
+[s5] quality-repaired-to-pass: 20
+[s5_linguistic_judge] OK → /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s5_linguistic_judge
+  all_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s5_linguistic_judge/judged.jsonl
+  passed_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s5_linguistic_judge/passed.jsonl
+  failed_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s5_linguistic_judge/failed.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s5_linguistic_judge/judged.parquet
+  audit_json: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s5_linguistic_judge/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s5_linguistic_judge/audit.md
+  soft_failures_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s5_linguistic_judge/soft_failures.jsonl
+
+=== s6_deterministic_auditor ===
+[s6] repair 1/5 uuid=5afdbf29e52249fc95146ec7db5e2023 errors=['missing_required:BANK_ROUTING_NUMBER', 'upstream_generation_soft_fail:missing_required_entities:BANK_ROUTING_NUMBER']
+[s6] repair 2/5 uuid=5afdbf29e52249fc95146ec7db5e2023 errors=['script_purity:target_script_ratio:0.000<0.35']
+[s6] REPAIRED-THEN-PASS uuid=5afdbf29e52249fc95146ec7db5e2023 attempts=2
+[s6] repair 1/5 uuid=5afdbf29e52249fc95146ec7db5e2023 errors=['format:AADHAAR_NUMBER:aadhaar_verhoeff']
+[s6] REPAIRED-THEN-PASS uuid=5afdbf29e52249fc95146ec7db5e2023 attempts=1
+[s6] repair 1/5 uuid=fe2793cf648244fa8cc427adc569983a errors=['unknown_entity_types:BANK_NAME', 'format:AADHAAR_NUMBER:aadhaar_verhoeff']
+[s6] repair 1/5 uuid=52013037170a43faa2b7bbe425373b47 errors=['format:AADHAAR_NUMBER:aadhaar_verhoeff']
+[s6] REPAIRED-THEN-PASS uuid=52013037170a43faa2b7bbe425373b47 attempts=1
+[s6] repair 1/5 uuid=e2083507b6fc4542853ff740cac47edf errors=['format:AADHAAR_NUMBER:aadhaar_verhoeff']
+[s6] REPAIRED-THEN-PASS uuid=e2083507b6fc4542853ff740cac47edf attempts=1
+[s6] repair 1/5 uuid=a215dd216aff46e7add35a2cb913a177 errors=['entity_stuffing:PHONE_NUMBER,RELATIVE_NAME', 'dics_below_threshold:0.625']
+[s6] repair 2/5 uuid=a215dd216aff46e7add35a2cb913a177 errors=['entity_stuffing:PHONE_NUMBER,RELATIVE_NAME', 'dics_below_threshold:0.625']
+[s6] repair 3/5 uuid=a215dd216aff46e7add35a2cb913a177 errors=['entity_stuffing:PHONE_NUMBER,RELATIVE_NAME', 'dics_below_threshold:0.625']
+[s6] repair 4/5 uuid=a215dd216aff46e7add35a2cb913a177 errors=['entity_stuffing:PHONE_NUMBER,RELATIVE_NAME', 'dics_below_threshold:0.625']
+[s6] repair 5/5 uuid=a215dd216aff46e7add35a2cb913a177 errors=['entity_stuffing:PHONE_NUMBER,RELATIVE_NAME', 'dics_below_threshold:0.625']
+[s6] repair 1/5 uuid=a215dd216aff46e7add35a2cb913a177 errors=['missing_required:DISTRICT,PHONE_NUMBER,HOSPITAL_ID,ABHA_ID', 'upstream_generation_soft_fail:missing_required_entities:DISTRICT,PHONE_NUMBER,HOSPITAL_ID,ABHA_ID']
+[s6] repair 2/5 uuid=a215dd216aff46e7add35a2cb913a177 errors=['missing_required:DISTRICT,PHONE_NUMBER,HOSPITAL_ID,ABHA_ID']
+[s6] repair 3/5 uuid=a215dd216aff46e7add35a2cb913a177 errors=['missing_required:DISTRICT,PHONE_NUMBER,HOSPITAL_ID,ABHA_ID']
+[s6] repair 4/5 uuid=a215dd216aff46e7add35a2cb913a177 errors=['missing_required:DISTRICT,PHONE_NUMBER,HOSPITAL_ID,ABHA_ID']
+[s6] repair 5/5 uuid=a215dd216aff46e7add35a2cb913a177 errors=['missing_required:DISTRICT,PHONE_NUMBER,HOSPITAL_ID,ABHA_ID']
+[s6] repair 1/5 uuid=85cdb818ce5740ed85a9bfb29cf57098 errors=['missing_required:DISTRICT,PHONE_NUMBER,HOSPITAL_ID,ABHA_ID', 'upstream_generation_soft_fail:missing_required_entities:DISTRICT,PHONE_NUMBER,HOSPITAL_ID,ABHA_ID']
+[s6] repair 2/5 uuid=85cdb818ce5740ed85a9bfb29cf57098 errors=['script_purity:target_script_ratio:0.000<0.35']
+[s6] REPAIRED-THEN-PASS uuid=85cdb818ce5740ed85a9bfb29cf57098 attempts=2
+[s6] repair 1/5 uuid=62bbda52de29443287ee799e3f265919 errors=['format:AADHAAR_NUMBER:aadhaar_verhoeff']
+[s6] REPAIRED-THEN-PASS uuid=62bbda52de29443287ee799e3f265919 attempts=1
+[s6] repair 1/5 uuid=9b16854e981048c59b1bc1efd2685bdf errors=['missing_required:BANK_ROUTING_NUMBER,CREDIT_CARD_NUMBER,CVV,PIN']
+[s6] repair 2/5 uuid=9b16854e981048c59b1bc1efd2685bdf errors=['missing_required:BANK_ROUTING_NUMBER,CREDIT_CARD_NUMBER,CVV,PIN', 'script_purity:target_script_ratio:0.000<0.35']
+[s6] repair 3/5 uuid=9b16854e981048c59b1bc1efd2685bdf errors=['missing_required:BANK_ROUTING_NUMBER,CREDIT_CARD_NUMBER,CVV,PIN']
+[s6] repair 4/5 uuid=9b16854e981048c59b1bc1efd2685bdf errors=['script_purity:target_script_ratio:0.000<0.35']
+[s6] REPAIRED-THEN-PASS uuid=9b16854e981048c59b1bc1efd2685bdf attempts=4
+[s6] repair 1/5 uuid=9b16854e981048c59b1bc1efd2685bdf errors=['format:AADHAAR_NUMBER:aadhaar_verhoeff']
+[s6] REPAIRED-THEN-PASS uuid=9b16854e981048c59b1bc1efd2685bdf attempts=1
+[s6] repair 1/5 uuid=911448710ce34ff686d217211c009ba8 errors=['missing_required:BANK_ROUTING_NUMBER', 'upstream_generation_soft_fail:missing_required_entities:BANK_ROUTING_NUMBER']
+[s6] repair 2/5 uuid=911448710ce34ff686d217211c009ba8 errors=['script_purity:target_script_ratio:0.000<0.35']
+[s6] REPAIRED-THEN-PASS uuid=911448710ce34ff686d217211c009ba8 attempts=2
+[s6] repair 1/5 uuid=911448710ce34ff686d217211c009ba8 errors=['format:AADHAAR_NUMBER:aadhaar_verhoeff']
+[s6] REPAIRED-THEN-PASS uuid=911448710ce34ff686d217211c009ba8 attempts=1
+[s6] repair 1/5 uuid=d89930b893984d4b96fbd0b492413321 errors=['format:AADHAAR_NUMBER:aadhaar_verhoeff', 'phi_residue:8']
+[s6] repair 2/5 uuid=d89930b893984d4b96fbd0b492413321 errors=['phi_residue:8', 'script_purity:target_script_ratio:0.000<0.35']
+[s6] repair 3/5 uuid=d89930b893984d4b96fbd0b492413321 errors=['entity_stuffing:DISTRICT', 'phi_residue:1']
+[s6] repair 4/5 uuid=d89930b893984d4b96fbd0b492413321 errors=['entity_stuffing:DISTRICT', 'phi_residue:1', 'script_purity:target_script_ratio:0.000<0.35']
+[s6] repair 5/5 uuid=d89930b893984d4b96fbd0b492413321 errors=['entity_stuffing:DISTRICT', 'phi_residue:1']
+[s6] repair 1/5 uuid=d89930b893984d4b96fbd0b492413321 errors=['missing_required:TAX_ID']
+[s6] repair 2/5 uuid=d89930b893984d4b96fbd0b492413321 errors=['script_purity:target_script_ratio:0.000<0.35']
+[s6] REPAIRED-THEN-PASS uuid=d89930b893984d4b96fbd0b492413321 attempts=2
+[s6] repair 1/5 uuid=18a30340943543c59236f8f4e9379b8d errors=['missing_required:RELIGION', 'upstream_translation_soft_fail:script_purity_failed:target_script_ratio:0.000<0.35 attempt=1;generator_repair_failed:ok']
+[s6] repair 2/5 uuid=18a30340943543c59236f8f4e9379b8d errors=['missing_required:RELIGION']
+[s6] repair 3/5 uuid=18a30340943543c59236f8f4e9379b8d errors=['phi_residue:1', 'script_purity:target_script_ratio:0.000<0.35']
+[s6] repair 4/5 uuid=18a30340943543c59236f8f4e9379b8d errors=['phi_residue:1']
+[s6] repair 5/5 uuid=18a30340943543c59236f8f4e9379b8d errors=['phi_residue:1', 'script_purity:target_script_ratio:0.000<0.35']
+[s6] repair 1/5 uuid=18a30340943543c59236f8f4e9379b8d errors=['missing_required:PATIENT_NAME,PHONE_NUMBER,DOCTOR_NAME', 'upstream_translation_soft_fail:script_purity_failed:wrong_indic_script:Devanagari>Arabic attempt=1;generator_repair_failed:ok']
+[s6] repair 2/5 uuid=18a30340943543c59236f8f4e9379b8d errors=['missing_required:PATIENT_NAME,PHONE_NUMBER,DOCTOR_NAME']
+[s6] repair 3/5 uuid=18a30340943543c59236f8f4e9379b8d errors=['missing_required:PHONE_NUMBER,DOCTOR_NAME', 'script_purity:target_script_ratio:0.000<0.35']
+[s6] repair 4/5 uuid=18a30340943543c59236f8f4e9379b8d errors=['script_purity:target_script_ratio:0.000<0.35']
+[s6] repair 5/5 uuid=18a30340943543c59236f8f4e9379b8d errors=['script_purity:target_script_ratio:0.000<0.35']
+[s6] repair 1/5 uuid=efe93c7f20fc46b7aa8ef936a09c90c6 errors=['format:AADHAAR_NUMBER:aadhaar_verhoeff', 'format:PAN_NUMBER:pan_format']
+[s6] repair 2/5 uuid=efe93c7f20fc46b7aa8ef936a09c90c6 errors=['format:PAN_NUMBER:pan_format', 'script_purity:target_script_ratio:0.000<0.35']
+[s6] repair 3/5 uuid=efe93c7f20fc46b7aa8ef936a09c90c6 errors=['format:PAN_NUMBER:pan_format']
+[s6] repair 4/5 uuid=efe93c7f20fc46b7aa8ef936a09c90c6 errors=['format:PAN_NUMBER:pan_format']
+[s6] repair 5/5 uuid=efe93c7f20fc46b7aa8ef936a09c90c6 errors=['format:PAN_NUMBER:pan_format']
+[s6] repair 1/5 uuid=6319018329714b92a0a64f8228dc39b6 errors=['missing_required:HOSPITAL_NAME', 'upstream_translation_soft_fail:script_purity_failed:target_script_ratio:0.082<0.35 attempt=1;generator_repair_failed:ok']
+[s6] repair 2/5 uuid=6319018329714b92a0a64f8228dc39b6 errors=['missing_required:HOSPITAL_NAME']
+[s6] repair 3/5 uuid=6319018329714b92a0a64f8228dc39b6 errors=['missing_required:HOSPITAL_NAME']
+[s6] repair 4/5 uuid=6319018329714b92a0a64f8228dc39b6 errors=['missing_required:HOSPITAL_NAME']
+[s6] repair 5/5 uuid=6319018329714b92a0a64f8228dc39b6 errors=['missing_required:HOSPITAL_NAME', 'script_purity:target_script_ratio:0.000<0.35']
+[s6] repair 1/5 uuid=64ccf4937c134083910a24e651a7f14c errors=['missing_required:VILLAGE,DISTRICT,RELIGION']
+[s6] repair 2/5 uuid=64ccf4937c134083910a24e651a7f14c errors=['missing_required:VILLAGE,DISTRICT,RELIGION', 'script_purity:target_script_ratio:0.000<0.35']
+[s6] REPAIRED-THEN-PASS uuid=64ccf4937c134083910a24e651a7f14c attempts=2
+[s6] repair 1/5 uuid=64ccf4937c134083910a24e651a7f14c errors=['format:AADHAAR_NUMBER:aadhaar_verhoeff']
+[s6] REPAIRED-THEN-PASS uuid=64ccf4937c134083910a24e651a7f14c attempts=1
+[s6] WARNING: 8 auditor failure(s) after repair logged — see failed.jsonl and audit failures
+[s6] repaired-to-pass: 13
+[s6_deterministic_auditor] OK → /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s6_deterministic_auditor
+  all_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s6_deterministic_auditor/audited.jsonl
+  passed_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s6_deterministic_auditor/passed.jsonl
+  failed_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s6_deterministic_auditor/failed.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s6_deterministic_auditor/audited.parquet
+  audit_json: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s6_deterministic_auditor/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s6_deterministic_auditor/audit.md
+  failures_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s6_deterministic_auditor/failures.jsonl
+
+=== s7_s8_curation ===
+2026-07-21 14:23:31.413 | WARNING  | nemo_curator.core.client:start:121 - No monitoring services are running. Please run the `start_prometheus_grafana.py` script from nemo_curator/metrics folder to setup monitoring services separately.
+2026-07-21 14:23:31.425 | INFO     | nemo_curator.core.utils:init_cluster:185 - Ray start command: ray start --head --node-ip-address 127.0.1.1 --port 6379 --metrics-export-port 8080 --dashboard-host 127.0.0.1 --dashboard-port 8265 --ray-client-server-port 10001 --temp-dir /tmp/ray --disable-usage-stats --block
+Usage stats collection is disabled.
+
+[37mLocal node IP[39m: [1m127.0.1.1[22m
+
+[32m--------------------[39m
+[32mRay runtime started.[39m
+[32m--------------------[39m
+
+[36mNext steps[39m
+  [2mNote: The following commands are intended for use on[22m
+  [2mthe head node or within the cluster network.[22m
+  
+  To add another node to this Ray cluster, run
+  [1m  ray start --address='127.0.1.1:6379'[22m
+  
+  To connect to this Ray cluster:
+    [35mimport[39m[26m ray
+    ray[35m.[39m[26minit(_node_ip_address[35m=[39m[26m[33m'127.0.1.1'[39m[26m)
+  
+  To submit a Ray job using the Ray Jobs CLI:
+  [1m  RAY_API_SERVER_ADDRESS='http://127.0.0.1:8265' ray job submit --working-dir . -- python my_script.py[22m
+  
+  See https://docs.ray.io/en/latest/cluster/running-applications/job-submission/index.html 
+  for more information on submitting Ray jobs to the Ray cluster.
+  
+  To terminate the Ray runtime, run
+  [1m  ray stop[22m
+  
+  To view the status of the cluster, use
+    [1mray status[22m[26m
+  
+  To monitor and debug Ray, view the dashboard at 
+    [1m127.0.0.1:8265[22m[26m
+  
+  [4mIf connection to the dashboard fails, check your firewall settings and network configuration.[24m
+
+[36m[1m--block[22m[39m
+  This command will now block forever until terminated by a signal.
+  Running subprocesses are monitored and a message will be printed if any of them terminate unexpectedly. Subprocesses exit with SIGTERM will be treated as graceful, thus NOT reported.
+  Process exit logs will be saved to: [1m/tmp/ray/session_2026-07-21_14-23-32_360880_127119/logs/ray_process_exit.log[22m[26m
+2026-07-21 14:23:38,996	INFO worker.py:1683 -- Using address 127.0.1.1:6379 set in the environment variable RAY_ADDRESS
+2026-07-21 14:23:38,999	INFO worker.py:1833 -- Connecting to existing Ray cluster at address: 127.0.1.1:6379...
+2026-07-21 14:23:39,028	INFO worker.py:2015 -- Connected to Ray cluster. View the dashboard at [1m[32mhttp://127.0.0.1:8265 [39m[22m
+2026-07-21 14:23:39.734 | WARNING  | nemo_curator.stages.file_partitioning:__post_init__:90 - Blocksize is greater than 512 MB, which is not recommended: 1GiB Consider using a smaller blocksize to avoid potential memory issues.
+2026-07-21 14:23:39.734 | INFO     | nemo_curator.pipeline.pipeline:build:70 - Planning pipeline: minhash_pipeline
+2026-07-21 14:23:39,735	INFO worker.py:1683 -- Using address 127.0.1.1:6379 set in the environment variable RAY_ADDRESS
+2026-07-21 14:23:39,737	INFO worker.py:1833 -- Connecting to existing Ray cluster at address: 127.0.1.1:6379...
+2026-07-21 14:23:39,753	INFO worker.py:2015 -- Connected to Ray cluster. View the dashboard at [1m[32mhttp://127.0.0.1:8265 [39m[22m
+2026-07-21 14:23:39.761 | INFO     | nemo_curator.backends.utils:execute_setup_on_node:228 - Executing setup on node 897d68e94bebf33d5654e3501324cdb41918067813133910641586d4 for 2 stages
+2026-07-21 14:23:41.397 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:103 - Setup on node complete for all stages. Starting Ray Actor Pool pipeline with 2 stages
+2026-07-21 14:23:41.397 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:110 - 
+Processing stage 1/2: FilePartitioningStage(file_paths='/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/artifacts/nemo_curator_dedup/input', files_per_partition=None, blocksize='1GiB', file_extensions=['.parquet'], storage_options={}, limit=None, name='file_partitioning')
+2026-07-21 14:23:41.397 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:111 -   Input tasks: 1
+2026-07-21 14:23:41.598 | INFO     | nemo_curator.backends.ray_actor_pool.utils:calculate_optimal_actors_for_stage:73 -     Resource calculation: CPU limit=24, GPU limit=2147483647
+2026-07-21 14:23:41.598 | INFO     | nemo_curator.backends.ray_actor_pool.utils:calculate_optimal_actors_for_stage:74 -     Available: 12.0 CPUs, 1.0 GPUs
+2026-07-21 14:23:41.598 | INFO     | nemo_curator.backends.ray_actor_pool.utils:calculate_optimal_actors_for_stage:75 -     Stage requirements: 0.5 CPUs, 0.0 GPUs
+2026-07-21 14:23:41.598 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:128 -  FilePartitioningStage(file_paths='/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/artifacts/nemo_curator_dedup/input', files_per_partition=None, blocksize='1GiB', file_extensions=['.parquet'], storage_options={}, limit=None, name='file_partitioning') - Creating 1 actors (CPUs: 0.5, GPUs: 0.0)
+2026-07-21 14:23:41.607 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:141 - Created actor pool for file_partitioning with 1 actors
+2026-07-21 14:23:42.296 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_process_stage_with_pool:308 - Broke down 1 tasks into batches of 1 for a total of 1 batches for file_partitioning
+Processing file_partitioning:   0%|          | 0/1 [00:00<?, ?it/s]Processing file_partitioning: 100%|██████████| 1/1 [00:00<00:00, 993.68it/s]
+2026-07-21 14:23:42.298 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:151 -   Output tasks: 1
+2026-07-21 14:23:42.299 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:110 - 
+Processing stage 2/2: MinHashStage
+2026-07-21 14:23:42.299 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:111 -   Input tasks: 1
+[36m(FilePartitioningStage pid=128720)[0m 2026-07-21 14:23:42.297 | INFO     | nemo_curator.stages.file_partitioning:process:122 - Found 1 files
+[36m(FilePartitioningStage pid=128720)[0m 2026-07-21 14:23:42.297 | INFO     | nemo_curator.stages.file_partitioning:process:192 - Created 1 file groups from 1 files
+2026-07-21 14:23:42.499 | INFO     | nemo_curator.backends.ray_actor_pool.utils:calculate_optimal_actors_for_stage:73 -     Resource calculation: CPU limit=12, GPU limit=1
+2026-07-21 14:23:42.499 | INFO     | nemo_curator.backends.ray_actor_pool.utils:calculate_optimal_actors_for_stage:74 -     Available: 12.0 CPUs, 1.0 GPUs
+2026-07-21 14:23:42.499 | INFO     | nemo_curator.backends.ray_actor_pool.utils:calculate_optimal_actors_for_stage:75 -     Stage requirements: 1.0 CPUs, 1.0 GPUs
+2026-07-21 14:23:42.499 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:128 -  MinHashStage - Creating 1 actors (CPUs: 1.0, GPUs: 1.0)
+2026-07-21 14:23:42.506 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:141 - Created actor pool for MinHashStage with 1 actors
+2026-07-21 14:23:44.501 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_process_stage_with_pool:308 - Broke down 1 tasks into batches of 1 for a total of 1 batches for MinHashStage
+Processing MinHashStage:   0%|          | 0/1 [00:00<?, ?it/s]Processing MinHashStage: 100%|██████████| 1/1 [00:00<00:00, 11.36it/s]
+2026-07-21 14:23:44.590 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:151 -   Output tasks: 1
+2026-07-21 14:23:44.590 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:159 - 
+Pipeline completed. Final results: 1 tasks
+2026-07-21 14:23:44.590 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:164 - Shutting down Ray to clean up all resources...
+2026-07-21 14:23:44.845 | INFO     | nemo_curator.stages.deduplication.fuzzy.workflow:run:342 - Minhash pipeline completed in 5.11 seconds
+2026-07-21 14:23:44,846	INFO worker.py:1683 -- Using address 127.0.1.1:6379 set in the environment variable RAY_ADDRESS
+2026-07-21 14:23:44,847	INFO worker.py:1833 -- Connecting to existing Ray cluster at address: 127.0.1.1:6379...
+2026-07-21 14:23:44,862	INFO worker.py:2015 -- Connected to Ray cluster. View the dashboard at [1m[32mhttp://127.0.0.1:8265 [39m[22m
+2026-07-21 14:23:44.873 | INFO     | nemo_curator.stages.deduplication.fuzzy.workflow:run:352 - Id generator written to /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/artifacts/nemo_curator_dedup/duplicate_ids/fuzzy_id_generator.json
+2026-07-21 14:23:44.873 | WARNING  | nemo_curator.stages.file_partitioning:__post_init__:90 - Blocksize is greater than 512 MB, which is not recommended: 2GiB Consider using a smaller blocksize to avoid potential memory issues.
+2026-07-21 14:23:44.874 | INFO     | nemo_curator.pipeline.pipeline:build:70 - Planning pipeline: lsh_duplicate_identification_pipeline
+2026-07-21 14:23:44,874	INFO worker.py:1683 -- Using address 127.0.1.1:6379 set in the environment variable RAY_ADDRESS
+2026-07-21 14:23:44,875	INFO worker.py:1833 -- Connecting to existing Ray cluster at address: 127.0.1.1:6379...
+2026-07-21 14:23:44,875	INFO worker.py:1847 -- Calling ray.init() again after it has already been called.
+2026-07-21 14:23:44.875 | INFO     | nemo_curator.backends.utils:execute_setup_on_node:228 - Executing setup on node 897d68e94bebf33d5654e3501324cdb41918067813133910641586d4 for 2 stages
+2026-07-21 14:23:46.020 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:103 - Setup on node complete for all stages. Starting Ray Actor Pool pipeline with 2 stages
+2026-07-21 14:23:46.021 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:110 - 
+Processing stage 1/2: FilePartitioningStage(file_paths='/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/artifacts/nemo_curator_dedup/cache/MinHashStage', files_per_partition=None, blocksize='2GiB', file_extensions=['.parquet'], storage_options={}, limit=None, name='file_partitioning')
+2026-07-21 14:23:46.021 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:111 -   Input tasks: 1
+2026-07-21 14:23:46.221 | INFO     | nemo_curator.backends.ray_actor_pool.utils:calculate_optimal_actors_for_stage:73 -     Resource calculation: CPU limit=24, GPU limit=2147483647
+2026-07-21 14:23:46.221 | INFO     | nemo_curator.backends.ray_actor_pool.utils:calculate_optimal_actors_for_stage:74 -     Available: 12.0 CPUs, 1.0 GPUs
+2026-07-21 14:23:46.221 | INFO     | nemo_curator.backends.ray_actor_pool.utils:calculate_optimal_actors_for_stage:75 -     Stage requirements: 0.5 CPUs, 0.0 GPUs
+2026-07-21 14:23:46.221 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:128 -  FilePartitioningStage(file_paths='/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/artifacts/nemo_curator_dedup/cache/MinHashStage', files_per_partition=None, blocksize='2GiB', file_extensions=['.parquet'], storage_options={}, limit=None, name='file_partitioning') - Creating 1 actors (CPUs: 0.5, GPUs: 0.0)
+2026-07-21 14:23:46.228 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:141 - Created actor pool for file_partitioning with 1 actors
+2026-07-21 14:23:46.495 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_process_stage_with_pool:308 - Broke down 1 tasks into batches of 1 for a total of 1 batches for file_partitioning
+Processing file_partitioning:   0%|          | 0/1 [00:00<?, ?it/s]Processing file_partitioning: 100%|██████████| 1/1 [00:00<00:00, 822.25it/s]
+2026-07-21 14:23:46.497 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:151 -   Output tasks: 1
+2026-07-21 14:23:46.498 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:110 - 
+Processing stage 2/2: LSHStage(num_bands=20, minhashes_per_band=13, id_field='_curator_dedup_id', minhash_field='_minhash_signature', output_path='/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/artifacts/nemo_curator_dedup/cache', read_kwargs={}, write_kwargs={}, rmm_pool_size='auto', spill_memory_limit='auto', enable_statistics=False, bands_per_iteration=5, total_nparts=None)
+2026-07-21 14:23:46.498 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:111 -   Input tasks: 1
+2026-07-21 14:23:46.498 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_execute_lsh_stage:399 -   Processing band range: 0-5
+[36m(FilePartitioningStage pid=128123)[0m 2026-07-21 14:23:46.496 | INFO     | nemo_curator.stages.file_partitioning:process:122 - Found 1 files
+[36m(FilePartitioningStage pid=128123)[0m 2026-07-21 14:23:46.497 | INFO     | nemo_curator.stages.file_partitioning:process:192 - Created 1 file groups from 1 files
+2026-07-21 14:23:46.698 | INFO     | nemo_curator.backends.ray_actor_pool.utils:calculate_optimal_actors_for_stage:73 -     Resource calculation: CPU limit=12, GPU limit=1
+2026-07-21 14:23:46.698 | INFO     | nemo_curator.backends.ray_actor_pool.utils:calculate_optimal_actors_for_stage:74 -     Available: 12.0 CPUs, 1.0 GPUs
+2026-07-21 14:23:46.698 | INFO     | nemo_curator.backends.ray_actor_pool.utils:calculate_optimal_actors_for_stage:75 -     Stage requirements: 1.0 CPUs, 1.0 GPUs
+2026-07-21 14:23:46.698 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_execute_lsh_stage:411 -  LSHStage(num_bands=20, minhashes_per_band=13, id_field='_curator_dedup_id', minhash_field='_minhash_signature', output_path='/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/artifacts/nemo_curator_dedup/cache', read_kwargs={}, write_kwargs={}, rmm_pool_size='auto', spill_memory_limit='auto', enable_statistics=False, bands_per_iteration=5, total_nparts=None) - Creating 1 actors (CPUs: 1.0, GPUs: 1.0)
+2026-07-21 14:23:46.698 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_execute_lsh_stage:415 -   Creating RapidsMPFShuffling Actor Pool for stage: LSHStage
+2026-07-21 14:23:46.698 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_create_rapidsmpf_actors:229 -     Initializing RapidsMPFShuffling actor pool with 1 actors
+2026-07-21 14:23:46.709 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_create_rapidsmpf_actors:242 -     Setting up UCXX communication...
+2026-07-21 14:23:48.578 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_create_rapidsmpf_actors:250 -     UCXX setup complete
+Inserting into shuffler:   0%|          | 0/1 [00:00<?, ?it/s]Inserting into shuffler: 100%|██████████| 1/1 [00:00<00:00,  8.48it/s]
+2026-07-21 14:23:48.718 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_execute_lsh_stage:399 -   Processing band range: 5-10
+2026-07-21 14:23:48.919 | INFO     | nemo_curator.backends.ray_actor_pool.utils:calculate_optimal_actors_for_stage:73 -     Resource calculation: CPU limit=12, GPU limit=1
+2026-07-21 14:23:48.919 | INFO     | nemo_curator.backends.ray_actor_pool.utils:calculate_optimal_actors_for_stage:74 -     Available: 12.0 CPUs, 1.0 GPUs
+2026-07-21 14:23:48.919 | INFO     | nemo_curator.backends.ray_actor_pool.utils:calculate_optimal_actors_for_stage:75 -     Stage requirements: 1.0 CPUs, 1.0 GPUs
+2026-07-21 14:23:48.919 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_execute_lsh_stage:411 -  LSHStage(num_bands=20, minhashes_per_band=13, id_field='_curator_dedup_id', minhash_field='_minhash_signature', output_path='/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/artifacts/nemo_curator_dedup/cache', read_kwargs={}, write_kwargs={}, rmm_pool_size='auto', spill_memory_limit='auto', enable_statistics=False, bands_per_iteration=5, total_nparts=None) - Creating 1 actors (CPUs: 1.0, GPUs: 1.0)
+2026-07-21 14:23:48.919 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_execute_lsh_stage:415 -   Creating RapidsMPFShuffling Actor Pool for stage: LSHStage
+2026-07-21 14:23:48.919 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_create_rapidsmpf_actors:229 -     Initializing RapidsMPFShuffling actor pool with 1 actors
+2026-07-21 14:23:48.920 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_create_rapidsmpf_actors:242 -     Setting up UCXX communication...
+2026-07-21 14:23:50.709 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_create_rapidsmpf_actors:250 -     UCXX setup complete
+Inserting into shuffler:   0%|          | 0/1 [00:00<?, ?it/s]Inserting into shuffler: 100%|██████████| 1/1 [00:00<00:00,  9.51it/s]
+2026-07-21 14:23:50.830 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_execute_lsh_stage:399 -   Processing band range: 10-15
+2026-07-21 14:23:51.031 | INFO     | nemo_curator.backends.ray_actor_pool.utils:calculate_optimal_actors_for_stage:73 -     Resource calculation: CPU limit=12, GPU limit=1
+2026-07-21 14:23:51.031 | INFO     | nemo_curator.backends.ray_actor_pool.utils:calculate_optimal_actors_for_stage:74 -     Available: 12.0 CPUs, 1.0 GPUs
+2026-07-21 14:23:51.031 | INFO     | nemo_curator.backends.ray_actor_pool.utils:calculate_optimal_actors_for_stage:75 -     Stage requirements: 1.0 CPUs, 1.0 GPUs
+2026-07-21 14:23:51.031 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_execute_lsh_stage:411 -  LSHStage(num_bands=20, minhashes_per_band=13, id_field='_curator_dedup_id', minhash_field='_minhash_signature', output_path='/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/artifacts/nemo_curator_dedup/cache', read_kwargs={}, write_kwargs={}, rmm_pool_size='auto', spill_memory_limit='auto', enable_statistics=False, bands_per_iteration=5, total_nparts=None) - Creating 1 actors (CPUs: 1.0, GPUs: 1.0)
+2026-07-21 14:23:51.031 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_execute_lsh_stage:415 -   Creating RapidsMPFShuffling Actor Pool for stage: LSHStage
+2026-07-21 14:23:51.031 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_create_rapidsmpf_actors:229 -     Initializing RapidsMPFShuffling actor pool with 1 actors
+2026-07-21 14:23:51.032 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_create_rapidsmpf_actors:242 -     Setting up UCXX communication...
+2026-07-21 14:23:52.818 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_create_rapidsmpf_actors:250 -     UCXX setup complete
+Inserting into shuffler:   0%|          | 0/1 [00:00<?, ?it/s]Inserting into shuffler: 100%|██████████| 1/1 [00:00<00:00,  9.20it/s]
+2026-07-21 14:23:52.943 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_execute_lsh_stage:399 -   Processing band range: 15-20
+2026-07-21 14:23:53.144 | INFO     | nemo_curator.backends.ray_actor_pool.utils:calculate_optimal_actors_for_stage:73 -     Resource calculation: CPU limit=12, GPU limit=1
+2026-07-21 14:23:53.144 | INFO     | nemo_curator.backends.ray_actor_pool.utils:calculate_optimal_actors_for_stage:74 -     Available: 12.0 CPUs, 1.0 GPUs
+2026-07-21 14:23:53.144 | INFO     | nemo_curator.backends.ray_actor_pool.utils:calculate_optimal_actors_for_stage:75 -     Stage requirements: 1.0 CPUs, 1.0 GPUs
+2026-07-21 14:23:53.144 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_execute_lsh_stage:411 -  LSHStage(num_bands=20, minhashes_per_band=13, id_field='_curator_dedup_id', minhash_field='_minhash_signature', output_path='/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/artifacts/nemo_curator_dedup/cache', read_kwargs={}, write_kwargs={}, rmm_pool_size='auto', spill_memory_limit='auto', enable_statistics=False, bands_per_iteration=5, total_nparts=None) - Creating 1 actors (CPUs: 1.0, GPUs: 1.0)
+2026-07-21 14:23:53.144 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_execute_lsh_stage:415 -   Creating RapidsMPFShuffling Actor Pool for stage: LSHStage
+2026-07-21 14:23:53.144 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_create_rapidsmpf_actors:229 -     Initializing RapidsMPFShuffling actor pool with 1 actors
+2026-07-21 14:23:53.145 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_create_rapidsmpf_actors:242 -     Setting up UCXX communication...
+2026-07-21 14:23:54.919 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_create_rapidsmpf_actors:250 -     UCXX setup complete
+Inserting into shuffler:   0%|          | 0/1 [00:00<?, ?it/s]Inserting into shuffler: 100%|██████████| 1/1 [00:00<00:00,  9.63it/s]
+2026-07-21 14:23:55.040 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_execute_lsh_stage:424 -   LSH processing complete. Output tasks: 4
+2026-07-21 14:23:55.040 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:159 - 
+Pipeline completed. Final results: 4 tasks
+2026-07-21 14:23:55.040 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:164 - Shutting down Ray to clean up all resources...
+2026-07-21 14:23:55.295 | INFO     | nemo_curator.stages.deduplication.fuzzy.workflow:run:364 - LSH pipeline completed in 10.42 seconds
+2026-07-21 14:23:55.295 | INFO     | nemo_curator.stages.deduplication.fuzzy.workflow:run:368 - No potential duplicates found in the dataset. Skipping connected components pipeline.
+2026-07-21 14:23:55,295	INFO worker.py:1683 -- Using address 127.0.1.1:6379 set in the environment variable RAY_ADDRESS
+2026-07-21 14:23:55,296	INFO worker.py:1833 -- Connecting to existing Ray cluster at address: 127.0.1.1:6379...
+2026-07-21 14:23:55,312	INFO worker.py:2015 -- Connected to Ray cluster. View the dashboard at [1m[32mhttp://127.0.0.1:8265 [39m[22m
+2026-07-21 14:23:55.321 | INFO     | nemo_curator.stages.deduplication.fuzzy.workflow:run:393 - Fuzzy deduplication pipeline completed in 16.33 seconds
+2026-07-21 14:23:57.694 | INFO     | nemo_curator.core.client:stop:205 - NeMo Curator has stopped the Ray cluster it started by killing the Ray GCS process. It is advised to wait for a few seconds before running any Ray commands to ensure Ray can cleanup other processes.If you are seeing any Ray commands like `ray status` failing, please ensure /tmp/ray/ray_current_cluster has correct information.
+[s7-s8] WARNING: large_balance_discard: discarded 70/92 rows (76.1%) while equalizing to 1 docs/language
+[s7_s8_curation] OK → /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s7_s8_curation
+  jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s7_s8_curation/curated.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s7_s8_curation/curated.parquet
+  audit_json: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s7_s8_curation/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s7_s8_curation/audit.md
+
+=== s9_gliner_format ===
+[s9_gliner_format] OK → /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s9_gliner_format
+  jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s9_gliner_format/gliner_docs.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s9_gliner_format/gliner_docs.parquet
+  gliner_json: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s9_gliner_format/gliner_train.json
+  audit_json: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s9_gliner_format/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s9_gliner_format/audit.md
+  preview_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/samples/s9_gliner_preview.jsonl
+
+=== s10_split ===
+[s10_split] OK → /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s10_split
+  train_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s10_split/train.jsonl
+  eval_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s10_split/eval.jsonl
+  gliner_train: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s10_split/gliner_train.json
+  gliner_eval: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s10_split/gliner_eval.json
+  audit_json: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s10_split/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s10_split/audit.md
+
+[run] complete → /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651
+[run] latest symlink → /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/latest
+[run] failures audit → /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/failures.md

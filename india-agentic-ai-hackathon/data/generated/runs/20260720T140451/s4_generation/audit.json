@@ -1,0 +1,44 @@
+{
+  "stage": "s4_generation",
+  "engine": "nemo_data_designer",
+  "timestamp_utc": "2026-07-20T08:54:00.097976+00:00",
+  "provider": "sarvam",
+  "model": "sarvam-105b",
+  "base_url": "https://api.sarvam.ai/v1",
+  "rows_requested": 10,
+  "rows_generated": 10,
+  "rows_from_checkpoint": 0,
+  "rows_newly_generated": 10,
+  "soft_failures": [
+    {
+      "uuid": "e7e83d4610764345b6bfc1814beba784",
+      "document_id": "e7e83d4610764345b6bfc1814beba784__0",
+      "doc_type_id": "radiology_report",
+      "document_language_code": "mr",
+      "missing_required_entities": [
+        "DOCTOR_NAME"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:DOCTOR_NAME"
+      ]
+    },
+    {
+      "uuid": "f6d9e443342646fdb70285e45d2a3a48",
+      "document_id": "f6d9e443342646fdb70285e45d2a3a48__0",
+      "doc_type_id": "automated_sms",
+      "document_language_code": "te",
+      "missing_required_entities": [
+        "DOCTOR_NAME"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:DOCTOR_NAME"
+      ]
+    }
+  ],
+  "soft_fail_count": 2,
+  "entity_coverage_complete_rate": 0.8,
+  "mean_chars": 711.1,
+  "checkpoint": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T140451/s4_generation/checkpoint.jsonl"
+}

@@ -1,0 +1,186 @@
+{
+  "stage": "s5_linguistic_judge",
+  "timestamp_utc": "2026-07-22T00:32:39.048645+00:00",
+  "provider": "azure_foundry",
+  "model": "grok-4.3",
+  "base_url": "https://ambedkar-interpreter-resource.services.ai.azure.com/openai/v1",
+  "requests_per_minute": 500.0,
+  "max_workers": 24,
+  "timeout_s": 600.0,
+  "network_retries": 2,
+  "rows_judged": 138,
+  "rows_resumed_from_checkpoint": 122,
+  "pass_rate": 0.9420289855072463,
+  "label_distribution": {
+    "fail": 0.057971014492753624,
+    "pass": 0.9420289855072463
+  },
+  "positional_length_bias": {
+    "pearson_r": 0.005619885694973533,
+    "n": 138.0
+  },
+  "failures": [
+    {
+      "uuid": "8b77264c0f7747c59ec191e95202ff7f",
+      "document_id": "8b77264c0f7747c59ec191e95202ff7f__1",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "brx",
+      "judge_verdict": "fail",
+      "judge_score": 0.35,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Clinical prose entirely in Hindi (wrong language) despite Devanagari script and Bodo requirement; all entity tags valid and Latin IDs allowed.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 2
+    },
+    {
+      "uuid": "fac14bf3d91143958fc1e8190e25c390",
+      "document_id": "fac14bf3d91143958fc1e8190e25c390__1",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "brx",
+      "judge_verdict": "fail",
+      "judge_score": 0.25,
+      "judge_flags": [
+        "dialect_script_impurity",
+        "other"
+      ],
+      "judge_rationale": "Clinical narrative in Nepali (not Bodo); district mismatches persona anchor (Kokrajhar vs Kamrup); extra billing entities soft but language fails requirement.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 2
+    },
+    {
+      "uuid": "fac14bf3d91143958fc1e8190e25c390",
+      "document_id": "fac14bf3d91143958fc1e8190e25c390__2",
+      "doc_type_id": "asha_worker_note",
+      "document_language_code": "brx",
+      "judge_verdict": "fail",
+      "judge_score": 0.35,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Clinical narrative prose is Nepali (e.g. 'बिरामीले आफ्नो', 'गर्छिन्', 'रगत चिनी') instead of Bodo; all entity tags and Latin medical terms are valid.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 2
+    },
+    {
+      "uuid": "9b16854e981048c59b1bc1efd2685bdf",
+      "document_id": "9b16854e981048c59b1bc1efd2685bdf__1",
+      "doc_type_id": "automated_sms",
+      "document_language_code": "hi",
+      "judge_verdict": "fail",
+      "judge_score": 0.65,
+      "judge_flags": [
+        "other"
+      ],
+      "judge_rationale": "Correct Hindi Devanagari prose and SMS length; fits psychiatry domain + male/28/Bihar persona; all TYPEs allow-listed and Latin IDs expected. Malformed nested MRN tag breaks formatting.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 0
+    },
+    {
+      "uuid": "1e23bb4e93b0465fa42494aee52e02ef",
+      "document_id": "1e23bb4e93b0465fa42494aee52e02ef__2",
+      "doc_type_id": "referral_letter",
+      "document_language_code": "mni",
+      "judge_verdict": "fail",
+      "judge_score": 0.2,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Clinical prose entirely English; expected Manipuri/Meitei script for narrative.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 2
+    },
+    {
+      "uuid": "49e7eef3f6644cc689038f044f77f052",
+      "document_id": "49e7eef3f6644cc689038f044f77f052__0",
+      "doc_type_id": "opd_slip",
+      "document_language_code": "sat",
+      "judge_verdict": "fail",
+      "judge_score": 0.2,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Prose uses Romanized Hindi medical terms instead of Santali in Ol Chiki script; all other elements (tags, persona, length) acceptable.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 2
+    },
+    {
+      "uuid": "c98c2d51b4ea4d0c947d6dfc0ee57383",
+      "document_id": "c98c2d51b4ea4d0c947d6dfc0ee57383__2",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "sat",
+      "judge_verdict": "fail",
+      "judge_score": 0.3,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Clinical prose entirely in Romanized mix/English instead of required Santali Ol Chiki script; RTA mention mildly drifts from TB/NCD domain.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 2
+    },
+    {
+      "uuid": "5c09bf9c92bb4474a1a128379f250e86",
+      "document_id": "5c09bf9c92bb4474a1a128379f250e86__1",
+      "doc_type_id": "discharge_summary",
+      "document_language_code": "sd",
+      "judge_verdict": "fail",
+      "judge_score": 0.6,
+      "judge_flags": [
+        "invented_entity_type"
+      ],
+      "judge_rationale": "Non-allowlist tags (CLINICAL_DIAGNOSIS, CLINICAL_HISTORY, HOSPITAL_COURSE, DISCHARGE_CONDITION, DISCHARGE_INSTRUCTIONS) used; prose/script, persona fit and IDs otherwise acceptable.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    }
+  ],
+  "failure_count": 8,
+  "soft_failures": [],
+  "soft_fail_count": 0,
+  "judge_repaired_count": 9,
+  "en_pivot_repair_count": 0,
+  "quality_repair_max": 5,
+  "repair_multi_constraint": true,
+  "repair_via_english_pivot": false,
+  "must_work_languages": [
+    "hi",
+    "ta",
+    "te",
+    "bn",
+    "mr",
+    "gu",
+    "kn",
+    "ml",
+    "pa",
+    "or",
+    "as",
+    "ur"
+  ],
+  "rare_script_languages": [
+    "brx",
+    "mni",
+    "sat",
+    "ks"
+  ],
+  "columns_added": [
+    "judge_verdict",
+    "judge_score",
+    "judge_reasoning",
+    "judge_flags",
+    "judge_provider",
+    "judge_model",
+    "judge_soft_fail",
+    "judge_error",
+    "judge_repair_attempts",
+    "judge_repaired",
+    "stage"
+  ]
+}

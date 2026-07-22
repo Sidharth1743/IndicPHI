@@ -1,0 +1,150 @@
+{
+  "stage": "s7_s8_curation",
+  "timestamp_utc": "2026-07-21T05:39:02.762492+00:00",
+  "rows_in": 54,
+  "dedup": {
+    "backend": "nemo_curator",
+    "rows_in": 54,
+    "rows_kept": 54,
+    "rows_dropped": 0,
+    "duplicate_ids_found": false,
+    "work_dir": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T095916/artifacts/nemo_curator_dedup",
+    "text_mode": "english_pivot_or_masked",
+    "template_fingerprints": {
+      "unique": 54,
+      "total": 54
+    },
+    "dropped_template_fingerprints": [
+      "TPA claim — Policy [[INSURANCE_POLICY_NUMBER]] [[PATIENT_NAME]] [[AGE]] [[GENDER]] Aadhaar [[AADHAAR_NUMBER]] Hospital [[HOSPITAL_NAME]] District [[DISTRICT]] Motor / RTA vehicle [[VEHICLE_REGISTRATION]] (exactly once). PAN [[PAN_NUMBER]] IFSC [[IFSC_CODE]] account [[BANK_ACCOUNT_NUMBER]] [[BANK_ROUTING_NUMBER]] [[CREDIT_CARD_NUMBER]] [[CVV]] [[PIN]] [[PHONE_NUMBER]] రోగి ప్రధాన ఫిర్యాదు నిరంతర తక్కువ మూడ్, ఆనందం లేకపోవడం మరియు గత మూడు నెలలుగా నిద్రకు సంబంధించిన ఇబ్బందులు. అతను పనిలో ఆశ కోల్పోవడం మరియు ఏకాగ్రత కష్టమవ్వడం గురించి నివేదించాడు. మేనియా ఎపిసోడ్ల చరిత్ర లేదు. గత వైద్య చరిత్ర ఎటువంటి సహకారం అందించలేదు. కుటుంబ చరిత్రలో అతని తండ్రికి రక్తపోటు ఉన్నట్లు గుర్తించబడింది. సామాజిక చరిత్ర అతను వివాహితుడని, సెకండరీ స్కూల్ విద్యను అభ్యసించాడని మరియు పొగాకును ఉపయోగిస్తాడని వెల్లడిస్తుంది. అతను పొగాకు కాకుండా ఇతర పదార్థాల వాడకాన్ని నిరాకరించాడు. పరీక్షలో, అతని మూడ్ నిరాశగా ఉంది, అఫెక్ట్ పరిమితంగా ఉంది మరియు అతను సమయం, స్థలం మరియు వ్యక్తికి అనుగుణంగా ఉన్నాడు. అతనికి రోజుకు 50mg సెర్ట్రాలైన్ ప్రారంభించబడింది మరియు రెండు వారాలలో ఫాలో-అప్ షెడ్యూల్ చేయబడింది. రోగికి కౌన్సెలింగ్ సెషన్లు సూచించబడ్డాయి. ప్రారంభ సంప్రదింపులు మరియు మందుల కోసం మొత్తం అంచనా ఖర్చు సుమారుగా రూ. 2500. క్లెయిమ్ పాలసీ కింద రీయింబర్స్‌మెంట్ కోసం సమర్పించబడింది.",
+      "آؤٹ پيشنٽ ڊپارٽمينٽ سلپ | [[HOSPITAL_NAME]] | ID [[HOSPITAL_ID]] مريضو: [[PATIENT_NAME]] | DOB [[DOB]] | عمر: [[AGE]] | جنس: [[GENDER]] پيشو: [[OCCUPATION]] | MRN: [[MRN]] | طبيب: [[DOCTOR_NAME]] نزديڪ: [[RELATIVE_NAME]] | فون: [[PHONE_NUMBER]] رجسٽرار EmpID: [[EMPLOYEE_ID]] | ضلعو: [[DISTRICT]] بنيادي شڪایت: 3 هفتن کان مُستقل کنگھ، گهٽ درجي جو بُخار، ۽ وزن گھٽجڻ. موجوده بيماري جو تاريخ: مريضو 42 سالن جو، ريٽائرڊ، 3 هفتن کان کنگھ سان گڏ پيش ٿي رہا آهي. هو شام جو گهٽ درجي جو بُخار ۽ پچھلي مھيني ۾ 5 ڪلو وزن گھٽجڻ جي رپورٽ پيش ڪري ٿو. سندس 20 سالن تائين روزانو 10 سگريٽ پيئڻ جو تاريخ موجود آهي. هو ڪا به رت جي کنگھ (hemoptysis) یا رات جو پسو (night sweats) نھ ٿو چوي. معاينة: وائٽلز: BP 130/85 mmHg, Pulse 88/min, Respiratory Rate 18/min, Temperature 99.4°F, SpO2 96% on room air. جنرل: سنهو، ڪيڪسڪس مڙس، باشعوڌدھ ۽ سمجهدار. چيڪس: ساڄي مٿين حصي ۾ هوا جو داخل ٿيڻ گھٽ، بارڪ کريڪلز سان گڏ. ڪا به ڪلبنگ یا لمف نوڊوپيٿي نھ. تحقيق: Sputum for AFB was positive. Chest X-ray shows right upper lobe consolidation with cavitation. Blood reports show mild normocytic anemia. تشخيص: Pulmonary Tuberculosis, Right Upper Lobe. علاج جو پلان: Category I DOTS regimen شروع ڪيو ويو: Isoniazid, Rifampicin, Pyrazinamide, Ethambutol. مريضو کي دوائون لڳائڻ اور سائيڊ ايفيڪٽس بابت صلاح ڏني وئي. 2 هفتن ۾ فالو اپ مقرر ڪيو ويو.",
+      "سرجيڪل نوٽ — [[HOSPITAL_NAME]] [[ADMISSION_NUMBER]] وارڊ [[WARD_NUMBER]] [[PATIENT_NAME]] [[AGE]] [[GENDER]] سرجن [[DOCTOR_NAME]] طريقو / مشاهدا: مريض 42 سالن جو مرد آهي، جنهن کي گذريل 2 سالن کان ساڄي انگوئنل هرنيا (inguinal hernia) جو بيمارو رھيو آھي. هرنيا معائني دوران واپس پوزيشن ۾ اچي سگھندو (reducible) پيو، پر جسماني سرگرمين دوران مريض کي گھڻو تڪليف پيو. آپريشن کان اڳ جا معائنا بشمول CBC، ڪوگوليشن پروفائل، ۽ ائبڊومينل الٽراساؤنڊ نارمل حدن اندر هئا. مريض کي جنرل ائستيھسيا (general anesthesia) تحت ساڄي انگوئنل هرنيا جي مرمت (repair) لاء آپريشن روم موڪليو ويو. آپريشن دوران مشاهدن مان معلوم ٿيو تہ ائٽرو سسٽ (omentum) سان ڀريل سڌو انگوئنل هرنيا موجود هو. لائچٽنشٽائن (Lichtenstein) طريقي سان لائٽ ويٽ پولي پروپيلين مئش (polypropylene mesh) استعمال ڪندي مرمت ڪئي وئي. سئڪ (sac) کي واپس پوزيشن ۾ آندو ويو، ۽ مئش (mesh) کي پري-پيرٽونيل اسپيس (pre-peritoneal space) ۾ رکي نان-ابساربيل سٽرز (non-absorbable sutures) سان ٽوڪو ويو. زخم (wound) جا تَهہ (layers)ابساربيل سٽرز سان بند ڪيا ويا. طريقيڪار (procedure) بغير ڪنھن تڪليف (uneventful) جي پورو थियो، ۽ مريض کي آپريشن کان پوءِ واري وارڊ ۾ مستحڪم حالت (stable condition) ۾ منتقل ڪيو ويو. [[BED_NUMBER]] [[MRN]] [[PATIENT_ID]] [[RELATIVE_NAME]]",
+      "प्रयोगशाला रिपोर्ट — [[HOSPITAL_NAME]] जिला [[DISTRICT]] MRN [[MRN]] रोगी पहचान [[PATIENT_ID]] [[PATIENT_NAME]] [[AGE]] [[GENDER]] फोन [[PHONE_NUMBER]] [[DOCTOR_NAME]] द्वारा आदेशित रोगी तीन सप्ताहक इतिहासक संग उत्पादक खाँसी, कम बुखार, आ वजन कम होयबाक शिकायत कयलनि। सूक्ष्मदर्शी आ GeneXpert MTB/RIF परीक्षणक लेल थूकक नमूना एकत्रित कयल गेल। रोगीकेँ उच्च रक्तचाप (hypertension) क इतिहास अछि आ ओ नियमित औषधि सेवन कऽ रहल छथि। परिणाम: थूक सूक्ष्मदर्शी (Ziehl-Neelsen रंजक): 2+ क्षेत्रमे एसिड-फास्ट बेसिली (AFB) देखल गेल। थूक GeneXpert MTB/RIF: माइकोबैक्टीरियम ट्यूबरकुलोसिस कॉम्प्लेक्सक पता लागल, रिफैम्पिसिन प्रतिरोधक पता नहि चलल। थूक संवर्धन (Culture): लंबित। पूर्ण रक्त गणना (CBC): हीमोग्लोबिन 11.2 g/dL, कुल ल्यूकोसाइट गणना 7,800 कोशिका/µL। यकृत कार्य परीक्षण (LFT): SGOT 45 U/L, SGPT 52 U/L, अल्कलाइन फॉस्फेट 78 U/L। वृक्क कार्य परीक्षण (RFT): सीरम क्रिएटिनिन 0.9 mg/dL, रक्त यूरिया नाइट्रोजन 18 mg/dL। रक्तचाप: 145/90 mmHg। रक्त शर्करा (उपवास): 110 mg/dL। व्याख्या: निष्कर्ष फुफ्फुसीय तपेदिक (Pulmonary Tuberculosis) क अनुरूप अछि। रोगीकेँ उच्च रक्तचाप आ हल्का रक्ताल्पता (anemia) सेहो देखल गेल अछि। संशोधित राष्ट्रीय तपेदिक नियंत्रण कार्यक्रम (RNTCP) क दिशानिर्देशानुसार हुनका एंटी-ट्यूबरकुलर थेरेपी शुरू करबाक सलाह देल जाइत अछि। योजना: 1. चारि-औषधि पद्धति शुरू करू: आइसोनियाज़िड, रिफैम्पिसिन, पाइराज़िनामाइड, आ एथमब्यूटोल। 2. उच्च रक्तचाप विरोधी औषधि जारी राखू। 3. पोषण संबंधी परामर्श आ सहायता प्रदान करू। 4. उपचारक प्रतिक्रिया आ औषधिक सहनशीलताक निगरानीक लेल दू सप्ताहमे अनुवर्ती (follow-up) जाँचक समय निर्धारित करू। 5. [[ASHA_WORKER_NAME]] सँ DOTS सहायताक लेल संपर्क करू।"
+    ],
+    "semantic_dedup": {
+      "backend": "hashed_ngram_bag",
+      "threshold": 0.92,
+      "rows_in": 54,
+      "rows_usable": 54,
+      "pairs_checked": 1313,
+      "dropped": 4,
+      "dropped_ids": [
+        "05653d78a0b944a1a6340ae58498aef3__0",
+        "05653d78a0b944a1a6340ae58498aef3__1",
+        "5101856b96064bb89d144b8fce1bad29__1",
+        "b40a892042de465688dba0baecb7b860__1"
+      ],
+      "clusters": [
+        {
+          "kept": "ecc5c42af9364fb79dfa7c3bc3b426f7__2",
+          "dropped": [
+            "b40a892042de465688dba0baecb7b860__1"
+          ]
+        },
+        {
+          "kept": "39ccef72592b48548e6bef4c9f232346__0",
+          "dropped": [
+            "05653d78a0b944a1a6340ae58498aef3__0"
+          ]
+        },
+        {
+          "kept": "70da0f4e70be41838df2f10c90d307ff__2",
+          "dropped": [
+            "05653d78a0b944a1a6340ae58498aef3__1"
+          ]
+        },
+        {
+          "kept": "95adf43ab19c4a8386ab22276ba36d01__1",
+          "dropped": [
+            "5101856b96064bb89d144b8fce1bad29__1"
+          ]
+        }
+      ]
+    },
+    "curator_kept_before_semantic": 54
+  },
+  "balancing": {
+    "enabled": true,
+    "equalize_mode": true,
+    "target_docs_per_language": 1,
+    "min_docs_per_language": null,
+    "allow_underfill": true,
+    "pre_balance_counts": {
+      "as": 3,
+      "bn": 2,
+      "brx": 2,
+      "doi": 1,
+      "en": 3,
+      "gu": 3,
+      "hi": 3,
+      "kn": 3,
+      "kok": 2,
+      "mai": 2,
+      "ml": 3,
+      "mni": 1,
+      "mr": 2,
+      "ne": 3,
+      "or": 3,
+      "pa": 2,
+      "sa": 2,
+      "sat": 1,
+      "sd": 1,
+      "ta": 3,
+      "te": 2,
+      "ur": 3
+    },
+    "per_language": {
+      "as": 1,
+      "bn": 1,
+      "brx": 1,
+      "doi": 1,
+      "en": 1,
+      "gu": 1,
+      "hi": 1,
+      "kn": 1,
+      "kok": 1,
+      "mai": 1,
+      "ml": 1,
+      "mni": 1,
+      "mr": 1,
+      "ne": 1,
+      "or": 1,
+      "pa": 1,
+      "sa": 1,
+      "sat": 1,
+      "sd": 1,
+      "ta": 1,
+      "te": 1,
+      "ur": 1
+    },
+    "discarded_by_balance": 28,
+    "discard_ratio": 0.56,
+    "rows_out": 22,
+    "underfilled": {},
+    "warning": "large_balance_discard: discarded 28/50 rows (56.0%) while equalizing to 1 docs/language"
+  },
+  "language_counts_out": {
+    "as": 1,
+    "bn": 1,
+    "brx": 1,
+    "doi": 1,
+    "en": 1,
+    "gu": 1,
+    "hi": 1,
+    "kn": 1,
+    "kok": 1,
+    "mai": 1,
+    "ml": 1,
+    "mni": 1,
+    "mr": 1,
+    "ne": 1,
+    "or": 1,
+    "pa": 1,
+    "sa": 1,
+    "sat": 1,
+    "sd": 1,
+    "ta": 1,
+    "te": 1,
+    "ur": 1
+  },
+  "rows_out": 22
+}

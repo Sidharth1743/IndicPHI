@@ -1,0 +1,2 @@
+{"uuid": "8b08baf3bcbf412eaace2d648074de01", "document_id": "8b08baf3bcbf412eaace2d648074de01__0", "doc_type_id": "telemedicine_transcript", "document_language_code": "bn", "auditor_errors": ["phi_residue:2"], "auditor_repair_attempts": 5}
+{"uuid": "f584cfd90471426ea809f549021f9a0f", "document_id": "f584cfd90471426ea809f549021f9a0f__2", "doc_type_id": "radiology_report", "document_language_code": "en", "auditor_errors": ["missing_required:DISTRICT,PHONE_NUMBER,HOSPITAL_ID,ABHA_ID"], "auditor_repair_attempts": 5}

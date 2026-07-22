@@ -155,7 +155,12 @@ def char_spans_to_token_ner(
     tokens: Sequence[tuple[str, int, int]],
     char_spans: Sequence[Mapping[str, Any]],
 ) -> tuple[list[list[Any]], list[str]]:
-    """Map character spans to inclusive token indices ``[start, end, label]``."""
+    """Map character spans to inclusive token indices ``[start, end, label]``.
+
+    GLiNER labels are token-level. Exact char↔token cover often fails on Indic
+    text (off-by-one / joiners). Prefer the overlapping token span and record a
+    soft warning when the cover is imperfect; only hard-error on zero overlap.
+    """
     ner: list[list[Any]] = []
     errors: list[str] = []
 
@@ -174,15 +179,14 @@ def char_spans_to_token_ner(
 
         tok_start = overlapping[0]
         tok_end = overlapping[-1]
-        # Require exact cover of the entity characters by the selected tokens.
         cover_start = tokens[tok_start][1]
         cover_end = tokens[tok_end][2]
         if cover_start != c_start or cover_end != c_end:
+            # Soft: snap to token cover (usable for training; do not drop doc).
             errors.append(
-                f"token_boundary_misalign:{label}:{c_start}-{c_end}"
+                f"token_boundary_snap:{label}:{c_start}-{c_end}"
                 f"->tok[{tok_start}:{tok_end}]chars[{cover_start}:{cover_end}]"
             )
-            continue
         ner.append([tok_start, tok_end, label])
 
     return ner, errors
@@ -211,11 +215,12 @@ def convert_document(
 
     tokens_with_offsets = tokenize(surface)
     tokenized_text = [tok for tok, _s, _e in tokens_with_offsets]
-    ner, align_errors = char_spans_to_token_ner(tokens_with_offsets, char_spans)
-    if align_errors and settings.fail_on_token_misalign:
+    ner, align_notes = char_spans_to_token_ner(tokens_with_offsets, char_spans)
+    hard_align = [e for e in align_notes if e.startswith("no_token_overlap:")]
+    if hard_align and settings.fail_on_token_misalign:
         raise GlinerFormatError(
             f"Token alignment failed for {row.get(settings.id_field)!r}: "
-            f"{align_errors[:5]}"
+            f"{hard_align[:5]}"
         )
 
     inline_count = len(extract_inline_spans(tagged))
@@ -232,7 +237,7 @@ def convert_document(
         "tokenized_text": tokenized_text,
         "ner": ner,
         "spans": char_spans,
-        "token_align_errors": align_errors,
+        "token_align_errors": align_notes,
         "document_language_code": row.get("document_language_code"),
         "doc_type_id": row.get("doc_type_id"),
         "domain_id": row.get("domain_id"),
@@ -256,8 +261,40 @@ def format_corpus(
         raise GlinerFormatError("No rows selected for GLiNER formatting")
 
     outputs: list[dict[str, Any]] = []
+    soft_failures: list[dict[str, Any]] = []
+    snap_docs = 0
     for row in selected:
-        outputs.append(convert_document(row, settings=settings, known_entities=known))
+        try:
+            doc = convert_document(row, settings=settings, known_entities=known)
+        except GlinerFormatError as exc:
+            soft_failures.append(
+                {
+                    "document_id": row.get(settings.id_field),
+                    "uuid": row.get("uuid"),
+                    "document_language_code": row.get("document_language_code"),
+                    "doc_type_id": row.get("doc_type_id"),
+                    "error": str(exc),
+                }
+            )
+            print(
+                f"[s9] SOFT-SKIP uuid={row.get('uuid')} "
+                f"doc_id={row.get(settings.id_field)} error={exc}",
+                file=sys.stderr,
+                flush=True,
+            )
+            continue
+        if any(
+            str(e).startswith("token_boundary_snap:")
+            for e in (doc.get("token_align_errors") or [])
+        ):
+            snap_docs += 1
+        outputs.append(doc)
+
+    if not outputs:
+        raise GlinerFormatError(
+            f"All {len(selected)} curated docs failed GLiNER conversion "
+            f"(soft_skips={len(soft_failures)})"
+        )
 
     ecr_report = compute_corpus_ecr(
         outputs,
@@ -280,6 +317,9 @@ def format_corpus(
         "input_jsonl": str(settings.input_jsonl),
         "rows_in": len(selected),
         "rows_out": len(outputs),
+        "soft_skip_count": len(soft_failures),
+        "soft_failures": soft_failures,
+        "token_boundary_snap_docs": snap_docs,
         "mean_tokens": (
             sum(len(row["tokenized_text"]) for row in outputs) / len(outputs)
         ),
@@ -292,7 +332,6 @@ def format_corpus(
         "fail_on_token_misalign": settings.fail_on_token_misalign,
     }
     return outputs, audit
-
 
 def write_outputs(
     rows: Sequence[Mapping[str, Any]],
@@ -333,6 +372,8 @@ def write_outputs(
     paths["audit_md"].write_text(
         "# Stage 9 — GLiNER Format & Intrinsic Metrics\n\n"
         f"- rows_out: **{audit['rows_out']}**\n"
+        f"- soft_skip_count: `{audit.get('soft_skip_count', 0)}`\n"
+        f"- token_boundary_snap_docs: `{audit.get('token_boundary_snap_docs', 0)}`\n"
         f"- mean_ecr: **{audit['ecr']['mean_ecr']:.3f}**\n"
         f"- mean_ised: **{audit['ised']['mean_ised']:.3f}**\n"
         f"{gold_line}",

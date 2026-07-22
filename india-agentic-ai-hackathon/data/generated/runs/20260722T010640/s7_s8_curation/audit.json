@@ -1,0 +1,156 @@
+{
+  "stage": "s7_s8_curation",
+  "timestamp_utc": "2026-07-22T00:48:20.781405+00:00",
+  "rows_in": 126,
+  "dedup": {
+    "backend": "nemo_curator",
+    "rows_in": 126,
+    "rows_kept": 126,
+    "rows_dropped": 0,
+    "duplicate_ids_found": false,
+    "work_dir": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T010640/artifacts/nemo_curator_dedup",
+    "text_mode": "english_pivot_or_masked",
+    "template_fingerprints": {
+      "unique": 126,
+      "total": 126
+    },
+    "dropped_template_fingerprints": [
+      "[[PATIENT_NAME]], ᱟᱢᱟᱜ ᱮᱯᱚᱭᱮᱱᱴᱢᱮᱱᱴ [[APPOINTMENT_ID]] [[DOCTOR_NAME]] ᱥᱟᱶ [[HOSPITAL_NAME]] ᱑᱕ ᱡᱩᱱ ᱑᱐:᱓᱐ ᱥᱮᱛᱟᱜ ᱨᱮ ᱾ ᱫᱟᱭᱟ ᱠᱟᱛᱮ ᱟᱢᱟᱜ [[MRN]] ᱟᱹᱜᱩᱭ ᱢᱮ ᱟᱨ ᱑᱕ ᱢᱤᱱᱤᱴ ᱞᱟᱦᱟ ᱨᱮ ᱥᱮᱴᱮᱨᱚᱜ ᱢᱮ ᱾ ᱡᱟᱦᱟᱸᱱᱟᱜ ᱠᱩᱠᱞᱤ ᱞᱟᱹᱜᱤᱫ [[PHONE_NUMBER]] ᱡᱚᱴᱮᱫ ᱢᱮ ᱾",
+      "बाह्य-रोगि-विभागः | [[HOSPITAL_NAME]] | परिचयाङ्कः [[HOSPITAL_ID]] रोगी: [[PATIENT_NAME]] | जन्म-तिथिः [[DOB]] | आयुः: [[AGE]] | लिङ्गम्: [[GENDER]] व्यवसायः: [[OCCUPATION]] | चिकित्सा-सङ्ख्या: [[MRN]] | चिकित्सकः: [[DOCTOR_NAME]] सम्बन्धी: [[RELATIVE_NAME]] | दूरभाषः: [[PHONE_NUMBER]] पञ्जीकारक-परिचय-सङ्ख्या: [[EMPLOYEE_ID]] | मण्डलम्: [[DISTRICT]] मुख्य-आक्षेपः: त्रिभिः दिनैः ज्वरः शरीर-शूलं च, मन्द-शिरःशूलं श्रान्तिः च सहिता। वर्तमान-रोग-वृत्तान्तः: रोगी त्रिभ्यः दिनेभ्यः पूर्वं ज्वरस्य आरम्भं सूचयति, यत्र तापः 101°F पर्यन्तं प्राप्तः। सामान्य-शरीर-शूलं, मन्द-शिरःशूलं, श्रान्तिः च सहिता। कासः श्वसन-लक्षणानि च नास्ति। वमनं अतिसारः च नास्ति। अन्तरालेषु Paracetamol सेवते, आंशिक-शमनेन सह। परीक्षणम्: तापः 100.8°F, नाडी 96/निमेषम्, रक्तचापः 110/70 mmHg, श्वसन-गतिः 18/निमेषम्। सामान्यम्: मन्दा पाण्डुता, कामला नास्ति। वक्षः: उभयतः स्पष्टम्। उदरम्: मृदुः, अवेदनम्। अङ्गानां वृद्धिः नास्ति। परीक्षणानि: CBC मन्द-श्वेत-रक्त-कोशिका-वृद्धिं दर्शयति। Widal परीक्षणं नकारात्मकम्। निदानम्: विषाणु-ज्वरः मांसपेशी-शूलं च। चिकित्सा: त्रिभ्यः दिनेभ्यः Paracetamol 500mg TDS, प्रचुराः द्रवाः, विश्रामः च। अनुवर्तनम्: यदि लक्षणानि तिष्ठन्ति तर्हि त्रिभ्यः दिनेभ्यः परं पुनः-परीक्षणं कुर्वन्तु।",
+      "ಬಿಲ್ಲಿಂಗ್ ಇನ್‌ವಾಯ್ಸ್ — [[HOSPITAL_NAME]] ಜಿಲ್ಲೆ [[DISTRICT]] ಪಿನ್ [[PIN_CODE]] ರೋಗಿ [[PATIENT_NAME]] MRN [[MRN]] ವಿಳಾಸ [[RESIDENTIAL_ADDRESS]] ಫೋನ್ [[PHONE_NUMBER]] ಇಮೇಲ್ [[EMAIL_ADDRESS]] ಪ್ಯಾನ್ [[PAN_NUMBER]] ಲ್ಯಾಂಡ್‌ಲೈನ್ [[TELEPHONE_LANDLINE]] ವಾಹನ [[VEHICLE_REGISTRATION]] ಆಧಾರ್ [[AADHAAR_NUMBER]] ವಿಮಾ ಪಾಲಿಸಿ [[INSURANCE_POLICY_NUMBER]] ತೆರಿಗೆ ಐಡಿ [[TAX_ID]] ರಶೀದಿ ಸಂಖ್ಯೆ INV-2024-0815 ಬಿಲ್ಲಿಂಗ್ ವಿವರಗಳು: ಪ್ರಕ್ರಿಯೆ: PET-CT ಸ್ಕ್ಯಾನ್, ಬಯಾಪ್ಸಿ - ₹6,300 ಪ್ರಕ್ರಿಯೆ: ಕೀಮೋಥೆರಪಿ ಸೆಷನ್, ವಿಕಿರಣ ಚಿಕಿತ್ಸೆ - ₹12,700 ಔಷಧಗಳು: ಟಮೊಕ್ಸಿಫೆನ್ 20mg, ಪ್ರಿಸ್ಕ್ರಿಪ್ಷನ್ ಕೀಮೋಥೆರಪಿ - ₹6,800 ಸಮಾಲೋಚನೆ: ಆಂಕೊಲಾಜಿ ಸಮಾಲೋಚನೆ - ₹1,500 ಪ್ರಯೋಗಾಲಯ ಪರೀಕ್ಷೆಗಳು: ಕಂಪ್ಲೀಟ್ ಬ್ಲಡ್ ಕೌಂಟ್, ಲಿವರ್ ಫಂಕ್ಷನ್ ಟೆಸ್ಟ್, ಕಿಡ್ನಿ ಫಂಕ್ಷನ್ - ₹800 ಒಟ್ಟು ಮೊತ್ತ: ₹27,600 ರೋಗಿಯ ವಿವರಗಳು: ಲಿಂಗ: ಪುರುಷ ವಯಸ್ಸು: 28 ವರ್ಷಗಳು ವಿಳಾಸ: [[RESIDENTIAL_ADDRESS]] ಜಿಲ್ಲೆ: [[DISTRICT]] ರಾಜ್ಯ: ಕರ್ನಾಟಕ ಪಿನ್ ಕೋಡ್: [[PIN_CODE]] ಫೋನ್: [[PHONE_NUMBER]] ಲ್ಯಾಂಡ್‌ಲೈನ್: [[TELEPHONE_LANDLINE]] ವಾಹನ ಸಂಖ್ಯೆ: [[VEHICLE_REGISTRATION]] ಇಮೇಲ್: [[EMAIL_ADDRESS]] ಆಧಾರ್: [[AADHAAR_NUMBER]] ಪ್ಯಾನ್: [[PAN_NUMBER]] ವಿಮಾ ಪಾಲಿಸಿ: [[INSURANCE_POLICY_NUMBER]] ತೆರಿಗೆ ಐಡಿ: [[TAX_ID]]",
+      "ബില്ലിംഗ് ഇൻവോയ്സ് — [[HOSPITAL_NAME]] ജില്ല [[DISTRICT]] പിൻ [[PIN_CODE]] രോഗി [[PATIENT_NAME]] MRN [[MRN]] വിലാസം [[RESIDENTIAL_ADDRESS]] ഫോൺ [[PHONE_NUMBER]] ഇമെയിൽ [[EMAIL_ADDRESS]] പാൻ [[PAN_NUMBER]] ലാൻഡ്‌ലൈൻ [[TELEPHONE_LANDLINE]] വാഹനം [[VEHICLE_REGISTRATION]] (ഒരിക്കൽ) ആധാർ [[AADHAAR_NUMBER]] പോളിസി [[INSURANCE_POLICY_NUMBER]] ജി.എസ്.ടി.ഐ.എൻ [[TAX_ID]] രസീത് നമ്പർ INV-2024-0815 രോഗിയുടെ വിവരങ്ങൾ: പ്രായം: 32 വയസ്സ്, ലിംഗം: സ്ത്രീ രോഗവിവരണം: കഴിഞ്ഞ 3 ദിവസമായി പനിയും തലവേദനയും അനുഭവപ്പെടുന്നു. പരിശോധന: ബി.പി 120/80, പൾസ് 80, താപനില 99.2°F രോഗനിർണ്ണയം: വൈറൽ പനി ചികിത്സ: പാരസെറ്റമോൾ 500mg, വിശ്രമം, ധാരാളം വെള്ളം കുടിക്കുക അഡ്മിഷൻ തീയതി: 2024 ഓഗസ്റ്റ് 15 ഡിസ്ചാർജ് തീയതി: 2024 ഓഗസ്റ്റ് 17 ചാർജുകൾ: കൺസൾട്ടേഷൻ ഫീ: ₹500 ബ്ലഡ് ടെസ്റ്റ്: ₹800 മെഡിസിൻ: ₹1200 റൂം ചാർജ്: ₹1500 ആകെ തുക: ₹4000 പണം അടച്ചത്: ₹4000 ബാക്കി തുക: ₹0 രോഗിയുടെ ഒപ്പ്: ________________",
+      "ബിൽ — [[HOSPITAL_NAME]] ജില്ല [[DISTRICT]] പിൻ [[PIN_CODE]] രോഗി [[PATIENT_NAME]] MRN [[MRN]] വിലാസം [[RESIDENTIAL_ADDRESS]] ഫോൺ [[PHONE_NUMBER]] ഇമെയിൽ [[EMAIL_ADDRESS]] പാൻ [[PAN_NUMBER]] ലാൻഡ്‌ലൈൻ [[TELEPHONE_LANDLINE]] വാഹനം [[VEHICLE_REGISTRATION]] (ഒരിക്കൽ) ആധാർ [[AADHAAR_NUMBER]] പോളിസി [[INSURANCE_POLICY_NUMBER]] ജിഎസ്ടിഐഎൻ [[TAX_ID]] രസീത് നമ്പർ INV-2024-0815 കേരള സ്റ്റേറ്റ് തീയതി: 15 ഓഗസ്റ്റ് 2024 ബിൽ വിവരങ്ങൾ: ANC രജിസ്ട്രേഷൻ: ₹800 ഒന്നാം ട്രൈമെസ്റ്റർ സ്ക്രീനിംഗ്: ₹2,500 അൾട്രാസൗണ്ട് സ്കാൻ (12 ആഴ്ച): ₹1,800 രക്തഗ്രൂപ്പ് & Rh ഫാക്ടർ: ₹400 കംപ്ലീറ്റ് ബ്ലഡ് കൗണ്ട്: ₹600 ബ്ലഡ് ഷുഗർ ഫാസ്റ്റിംഗ്: ₹300 HbA1c: ₹500 യൂറിൻ റുട്ടീൻ: ₹200 ബ്ലഡ് പ്രഷർ മോണിറ്ററിംഗ്: ₹150 ഭാരം & ഉയരം: ₹100 അയൺ & ഫോളിക് ആസിഡ്: ₹250 കാൽസ്യം & വിറ്റാമിൻ ഡി: ₹350 ടെറ്റനസ് ഇമ്മ്യൂണൈസേഷൻ: ₹150 കൗൺസിലിംഗ് സെഷൻ: ₹500 ഡെലിവറി പാക്കേജ്: ₹25,000 ബെഡ് ചാർജ്: ഒരു ദിവസത്തേക്ക് ₹1,200 ഡോക്ടർ കൺസൾട്ടേഷൻ: ഒരു സന്ദർശനത്തിന് ₹800 മരുന്ന് ചാർജ്: ₹3,500 ലാബോറട്ടറി ടെസ്റ്റുകൾ: ₹2,800 വാക്സിനേഷൻ: ₹400 ആകെ തുക: ₹38,200 ജിഎസ്ടി തുക: ₹3,820 ആകെ തുക: ₹42,020 പേയ്‌മെന്റ് രീതി: പണമടയ്ക്കൽ/ഇൻഷുറൻസ് ഇൻഷുറൻസ് ക്ലെയിം നമ്പർ: POL-KL-2024-7781 ഡിസ്ചാർജ് തീയതി: 20 ഓഗസ്റ്റ് 2024 ഡോക്ടർ: ഡോ. അഞ്ജലി മേനോൻ (പ്രസവചികിത്സ & ഗൈനക്കോളജി) അഡ്മിഷൻ തീയതി: 15 ഓഗസ്റ്റ് 2024"
+    ],
+    "semantic_dedup": {
+      "backend": "hashed_ngram_bag",
+      "threshold": 0.92,
+      "rows_in": 126,
+      "rows_usable": 126,
+      "pairs_checked": 7499,
+      "dropped": 5,
+      "dropped_ids": [
+        "17f9c3d0179e4aa5a9546ec050612896__2",
+        "22ef884ce12247309d07fc3f601a3c59__1",
+        "80435bdcef24479390d6e6ae0b2aeeb1__2",
+        "c98c2d51b4ea4d0c947d6dfc0ee57383__1",
+        "d89930b893984d4b96fbd0b492413321__2"
+      ],
+      "clusters": [
+        {
+          "kept": "62bbda52de29443287ee799e3f265919__1",
+          "dropped": [
+            "d89930b893984d4b96fbd0b492413321__2",
+            "80435bdcef24479390d6e6ae0b2aeeb1__2"
+          ]
+        },
+        {
+          "kept": "c03b2ff49ffa439380a254bb9f8972f7__1",
+          "dropped": [
+            "17f9c3d0179e4aa5a9546ec050612896__2"
+          ]
+        },
+        {
+          "kept": "9fe1a2291cd5496b92e09e133ea65d85__1",
+          "dropped": [
+            "22ef884ce12247309d07fc3f601a3c59__1"
+          ]
+        },
+        {
+          "kept": "92bd0bf2eb344ae9817ad6c5c3e89f31__2",
+          "dropped": [
+            "c98c2d51b4ea4d0c947d6dfc0ee57383__1"
+          ]
+        }
+      ]
+    },
+    "curator_kept_before_semantic": 126
+  },
+  "balancing": {
+    "enabled": true,
+    "equalize_mode": true,
+    "target_docs_per_language": 3,
+    "min_docs_per_language": null,
+    "allow_underfill": true,
+    "pre_balance_counts": {
+      "as": 5,
+      "bn": 6,
+      "brx": 3,
+      "doi": 6,
+      "en": 6,
+      "gu": 6,
+      "hi": 4,
+      "kn": 5,
+      "kok": 6,
+      "ks": 6,
+      "mai": 6,
+      "ml": 4,
+      "mni": 4,
+      "mr": 6,
+      "ne": 6,
+      "or": 6,
+      "pa": 6,
+      "sa": 5,
+      "sat": 3,
+      "sd": 4,
+      "ta": 6,
+      "te": 6,
+      "ur": 6
+    },
+    "per_language": {
+      "as": 3,
+      "bn": 3,
+      "brx": 3,
+      "doi": 3,
+      "en": 3,
+      "gu": 3,
+      "hi": 3,
+      "kn": 3,
+      "kok": 3,
+      "ks": 3,
+      "mai": 3,
+      "ml": 3,
+      "mni": 3,
+      "mr": 3,
+      "ne": 3,
+      "or": 3,
+      "pa": 3,
+      "sa": 3,
+      "sat": 3,
+      "sd": 3,
+      "ta": 3,
+      "te": 3,
+      "ur": 3
+    },
+    "discarded_by_balance": 52,
+    "discard_ratio": 0.4298,
+    "rows_out": 69,
+    "underfilled": {},
+    "warning": "large_balance_discard: discarded 52/121 rows (43.0%) while equalizing to 3 docs/language"
+  },
+  "language_counts_out": {
+    "as": 3,
+    "bn": 3,
+    "brx": 3,
+    "doi": 3,
+    "en": 3,
+    "gu": 3,
+    "hi": 3,
+    "kn": 3,
+    "kok": 3,
+    "ks": 3,
+    "mai": 3,
+    "ml": 3,
+    "mni": 3,
+    "mr": 3,
+    "ne": 3,
+    "or": 3,
+    "pa": 3,
+    "sa": 3,
+    "sat": 3,
+    "sd": 3,
+    "ta": 3,
+    "te": 3,
+    "ur": 3
+  },
+  "rows_out": 69
+}

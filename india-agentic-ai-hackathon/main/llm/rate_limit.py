@@ -26,11 +26,16 @@ class RateLimiter:
     def acquire(self) -> None:
         if self._min_interval_s is None:
             return
+        wait = 0.0
         with self._lock:
             now = time.monotonic()
             if self._last_acquire_monotonic is not None:
                 elapsed = now - self._last_acquire_monotonic
                 wait = self._min_interval_s - elapsed
-                if wait > 0:
-                    time.sleep(wait)
-            self._last_acquire_monotonic = time.monotonic()
+            # Reserve the next slot before sleeping so concurrent callers
+            # space correctly without holding the lock during sleep.
+            if wait < 0:
+                wait = 0.0
+            self._last_acquire_monotonic = now + wait
+        if wait > 0:
+            time.sleep(wait)

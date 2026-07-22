@@ -1,0 +1,164 @@
+{
+  "stage": "s4_generation",
+  "engine": "nemo_data_designer",
+  "timestamp_utc": "2026-07-21T06:00:18.361622+00:00",
+  "provider": "sarvam",
+  "model": "sarvam-105b",
+  "base_url": "https://api.sarvam.ai/v1",
+  "rows_requested": 138,
+  "rows_generated": 138,
+  "rows_from_checkpoint": 0,
+  "rows_newly_generated": 138,
+  "soft_failures": [
+    {
+      "uuid": "5afdbf29e52249fc95146ec7db5e2023",
+      "document_id": "5afdbf29e52249fc95146ec7db5e2023__1",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "as",
+      "missing_required_entities": [
+        "BANK_ROUTING_NUMBER"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:BANK_ROUTING_NUMBER"
+      ]
+    },
+    {
+      "uuid": "a215dd216aff46e7add35a2cb913a177",
+      "document_id": "a215dd216aff46e7add35a2cb913a177__0",
+      "doc_type_id": "referral_letter",
+      "document_language_code": "en",
+      "missing_required_entities": [],
+      "stuffed_entity_types": [
+        "AGE",
+        "DISTRICT",
+        "GENDER",
+        "HOSPITAL_ID",
+        "HOSPITAL_NAME",
+        "MRN",
+        "PHONE_NUMBER",
+        "REFERRAL_ID",
+        "RELATIVE_NAME"
+      ],
+      "reasons": [
+        "entity_stuffing:AGE,DISTRICT,GENDER,HOSPITAL_ID,HOSPITAL_NAME,MRN,PHONE_NUMBER,REFERRAL_ID,RELATIVE_NAME"
+      ]
+    },
+    {
+      "uuid": "a215dd216aff46e7add35a2cb913a177",
+      "document_id": "a215dd216aff46e7add35a2cb913a177__1",
+      "doc_type_id": "radiology_report",
+      "document_language_code": "en",
+      "missing_required_entities": [
+        "DISTRICT",
+        "PHONE_NUMBER",
+        "HOSPITAL_ID",
+        "ABHA_ID"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:DISTRICT,PHONE_NUMBER,HOSPITAL_ID,ABHA_ID"
+      ]
+    },
+    {
+      "uuid": "85cdb818ce5740ed85a9bfb29cf57098",
+      "document_id": "85cdb818ce5740ed85a9bfb29cf57098__1",
+      "doc_type_id": "radiology_report",
+      "document_language_code": "gu",
+      "missing_required_entities": [
+        "DISTRICT",
+        "PHONE_NUMBER",
+        "HOSPITAL_ID",
+        "ABHA_ID"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:DISTRICT,PHONE_NUMBER,HOSPITAL_ID,ABHA_ID"
+      ]
+    },
+    {
+      "uuid": "9b16854e981048c59b1bc1efd2685bdf",
+      "document_id": "9b16854e981048c59b1bc1efd2685bdf__0",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "hi",
+      "missing_required_entities": [],
+      "stuffed_entity_types": [
+        "TOTAL_TAGS>32"
+      ],
+      "reasons": [
+        "entity_stuffing:TOTAL_TAGS>32"
+      ]
+    },
+    {
+      "uuid": "911448710ce34ff686d217211c009ba8",
+      "document_id": "911448710ce34ff686d217211c009ba8__1",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "kn",
+      "missing_required_entities": [
+        "BANK_ROUTING_NUMBER"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:BANK_ROUTING_NUMBER"
+      ]
+    },
+    {
+      "uuid": "99d8e2b0dd9e42e6b270e50cb12c26c5",
+      "document_id": "99d8e2b0dd9e42e6b270e50cb12c26c5__2",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "ks",
+      "missing_required_entities": [],
+      "stuffed_entity_types": [
+        "AADHAAR_NUMBER",
+        "AGE",
+        "BANK_ACCOUNT_NUMBER",
+        "BANK_ROUTING_NUMBER",
+        "CREDIT_CARD_NUMBER",
+        "CVV",
+        "DISTRICT",
+        "GENDER",
+        "HOSPITAL_NAME",
+        "IFSC_CODE",
+        "INSURANCE_POLICY_NUMBER",
+        "PAN_NUMBER",
+        "PHONE_NUMBER",
+        "PIN",
+        "VEHICLE_REGISTRATION"
+      ],
+      "reasons": [
+        "entity_stuffing:AADHAAR_NUMBER,AGE,BANK_ACCOUNT_NUMBER,BANK_ROUTING_NUMBER,CREDIT_CARD_NUMBER,CVV,DISTRICT,GENDER,HOSPITAL_NAME,IFSC_CODE,INSURANCE_POLICY_NUMBER,PAN_NUMBER,PHONE_NUMBER,PIN,VEHICLE_REGISTRATION"
+      ]
+    },
+    {
+      "uuid": "9fe1a2291cd5496b92e09e133ea65d85",
+      "document_id": "9fe1a2291cd5496b92e09e133ea65d85__0",
+      "doc_type_id": "lab_report",
+      "document_language_code": "mai",
+      "missing_required_entities": [],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "invalid_type_tags:রোগীর_নাম,এম.আর.এন"
+      ]
+    },
+    {
+      "uuid": "64ccf4937c134083910a24e651a7f14c",
+      "document_id": "64ccf4937c134083910a24e651a7f14c__1",
+      "doc_type_id": "asha_worker_note",
+      "document_language_code": "te",
+      "missing_required_entities": [
+        "VILLAGE",
+        "DISTRICT",
+        "RELIGION"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:VILLAGE,DISTRICT,RELIGION"
+      ]
+    }
+  ],
+  "soft_fail_count": 9,
+  "generation_repaired_count": 12,
+  "entity_coverage_complete_rate": 0.9565217391304348,
+  "mean_chars": 1286.8478260869565,
+  "checkpoint": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T111651/s4_generation/checkpoint.jsonl"
+}

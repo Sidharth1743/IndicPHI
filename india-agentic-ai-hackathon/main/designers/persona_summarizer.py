@@ -65,6 +65,7 @@ class SummarySettings:
     requests_per_minute: float | None
     max_workers: int
     narrative_max_chars: int
+    empty_content_retries: int = 3
 
 
 class SummaryError(RuntimeError):
@@ -110,6 +111,10 @@ def load_settings(pipeline_config: Path) -> SummarySettings:
     if max_workers < 1:
         raise ValueError("max_workers must be >= 1")
 
+    empty_retries = int(block.get("empty_content_retries", 3))
+    if empty_retries < 0:
+        raise ValueError("empty_content_retries must be >= 0")
+
     return SummarySettings(
         input_jsonl=resolve_repo_path(str(block["input_jsonl"])),
         output_dir=resolve_repo_path(str(block["output_dir"])),
@@ -124,6 +129,7 @@ def load_settings(pipeline_config: Path) -> SummarySettings:
         requests_per_minute=rpm,
         max_workers=max_workers,
         narrative_max_chars=int(block.get("narrative_max_chars", 240)),
+        empty_content_retries=empty_retries,
     )
 
 
@@ -181,37 +187,55 @@ def _summarize_one(
     client: SarvamClient,
     settings: SummarySettings,
 ) -> dict[str, Any]:
-    try:
-        result = client.chat_completion(
-            model=settings.model,
-            messages=build_summary_messages(
-                row, narrative_max_chars=settings.narrative_max_chars
-            ),
-            temperature=settings.temperature,
-            max_tokens=settings.max_tokens,
-            reasoning_effort=settings.reasoning_effort,
-            timeout_s=settings.timeout_s,
-        )
-    except SarvamClientError as exc:
-        raise SummaryError(
-            f"Persona summary failed at row {index} uuid={row.get('uuid')!r}: {exc}"
-        ) from exc
-
-    summary = result.content.strip()
-    if len(summary) < 20:
-        raise SummaryError(
-            f"Persona summary too short at row {index} uuid={row.get('uuid')!r}"
-        )
-
-    out = dict(row)
-    out.update(
-        {
-            "persona_clinical_summary": summary,
-            "persona_summary_model": result.model,
-            "stage": "s2b_persona_summary",
-        }
+    messages = build_summary_messages(
+        row, narrative_max_chars=settings.narrative_max_chars
     )
-    return out
+    attempts = settings.empty_content_retries + 1
+    last_exc: Exception | None = None
+    result = None
+    for attempt in range(attempts):
+        try:
+            result = client.chat_completion(
+                model=settings.model,
+                messages=messages,
+                temperature=settings.temperature,
+                max_tokens=settings.max_tokens,
+                reasoning_effort=settings.reasoning_effort,
+                timeout_s=settings.timeout_s,
+            )
+            summary = result.content.strip()
+            if len(summary) < 20:
+                raise SummaryError(
+                    f"Persona summary too short at row {index} "
+                    f"uuid={row.get('uuid')!r}"
+                )
+            out = dict(row)
+            out.update(
+                {
+                    "persona_clinical_summary": summary,
+                    "persona_summary_model": result.model,
+                    "stage": "s2b_persona_summary",
+                }
+            )
+            return out
+        except (SarvamClientError, SummaryError) as exc:
+            last_exc = exc
+            msg = str(exc).lower()
+            retryable = "empty content" in msg or "too short" in msg
+            if retryable and attempt < attempts - 1:
+                print(
+                    f"[s2b] empty/short retry {attempt + 1}/{attempts - 1} "
+                    f"uuid={row.get('uuid')}: {exc}",
+                    file=sys.stderr,
+                    flush=True,
+                )
+                continue
+            raise SummaryError(
+                f"Persona summary failed at row {index} uuid={row.get('uuid')!r}: {exc}"
+            ) from exc
+    raise SummaryError(
+        f"Persona summary failed at row {index} uuid={row.get('uuid')!r}: {last_exc}"
+    )
 
 
 def summarize_rows(

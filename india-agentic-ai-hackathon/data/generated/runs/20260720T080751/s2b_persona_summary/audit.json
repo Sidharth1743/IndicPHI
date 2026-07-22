@@ -1,0 +1,15 @@
+{
+  "stage": "s2b_persona_summary",
+  "timestamp_utc": "2026-07-20T02:38:03.407920+00:00",
+  "model": "sarvam-30b",
+  "rows_in": 20,
+  "rows_out": 20,
+  "max_workers": 12,
+  "requests_per_minute": 110.0,
+  "mean_summary_chars": 379.45,
+  "columns_added": [
+    "persona_clinical_summary",
+    "persona_summary_model",
+    "stage"
+  ]
+}

@@ -1,0 +1,1 @@
+{"uuid": "81ed007d28a447e3952a9359d6e9e528", "document_id": "81ed007d28a447e3952a9359d6e9e528__0", "doc_type_id": "opd_slip", "document_language_code": "ta", "missing_required_entities": ["HOSPITAL_NAME"], "stuffed_entity_types": [], "reasons": ["missing_required_entities:HOSPITAL_NAME"]}

@@ -1,0 +1,11 @@
+{
+  "stage": "s6_deterministic_auditor",
+  "timestamp_utc": "2026-07-21T07:41:26.672849+00:00",
+  "rows_audited": 0,
+  "rows_passed": 0,
+  "pass_rate": 0.0,
+  "mean_dics": 0.0,
+  "mean_ecr": 0.0,
+  "mean_bcr": 0.0,
+  "note": "No judge-passed rows; wrote empty auditor outputs."
+}

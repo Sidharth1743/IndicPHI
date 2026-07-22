@@ -1,0 +1,58 @@
+{
+  "stage": "s6_deterministic_auditor",
+  "timestamp_utc": "2026-07-22T00:47:53.612422+00:00",
+  "rows_audited": 130,
+  "rows_passed": 126,
+  "rows_failed": 4,
+  "pass_rate": 0.9692307692307692,
+  "mean_dics": 0.9923076923076923,
+  "mean_ecr": 0.9923076923076923,
+  "mean_bcr": 0.002197802197802198,
+  "failures": [
+    {
+      "uuid": "5afdbf29e52249fc95146ec7db5e2023",
+      "document_id": "5afdbf29e52249fc95146ec7db5e2023__1",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "as",
+      "auditor_errors": [
+        "phi_residue:1"
+      ],
+      "auditor_repair_attempts": 5
+    },
+    {
+      "uuid": "9b16854e981048c59b1bc1efd2685bdf",
+      "document_id": "9b16854e981048c59b1bc1efd2685bdf__2",
+      "doc_type_id": "hospital_billing",
+      "document_language_code": "hi",
+      "auditor_errors": [
+        "dics_below_threshold:0.0"
+      ],
+      "auditor_repair_attempts": 1
+    },
+    {
+      "uuid": "d15c31be6c8e40a393e6e6f4f9562ea3",
+      "document_id": "d15c31be6c8e40a393e6e6f4f9562ea3__0",
+      "doc_type_id": "hospital_billing",
+      "document_language_code": "mni",
+      "auditor_errors": [
+        "span_alignment_failure",
+        "boundary_corruption_rate:0.2857142857142857"
+      ],
+      "auditor_repair_attempts": 1
+    },
+    {
+      "uuid": "5c09bf9c92bb4474a1a128379f250e86",
+      "document_id": "5c09bf9c92bb4474a1a128379f250e86__0",
+      "doc_type_id": "hospital_billing",
+      "document_language_code": "sd",
+      "auditor_errors": [
+        "missing_required:PATIENT_NAME,HOSPITAL_NAME,MRN,DISTRICT,PIN_CODE,PHONE_NUMBER,AADHAAR_NUMBER,INSURANCE_POLICY_NUMBER,TAX_ID,TELEPHONE_LANDLINE,VEHICLE_REGISTRATION,EMAIL_ADDRESS,RESIDENTIAL_ADDRESS,PAN_NUMBER",
+        "phi_residue:14"
+      ],
+      "auditor_repair_attempts": 5
+    }
+  ],
+  "failure_count": 4,
+  "auditor_repaired_count": 19,
+  "quality_repair_max": 5
+}

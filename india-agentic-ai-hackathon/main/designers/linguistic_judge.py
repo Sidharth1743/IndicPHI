@@ -11,17 +11,28 @@ import json
 import re
 import sys
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Mapping, Protocol, Sequence
 
+from main.designers.entity_checks import (
+    SOFT_JUDGE_FLAGS,
+    normalize_inline_entity_tags,
+)
 from main.designers.repair import (
     clear_upstream_soft_fail_fields,
     issues_from_judge_flags,
     load_repair_settings_from_generation,
+    merge_repair_issues,
     repair_document,
+    RepairIssue,
     RepairSettings,
+)
+from main.designers.translator import (
+    TranslationSettings,
+    translate_english_once,
 )
 from main.llm.openai_compatible import (
     OpenAICompatibleClient,
@@ -89,6 +100,9 @@ class JudgeSettings:
     requests_per_minute: float | None
     entities_config: Path | None
     network_retries: int
+    max_workers: int = 24
+    must_work_languages: tuple[str, ...] = ()
+    rare_script_languages: tuple[str, ...] = ()
 
 
 class JudgeError(RuntimeError):
@@ -152,6 +166,16 @@ def load_settings(pipeline_config: Path) -> JudgeSettings:
         resolve_repo_path(str(entities_config)) if entities_config is not None else None
     )
 
+    max_workers = int(block.get("max_workers", 24))
+    if max_workers < 1:
+        raise ValueError("max_workers must be >= 1")
+
+    def _lang_tuple(key: str) -> tuple[str, ...]:
+        raw = block.get(key) or []
+        if not isinstance(raw, list):
+            raise ValueError(f"{key} must be a list when set")
+        return tuple(str(x).strip() for x in raw if str(x).strip())
+
     return JudgeSettings(
         provider=provider,
         input_jsonl=resolve_repo_path(str(block["input_jsonl"])),
@@ -170,6 +194,9 @@ def load_settings(pipeline_config: Path) -> JudgeSettings:
         requests_per_minute=rpm,
         entities_config=entities_path,
         network_retries=max(0, int(block.get("network_retries", 4))),
+        max_workers=max_workers,
+        must_work_languages=_lang_tuple("must_work_languages"),
+        rare_script_languages=_lang_tuple("rare_script_languages"),
     )
 
 
@@ -237,9 +264,17 @@ def build_judge_messages(
         "- Flag dialect_script_impurity only when clinical narrative prose is "
         "mostly wrong language/script (e.g. English body when Tamil was required).\n"
         "- Flag domain_persona_mismatch for sex/age vs clinical content "
-        "(e.g. male maternal delivery; age 70 paediatric; geriatric maternal SMS).\n"
+        "(e.g. male maternal delivery; age 70 paediatric; extreme-age routine "
+        "mid-trimester pregnancy — unsafe / not age-plausible).\n"
+        "- invented_entity_type is SOFT for billing/admin extras: do NOT fail "
+        "solely for EMAIL/CONTACT_EMAIL/ADDRESS_NUMBER/RECEIPT_NUMBER/STATE/"
+        "money-amount invents when required allow-list tags + script/domain are fine. "
+        "You may list invented_entity_type as an advisory flag; map aliases mentally "
+        "to EMAIL_ADDRESS / RESIDENTIAL_ADDRESS; receipt/state/money belong in prose. "
+        "Still fail for invent storms that replace required types, or missing required tags.\n"
         "- Flag invented_entity_type ONLY for TYPE names outside the allow-list "
-        "(e.g. DATE, TIME, APPOINTMENT_DATE, POLICY_NUMBER). "
+        "(e.g. DATE, TIME, APPOINTMENT_DATE, POLICY_NUMBER) — and treat billing "
+        "near-misses as soft as above. "
         "PATIENT_NAME / HOSPITAL_NAME / DOCTOR_NAME / MRN etc. are valid if listed.\n"
         "- Flag length_violation if automated_sms is a long chart dump "
         "(>> ~400 chars / many paragraphs).\n"
@@ -295,6 +330,17 @@ def parse_judge_response(content: str, *, pass_threshold: float) -> dict[str, An
         raise JudgeError("Judge flags must be a list")
     flags_t = [str(item) for item in flags]
     reasoning = str(payload.get("reasoning", "")).strip()
+
+    # Soft: invented_entity_type alone must not fail an otherwise-OK doc.
+    hard_flags = [f for f in flags_t if f not in SOFT_JUDGE_FLAGS]
+    if (
+        verdict == "fail"
+        and score >= pass_threshold
+        and flags_t
+        and not hard_flags
+    ):
+        verdict = "pass"
+
     return {
         "judge_verdict": verdict,
         "judge_score": score,
@@ -348,6 +394,333 @@ def _is_retryable_judge_error(exc: BaseException) -> bool:
     return any(item in message for item in needles)
 
 
+
+def _judge_one_row(
+    index: int,
+    row: Mapping[str, Any],
+    *,
+    client: _ChatClient,
+    settings: JudgeSettings,
+    allow_list: Sequence[str],
+    repair_client: SarvamClient | None,
+    repair_settings: RepairSettings | None,
+    translation_settings: TranslationSettings | None,
+    max_quality_repairs: int,
+    multi_constraint: bool,
+    via_english_pivot: bool,
+    attempts_per_row: int,
+    total_rows: int,
+) -> tuple[dict[str, Any], str, dict[str, Any] | None, bool, int]:
+    """Judge + optional repair for one row. Thread-safe (no shared mutables)."""
+    working = dict(row)
+    text0 = str(working.get("generated_text") or "")
+    normalized, norm_notes = normalize_inline_entity_tags(text0)
+    if norm_notes:
+        working["generated_text"] = normalized
+        working["entity_tag_normalize_notes"] = norm_notes
+    result: ChatResult | None = None
+    parsed: dict[str, Any] | None = None
+    last_error: Exception | None = None
+    repair_attempts = 0
+    repaired = False
+    en_pivot_delta = 0
+    accumulated_issues: list[RepairIssue] = []
+    accumulated_flags: list[str] = []
+    rare_dedicated_tried = False
+    print(
+        f"[s5] judging {index + 1}/{total_rows} "
+        f"uuid={working.get('uuid')} lang={working.get('document_language_code')} "
+        f"doc_type={working.get('doc_type_id')}",
+        file=sys.stderr,
+        flush=True,
+    )
+
+    for quality_round in range(max_quality_repairs + 1):
+        result = None
+        parsed = None
+        last_error = None
+        for attempt in range(attempts_per_row):
+            try:
+                result = _call_judge(
+                    client,
+                    settings=settings,
+                    messages=build_judge_messages(working, allow_list=allow_list),
+                )
+                parsed = parse_judge_response(
+                    result.content, pass_threshold=settings.pass_threshold
+                )
+                last_error = None
+                break
+            except (
+                SarvamClientError,
+                OpenAICompatibleClientError,
+                JudgeError,
+                TimeoutError,
+                OSError,
+            ) as exc:
+                last_error = exc
+                if _is_retryable_judge_error(exc) and attempt < attempts_per_row - 1:
+                    delay = min(30.0, 2.0 ** attempt)
+                    print(
+                        f"[s5] retry {attempt + 1}/{attempts_per_row - 1} "
+                        f"uuid={working.get('uuid')} after {delay:.0f}s: {exc}",
+                        file=sys.stderr,
+                        flush=True,
+                    )
+                    time.sleep(delay)
+                    continue
+                if _is_retryable_judge_error(exc):
+                    break
+                raise JudgeError(
+                    f"Judge failed at row {index} uuid={working.get('uuid')!r}: {exc}"
+                ) from exc
+
+        if parsed is None:
+            break
+
+        if parsed["judge_verdict"] == "pass":
+            if quality_round > 0:
+                repaired = True
+                print(
+                    f"[s5] REPAIRED-THEN-PASS uuid={working.get('uuid')} "
+                    f"rounds={repair_attempts} score={parsed['judge_score']}",
+                    file=sys.stderr,
+                    flush=True,
+                )
+            break
+
+        flags = [str(f) for f in (parsed.get("judge_flags") or [])]
+        repair_flags = [f for f in flags if f not in SOFT_JUDGE_FLAGS]
+        issues = issues_from_judge_flags(
+            repair_flags,
+            reasoning=str(parsed.get("judge_reasoning") or ""),
+            row=working,
+        )
+        if multi_constraint:
+            accumulated_issues = merge_repair_issues(accumulated_issues, issues)
+            issues = accumulated_issues
+            accumulated_flags = sorted(set(accumulated_flags) | set(flags))
+        else:
+            accumulated_flags = list(flags)
+
+        if not issues or repair_client is None or repair_settings is None:
+            break
+
+        required = [str(x) for x in (working.get("required_entities") or [])]
+        if str(working.get("doc_type_id") or "") == "lab_report":
+            required = [t for t in required if t != "STUDENT_ID"]
+        lang = str(working.get("document_language_code") or "")
+        rare_langs = set(settings.rare_script_languages or ())
+        is_rare = lang in rare_langs
+        row_max_repairs = (
+            min(2, max_quality_repairs) if is_rare else max_quality_repairs
+        )
+        if quality_round >= row_max_repairs:
+            if (
+                is_rare
+                and not rare_dedicated_tried
+                and translation_settings is not None
+                and any(
+                    f in {"dialect_script_impurity", "cross_language_entity_shift"}
+                    for f in accumulated_flags
+                )
+            ):
+                from main.designers.translator import try_dedicated_translate_fallback
+
+                rare_dedicated_tried = True
+                en_draft = str(
+                    working.get("generated_text_en")
+                    or working.get("generated_text")
+                    or ""
+                )
+                ded_text, ded_err, ded_ok = try_dedicated_translate_fallback(
+                    client=repair_client,
+                    english_text=en_draft,
+                    row=working,
+                    settings=translation_settings,
+                )
+                if ded_text:
+                    working["generated_text"] = ded_text
+                    if ded_ok:
+                        print(
+                            f"[s5] rare dedicated /translate "
+                            f"uuid={working.get('uuid')} lang={lang}",
+                            file=sys.stderr,
+                            flush=True,
+                        )
+                    else:
+                        print(
+                            f"[s5] rare dedicated soft "
+                            f"uuid={working.get('uuid')} err={ded_err}",
+                            file=sys.stderr,
+                            flush=True,
+                        )
+                    continue
+            break
+
+        use_en_pivot = (
+            via_english_pivot
+            and lang not in {"en", "en_IN", ""}
+            and translation_settings is not None
+        )
+        script_related = any(
+            f in {"dialect_script_impurity", "cross_language_entity_shift"}
+            for f in accumulated_flags
+        )
+        check_script = (not use_en_pivot) and (
+            script_related or (multi_constraint and lang not in {"en", "en_IN", ""})
+        )
+        print(
+            f"[s5] repair {quality_round + 1}/{max_quality_repairs} "
+            f"uuid={working.get('uuid')} flags={flags}"
+            + (
+                f" accumulated={accumulated_flags}"
+                if multi_constraint and accumulated_flags != flags
+                else ""
+            )
+            + (" via=en_pivot+translate" if use_en_pivot else ""),
+            file=sys.stderr,
+            flush=True,
+        )
+        one_shot = RepairSettings(
+            model=repair_settings.model,
+            temperature=repair_settings.temperature,
+            max_tokens=repair_settings.max_tokens,
+            reasoning_effort=repair_settings.reasoning_effort,
+            timeout_s=repair_settings.timeout_s,
+            max_repairs=1,
+            multi_constraint=repair_settings.multi_constraint,
+            via_english_pivot=repair_settings.via_english_pivot,
+        )
+        if use_en_pivot:
+            en_draft = str(
+                working.get("generated_text_en")
+                or working.get("generated_text")
+                or ""
+            )
+            fix = repair_document(
+                repair_client,
+                draft=en_draft,
+                row=working,
+                required=required,
+                issues=issues,
+                settings=one_shot,
+                check_script=False,
+            )
+            repair_attempts += 1
+            if fix.text.strip():
+                working["generated_text_en"] = fix.text
+                translated, tr_err = translate_english_once(
+                    repair_client,
+                    english_text=fix.text,
+                    row=working,
+                    settings=translation_settings,
+                    retry_harder=True,
+                )
+                if translated:
+                    working["generated_text"] = translated
+                    en_pivot_delta += 1
+                    if tr_err:
+                        print(
+                            f"[s5] en_pivot translate soft "
+                            f"uuid={working.get('uuid')} err={tr_err}",
+                            file=sys.stderr,
+                            flush=True,
+                        )
+                else:
+                    working["generated_text"] = fix.text
+                    print(
+                        f"[s5] en_pivot translate failed "
+                        f"uuid={working.get('uuid')} err={tr_err}",
+                        file=sys.stderr,
+                        flush=True,
+                    )
+                clear_upstream_soft_fail_fields(working)
+        else:
+            fix = repair_document(
+                repair_client,
+                draft=str(working.get("generated_text") or ""),
+                row=working,
+                required=required,
+                issues=issues,
+                settings=one_shot,
+                check_script=check_script,
+            )
+            repair_attempts += 1
+            if fix.text.strip():
+                working["generated_text"] = fix.text
+                clear_upstream_soft_fail_fields(working)
+
+        fixed_text = str(working.get("generated_text") or "")
+        fixed_norm, fixed_notes = normalize_inline_entity_tags(fixed_text)
+        if fixed_notes:
+            working["generated_text"] = fixed_norm
+            prev = list(working.get("entity_tag_normalize_notes") or [])
+            working["entity_tag_normalize_notes"] = list(
+                dict.fromkeys([*prev, *fixed_notes])
+            )
+
+    out = dict(working)
+    status = "ok"
+    soft_entry: dict[str, Any] | None = None
+    if parsed is not None and result is not None:
+        out.update(parsed)
+        out.update(
+            {
+                "judge_provider": settings.provider,
+                "judge_model": result.model,
+                "judge_soft_fail": False,
+                "judge_error": None,
+                "judge_repair_attempts": repair_attempts,
+                "judge_repaired": repaired,
+                "stage": "s5_linguistic_judge",
+            }
+        )
+        print(
+            f"[s5] done {index + 1}/{total_rows} "
+            f"verdict={out.get('judge_verdict')} score={out.get('judge_score')} "
+            f"repairs={repair_attempts}",
+            file=sys.stderr,
+            flush=True,
+        )
+    else:
+        assert last_error is not None
+        err = str(last_error)
+        print(
+            f"[s5] SOFT-FAIL uuid={working.get('uuid')} "
+            f"doc_type={working.get('doc_type_id')} error={err}",
+            file=sys.stderr,
+            flush=True,
+        )
+        soft_entry = {
+            "uuid": working.get("uuid"),
+            "document_id": working.get("document_id"),
+            "doc_type_id": working.get("doc_type_id"),
+            "document_language_code": working.get("document_language_code"),
+            "judge_error": err,
+        }
+        out.update(
+            {
+                "judge_verdict": "fail",
+                "judge_score": 0.0,
+                "judge_flags": ["judge_network_error"],
+                "judge_reasoning": (
+                    f"Soft-fail after {attempts_per_row} attempts "
+                    f"(timeout/network). Logged — not silent. error={err}"
+                ),
+                "judge_provider": settings.provider,
+                "judge_model": settings.model,
+                "judge_soft_fail": True,
+                "judge_error": err,
+                "judge_repair_attempts": repair_attempts,
+                "judge_repaired": False,
+                "stage": "s5_linguistic_judge",
+            }
+        )
+        status = "soft_fail"
+    return out, status, soft_entry, repaired, en_pivot_delta
+
+
 def judge_documents(
     rows: Sequence[Mapping[str, Any]],
     *,
@@ -356,6 +729,7 @@ def judge_documents(
     checkpoint: CheckpointStore | None = None,
     repair_client: SarvamClient | None = None,
     repair_settings: RepairSettings | None = None,
+    translation_settings: TranslationSettings | None = None,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     selected = list(rows)
     if settings.max_docs is not None:
@@ -369,12 +743,22 @@ def judge_documents(
     attempts_per_row = settings.network_retries + 1
     resumed = 0
     repaired_count = 0
+    en_pivot_repair_count = 0
     max_quality_repairs = (
         repair_settings.max_repairs
         if repair_settings is not None and repair_client is not None
         else 0
     )
+    multi_constraint = bool(
+        repair_settings is not None and repair_settings.multi_constraint
+    )
+    via_english_pivot = bool(
+        repair_settings is not None and repair_settings.via_english_pivot
+    )
 
+
+    results_by_index: dict[int, dict[str, Any]] = {}
+    pending: list[tuple[int, Mapping[str, Any], str, str]] = []
     for index, row in enumerate(selected):
         if "generated_text" not in row:
             raise JudgeError(f"Row {index} missing generated_text")
@@ -398,7 +782,7 @@ def judge_documents(
                 and existing.payload
             ):
                 out = dict(existing.payload)
-                outputs.append(out)
+                results_by_index[index] = out
                 if out.get("judge_soft_fail"):
                     soft_failures.append(
                         {
@@ -413,191 +797,106 @@ def judge_documents(
                     )
                 resumed += 1
                 continue
+        pending.append((index, row, key, req))
 
-        working = dict(row)
-        result: ChatResult | None = None
-        parsed: dict[str, Any] | None = None
-        last_error: Exception | None = None
-        repair_attempts = 0
-        repaired = False
-        print(
-            f"[s5] judging {index + 1}/{len(selected)} "
-            f"uuid={working.get('uuid')} lang={working.get('document_language_code')} "
-            f"doc_type={working.get('doc_type_id')}",
-            file=sys.stderr,
-            flush=True,
-        )
-
-        for quality_round in range(max_quality_repairs + 1):
-            result = None
-            parsed = None
-            last_error = None
-            for attempt in range(attempts_per_row):
+    workers = min(settings.max_workers, max(1, len(pending))) if pending else 1
+    print(
+        f"[s5] start rows={len(selected)} pending={len(pending)} "
+        f"resumed={resumed} workers={workers} "
+        f"timeout_s={settings.timeout_s} model={settings.model}",
+        file=sys.stderr,
+        flush=True,
+    )
+    done_count = 0
+    if pending:
+        with ThreadPoolExecutor(max_workers=workers) as pool:
+            futures = {
+                pool.submit(
+                    _judge_one_row,
+                    index,
+                    row,
+                    client=client,
+                    settings=settings,
+                    allow_list=allow_list,
+                    repair_client=repair_client,
+                    repair_settings=repair_settings,
+                    translation_settings=translation_settings,
+                    max_quality_repairs=max_quality_repairs,
+                    multi_constraint=multi_constraint,
+                    via_english_pivot=via_english_pivot,
+                    attempts_per_row=attempts_per_row,
+                    total_rows=len(selected),
+                ): (index, key, req)
+                for index, row, key, req in pending
+            }
+            for future in as_completed(futures):
+                index, key, req = futures[future]
+                row = selected[index]
                 try:
-                    result = _call_judge(
-                        client,
-                        settings=settings,
-                        messages=build_judge_messages(working, allow_list=allow_list),
-                    )
-                    parsed = parse_judge_response(
-                        result.content, pass_threshold=settings.pass_threshold
-                    )
-                    last_error = None
-                    break
-                except (
-                    SarvamClientError,
-                    OpenAICompatibleClientError,
-                    JudgeError,
-                    TimeoutError,
-                    OSError,
-                ) as exc:
-                    last_error = exc
-                    if _is_retryable_judge_error(exc) and attempt < attempts_per_row - 1:
-                        delay = min(30.0, 2.0 ** attempt)
-                        print(
-                            f"[s5] retry {attempt + 1}/{attempts_per_row - 1} "
-                            f"uuid={working.get('uuid')} after {delay:.0f}s: {exc}",
-                            file=sys.stderr,
-                            flush=True,
-                        )
-                        time.sleep(delay)
-                        continue
-                    if _is_retryable_judge_error(exc):
-                        break
-                    raise JudgeError(
-                        f"Judge failed at row {index} uuid={working.get('uuid')!r}: {exc}"
-                    ) from exc
-
-            if parsed is None:
-                break
-
-            if parsed["judge_verdict"] == "pass":
-                if quality_round > 0:
-                    repaired = True
-                    repaired_count += 1
+                    out, status, soft_entry, repaired, en_pivot_delta = future.result()
+                except Exception as exc:  # noqa: BLE001 — one row must not kill stage
+                    err = str(exc)
                     print(
-                        f"[s5] REPAIRED-THEN-PASS uuid={working.get('uuid')} "
-                        f"rounds={repair_attempts} score={parsed['judge_score']}",
+                        f"[s5] SOFT-FAIL uuid={row.get('uuid')} "
+                        f"lang={row.get('document_language_code')} "
+                        f"doc_type={row.get('doc_type_id')} error=row_exception:{err}",
                         file=sys.stderr,
                         flush=True,
                     )
-                break
+                    soft_entry = {
+                        "uuid": row.get("uuid"),
+                        "document_id": row.get("document_id"),
+                        "doc_type_id": row.get("doc_type_id"),
+                        "document_language_code": row.get("document_language_code"),
+                        "judge_error": err,
+                    }
+                    out = dict(row)
+                    out.update(
+                        {
+                            "judge_verdict": "fail",
+                            "judge_score": 0.0,
+                            "judge_flags": ["judge_network_error"],
+                            "judge_reasoning": (
+                                f"Soft-fail after worker exception. "
+                                f"Logged — not silent. error={err}"
+                            ),
+                            "judge_provider": settings.provider,
+                            "judge_model": settings.model,
+                            "judge_soft_fail": True,
+                            "judge_error": err,
+                            "judge_repair_attempts": 0,
+                            "judge_repaired": False,
+                            "stage": "s5_linguistic_judge",
+                        }
+                    )
+                    status = "soft_fail"
+                    repaired = False
+                    en_pivot_delta = 0
+                results_by_index[index] = out
+                if soft_entry is not None:
+                    soft_failures.append(soft_entry)
+                if repaired:
+                    repaired_count += 1
+                en_pivot_repair_count += en_pivot_delta
+                if checkpoint is not None:
+                    checkpoint.append(
+                        row_key=key,
+                        status=status,
+                        request_hash=req,
+                        payload=out,
+                        error=out.get("judge_error"),
+                    )
+                done_count += 1
+                if done_count == 1 or done_count % 5 == 0 or done_count == len(pending):
+                    print(
+                        f"[s5] progress {done_count}/{len(pending)} "
+                        f"uuid={out.get('uuid')} lang={out.get('document_language_code')} "
+                        f"verdict={out.get('judge_verdict')} soft={bool(out.get('judge_soft_fail'))}",
+                        file=sys.stderr,
+                        flush=True,
+                    )
 
-            flags = [str(f) for f in (parsed.get("judge_flags") or [])]
-            issues = issues_from_judge_flags(
-                flags,
-                reasoning=str(parsed.get("judge_reasoning") or ""),
-                row=working,
-            )
-            if (
-                quality_round >= max_quality_repairs
-                or not issues
-                or repair_client is None
-                or repair_settings is None
-            ):
-                break
-
-            required = [str(x) for x in (working.get("required_entities") or [])]
-            check_script = any(
-                f in {"dialect_script_impurity", "cross_language_entity_shift"}
-                for f in flags
-            )
-            print(
-                f"[s5] repair {quality_round + 1}/{max_quality_repairs} "
-                f"uuid={working.get('uuid')} flags={flags}",
-                file=sys.stderr,
-                flush=True,
-            )
-            one_shot = RepairSettings(
-                model=repair_settings.model,
-                temperature=repair_settings.temperature,
-                max_tokens=repair_settings.max_tokens,
-                reasoning_effort=repair_settings.reasoning_effort,
-                timeout_s=repair_settings.timeout_s,
-                max_repairs=1,
-            )
-            fix = repair_document(
-                repair_client,
-                draft=str(working.get("generated_text") or ""),
-                row=working,
-                required=required,
-                issues=issues,
-                settings=one_shot,
-                check_script=check_script,
-            )
-            repair_attempts += 1
-            if fix.text.strip():
-                working["generated_text"] = fix.text
-                clear_upstream_soft_fail_fields(working)
-
-        out = dict(working)
-        status = "ok"
-        if parsed is not None and result is not None:
-            out.update(parsed)
-            out.update(
-                {
-                    "judge_provider": settings.provider,
-                    "judge_model": result.model,
-                    "judge_soft_fail": False,
-                    "judge_error": None,
-                    "judge_repair_attempts": repair_attempts,
-                    "judge_repaired": repaired,
-                    "stage": "s5_linguistic_judge",
-                }
-            )
-            print(
-                f"[s5] done {index + 1}/{len(selected)} "
-                f"verdict={out.get('judge_verdict')} score={out.get('judge_score')} "
-                f"repairs={repair_attempts}",
-                file=sys.stderr,
-                flush=True,
-            )
-        else:
-            assert last_error is not None
-            err = str(last_error)
-            print(
-                f"[s5] SOFT-FAIL uuid={working.get('uuid')} "
-                f"doc_type={working.get('doc_type_id')} error={err}",
-                file=sys.stderr,
-                flush=True,
-            )
-            soft_failures.append(
-                {
-                    "uuid": working.get("uuid"),
-                    "document_id": working.get("document_id"),
-                    "doc_type_id": working.get("doc_type_id"),
-                    "document_language_code": working.get("document_language_code"),
-                    "judge_error": err,
-                }
-            )
-            out.update(
-                {
-                    "judge_verdict": "fail",
-                    "judge_score": 0.0,
-                    "judge_flags": ["judge_network_error"],
-                    "judge_reasoning": (
-                        f"Soft-fail after {attempts_per_row} attempts "
-                        f"(timeout/network). Logged — not silent. error={err}"
-                    ),
-                    "judge_provider": settings.provider,
-                    "judge_model": settings.model,
-                    "judge_soft_fail": True,
-                    "judge_error": err,
-                    "judge_repair_attempts": repair_attempts,
-                    "judge_repaired": False,
-                    "stage": "s5_linguistic_judge",
-                }
-            )
-            status = "soft_fail"
-        outputs.append(out)
-        if checkpoint is not None:
-            checkpoint.append(
-                row_key=key,
-                status=status,
-                request_hash=req,
-                payload=out,
-                error=out.get("judge_error"),
-            )
+    outputs = [results_by_index[i] for i in range(len(selected))]
 
     verdicts = [str(row["judge_verdict"]) for row in outputs]
     failures = [
@@ -624,6 +923,7 @@ def judge_documents(
         "model": settings.model,
         "base_url": settings.base_url,
         "requests_per_minute": settings.requests_per_minute,
+        "max_workers": settings.max_workers,
         "timeout_s": settings.timeout_s,
         "network_retries": settings.network_retries,
         "rows_judged": len(outputs),
@@ -636,7 +936,12 @@ def judge_documents(
         "soft_failures": soft_failures,
         "soft_fail_count": len(soft_failures),
         "judge_repaired_count": repaired_count,
+        "en_pivot_repair_count": en_pivot_repair_count,
         "quality_repair_max": max_quality_repairs,
+        "repair_multi_constraint": multi_constraint,
+        "repair_via_english_pivot": via_english_pivot,
+        "must_work_languages": list(settings.must_work_languages),
+        "rare_script_languages": list(settings.rare_script_languages),
         "columns_added": list(JUDGE_COLUMNS),
     }
     if soft_failures:
@@ -651,6 +956,36 @@ def judge_documents(
             "— see failed.jsonl and audit failures",
             file=sys.stderr,
         )
+        must = set(settings.must_work_languages)
+        rare = set(settings.rare_script_languages)
+        if must:
+            must_fails = [
+                f
+                for f in failures
+                if str(f.get("document_language_code") or "") in must
+            ]
+            if must_fails:
+                print(
+                    f"[s5] MUST-WORK language fail(s): {len(must_fails)} "
+                    f"(treat as system bug) langs="
+                    f"{sorted({f.get('document_language_code') for f in must_fails})}",
+                    file=sys.stderr,
+                    flush=True,
+                )
+        if rare:
+            rare_fails = [
+                f
+                for f in failures
+                if str(f.get("document_language_code") or "") in rare
+            ]
+            if rare_fails:
+                print(
+                    f"[s5] rare-script fail(s): {len(rare_fails)} "
+                    f"(expected capacity loss) langs="
+                    f"{sorted({f.get('document_language_code') for f in rare_fails})}",
+                    file=sys.stderr,
+                    flush=True,
+                )
     if repaired_count:
         print(
             f"[s5] quality-repaired-to-pass: {repaired_count}",
@@ -747,6 +1082,18 @@ def run(pipeline_config: Path) -> dict[str, Path]:
             base_url=str(gen.get("base_url") or "https://api.sarvam.ai/v1"),
             rate_limiter=limiter,
         )
+    translation_settings: TranslationSettings | None = None
+    need_translate = bool(
+        repair_settings is not None
+        and (
+            repair_settings.via_english_pivot
+            or settings.rare_script_languages
+        )
+    )
+    if need_translate:
+        from main.designers.translator import load_settings as load_translation_settings
+
+        translation_settings = load_translation_settings(pipeline_config)
     rows = read_jsonl(settings.input_jsonl)
     checkpoint = CheckpointStore(settings.output_dir / "checkpoint.jsonl")
     judged, audit = judge_documents(
@@ -756,6 +1103,7 @@ def run(pipeline_config: Path) -> dict[str, Path]:
         checkpoint=checkpoint,
         repair_client=repair_client,
         repair_settings=repair_settings,
+        translation_settings=translation_settings,
     )
     return write_outputs(judged, audit, settings.output_dir)
 

@@ -89,6 +89,10 @@ generation:
   max_docs: null
   empty_content_retries: 2
   repair_retries: 5
+  # Keep false for baseline/smoke. Diversity profile enables these.
+  # Undo anytime: set both false (or omit — defaults false).
+  repair_multi_constraint: false
+  repair_via_english_pivot: false
   reject_truncated: true
 
 translation:

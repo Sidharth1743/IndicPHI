@@ -17,7 +17,7 @@ build/
 configs/nim.env
 
 # Pipeline outputs (keep data/samples/ and data/eval/)
-data/generated/
+
 artifacts/
 
 # OS / editor

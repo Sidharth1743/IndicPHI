@@ -9,8 +9,10 @@ domains:
   - id: maternal_health
     name: Maternal Health
     require_sex: [Female]
-    min_age: 15
-    max_age: 49
+    # Keep within clinically plausible routine ANC/delivery age band.
+    # (49yo + mid-trimester pregnancy is unsafe / extreme — do not assign.)
+    min_age: 18
+    max_age: 42
 
   - id: tb_ncd
     name: Tuberculosis & Non-Communicable Diseases

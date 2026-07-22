@@ -1,0 +1,65 @@
+{
+  "stage": "s5_linguistic_judge",
+  "timestamp_utc": "2026-07-20T02:52:46.335260+00:00",
+  "provider": "azure_foundry",
+  "model": "grok-4.3",
+  "base_url": "https://ambedkar-interpreter-resource.services.ai.azure.com/openai/v1",
+  "requests_per_minute": 500.0,
+  "timeout_s": 600.0,
+  "network_retries": 4,
+  "rows_judged": 20,
+  "pass_rate": 0.9,
+  "label_distribution": {
+    "fail": 0.1,
+    "pass": 0.9
+  },
+  "positional_length_bias": {
+    "pearson_r": 0.13347925038857067,
+    "n": 20.0
+  },
+  "failures": [
+    {
+      "uuid": "89d785f5c9f64f119b428efc6d0c259e",
+      "document_id": "89d785f5c9f64f119b428efc6d0c259e__0",
+      "doc_type_id": "telemedicine_transcript",
+      "document_language_code": "bn",
+      "judge_verdict": "fail",
+      "judge_score": 0.45,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Chat prose mostly Romanized Latin script after opening lines; expected Bengali script for clinical narrative.",
+      "judge_soft_fail": false,
+      "judge_error": null
+    },
+    {
+      "uuid": "396f437fcf6a45e6b7f38f4fe5cf5e48",
+      "document_id": "396f437fcf6a45e6b7f38f4fe5cf5e48__0",
+      "doc_type_id": "prescription",
+      "document_language_code": "gu",
+      "judge_verdict": "fail",
+      "judge_score": 0.25,
+      "judge_flags": [
+        "dialect_script_impurity",
+        "instruction_drift"
+      ],
+      "judge_rationale": "All clinical prose in English; Gujarati script required for narrative.",
+      "judge_soft_fail": false,
+      "judge_error": null
+    }
+  ],
+  "failure_count": 2,
+  "soft_failures": [],
+  "soft_fail_count": 0,
+  "columns_added": [
+    "judge_verdict",
+    "judge_score",
+    "judge_reasoning",
+    "judge_flags",
+    "judge_provider",
+    "judge_model",
+    "judge_soft_fail",
+    "judge_error",
+    "stage"
+  ]
+}

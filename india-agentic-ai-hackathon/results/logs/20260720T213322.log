@@ -1,0 +1,539 @@
+[run] resuming run_id=20260720T213322
+[run] run_id=20260720T213322
+[run] folder=/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322
+[run] config=/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/pipeline.resolved.yaml
+--- skip s1_persona_sampling (before --from-stage) ---
+--- skip s2_taxonomy (before --from-stage) ---
+--- skip s2b_persona_summary (before --from-stage) ---
+--- skip s3_prompt_construction (before --from-stage) ---
+--- skip s4_generation (before --from-stage) ---
+
+=== s4b_translation ===
+[s4b] REPAIRED-BY-GENERATOR uuid=18dab46e26db4ceeb41928bac62ba43b lang=gu doc_type=er_triage_notes attempts=1
+[s4b] SOFT-FAIL uuid=8b08baf3bcbf412eaace2d648074de01 lang=bn doc_type=lab_report error=no_valid_entity_tags_to_protect;invalid_type_tags:এম.আর.এন,রোগীর_নাম,বয়স,লিঙ্গ,ডক্টর_নাম,রোগী_আইডি,ফোন_নম্বর,জেলা,ছাত্র_আইডি
+[s4b] SOFT-FAIL uuid=944cf9bf2c4d48b2974bb723f704bded lang=sat doc_type=radiology_report error=script_purity_failed:target_script_ratio:0.000<0.35 attempt=1
+[s4b] SOFT-FAIL uuid=442b760204fb4430b6745545930228cd lang=ks doc_type=prescription error=script_purity_failed:target_script_ratio:0.000<0.35 attempt=1;generator_repair_failed:target_script_ratio:0.000<0.35
+[s4b] SOFT-FAIL uuid=944cf9bf2c4d48b2974bb723f704bded lang=sat doc_type=er_triage_notes error=script_purity_failed:target_script_ratio:0.000<0.35 attempt=1;generator_repair_failed:target_script_ratio:0.000<0.35
+[s4b] SOFT-FAIL uuid=c56b228238e847d393141f0a17d86444 lang=hi doc_type=er_triage_notes error=script_purity_failed:target_script_ratio:0.011<0.35 attempt=1;generator_repair_failed:target_script_ratio:0.000<0.35
+[s4b] SOFT-FAIL uuid=51fc0c57ffcc40c6ae5d2fb055d07030 lang=mni doc_type=phc_register error=script_purity_failed:target_script_ratio:0.000<0.35 attempt=1;generator_repair_failed:wrong_indic_script:Devanagari>Meitei
+[s4b] SOFT-FAIL uuid=944cf9bf2c4d48b2974bb723f704bded lang=sat doc_type=referral_letter error=Translation lost protected ID tag '[[AGE|32]]'
+[s4b] SOFT-FAIL uuid=51fc0c57ffcc40c6ae5d2fb055d07030 lang=mni doc_type=opd_slip error=script_purity_failed:wrong_indic_script:Bengali>Meitei attempt=1;generator_repair_failed:wrong_indic_script:Devanagari>Meitei
+[s4b] SOFT-FAIL uuid=51fc0c57ffcc40c6ae5d2fb055d07030 lang=mni doc_type=lab_report error=script_purity_failed:target_script_ratio:0.000<0.35 attempt=1;generator_repair_failed:target_script_ratio:0.000<0.35
+[s4b] WARNING: 9 translation soft-fail(s) logged — see audit soft_failures
+[s4b_translation] OK → /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/s4b_translation
+  jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/s4b_translation/documents.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/s4b_translation/documents.parquet
+  audit_json: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/s4b_translation/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/s4b_translation/audit.md
+  soft_failures_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/s4b_translation/soft_failures.jsonl
+
+=== s5_linguistic_judge ===
+[s5] judging 1/69 uuid=3c0199017c7c4f00bbb3de4770ce25fc lang=as doc_type=automated_sms
+[s5] done 1/69 verdict=pass score=0.92 repairs=0
+[s5] judging 2/69 uuid=3c0199017c7c4f00bbb3de4770ce25fc lang=as doc_type=hospital_billing
+[s5] repair 1/5 uuid=3c0199017c7c4f00bbb3de4770ce25fc flags=['instruction_drift']
+[s5] repair 2/5 uuid=3c0199017c7c4f00bbb3de4770ce25fc flags=['dialect_script_impurity']
+[s5] repair 3/5 uuid=3c0199017c7c4f00bbb3de4770ce25fc flags=['instruction_drift']
+[s5] repair 4/5 uuid=3c0199017c7c4f00bbb3de4770ce25fc flags=['dialect_script_impurity', 'instruction_drift']
+[s5] repair 5/5 uuid=3c0199017c7c4f00bbb3de4770ce25fc flags=['instruction_drift']
+[s5] done 2/69 verdict=fail score=0.35 repairs=5
+[s5] judging 3/69 uuid=3c0199017c7c4f00bbb3de4770ce25fc lang=as doc_type=discharge_summary
+[s5] done 3/69 verdict=pass score=0.92 repairs=0
+[s5] judging 4/69 uuid=8b08baf3bcbf412eaace2d648074de01 lang=bn doc_type=telemedicine_transcript
+[s5] done 4/69 verdict=pass score=0.82 repairs=0
+[s5] judging 5/69 uuid=8b08baf3bcbf412eaace2d648074de01 lang=bn doc_type=surgical_note
+[s5] done 5/69 verdict=pass score=0.92 repairs=0
+[s5] judging 6/69 uuid=8b08baf3bcbf412eaace2d648074de01 lang=bn doc_type=lab_report
+[s5] repair 1/5 uuid=8b08baf3bcbf412eaace2d648074de01 flags=['invented_entity_type', 'domain_persona_mismatch']
+[s5] repair 2/5 uuid=8b08baf3bcbf412eaace2d648074de01 flags=['dialect_script_impurity']
+[s5] repair 3/5 uuid=8b08baf3bcbf412eaace2d648074de01 flags=['invented_entity_type', 'domain_persona_mismatch']
+[s5] repair 4/5 uuid=8b08baf3bcbf412eaace2d648074de01 flags=['dialect_script_impurity']
+[s5] REPAIRED-THEN-PASS uuid=8b08baf3bcbf412eaace2d648074de01 rounds=4 score=0.85
+[s5] done 6/69 verdict=pass score=0.85 repairs=4
+[s5] judging 7/69 uuid=2a0042e543f7400299209a84f31ceab7 lang=brx doc_type=er_triage_notes
+[s5] repair 1/5 uuid=2a0042e543f7400299209a84f31ceab7 flags=['dialect_script_impurity', 'domain_persona_mismatch']
+[s5] repair 2/5 uuid=2a0042e543f7400299209a84f31ceab7 flags=['instruction_drift', 'dialect_script_impurity', 'domain_persona_mismatch']
+[s5] repair 3/5 uuid=2a0042e543f7400299209a84f31ceab7 flags=['instruction_drift', 'dialect_script_impurity']
+[s5] repair 4/5 uuid=2a0042e543f7400299209a84f31ceab7 flags=['instruction_drift', 'surrogate_plausibility_collapse']
+[s5] repair 5/5 uuid=2a0042e543f7400299209a84f31ceab7 flags=['dialect_script_impurity', 'instruction_drift']
+[s5] done 7/69 verdict=fail score=0.35 repairs=5
+[s5] judging 8/69 uuid=2a0042e543f7400299209a84f31ceab7 lang=brx doc_type=telemedicine_transcript
+[s5] repair 1/5 uuid=2a0042e543f7400299209a84f31ceab7 flags=['dialect_script_impurity', 'domain_persona_mismatch']
+[s5] repair 2/5 uuid=2a0042e543f7400299209a84f31ceab7 flags=['dialect_script_impurity']
+[s5] repair 3/5 uuid=2a0042e543f7400299209a84f31ceab7 flags=['dialect_script_impurity']
+[s5] repair 4/5 uuid=2a0042e543f7400299209a84f31ceab7 flags=['dialect_script_impurity']
+[s5] repair 5/5 uuid=2a0042e543f7400299209a84f31ceab7 flags=['dialect_script_impurity']
+[s5] done 8/69 verdict=fail score=0.35 repairs=5
+[s5] judging 9/69 uuid=2a0042e543f7400299209a84f31ceab7 lang=brx doc_type=surgical_note
+[s5] repair 1/5 uuid=2a0042e543f7400299209a84f31ceab7 flags=['dialect_script_impurity']
+[s5] repair 2/5 uuid=2a0042e543f7400299209a84f31ceab7 flags=['dialect_script_impurity']
+[s5] repair 3/5 uuid=2a0042e543f7400299209a84f31ceab7 flags=['dialect_script_impurity']
+[s5] repair 4/5 uuid=2a0042e543f7400299209a84f31ceab7 flags=['dialect_script_impurity']
+[s5] repair 5/5 uuid=2a0042e543f7400299209a84f31ceab7 flags=['dialect_script_impurity']
+[s5] done 9/69 verdict=fail score=0.3 repairs=5
+[s5] judging 10/69 uuid=8027a62865e6486cba6cb4978d8de433 lang=doi doc_type=discharge_summary
+[s5] done 10/69 verdict=pass score=0.9 repairs=0
+[s5] judging 11/69 uuid=8027a62865e6486cba6cb4978d8de433 lang=doi doc_type=referral_letter
+[s5] done 11/69 verdict=pass score=0.9 repairs=0
+[s5] judging 12/69 uuid=8027a62865e6486cba6cb4978d8de433 lang=doi doc_type=radiology_report
+[s5] repair 1/5 uuid=8027a62865e6486cba6cb4978d8de433 flags=['domain_persona_mismatch', 'surrogate_plausibility_collapse']
+[s5] repair 2/5 uuid=8027a62865e6486cba6cb4978d8de433 flags=['dialect_script_impurity', 'domain_persona_mismatch']
+[s5] repair 3/5 uuid=8027a62865e6486cba6cb4978d8de433 flags=['domain_persona_mismatch']
+[s5] repair 4/5 uuid=8027a62865e6486cba6cb4978d8de433 flags=['dialect_script_impurity', 'domain_persona_mismatch']
+[s5] repair 5/5 uuid=8027a62865e6486cba6cb4978d8de433 flags=['domain_persona_mismatch', 'surrogate_plausibility_collapse']
+[s5] done 12/69 verdict=fail score=0.18 repairs=5
+[s5] judging 13/69 uuid=f584cfd90471426ea809f549021f9a0f lang=en doc_type=discharge_summary
+[s5] done 13/69 verdict=pass score=0.92 repairs=0
+[s5] judging 14/69 uuid=f584cfd90471426ea809f549021f9a0f lang=en doc_type=referral_letter
+[s5] repair 1/5 uuid=f584cfd90471426ea809f549021f9a0f flags=['invented_entity_type']
+[s5] REPAIRED-THEN-PASS uuid=f584cfd90471426ea809f549021f9a0f rounds=1 score=0.93
+[s5] done 14/69 verdict=pass score=0.93 repairs=1
+[s5] judging 15/69 uuid=f584cfd90471426ea809f549021f9a0f lang=en doc_type=radiology_report
+[s5] done 15/69 verdict=pass score=0.9 repairs=0
+[s5] judging 16/69 uuid=18dab46e26db4ceeb41928bac62ba43b lang=gu doc_type=referral_letter
+[s5] done 16/69 verdict=pass score=0.92 repairs=0
+[s5] judging 17/69 uuid=18dab46e26db4ceeb41928bac62ba43b lang=gu doc_type=radiology_report
+[s5] repair 1/5 uuid=18dab46e26db4ceeb41928bac62ba43b flags=['invented_entity_type', 'surrogate_plausibility_collapse']
+[s5] repair 2/5 uuid=18dab46e26db4ceeb41928bac62ba43b flags=['dialect_script_impurity']
+[s5] REPAIRED-THEN-PASS uuid=18dab46e26db4ceeb41928bac62ba43b rounds=2 score=0.9
+[s5] done 17/69 verdict=pass score=0.9 repairs=2
+[s5] judging 18/69 uuid=18dab46e26db4ceeb41928bac62ba43b lang=gu doc_type=er_triage_notes
+[s5] done 18/69 verdict=pass score=0.9 repairs=0
+[s5] judging 19/69 uuid=c56b228238e847d393141f0a17d86444 lang=hi doc_type=er_triage_notes
+[s5] repair 1/5 uuid=c56b228238e847d393141f0a17d86444 flags=['dialect_script_impurity']
+[s5] repair 2/5 uuid=c56b228238e847d393141f0a17d86444 flags=['dialect_script_impurity']
+[s5] repair 3/5 uuid=c56b228238e847d393141f0a17d86444 flags=['dialect_script_impurity']
+[s5] repair 4/5 uuid=c56b228238e847d393141f0a17d86444 flags=['instruction_drift', 'length_violation', 'dialect_script_impurity']
+[s5] repair 5/5 uuid=c56b228238e847d393141f0a17d86444 flags=['instruction_drift', 'length_violation', 'dialect_script_impurity']
+[s5] done 19/69 verdict=fail score=0.0 repairs=5
+[s5] judging 20/69 uuid=c56b228238e847d393141f0a17d86444 lang=hi doc_type=telemedicine_transcript
+[s5] done 20/69 verdict=pass score=0.92 repairs=0
+[s5] judging 21/69 uuid=c56b228238e847d393141f0a17d86444 lang=hi doc_type=surgical_note
+[s5] repair 1/5 uuid=c56b228238e847d393141f0a17d86444 flags=['surrogate_plausibility_collapse']
+[s5] repair 2/5 uuid=c56b228238e847d393141f0a17d86444 flags=['dialect_script_impurity']
+[s5] REPAIRED-THEN-PASS uuid=c56b228238e847d393141f0a17d86444 rounds=2 score=0.92
+[s5] done 21/69 verdict=pass score=0.92 repairs=2
+[s5] judging 22/69 uuid=a90ec50b35a04cb3a09db6ca09ff1a37 lang=kn doc_type=prescription
+[s5] done 22/69 verdict=pass score=0.92 repairs=0
+[s5] judging 23/69 uuid=a90ec50b35a04cb3a09db6ca09ff1a37 lang=kn doc_type=lab_report
+[s5] done 23/69 verdict=pass score=0.9 repairs=0
+[s5] judging 24/69 uuid=a90ec50b35a04cb3a09db6ca09ff1a37 lang=kn doc_type=asha_worker_note
+[s5] done 24/69 verdict=pass score=0.92 repairs=0
+[s5] judging 25/69 uuid=c03b2ff49ffa439380a254bb9f8972f7 lang=kok doc_type=opd_slip
+[s5] done 25/69 verdict=pass score=0.92 repairs=0
+[s5] judging 26/69 uuid=c03b2ff49ffa439380a254bb9f8972f7 lang=kok doc_type=surgical_note
+[s5] done 26/69 verdict=pass score=0.92 repairs=0
+[s5] judging 27/69 uuid=c03b2ff49ffa439380a254bb9f8972f7 lang=kok doc_type=prescription
+[s5] done 27/69 verdict=pass score=0.9 repairs=0
+[s5] judging 28/69 uuid=442b760204fb4430b6745545930228cd lang=ks doc_type=opd_slip
+[s5] repair 1/5 uuid=442b760204fb4430b6745545930228cd flags=['dialect_script_impurity']
+[s5] repair 2/5 uuid=442b760204fb4430b6745545930228cd flags=['dialect_script_impurity']
+[s5] repair 3/5 uuid=442b760204fb4430b6745545930228cd flags=['dialect_script_impurity']
+[s5] repair 4/5 uuid=442b760204fb4430b6745545930228cd flags=['dialect_script_impurity']
+[s5] repair 5/5 uuid=442b760204fb4430b6745545930228cd flags=['dialect_script_impurity']
+[s5] done 28/69 verdict=fail score=0.35 repairs=5
+[s5] judging 29/69 uuid=442b760204fb4430b6745545930228cd lang=ks doc_type=phc_register
+[s5] done 29/69 verdict=pass score=0.9 repairs=0
+[s5] judging 30/69 uuid=442b760204fb4430b6745545930228cd lang=ks doc_type=prescription
+[s5] repair 1/5 uuid=442b760204fb4430b6745545930228cd flags=['dialect_script_impurity', 'instruction_drift']
+[s5] repair 2/5 uuid=442b760204fb4430b6745545930228cd flags=['dialect_script_impurity']
+[s5] repair 3/5 uuid=442b760204fb4430b6745545930228cd flags=['dialect_script_impurity']
+[s5] repair 4/5 uuid=442b760204fb4430b6745545930228cd flags=['dialect_script_impurity']
+[s5] repair 5/5 uuid=442b760204fb4430b6745545930228cd flags=['dialect_script_impurity']
+[s5] done 30/69 verdict=fail score=0.3 repairs=5
+[s5] judging 31/69 uuid=72db01dc59584f27949df74b76c51edf lang=mai doc_type=discharge_summary
+[s5] done 31/69 verdict=pass score=0.9 repairs=0
+[s5] judging 32/69 uuid=72db01dc59584f27949df74b76c51edf lang=mai doc_type=referral_letter
+[s5] done 32/69 verdict=pass score=0.82 repairs=0
+[s5] judging 33/69 uuid=72db01dc59584f27949df74b76c51edf lang=mai doc_type=radiology_report
+[s5] done 33/69 verdict=pass score=0.9 repairs=0
+[s5] judging 34/69 uuid=f3d9ad4909c345f99fadaafad821b3b0 lang=ml doc_type=opd_slip
+[s5] done 34/69 verdict=pass score=0.93 repairs=0
+[s5] judging 35/69 uuid=f3d9ad4909c345f99fadaafad821b3b0 lang=ml doc_type=phc_register
+[s5] repair 1/5 uuid=f3d9ad4909c345f99fadaafad821b3b0 flags=['domain_persona_mismatch', 'surrogate_plausibility_collapse']
+[s5] repair 2/5 uuid=f3d9ad4909c345f99fadaafad821b3b0 flags=['dialect_script_impurity', 'surrogate_plausibility_collapse']
+[s5] repair 3/5 uuid=f3d9ad4909c345f99fadaafad821b3b0 flags=['surrogate_plausibility_collapse']
+[s5] repair 4/5 uuid=f3d9ad4909c345f99fadaafad821b3b0 flags=['dialect_script_impurity']
+[s5] REPAIRED-THEN-PASS uuid=f3d9ad4909c345f99fadaafad821b3b0 rounds=4 score=0.92
+[s5] done 35/69 verdict=pass score=0.92 repairs=4
+[s5] judging 36/69 uuid=f3d9ad4909c345f99fadaafad821b3b0 lang=ml doc_type=prescription
+[s5] done 36/69 verdict=pass score=0.92 repairs=0
+[s5] judging 37/69 uuid=51fc0c57ffcc40c6ae5d2fb055d07030 lang=mni doc_type=lab_report
+[s5] repair 1/5 uuid=51fc0c57ffcc40c6ae5d2fb055d07030 flags=['dialect_script_impurity', 'length_violation', 'surrogate_plausibility_collapse']
+[s5] repair 2/5 uuid=51fc0c57ffcc40c6ae5d2fb055d07030 flags=['dialect_script_impurity', 'surrogate_plausibility_collapse']
+[s5] repair 3/5 uuid=51fc0c57ffcc40c6ae5d2fb055d07030 flags=['dialect_script_impurity', 'surrogate_plausibility_collapse']
+[s5] repair 4/5 uuid=51fc0c57ffcc40c6ae5d2fb055d07030 flags=['dialect_script_impurity', 'surrogate_plausibility_collapse', 'instruction_drift']
+[s5] repair 5/5 uuid=51fc0c57ffcc40c6ae5d2fb055d07030 flags=['dialect_script_impurity', 'surrogate_plausibility_collapse', 'instruction_drift']
+[s5] done 37/69 verdict=fail score=0.25 repairs=5
+[s5] judging 38/69 uuid=51fc0c57ffcc40c6ae5d2fb055d07030 lang=mni doc_type=opd_slip
+[s5] repair 1/5 uuid=51fc0c57ffcc40c6ae5d2fb055d07030 flags=['length_violation', 'dialect_script_impurity', 'surrogate_plausibility_collapse']
+[s5] repair 2/5 uuid=51fc0c57ffcc40c6ae5d2fb055d07030 flags=['dialect_script_impurity', 'length_violation', 'surrogate_plausibility_collapse']
+[s5] repair 3/5 uuid=51fc0c57ffcc40c6ae5d2fb055d07030 flags=['dialect_script_impurity', 'length_violation', 'surrogate_plausibility_collapse']
+[s5] repair 4/5 uuid=51fc0c57ffcc40c6ae5d2fb055d07030 flags=['length_violation', 'dialect_script_impurity', 'surrogate_plausibility_collapse']
+[s5] repair 5/5 uuid=51fc0c57ffcc40c6ae5d2fb055d07030 flags=['dialect_script_impurity', 'length_violation', 'surrogate_plausibility_collapse']
+[s5] done 38/69 verdict=fail score=0.15 repairs=5
+[s5] judging 39/69 uuid=51fc0c57ffcc40c6ae5d2fb055d07030 lang=mni doc_type=phc_register
+[s5] repair 1/5 uuid=51fc0c57ffcc40c6ae5d2fb055d07030 flags=['dialect_script_impurity']
+[s5] repair 2/5 uuid=51fc0c57ffcc40c6ae5d2fb055d07030 flags=['dialect_script_impurity']
+[s5] repair 3/5 uuid=51fc0c57ffcc40c6ae5d2fb055d07030 flags=['dialect_script_impurity', 'cross_language_entity_shift']
+[s5] repair 4/5 uuid=51fc0c57ffcc40c6ae5d2fb055d07030 flags=['dialect_script_impurity']
+[s5] repair 5/5 uuid=51fc0c57ffcc40c6ae5d2fb055d07030 flags=['dialect_script_impurity']
+[s5] done 39/69 verdict=fail score=0.35 repairs=5
+[s5] judging 40/69 uuid=94295cb27ee046a2b7f397c6f8e6d45b lang=mr doc_type=surgical_note
+[s5] done 40/69 verdict=pass score=0.92 repairs=0
+[s5] judging 41/69 uuid=94295cb27ee046a2b7f397c6f8e6d45b lang=mr doc_type=lab_report
+[s5] done 41/69 verdict=pass score=0.9 repairs=0
+[s5] judging 42/69 uuid=94295cb27ee046a2b7f397c6f8e6d45b lang=mr doc_type=opd_slip
+[s5] done 42/69 verdict=pass score=0.9 repairs=0
+[s5] judging 43/69 uuid=259f783314be4a6ca9979240d0de82cd lang=ne doc_type=telemedicine_transcript
+[s5] done 43/69 verdict=pass score=0.92 repairs=0
+[s5] judging 44/69 uuid=259f783314be4a6ca9979240d0de82cd lang=ne doc_type=surgical_note
+[s5] done 44/69 verdict=pass score=0.92 repairs=0
+[s5] judging 45/69 uuid=259f783314be4a6ca9979240d0de82cd lang=ne doc_type=lab_report
+[s5] repair 1/5 uuid=259f783314be4a6ca9979240d0de82cd flags=['invented_entity_type']
+[s5] repair 2/5 uuid=259f783314be4a6ca9979240d0de82cd flags=['dialect_script_impurity', 'invented_entity_type']
+[s5] repair 3/5 uuid=259f783314be4a6ca9979240d0de82cd flags=['invented_entity_type', 'surrogate_plausibility_collapse']
+[s5] repair 4/5 uuid=259f783314be4a6ca9979240d0de82cd flags=['dialect_script_impurity']
+[s5] REPAIRED-THEN-PASS uuid=259f783314be4a6ca9979240d0de82cd rounds=4 score=0.85
+[s5] done 45/69 verdict=pass score=0.85 repairs=4
+[s5] judging 46/69 uuid=01f011a8da4d401ca4ff9810f7a35a19 lang=or doc_type=prescription
+[s5] done 46/69 verdict=pass score=0.88 repairs=0
+[s5] judging 47/69 uuid=01f011a8da4d401ca4ff9810f7a35a19 lang=or doc_type=insurance_claim
+[s5] done 47/69 verdict=pass score=0.9 repairs=0
+[s5] judging 48/69 uuid=01f011a8da4d401ca4ff9810f7a35a19 lang=or doc_type=asha_worker_note
+[s5] done 48/69 verdict=pass score=0.92 repairs=0
+[s5] judging 49/69 uuid=edf29d2e2af24030992b0a4ccf114083 lang=pa doc_type=radiology_report
+[s5] repair 1/5 uuid=edf29d2e2af24030992b0a4ccf114083 flags=['domain_persona_mismatch', 'surrogate_plausibility_collapse']
+[s5] REPAIRED-THEN-PASS uuid=edf29d2e2af24030992b0a4ccf114083 rounds=1 score=0.9
+[s5] done 49/69 verdict=pass score=0.9 repairs=1
+[s5] judging 50/69 uuid=edf29d2e2af24030992b0a4ccf114083 lang=pa doc_type=er_triage_notes
+[s5] repair 1/5 uuid=edf29d2e2af24030992b0a4ccf114083 flags=['domain_persona_mismatch']
+[s5] repair 2/5 uuid=edf29d2e2af24030992b0a4ccf114083 flags=['dialect_script_impurity', 'domain_persona_mismatch']
+[s5] repair 3/5 uuid=edf29d2e2af24030992b0a4ccf114083 flags=['dialect_script_impurity', 'surrogate_plausibility_collapse']
+[s5] repair 4/5 uuid=edf29d2e2af24030992b0a4ccf114083 flags=['dialect_script_impurity']
+[s5] repair 5/5 uuid=edf29d2e2af24030992b0a4ccf114083 flags=['dialect_script_impurity']
+[s5] done 50/69 verdict=fail score=0.55 repairs=5
+[s5] judging 51/69 uuid=edf29d2e2af24030992b0a4ccf114083 lang=pa doc_type=telemedicine_transcript
+[s5] done 51/69 verdict=pass score=0.92 repairs=0
+[s5] judging 52/69 uuid=6e943dc3578249e38b9e61705d0912a9 lang=sa doc_type=asha_worker_note
+[s5] repair 1/5 uuid=6e943dc3578249e38b9e61705d0912a9 flags=['dialect_script_impurity']
+[s5] REPAIRED-THEN-PASS uuid=6e943dc3578249e38b9e61705d0912a9 rounds=1 score=0.82
+[s5] done 52/69 verdict=pass score=0.82 repairs=1
+[s5] judging 53/69 uuid=6e943dc3578249e38b9e61705d0912a9 lang=sa doc_type=phc_register
+[s5] repair 1/5 uuid=6e943dc3578249e38b9e61705d0912a9 flags=['dialect_script_impurity', 'length_violation']
+[s5] repair 2/5 uuid=6e943dc3578249e38b9e61705d0912a9 flags=['instruction_drift', 'dialect_script_impurity', 'surrogate_plausibility_collapse']
+[s5] repair 3/5 uuid=6e943dc3578249e38b9e61705d0912a9 flags=['instruction_drift', 'surrogate_plausibility_collapse']
+[s5] repair 4/5 uuid=6e943dc3578249e38b9e61705d0912a9 flags=['dialect_script_impurity', 'instruction_drift']
+[s5] repair 5/5 uuid=6e943dc3578249e38b9e61705d0912a9 flags=['dialect_script_impurity']
+[s5] done 53/69 verdict=fail score=0.55 repairs=5
+[s5] judging 54/69 uuid=6e943dc3578249e38b9e61705d0912a9 lang=sa doc_type=automated_sms
+[s5] done 54/69 verdict=pass score=0.82 repairs=0
+[s5] judging 55/69 uuid=944cf9bf2c4d48b2974bb723f704bded lang=sat doc_type=referral_letter
+[s5] repair 1/5 uuid=944cf9bf2c4d48b2974bb723f704bded flags=['dialect_script_impurity', 'invented_entity_type']
+[s5] repair 2/5 uuid=944cf9bf2c4d48b2974bb723f704bded flags=['dialect_script_impurity']
+[s5] repair 3/5 uuid=944cf9bf2c4d48b2974bb723f704bded flags=['dialect_script_impurity']
+[s5] repair 4/5 uuid=944cf9bf2c4d48b2974bb723f704bded flags=['dialect_script_impurity']
+[s5] repair 5/5 uuid=944cf9bf2c4d48b2974bb723f704bded flags=['dialect_script_impurity']
+[s5] done 55/69 verdict=fail score=0.25 repairs=5
+[s5] judging 56/69 uuid=944cf9bf2c4d48b2974bb723f704bded lang=sat doc_type=radiology_report
+[s5] repair 1/5 uuid=944cf9bf2c4d48b2974bb723f704bded flags=['dialect_script_impurity']
+[s5] repair 2/5 uuid=944cf9bf2c4d48b2974bb723f704bded flags=['dialect_script_impurity']
+[s5] repair 3/5 uuid=944cf9bf2c4d48b2974bb723f704bded flags=['dialect_script_impurity']
+[s5] repair 4/5 uuid=944cf9bf2c4d48b2974bb723f704bded flags=['dialect_script_impurity']
+[s5] repair 5/5 uuid=944cf9bf2c4d48b2974bb723f704bded flags=['dialect_script_impurity']
+[s5] done 56/69 verdict=fail score=0.2 repairs=5
+[s5] judging 57/69 uuid=944cf9bf2c4d48b2974bb723f704bded lang=sat doc_type=er_triage_notes
+[s5] repair 1/5 uuid=944cf9bf2c4d48b2974bb723f704bded flags=['dialect_script_impurity']
+[s5] repair 2/5 uuid=944cf9bf2c4d48b2974bb723f704bded flags=['dialect_script_impurity']
+[s5] repair 3/5 uuid=944cf9bf2c4d48b2974bb723f704bded flags=['dialect_script_impurity']
+[s5] repair 4/5 uuid=944cf9bf2c4d48b2974bb723f704bded flags=['dialect_script_impurity']
+[s5] repair 5/5 uuid=944cf9bf2c4d48b2974bb723f704bded flags=['dialect_script_impurity']
+[s5] done 57/69 verdict=fail score=0.25 repairs=5
+[s5] judging 58/69 uuid=68da8d4342bc4e28a1a4cd69a55cc86f lang=sd doc_type=er_triage_notes
+[s5] repair 1/5 uuid=68da8d4342bc4e28a1a4cd69a55cc86f flags=['dialect_script_impurity']
+[s5] repair 2/5 uuid=68da8d4342bc4e28a1a4cd69a55cc86f flags=['dialect_script_impurity']
+[s5] repair 3/5 uuid=68da8d4342bc4e28a1a4cd69a55cc86f flags=['dialect_script_impurity']
+[s5] repair 4/5 uuid=68da8d4342bc4e28a1a4cd69a55cc86f flags=['dialect_script_impurity']
+[s5] repair 5/5 uuid=68da8d4342bc4e28a1a4cd69a55cc86f flags=['dialect_script_impurity']
+[s5] done 58/69 verdict=fail score=0.4 repairs=5
+[s5] judging 59/69 uuid=68da8d4342bc4e28a1a4cd69a55cc86f lang=sd doc_type=telemedicine_transcript
+[s5] repair 1/5 uuid=68da8d4342bc4e28a1a4cd69a55cc86f flags=['dialect_script_impurity', 'surrogate_plausibility_collapse']
+[s5] repair 2/5 uuid=68da8d4342bc4e28a1a4cd69a55cc86f flags=['dialect_script_impurity']
+[s5] repair 3/5 uuid=68da8d4342bc4e28a1a4cd69a55cc86f flags=['dialect_script_impurity']
+[s5] repair 4/5 uuid=68da8d4342bc4e28a1a4cd69a55cc86f flags=['dialect_script_impurity']
+[s5] repair 5/5 uuid=68da8d4342bc4e28a1a4cd69a55cc86f flags=['dialect_script_impurity', 'surrogate_plausibility_collapse']
+[s5] done 59/69 verdict=fail score=0.25 repairs=5
+[s5] judging 60/69 uuid=68da8d4342bc4e28a1a4cd69a55cc86f lang=sd doc_type=surgical_note
+[s5] repair 1/5 uuid=68da8d4342bc4e28a1a4cd69a55cc86f flags=['dialect_script_impurity']
+[s5] REPAIRED-THEN-PASS uuid=68da8d4342bc4e28a1a4cd69a55cc86f rounds=1 score=0.85
+[s5] done 60/69 verdict=pass score=0.85 repairs=1
+[s5] judging 61/69 uuid=d631fc47947c4178a5a6baaa0fe17aa8 lang=ta doc_type=referral_letter
+[s5] done 61/69 verdict=pass score=0.92 repairs=0
+[s5] judging 62/69 uuid=d631fc47947c4178a5a6baaa0fe17aa8 lang=ta doc_type=radiology_report
+[s5] done 62/69 verdict=pass score=0.95 repairs=0
+[s5] judging 63/69 uuid=d631fc47947c4178a5a6baaa0fe17aa8 lang=ta doc_type=er_triage_notes
+[s5] done 63/69 verdict=pass score=0.92 repairs=0
+[s5] judging 64/69 uuid=6dae1a15538348f3a3bc29a4111088bc lang=te doc_type=opd_slip
+[s5] repair 1/5 uuid=6dae1a15538348f3a3bc29a4111088bc flags=['instruction_drift']
+[s5] repair 2/5 uuid=6dae1a15538348f3a3bc29a4111088bc flags=['instruction_drift']
+[s5] repair 3/5 uuid=6dae1a15538348f3a3bc29a4111088bc flags=['instruction_drift']
+[s5] repair 4/5 uuid=6dae1a15538348f3a3bc29a4111088bc flags=['dialect_script_impurity', 'instruction_drift']
+[s5] repair 5/5 uuid=6dae1a15538348f3a3bc29a4111088bc flags=['instruction_drift']
+[s5] done 64/69 verdict=fail score=0.55 repairs=5
+[s5] judging 65/69 uuid=6dae1a15538348f3a3bc29a4111088bc lang=te doc_type=surgical_note
+[s5] done 65/69 verdict=pass score=0.9 repairs=0
+[s5] judging 66/69 uuid=6dae1a15538348f3a3bc29a4111088bc lang=te doc_type=prescription
+[s5] done 66/69 verdict=pass score=0.92 repairs=0
+[s5] judging 67/69 uuid=c8cbb5811e2a4a05bfe15b06b2be3a52 lang=ur doc_type=automated_sms
+[s5] done 67/69 verdict=pass score=0.82 repairs=0
+[s5] judging 68/69 uuid=c8cbb5811e2a4a05bfe15b06b2be3a52 lang=ur doc_type=insurance_claim
+[s5] done 68/69 verdict=pass score=0.85 repairs=0
+[s5] judging 69/69 uuid=c8cbb5811e2a4a05bfe15b06b2be3a52 lang=ur doc_type=hospital_billing
+[s5] done 69/69 verdict=pass score=0.9 repairs=0
+[s5] WARNING: 19 judge fail(s) after repair logged — see failed.jsonl and audit failures
+[s5] quality-repaired-to-pass: 9
+[s5_linguistic_judge] OK → /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/s5_linguistic_judge
+  all_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/s5_linguistic_judge/judged.jsonl
+  passed_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/s5_linguistic_judge/passed.jsonl
+  failed_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/s5_linguistic_judge/failed.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/s5_linguistic_judge/judged.parquet
+  audit_json: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/s5_linguistic_judge/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/s5_linguistic_judge/audit.md
+  soft_failures_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/s5_linguistic_judge/soft_failures.jsonl
+
+=== s6_deterministic_auditor ===
+[s6] repair 1/5 uuid=8b08baf3bcbf412eaace2d648074de01 errors=['phi_residue:1']
+[s6] repair 2/5 uuid=8b08baf3bcbf412eaace2d648074de01 errors=['phi_residue:2', 'script_purity:target_script_ratio:0.000<0.35']
+[s6] repair 3/5 uuid=8b08baf3bcbf412eaace2d648074de01 errors=['phi_residue:2']
+[s6] repair 4/5 uuid=8b08baf3bcbf412eaace2d648074de01 errors=['phi_residue:2']
+[s6] repair 5/5 uuid=8b08baf3bcbf412eaace2d648074de01 errors=['phi_residue:2']
+[s6] repair 1/5 uuid=8b08baf3bcbf412eaace2d648074de01 errors=['missing_required:HOSPITAL_NAME']
+[s6] repair 2/5 uuid=8b08baf3bcbf412eaace2d648074de01 errors=['script_purity:target_script_ratio:0.000<0.35']
+[s6] REPAIRED-THEN-PASS uuid=8b08baf3bcbf412eaace2d648074de01 attempts=2
+[s6] repair 1/5 uuid=f584cfd90471426ea809f549021f9a0f errors=['missing_required:DISTRICT,PHONE_NUMBER,HOSPITAL_ID,ABHA_ID', 'upstream_generation_soft_fail:missing_required_entities:DISTRICT,PHONE_NUMBER,HOSPITAL_ID,ABHA_ID']
+[s6] repair 2/5 uuid=f584cfd90471426ea809f549021f9a0f errors=['missing_required:DISTRICT,PHONE_NUMBER,HOSPITAL_ID,ABHA_ID']
+[s6] repair 3/5 uuid=f584cfd90471426ea809f549021f9a0f errors=['missing_required:DISTRICT,PHONE_NUMBER,HOSPITAL_ID,ABHA_ID']
+[s6] repair 4/5 uuid=f584cfd90471426ea809f549021f9a0f errors=['missing_required:DISTRICT,PHONE_NUMBER,HOSPITAL_ID,ABHA_ID']
+[s6] repair 5/5 uuid=f584cfd90471426ea809f549021f9a0f errors=['missing_required:DISTRICT,PHONE_NUMBER,HOSPITAL_ID,ABHA_ID']
+[s6] repair 1/5 uuid=a90ec50b35a04cb3a09db6ca09ff1a37 errors=['upstream_generation_soft_fail:missing_required_entities:STUDENT_ID', 'upstream_missing_required:STUDENT_ID']
+[s6] REPAIRED-THEN-PASS uuid=a90ec50b35a04cb3a09db6ca09ff1a37 attempts=1
+[s6] repair 1/5 uuid=01f011a8da4d401ca4ff9810f7a35a19 errors=['format:AADHAAR_NUMBER:aadhaar_verhoeff']
+[s6] REPAIRED-THEN-PASS uuid=01f011a8da4d401ca4ff9810f7a35a19 attempts=1
+[s6] repair 1/5 uuid=6dae1a15538348f3a3bc29a4111088bc errors=['format:PHONE_NUMBER:phone_format']
+[s6] REPAIRED-THEN-PASS uuid=6dae1a15538348f3a3bc29a4111088bc attempts=1
+[s6] repair 1/5 uuid=c8cbb5811e2a4a05bfe15b06b2be3a52 errors=['format:AADHAAR_NUMBER:aadhaar_verhoeff']
+[s6] REPAIRED-THEN-PASS uuid=c8cbb5811e2a4a05bfe15b06b2be3a52 attempts=1
+[s6] repair 1/5 uuid=c8cbb5811e2a4a05bfe15b06b2be3a52 errors=['format:AADHAAR_NUMBER:aadhaar_verhoeff']
+[s6] REPAIRED-THEN-PASS uuid=c8cbb5811e2a4a05bfe15b06b2be3a52 attempts=1
+[s6] WARNING: 2 auditor failure(s) after repair logged — see failed.jsonl and audit failures
+[s6] repaired-to-pass: 6
+[s6_deterministic_auditor] OK → /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/s6_deterministic_auditor
+  all_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/s6_deterministic_auditor/audited.jsonl
+  passed_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/s6_deterministic_auditor/passed.jsonl
+  failed_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/s6_deterministic_auditor/failed.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/s6_deterministic_auditor/audited.parquet
+  audit_json: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/s6_deterministic_auditor/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/s6_deterministic_auditor/audit.md
+  failures_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/s6_deterministic_auditor/failures.jsonl
+
+=== s7_s8_curation ===
+2026-07-21 01:02:09.855 | WARNING  | nemo_curator.core.client:start:121 - No monitoring services are running. Please run the `start_prometheus_grafana.py` script from nemo_curator/metrics folder to setup monitoring services separately.
+2026-07-21 01:02:09.899 | INFO     | nemo_curator.core.utils:init_cluster:185 - Ray start command: ray start --head --node-ip-address 127.0.1.1 --port 6379 --metrics-export-port 8080 --dashboard-host 127.0.0.1 --dashboard-port 8265 --ray-client-server-port 10001 --temp-dir /tmp/ray --disable-usage-stats --block
+Usage stats collection is disabled.
+
+[37mLocal node IP[39m: [1m127.0.1.1[22m
+
+[32m--------------------[39m
+[32mRay runtime started.[39m
+[32m--------------------[39m
+
+[36mNext steps[39m
+  [2mNote: The following commands are intended for use on[22m
+  [2mthe head node or within the cluster network.[22m
+  
+  To add another node to this Ray cluster, run
+  [1m  ray start --address='127.0.1.1:6379'[22m
+  
+  To connect to this Ray cluster:
+    [35mimport[39m[26m ray
+    ray[35m.[39m[26minit(_node_ip_address[35m=[39m[26m[33m'127.0.1.1'[39m[26m)
+  
+  To submit a Ray job using the Ray Jobs CLI:
+  [1m  RAY_API_SERVER_ADDRESS='http://127.0.0.1:8265' ray job submit --working-dir . -- python my_script.py[22m
+  
+  See https://docs.ray.io/en/latest/cluster/running-applications/job-submission/index.html 
+  for more information on submitting Ray jobs to the Ray cluster.
+  
+  To terminate the Ray runtime, run
+  [1m  ray stop[22m
+  
+  To view the status of the cluster, use
+    [1mray status[22m[26m
+  
+  To monitor and debug Ray, view the dashboard at 
+    [1m127.0.0.1:8265[22m[26m
+  
+  [4mIf connection to the dashboard fails, check your firewall settings and network configuration.[24m
+
+[36m[1m--block[22m[39m
+  This command will now block forever until terminated by a signal.
+  Running subprocesses are monitored and a message will be printed if any of them terminate unexpectedly. Subprocesses exit with SIGTERM will be treated as graceful, thus NOT reported.
+  Process exit logs will be saved to: [1m/tmp/ray/session_2026-07-21_01-02-10_523153_187266/logs/ray_process_exit.log[22m[26m
+2026-07-21 01:02:17,484	INFO worker.py:1683 -- Using address 127.0.1.1:6379 set in the environment variable RAY_ADDRESS
+2026-07-21 01:02:17,488	INFO worker.py:1833 -- Connecting to existing Ray cluster at address: 127.0.1.1:6379...
+2026-07-21 01:02:17,523	INFO worker.py:2015 -- Connected to Ray cluster. View the dashboard at [1m[32mhttp://127.0.0.1:8265 [39m[22m
+2026-07-21 01:02:18.310 | WARNING  | nemo_curator.stages.file_partitioning:__post_init__:90 - Blocksize is greater than 512 MB, which is not recommended: 1GiB Consider using a smaller blocksize to avoid potential memory issues.
+2026-07-21 01:02:18.310 | INFO     | nemo_curator.pipeline.pipeline:build:70 - Planning pipeline: minhash_pipeline
+2026-07-21 01:02:18,311	INFO worker.py:1683 -- Using address 127.0.1.1:6379 set in the environment variable RAY_ADDRESS
+2026-07-21 01:02:18,312	INFO worker.py:1833 -- Connecting to existing Ray cluster at address: 127.0.1.1:6379...
+2026-07-21 01:02:18,332	INFO worker.py:2015 -- Connected to Ray cluster. View the dashboard at [1m[32mhttp://127.0.0.1:8265 [39m[22m
+2026-07-21 01:02:18.340 | INFO     | nemo_curator.backends.utils:execute_setup_on_node:228 - Executing setup on node b889708002bb18db709482ddb5cccb67d47131809a12247a3f29aa2b for 2 stages
+2026-07-21 01:02:19.999 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:103 - Setup on node complete for all stages. Starting Ray Actor Pool pipeline with 2 stages
+2026-07-21 01:02:19.999 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:110 - 
+Processing stage 1/2: FilePartitioningStage(file_paths='/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/artifacts/nemo_curator_dedup/input', files_per_partition=None, blocksize='1GiB', file_extensions=['.parquet'], storage_options={}, limit=None, name='file_partitioning')
+2026-07-21 01:02:19.999 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:111 -   Input tasks: 1
+2026-07-21 01:02:20.199 | INFO     | nemo_curator.backends.ray_actor_pool.utils:calculate_optimal_actors_for_stage:73 -     Resource calculation: CPU limit=24, GPU limit=2147483647
+2026-07-21 01:02:20.199 | INFO     | nemo_curator.backends.ray_actor_pool.utils:calculate_optimal_actors_for_stage:74 -     Available: 12.0 CPUs, 1.0 GPUs
+2026-07-21 01:02:20.200 | INFO     | nemo_curator.backends.ray_actor_pool.utils:calculate_optimal_actors_for_stage:75 -     Stage requirements: 0.5 CPUs, 0.0 GPUs
+2026-07-21 01:02:20.200 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:128 -  FilePartitioningStage(file_paths='/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/artifacts/nemo_curator_dedup/input', files_per_partition=None, blocksize='1GiB', file_extensions=['.parquet'], storage_options={}, limit=None, name='file_partitioning') - Creating 1 actors (CPUs: 0.5, GPUs: 0.0)
+2026-07-21 01:02:20.209 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:141 - Created actor pool for file_partitioning with 1 actors
+2026-07-21 01:02:20.902 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_process_stage_with_pool:308 - Broke down 1 tasks into batches of 1 for a total of 1 batches for file_partitioning
+
+Processing file_partitioning:   0%|          | 0/1 [00:00<?, ?it/s]
+Processing file_partitioning: 100%|██████████| 1/1 [00:00<00:00, 1003.66it/s]
+2026-07-21 01:02:20.904 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:151 -   Output tasks: 1
+2026-07-21 01:02:20.904 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:110 - 
+Processing stage 2/2: MinHashStage
+2026-07-21 01:02:20.904 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:111 -   Input tasks: 1
+[36m(FilePartitioningStage pid=188986)[0m 2026-07-21 01:02:20.903 | INFO     | nemo_curator.stages.file_partitioning:process:122 - Found 1 files
+[36m(FilePartitioningStage pid=188986)[0m 2026-07-21 01:02:20.903 | INFO     | nemo_curator.stages.file_partitioning:process:192 - Created 1 file groups from 1 files
+2026-07-21 01:02:21.105 | INFO     | nemo_curator.backends.ray_actor_pool.utils:calculate_optimal_actors_for_stage:73 -     Resource calculation: CPU limit=12, GPU limit=1
+2026-07-21 01:02:21.105 | INFO     | nemo_curator.backends.ray_actor_pool.utils:calculate_optimal_actors_for_stage:74 -     Available: 12.0 CPUs, 1.0 GPUs
+2026-07-21 01:02:21.105 | INFO     | nemo_curator.backends.ray_actor_pool.utils:calculate_optimal_actors_for_stage:75 -     Stage requirements: 1.0 CPUs, 1.0 GPUs
+2026-07-21 01:02:21.105 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:128 -  MinHashStage - Creating 1 actors (CPUs: 1.0, GPUs: 1.0)
+2026-07-21 01:02:21.112 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:141 - Created actor pool for MinHashStage with 1 actors
+2026-07-21 01:02:22.980 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_process_stage_with_pool:308 - Broke down 1 tasks into batches of 1 for a total of 1 batches for MinHashStage
+
+Processing MinHashStage:   0%|          | 0/1 [00:00<?, ?it/s]
+Processing MinHashStage: 100%|██████████| 1/1 [00:00<00:00, 10.82it/s]
+2026-07-21 01:02:23.074 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:151 -   Output tasks: 1
+2026-07-21 01:02:23.074 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:159 - 
+Pipeline completed. Final results: 1 tasks
+2026-07-21 01:02:23.074 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:164 - Shutting down Ray to clean up all resources...
+2026-07-21 01:02:23.329 | INFO     | nemo_curator.stages.deduplication.fuzzy.workflow:run:342 - Minhash pipeline completed in 5.02 seconds
+2026-07-21 01:02:23,329	INFO worker.py:1683 -- Using address 127.0.1.1:6379 set in the environment variable RAY_ADDRESS
+2026-07-21 01:02:23,330	INFO worker.py:1833 -- Connecting to existing Ray cluster at address: 127.0.1.1:6379...
+2026-07-21 01:02:23,350	INFO worker.py:2015 -- Connected to Ray cluster. View the dashboard at [1m[32mhttp://127.0.0.1:8265 [39m[22m
+2026-07-21 01:02:23.362 | INFO     | nemo_curator.stages.deduplication.fuzzy.workflow:run:352 - Id generator written to /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/artifacts/nemo_curator_dedup/duplicate_ids/fuzzy_id_generator.json
+2026-07-21 01:02:23.362 | WARNING  | nemo_curator.stages.file_partitioning:__post_init__:90 - Blocksize is greater than 512 MB, which is not recommended: 2GiB Consider using a smaller blocksize to avoid potential memory issues.
+2026-07-21 01:02:23.362 | INFO     | nemo_curator.pipeline.pipeline:build:70 - Planning pipeline: lsh_duplicate_identification_pipeline
+2026-07-21 01:02:23,362	INFO worker.py:1683 -- Using address 127.0.1.1:6379 set in the environment variable RAY_ADDRESS
+2026-07-21 01:02:23,363	INFO worker.py:1833 -- Connecting to existing Ray cluster at address: 127.0.1.1:6379...
+2026-07-21 01:02:23,363	INFO worker.py:1847 -- Calling ray.init() again after it has already been called.
+2026-07-21 01:02:23.364 | INFO     | nemo_curator.backends.utils:execute_setup_on_node:228 - Executing setup on node b889708002bb18db709482ddb5cccb67d47131809a12247a3f29aa2b for 2 stages
+2026-07-21 01:02:24.528 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:103 - Setup on node complete for all stages. Starting Ray Actor Pool pipeline with 2 stages
+2026-07-21 01:02:24.528 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:110 - 
+Processing stage 1/2: FilePartitioningStage(file_paths='/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/artifacts/nemo_curator_dedup/cache/MinHashStage', files_per_partition=None, blocksize='2GiB', file_extensions=['.parquet'], storage_options={}, limit=None, name='file_partitioning')
+2026-07-21 01:02:24.528 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:111 -   Input tasks: 1
+2026-07-21 01:02:24.729 | INFO     | nemo_curator.backends.ray_actor_pool.utils:calculate_optimal_actors_for_stage:73 -     Resource calculation: CPU limit=24, GPU limit=2147483647
+2026-07-21 01:02:24.729 | INFO     | nemo_curator.backends.ray_actor_pool.utils:calculate_optimal_actors_for_stage:74 -     Available: 12.0 CPUs, 1.0 GPUs
+2026-07-21 01:02:24.729 | INFO     | nemo_curator.backends.ray_actor_pool.utils:calculate_optimal_actors_for_stage:75 -     Stage requirements: 0.5 CPUs, 0.0 GPUs
+2026-07-21 01:02:24.729 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:128 -  FilePartitioningStage(file_paths='/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/artifacts/nemo_curator_dedup/cache/MinHashStage', files_per_partition=None, blocksize='2GiB', file_extensions=['.parquet'], storage_options={}, limit=None, name='file_partitioning') - Creating 1 actors (CPUs: 0.5, GPUs: 0.0)
+2026-07-21 01:02:24.735 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:141 - Created actor pool for file_partitioning with 1 actors
+2026-07-21 01:02:24.998 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_process_stage_with_pool:308 - Broke down 1 tasks into batches of 1 for a total of 1 batches for file_partitioning
+
+Processing file_partitioning:   0%|          | 0/1 [00:00<?, ?it/s]
+Processing file_partitioning: 100%|██████████| 1/1 [00:00<00:00, 825.98it/s]
+2026-07-21 01:02:25.000 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:151 -   Output tasks: 1
+2026-07-21 01:02:25.000 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:110 - 
+Processing stage 2/2: LSHStage(num_bands=20, minhashes_per_band=13, id_field='_curator_dedup_id', minhash_field='_minhash_signature', output_path='/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/artifacts/nemo_curator_dedup/cache', read_kwargs={}, write_kwargs={}, rmm_pool_size='auto', spill_memory_limit='auto', enable_statistics=False, bands_per_iteration=5, total_nparts=None)
+2026-07-21 01:02:25.000 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:111 -   Input tasks: 1
+2026-07-21 01:02:25.000 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_execute_lsh_stage:399 -   Processing band range: 0-5
+[36m(FilePartitioningStage pid=188272)[0m 2026-07-21 01:02:24.999 | INFO     | nemo_curator.stages.file_partitioning:process:122 - Found 1 files
+[36m(FilePartitioningStage pid=188272)[0m 2026-07-21 01:02:24.999 | INFO     | nemo_curator.stages.file_partitioning:process:192 - Created 1 file groups from 1 files
+2026-07-21 01:02:25.200 | INFO     | nemo_curator.backends.ray_actor_pool.utils:calculate_optimal_actors_for_stage:73 -     Resource calculation: CPU limit=12, GPU limit=1
+2026-07-21 01:02:25.200 | INFO     | nemo_curator.backends.ray_actor_pool.utils:calculate_optimal_actors_for_stage:74 -     Available: 12.0 CPUs, 1.0 GPUs
+2026-07-21 01:02:25.200 | INFO     | nemo_curator.backends.ray_actor_pool.utils:calculate_optimal_actors_for_stage:75 -     Stage requirements: 1.0 CPUs, 1.0 GPUs
+2026-07-21 01:02:25.201 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_execute_lsh_stage:411 -  LSHStage(num_bands=20, minhashes_per_band=13, id_field='_curator_dedup_id', minhash_field='_minhash_signature', output_path='/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/artifacts/nemo_curator_dedup/cache', read_kwargs={}, write_kwargs={}, rmm_pool_size='auto', spill_memory_limit='auto', enable_statistics=False, bands_per_iteration=5, total_nparts=None) - Creating 1 actors (CPUs: 1.0, GPUs: 1.0)
+2026-07-21 01:02:25.201 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_execute_lsh_stage:415 -   Creating RapidsMPFShuffling Actor Pool for stage: LSHStage
+2026-07-21 01:02:25.201 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_create_rapidsmpf_actors:229 -     Initializing RapidsMPFShuffling actor pool with 1 actors
+2026-07-21 01:02:25.211 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_create_rapidsmpf_actors:242 -     Setting up UCXX communication...
+2026-07-21 01:02:27.034 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_create_rapidsmpf_actors:250 -     UCXX setup complete
+
+Inserting into shuffler:   0%|          | 0/1 [00:00<?, ?it/s]
+Inserting into shuffler: 100%|██████████| 1/1 [00:00<00:00,  9.33it/s]
+2026-07-21 01:02:27.170 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_execute_lsh_stage:399 -   Processing band range: 5-10
+2026-07-21 01:02:27.370 | INFO     | nemo_curator.backends.ray_actor_pool.utils:calculate_optimal_actors_for_stage:73 -     Resource calculation: CPU limit=12, GPU limit=1
+2026-07-21 01:02:27.370 | INFO     | nemo_curator.backends.ray_actor_pool.utils:calculate_optimal_actors_for_stage:74 -     Available: 12.0 CPUs, 1.0 GPUs
+2026-07-21 01:02:27.370 | INFO     | nemo_curator.backends.ray_actor_pool.utils:calculate_optimal_actors_for_stage:75 -     Stage requirements: 1.0 CPUs, 1.0 GPUs
+2026-07-21 01:02:27.370 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_execute_lsh_stage:411 -  LSHStage(num_bands=20, minhashes_per_band=13, id_field='_curator_dedup_id', minhash_field='_minhash_signature', output_path='/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/artifacts/nemo_curator_dedup/cache', read_kwargs={}, write_kwargs={}, rmm_pool_size='auto', spill_memory_limit='auto', enable_statistics=False, bands_per_iteration=5, total_nparts=None) - Creating 1 actors (CPUs: 1.0, GPUs: 1.0)
+2026-07-21 01:02:27.370 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_execute_lsh_stage:415 -   Creating RapidsMPFShuffling Actor Pool for stage: LSHStage
+2026-07-21 01:02:27.370 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_create_rapidsmpf_actors:229 -     Initializing RapidsMPFShuffling actor pool with 1 actors
+2026-07-21 01:02:27.372 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_create_rapidsmpf_actors:242 -     Setting up UCXX communication...
+2026-07-21 01:02:29.156 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_create_rapidsmpf_actors:250 -     UCXX setup complete
+
+Inserting into shuffler:   0%|          | 0/1 [00:00<?, ?it/s]
+Inserting into shuffler: 100%|██████████| 1/1 [00:00<00:00,  9.34it/s]
+2026-07-21 01:02:29.289 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_execute_lsh_stage:399 -   Processing band range: 10-15
+2026-07-21 01:02:29.490 | INFO     | nemo_curator.backends.ray_actor_pool.utils:calculate_optimal_actors_for_stage:73 -     Resource calculation: CPU limit=12, GPU limit=1
+2026-07-21 01:02:29.490 | INFO     | nemo_curator.backends.ray_actor_pool.utils:calculate_optimal_actors_for_stage:74 -     Available: 12.0 CPUs, 1.0 GPUs
+2026-07-21 01:02:29.490 | INFO     | nemo_curator.backends.ray_actor_pool.utils:calculate_optimal_actors_for_stage:75 -     Stage requirements: 1.0 CPUs, 1.0 GPUs
+2026-07-21 01:02:29.490 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_execute_lsh_stage:411 -  LSHStage(num_bands=20, minhashes_per_band=13, id_field='_curator_dedup_id', minhash_field='_minhash_signature', output_path='/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/artifacts/nemo_curator_dedup/cache', read_kwargs={}, write_kwargs={}, rmm_pool_size='auto', spill_memory_limit='auto', enable_statistics=False, bands_per_iteration=5, total_nparts=None) - Creating 1 actors (CPUs: 1.0, GPUs: 1.0)
+2026-07-21 01:02:29.490 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_execute_lsh_stage:415 -   Creating RapidsMPFShuffling Actor Pool for stage: LSHStage
+2026-07-21 01:02:29.490 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_create_rapidsmpf_actors:229 -     Initializing RapidsMPFShuffling actor pool with 1 actors
+2026-07-21 01:02:29.492 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_create_rapidsmpf_actors:242 -     Setting up UCXX communication...
+2026-07-21 01:02:31.316 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_create_rapidsmpf_actors:250 -     UCXX setup complete
+
+Inserting into shuffler:   0%|          | 0/1 [00:00<?, ?it/s]
+Inserting into shuffler: 100%|██████████| 1/1 [00:00<00:00,  9.29it/s]
+2026-07-21 01:02:31.451 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_execute_lsh_stage:399 -   Processing band range: 15-20
+2026-07-21 01:02:31.652 | INFO     | nemo_curator.backends.ray_actor_pool.utils:calculate_optimal_actors_for_stage:73 -     Resource calculation: CPU limit=12, GPU limit=1
+2026-07-21 01:02:31.652 | INFO     | nemo_curator.backends.ray_actor_pool.utils:calculate_optimal_actors_for_stage:74 -     Available: 12.0 CPUs, 1.0 GPUs
+2026-07-21 01:02:31.652 | INFO     | nemo_curator.backends.ray_actor_pool.utils:calculate_optimal_actors_for_stage:75 -     Stage requirements: 1.0 CPUs, 1.0 GPUs
+2026-07-21 01:02:31.652 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_execute_lsh_stage:411 -  LSHStage(num_bands=20, minhashes_per_band=13, id_field='_curator_dedup_id', minhash_field='_minhash_signature', output_path='/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/artifacts/nemo_curator_dedup/cache', read_kwargs={}, write_kwargs={}, rmm_pool_size='auto', spill_memory_limit='auto', enable_statistics=False, bands_per_iteration=5, total_nparts=None) - Creating 1 actors (CPUs: 1.0, GPUs: 1.0)
+2026-07-21 01:02:31.652 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_execute_lsh_stage:415 -   Creating RapidsMPFShuffling Actor Pool for stage: LSHStage
+2026-07-21 01:02:31.652 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_create_rapidsmpf_actors:229 -     Initializing RapidsMPFShuffling actor pool with 1 actors
+2026-07-21 01:02:31.653 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_create_rapidsmpf_actors:242 -     Setting up UCXX communication...
+2026-07-21 01:02:33.437 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_create_rapidsmpf_actors:250 -     UCXX setup complete
+
+Inserting into shuffler:   0%|          | 0/1 [00:00<?, ?it/s]
+Inserting into shuffler: 100%|██████████| 1/1 [00:00<00:00,  8.15it/s]
+2026-07-21 01:02:33.579 | INFO     | nemo_curator.backends.ray_actor_pool.executor:_execute_lsh_stage:424 -   LSH processing complete. Output tasks: 4
+2026-07-21 01:02:33.579 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:159 - 
+Pipeline completed. Final results: 4 tasks
+2026-07-21 01:02:33.579 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:164 - Shutting down Ray to clean up all resources...
+2026-07-21 01:02:33.834 | INFO     | nemo_curator.stages.deduplication.fuzzy.workflow:run:364 - LSH pipeline completed in 10.47 seconds
+2026-07-21 01:02:33.834 | INFO     | nemo_curator.stages.deduplication.fuzzy.workflow:run:368 - No potential duplicates found in the dataset. Skipping connected components pipeline.
+2026-07-21 01:02:33,834	INFO worker.py:1683 -- Using address 127.0.1.1:6379 set in the environment variable RAY_ADDRESS
+2026-07-21 01:02:33,835	INFO worker.py:1833 -- Connecting to existing Ray cluster at address: 127.0.1.1:6379...
+2026-07-21 01:02:33,855	INFO worker.py:2015 -- Connected to Ray cluster. View the dashboard at [1m[32mhttp://127.0.0.1:8265 [39m[22m
+2026-07-21 01:02:33.864 | INFO     | nemo_curator.stages.deduplication.fuzzy.workflow:run:393 - Fuzzy deduplication pipeline completed in 16.38 seconds
+2026-07-21 01:02:36.187 | INFO     | nemo_curator.core.client:stop:205 - NeMo Curator has stopped the Ray cluster it started by killing the Ray GCS process. It is advised to wait for a few seconds before running any Ray commands to ensure Ray can cleanup other processes.If you are seeing any Ray commands like `ray status` failing, please ensure /tmp/ray/ray_current_cluster has correct information.
+[s7-s8] WARNING: large_balance_discard: discarded 26/46 rows (56.5%) while equalizing to 1 docs/language
+[s7_s8_curation] OK → /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/s7_s8_curation
+  jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/s7_s8_curation/curated.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/s7_s8_curation/curated.parquet
+  audit_json: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/s7_s8_curation/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/s7_s8_curation/audit.md
+
+=== s9_gliner_format ===
+[s9_gliner_format] OK → /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/s9_gliner_format
+  jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/s9_gliner_format/gliner_docs.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/s9_gliner_format/gliner_docs.parquet
+  gliner_json: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/s9_gliner_format/gliner_train.json
+  audit_json: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/s9_gliner_format/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/s9_gliner_format/audit.md
+  preview_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/samples/s9_gliner_preview.jsonl
+
+=== s10_split ===
+[s10_split] OK → /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/s10_split
+  train_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/s10_split/train.jsonl
+  eval_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/s10_split/eval.jsonl
+  gliner_train: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/s10_split/gliner_train.json
+  gliner_eval: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/s10_split/gliner_eval.json
+  audit_json: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/s10_split/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/s10_split/audit.md
+
+[run] complete → /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322
+[run] latest symlink → /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/latest
+[run] failures audit → /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T213322/failures.md

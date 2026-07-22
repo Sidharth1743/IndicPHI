@@ -37,8 +37,10 @@ persona_summary:
   base_url: https://api.sarvam.ai/v1
   api_key_env: SARVAM_API_KEY
   temperature: 0.2
-  max_tokens: 256
+  # Short 2–4 sentence summary — reasoning OFF (thinking burns budget for no gain).
+  max_tokens: 512
   reasoning_effort: null
+  empty_content_retries: 3
   requests_per_minute: 110
   max_workers: 24
   timeout_s: 120
@@ -67,11 +69,11 @@ generation:
   engine: data_designer
   # Model endpoint used by Data Designer provider registration.
   # Generator model: Sarvam-105B via Sarvam API (English pivot with inline tags).
-  # reasoning_effort: null is serialized as JSON null → reasoning OFF.
-  # (Omitting the field leaves Sarvam default reasoning ON — do not omit.)
-  # max_tokens: 16384 — enough for long Indic discharge/surgical notes with
-  # inline tags. Do NOT set near the 128k context window: that encourages
-  # runaway dumps and does not improve clinical quality.
+  # reasoning_effort: low|medium|high → ON; null → OFF (JSON null in body).
+  # With reasoning ON, content shares the max_tokens budget with thinking —
+  # empty_content_retries recovers when reasoning exhausts the budget.
+  # max_tokens: 32768 — room for medium reasoning + long tagged clinical notes.
+  # Do NOT set near the 128k context window: that encourages runaway dumps.
   # Sarvam-105B Business RPM = 120 (ms-llm default tier is 1000 — different).
   # Throttle at 110 + max_workers for concurrent in-flight generations.
   provider: sarvam
@@ -81,14 +83,19 @@ generation:
   base_url: https://api.sarvam.ai/v1
   api_key_env: SARVAM_API_KEY
   temperature: 0.3
-  max_tokens: 16384
-  reasoning_effort: null
+  max_tokens: 32768
+  reasoning_effort: medium
   requests_per_minute: 110
   max_workers: 24
   timeout_s: 600
   max_docs: null
   empty_content_retries: 3
   repair_retries: 5
+  # S5/S4 repair behavior (defaults false elsewhere = old path). Undo: set false.
+  # multi_constraint: accumulate flags across rounds + stability guards (no A↔B flip).
+  repair_multi_constraint: true
+  # via_english_pivot: OFF for this experiment (repair Indic body in place).
+  repair_via_english_pivot: false
   reject_truncated: true
 
 translation:
@@ -99,13 +106,23 @@ translation:
   base_url: https://api.sarvam.ai/v1
   api_key_env: SARVAM_API_KEY
   temperature: 0.2
-  max_tokens: 16384
-  reasoning_effort: null
+  max_tokens: 32768
+  reasoning_effort: medium
   requests_per_minute: 110
   max_workers: 24
-  timeout_s: 600
+  # Raised: rare-script + reasoning medium often hit 600s timeouts.
+  timeout_s: 1200
   skip_language_codes: [en]
   max_docs: null
+  # After ≤2 chat-translate failures on these langs → dedicated /translate once
+  # (no 5× generator repair burn). Undo: enable_dedicated_translate_fallback: false
+  rare_script_languages: [brx, mni, sat, ks]
+  rare_script_max_chat_attempts: 2
+  enable_dedicated_translate_fallback: true
+  dedicated_translate_model: sarvam-translate:v1
+  dedicated_translate_timeout_s: 180
+  # Business ms-ts Translate = 1000 RPM (separate from sarvam-105b 120 RPM).
+  dedicated_translate_requests_per_minute: 900
 
 linguistic_judge:
   # Judge: Grok-4.3 via Azure Foundry OpenAI-compatible chat/completions.
@@ -122,15 +139,23 @@ linguistic_judge:
     - AZURE_FOUNDARY_API_KEY
   entities_config: configs/synthetic-data/entities.yaml
   temperature: 0.0
-  max_tokens: 2048
+  max_tokens: 8192
   max_tokens_field: max_tokens
-  reasoning_effort: null
+  reasoning_effort: medium
   requests_per_minute: 500
-  # Diversity runs: shorter timeout so one hung call cannot stall ~10–50 min silently.
-  timeout_s: 180
+  # Parallel judge calls (Azure Business-style 500 RPM). Default 24 if omitted.
+  max_workers: 24
+  # Diversity: 600s — judge+repair with reasoning medium can exceed 300s.
+  timeout_s: 600
   network_retries: 2
   pass_threshold: 0.7
   max_docs: null
+  # Language SLA (reporting / ops — does NOT auto-pass docs).
+  # Must-work: hi, ta, te, bn, mr, gu, kn, ml, pa, or, as, ur — failures = system bug.
+  # Rare-script capacity: brx, mni, sat (+ often ks/sd) — soft-fail expected; do not
+  # treat wipeouts as pipeline breakage. Undo: delete these keys.
+  must_work_languages: [hi, ta, te, bn, mr, gu, kn, ml, pa, or, as, ur]
+  rare_script_languages: [brx, mni, sat, ks]
 
 deterministic_auditor:
   # Prefer judge-passed docs; set input to s5 passed.jsonl in normal runs.
@@ -142,6 +167,7 @@ deterministic_auditor:
   min_dics: 1.0
   max_boundary_corruption_rate: 0.01
   require_all_profile_entities: true
+  max_workers: 24
   max_docs: null
 
 curation:
@@ -208,7 +234,9 @@ data_designer:
   # Sarvam uses api-subscription-key (not Bearer).
   auth_style: subscription_key
   temperature: 0.3
-  max_tokens: 16384
+  max_tokens: 32768
+  # Must match generation.reasoning_effort — Data Designer forwards this in extra_body.
+  reasoning_effort: medium
   system_prompt_column: system_prompt
   user_prompt_column: user_prompt
   output_column: generated_text

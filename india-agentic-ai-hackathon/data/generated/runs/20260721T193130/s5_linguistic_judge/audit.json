@@ -1,0 +1,235 @@
+{
+  "stage": "s5_linguistic_judge",
+  "timestamp_utc": "2026-07-21T17:31:29.806425+00:00",
+  "provider": "azure_foundry",
+  "model": "grok-4.3",
+  "base_url": "https://ambedkar-interpreter-resource.services.ai.azure.com/openai/v1",
+  "requests_per_minute": 500.0,
+  "timeout_s": 300.0,
+  "network_retries": 2,
+  "rows_judged": 138,
+  "rows_resumed_from_checkpoint": 0,
+  "pass_rate": 0.9202898550724637,
+  "label_distribution": {
+    "fail": 0.07971014492753623,
+    "pass": 0.9202898550724637
+  },
+  "positional_length_bias": {
+    "pearson_r": 0.029272656439593796,
+    "n": 138.0
+  },
+  "failures": [
+    {
+      "uuid": "8b77264c0f7747c59ec191e95202ff7f",
+      "document_id": "8b77264c0f7747c59ec191e95202ff7f__0",
+      "doc_type_id": "automated_sms",
+      "document_language_code": "brx",
+      "judge_verdict": "fail",
+      "judge_score": 0.45,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Prose mixes Nepali phrasing/verbs with partial Bodo terms; expected Bodo (Devanagari) narrative not met.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "8b77264c0f7747c59ec191e95202ff7f",
+      "document_id": "8b77264c0f7747c59ec191e95202ff7f__2",
+      "doc_type_id": "hospital_billing",
+      "document_language_code": "brx",
+      "judge_verdict": "fail",
+      "judge_score": 0.3,
+      "judge_flags": [
+        "dialect_script_impurity",
+        "instruction_drift",
+        "cross_language_entity_shift"
+      ],
+      "judge_rationale": "Narrative prose uses Assamese/Bengali script+lexicon instead of required Bodo Devanagari; entity values show mixed/wrong scripts.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "fac14bf3d91143958fc1e8190e25c390",
+      "document_id": "fac14bf3d91143958fc1e8190e25c390__0",
+      "doc_type_id": "prescription",
+      "document_language_code": "brx",
+      "judge_verdict": "fail",
+      "judge_score": 0.45,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Clinical prose uses Hindi/Nepali vocabulary and structure instead of Bodo; all entity tags and content otherwise valid and persona-plausible.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "fac14bf3d91143958fc1e8190e25c390",
+      "document_id": "fac14bf3d91143958fc1e8190e25c390__1",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "brx",
+      "judge_verdict": "fail",
+      "judge_score": 0.35,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Clinical narrative prose written mostly in Assamese/Bengali script with mixed Devanagari insertions instead of required Bodo Devanagari; language and script mismatch for expected brx document.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "fc0833a3fd3a4916849cba96e415af4b",
+      "document_id": "fc0833a3fd3a4916849cba96e415af4b__0",
+      "doc_type_id": "hospital_billing",
+      "document_language_code": "kok",
+      "judge_verdict": "fail",
+      "judge_score": 0.35,
+      "judge_flags": [
+        "domain_persona_mismatch",
+        "surrogate_plausibility_collapse"
+      ],
+      "judge_rationale": "49yo female as surrogate at 28 weeks gestation violates age-domain fit and surrogate plausibility; prose/script otherwise acceptable with valid entity tags.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "1e23bb4e93b0465fa42494aee52e02ef",
+      "document_id": "1e23bb4e93b0465fa42494aee52e02ef__0",
+      "doc_type_id": "hospital_billing",
+      "document_language_code": "mni",
+      "judge_verdict": "fail",
+      "judge_score": 0.25,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Narrative prose in Bengali script instead of required Meitei; all entity TYPEs valid and Latin IDs acceptable.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "d15c31be6c8e40a393e6e6f4f9562ea3",
+      "document_id": "d15c31be6c8e40a393e6e6f4f9562ea3__0",
+      "doc_type_id": "hospital_billing",
+      "document_language_code": "mni",
+      "judge_verdict": "fail",
+      "judge_score": 0.65,
+      "judge_flags": [
+        "invented_entity_type",
+        "cross_language_entity_shift"
+      ],
+      "judge_rationale": "Invalid STATE type (not in allow-list) + Bengali script for place name instead of Meitei.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "d15c31be6c8e40a393e6e6f4f9562ea3",
+      "document_id": "d15c31be6c8e40a393e6e6f4f9562ea3__1",
+      "doc_type_id": "discharge_summary",
+      "document_language_code": "mni",
+      "judge_verdict": "fail",
+      "judge_score": 0.25,
+      "judge_flags": [
+        "dialect_script_impurity",
+        "surrogate_plausibility_collapse"
+      ],
+      "judge_rationale": "Narrative prose uses Burmese script instead of required Meitei; content incoherent with 'American citizen' reference and garbled delivery/Apgar details, breaking persona and plausibility.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "d15c31be6c8e40a393e6e6f4f9562ea3",
+      "document_id": "d15c31be6c8e40a393e6e6f4f9562ea3__2",
+      "doc_type_id": "referral_letter",
+      "document_language_code": "mni",
+      "judge_verdict": "fail",
+      "judge_score": 0.25,
+      "judge_flags": [
+        "dialect_script_impurity",
+        "domain_persona_mismatch"
+      ],
+      "judge_rationale": "Narrative prose uses Assamese/Bengali script throughout instead of required Meitei; female patient listed with wife (পত্নী) relative creates sex mismatch.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "f64651bbe52e4c86b23c9a11c76682d9",
+      "document_id": "f64651bbe52e4c86b23c9a11c76682d9__2",
+      "doc_type_id": "opd_slip",
+      "document_language_code": "or",
+      "judge_verdict": "fail",
+      "judge_score": 0.65,
+      "judge_flags": [
+        "domain_persona_mismatch"
+      ],
+      "judge_rationale": "Maternal health domain incompatible with 45yo postmenopausal/menopausal presentation and negative pregnancy test.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "c98c2d51b4ea4d0c947d6dfc0ee57383",
+      "document_id": "c98c2d51b4ea4d0c947d6dfc0ee57383__0",
+      "doc_type_id": "asha_worker_note",
+      "document_language_code": "sat",
+      "judge_verdict": "fail",
+      "judge_score": 0.2,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Narrative prose entirely in Hindi/Devanagari; expected Santali in Ol Chiki script.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    }
+  ],
+  "failure_count": 11,
+  "soft_failures": [],
+  "soft_fail_count": 0,
+  "judge_repaired_count": 32,
+  "en_pivot_repair_count": 0,
+  "quality_repair_max": 5,
+  "repair_multi_constraint": true,
+  "repair_via_english_pivot": false,
+  "must_work_languages": [
+    "hi",
+    "ta",
+    "te",
+    "bn",
+    "mr",
+    "gu",
+    "kn",
+    "ml",
+    "pa",
+    "or",
+    "as",
+    "ur"
+  ],
+  "rare_script_languages": [
+    "brx",
+    "mni",
+    "sat",
+    "ks"
+  ],
+  "columns_added": [
+    "judge_verdict",
+    "judge_score",
+    "judge_reasoning",
+    "judge_flags",
+    "judge_provider",
+    "judge_model",
+    "judge_soft_fail",
+    "judge_error",
+    "judge_repair_attempts",
+    "judge_repaired",
+    "stage"
+  ]
+}

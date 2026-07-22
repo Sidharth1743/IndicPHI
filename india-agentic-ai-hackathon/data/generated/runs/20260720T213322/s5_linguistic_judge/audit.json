@@ -1,0 +1,334 @@
+{
+  "stage": "s5_linguistic_judge",
+  "timestamp_utc": "2026-07-20T19:31:27.272375+00:00",
+  "provider": "azure_foundry",
+  "model": "grok-4.3",
+  "base_url": "https://ambedkar-interpreter-resource.services.ai.azure.com/openai/v1",
+  "requests_per_minute": 500.0,
+  "timeout_s": 180.0,
+  "network_retries": 2,
+  "rows_judged": 69,
+  "rows_resumed_from_checkpoint": 0,
+  "pass_rate": 0.7246376811594203,
+  "label_distribution": {
+    "fail": 0.2753623188405797,
+    "pass": 0.7246376811594203
+  },
+  "positional_length_bias": {
+    "pearson_r": -0.2601068650185871,
+    "n": 69.0
+  },
+  "failures": [
+    {
+      "uuid": "3c0199017c7c4f00bbb3de4770ce25fc",
+      "document_id": "3c0199017c7c4f00bbb3de4770ce25fc__1",
+      "doc_type_id": "hospital_billing",
+      "document_language_code": "as",
+      "judge_verdict": "fail",
+      "judge_score": 0.35,
+      "judge_flags": [
+        "dialect_script_impurity",
+        "invented_entity_type"
+      ],
+      "judge_rationale": "All content in English/Latin script instead of Assamese (Bengali); multiple non-allowlist types (ADMISSION_DATE, BILLING_CODE, DISCHARGE_DATE, etc.).",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "2a0042e543f7400299209a84f31ceab7",
+      "document_id": "2a0042e543f7400299209a84f31ceab7__0",
+      "doc_type_id": "er_triage_notes",
+      "document_language_code": "brx",
+      "judge_verdict": "fail",
+      "judge_score": 0.35,
+      "judge_flags": [
+        "instruction_drift",
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Domain oncology/chronic care violated by acute appendicitis content; clinical prose mixes English medical phrases instead of consistent Bodo Devanagari narrative.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "2a0042e543f7400299209a84f31ceab7",
+      "document_id": "2a0042e543f7400299209a84f31ceab7__1",
+      "doc_type_id": "telemedicine_transcript",
+      "document_language_code": "brx",
+      "judge_verdict": "fail",
+      "judge_score": 0.35,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "All clinical prose is Hindi (not Bodo) despite Devanagari script and correct Latin-tagged entities.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "2a0042e543f7400299209a84f31ceab7",
+      "document_id": "2a0042e543f7400299209a84f31ceab7__2",
+      "doc_type_id": "surgical_note",
+      "document_language_code": "brx",
+      "judge_verdict": "fail",
+      "judge_score": 0.3,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Clinical prose is Hindi, not Bodo, despite Devanagari script and valid tags.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "8027a62865e6486cba6cb4978d8de433",
+      "document_id": "8027a62865e6486cba6cb4978d8de433__2",
+      "doc_type_id": "radiology_report",
+      "document_language_code": "doi",
+      "judge_verdict": "fail",
+      "judge_score": 0.18,
+      "judge_flags": [
+        "dialect_script_impurity",
+        "domain_persona_mismatch",
+        "surrogate_plausibility_collapse"
+      ],
+      "judge_rationale": "English prose instead of Dogri Devanagari; male patient with ovarian/uterine anatomy and adnexal mass.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "c56b228238e847d393141f0a17d86444",
+      "document_id": "c56b228238e847d393141f0a17d86444__0",
+      "doc_type_id": "er_triage_notes",
+      "document_language_code": "hi",
+      "judge_verdict": "fail",
+      "judge_score": 0.0,
+      "judge_flags": [
+        "instruction_drift",
+        "length_violation",
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Pure English title repetition (no Devanagari prose); extreme length dump with zero clinical content or Hindi narrative.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "442b760204fb4430b6745545930228cd",
+      "document_id": "442b760204fb4430b6745545930228cd__0",
+      "doc_type_id": "opd_slip",
+      "document_language_code": "ks",
+      "judge_verdict": "fail",
+      "judge_score": 0.35,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Clinical prose is Urdu (not Kashmiri) despite Arabic script and correct persona/domain fit.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "442b760204fb4430b6745545930228cd",
+      "document_id": "442b760204fb4430b6745545930228cd__2",
+      "doc_type_id": "prescription",
+      "document_language_code": "ks",
+      "judge_verdict": "fail",
+      "judge_score": 0.3,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Clinical prose entirely in English; expected Kashmiri Arabic script.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "51fc0c57ffcc40c6ae5d2fb055d07030",
+      "document_id": "51fc0c57ffcc40c6ae5d2fb055d07030__0",
+      "doc_type_id": "lab_report",
+      "document_language_code": "mni",
+      "judge_verdict": "fail",
+      "judge_score": 0.25,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Prose entirely in Bengali script/language instead of required Meitei script for Manipuri; all other elements (tags, content, persona fit) acceptable.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "51fc0c57ffcc40c6ae5d2fb055d07030",
+      "document_id": "51fc0c57ffcc40c6ae5d2fb055d07030__1",
+      "doc_type_id": "opd_slip",
+      "document_language_code": "mni",
+      "judge_verdict": "fail",
+      "judge_score": 0.15,
+      "judge_flags": [
+        "dialect_script_impurity",
+        "length_violation",
+        "surrogate_plausibility_collapse"
+      ],
+      "judge_rationale": "OPD prose complaint is repetitive gibberish in Bengali script (not Meitei), massively exceeds length, and lacks clinical plausibility.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "51fc0c57ffcc40c6ae5d2fb055d07030",
+      "document_id": "51fc0c57ffcc40c6ae5d2fb055d07030__2",
+      "doc_type_id": "phc_register",
+      "document_language_code": "mni",
+      "judge_verdict": "fail",
+      "judge_score": 0.35,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Prose mixes Bengali script with Tamil intrusion instead of Meitei; long multi-paragraph narrative also mismatches register-entry brevity.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "edf29d2e2af24030992b0a4ccf114083",
+      "document_id": "edf29d2e2af24030992b0a4ccf114083__1",
+      "doc_type_id": "er_triage_notes",
+      "document_language_code": "pa",
+      "judge_verdict": "fail",
+      "judge_score": 0.55,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Clinical narrative mixes substantial English prose sentences with Punjabi; expected full Gurmukhi body for Punjabi document.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "6e943dc3578249e38b9e61705d0912a9",
+      "document_id": "6e943dc3578249e38b9e61705d0912a9__1",
+      "doc_type_id": "phc_register",
+      "document_language_code": "sa",
+      "judge_verdict": "fail",
+      "judge_score": 0.55,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Prose is Hindi (with Sanskritized medical terms) in Devanagari rather than Sanskrit; minor English glosses outside tags but main narrative mismatches required language.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "944cf9bf2c4d48b2974bb723f704bded",
+      "document_id": "944cf9bf2c4d48b2974bb723f704bded__0",
+      "doc_type_id": "referral_letter",
+      "document_language_code": "sat",
+      "judge_verdict": "fail",
+      "judge_score": 0.25,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "All clinical prose in English; expected Santali Ol Chiki. No other violations (entities allowed, persona fit, length ok).",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "944cf9bf2c4d48b2974bb723f704bded",
+      "document_id": "944cf9bf2c4d48b2974bb723f704bded__1",
+      "doc_type_id": "radiology_report",
+      "document_language_code": "sat",
+      "judge_verdict": "fail",
+      "judge_score": 0.2,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Clinical prose entirely in English; expected Santali Ol Chiki narrative.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "944cf9bf2c4d48b2974bb723f704bded",
+      "document_id": "944cf9bf2c4d48b2974bb723f704bded__2",
+      "doc_type_id": "er_triage_notes",
+      "document_language_code": "sat",
+      "judge_verdict": "fail",
+      "judge_score": 0.25,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Prose is English/Latin with scattered transliterated Santali words; expected full Santali narrative in Ol Chiki script.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "68da8d4342bc4e28a1a4cd69a55cc86f",
+      "document_id": "68da8d4342bc4e28a1a4cd69a55cc86f__0",
+      "doc_type_id": "er_triage_notes",
+      "document_language_code": "sd",
+      "judge_verdict": "fail",
+      "judge_score": 0.4,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Narrative prose heavily code-mixed with English terms and contains Devanagari intrusions instead of consistent Sindhi (Arabic script).",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "68da8d4342bc4e28a1a4cd69a55cc86f",
+      "document_id": "68da8d4342bc4e28a1a4cd69a55cc86f__1",
+      "doc_type_id": "telemedicine_transcript",
+      "document_language_code": "sd",
+      "judge_verdict": "fail",
+      "judge_score": 0.25,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Prose mixes Devanagari/Thai/English heavily into Sindhi Arabic narrative; violates expected script despite valid entity tags.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    },
+    {
+      "uuid": "6dae1a15538348f3a3bc29a4111088bc",
+      "document_id": "6dae1a15538348f3a3bc29a4111088bc__0",
+      "doc_type_id": "opd_slip",
+      "document_language_code": "te",
+      "judge_verdict": "fail",
+      "judge_score": 0.55,
+      "judge_flags": [
+        "instruction_drift"
+      ],
+      "judge_rationale": "Domain Oncology specified but content is TB workup/diagnosis; Telugu prose and allowed entities otherwise match.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 5
+    }
+  ],
+  "failure_count": 19,
+  "soft_failures": [],
+  "soft_fail_count": 0,
+  "judge_repaired_count": 9,
+  "quality_repair_max": 5,
+  "columns_added": [
+    "judge_verdict",
+    "judge_score",
+    "judge_reasoning",
+    "judge_flags",
+    "judge_provider",
+    "judge_model",
+    "judge_soft_fail",
+    "judge_error",
+    "judge_repair_attempts",
+    "judge_repaired",
+    "stage"
+  ]
+}

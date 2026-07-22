@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import json
 import os
+import sys
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
@@ -47,6 +48,8 @@ class DesignerBridgeSettings:
     provider: str
     temperature: float
     max_tokens: int
+    # Sarvam: null → reasoning OFF; "low"|"medium"|"high" → ON.
+    reasoning_effort: str | None
     system_prompt_column: str
     user_prompt_column: str
     output_column: str
@@ -105,6 +108,16 @@ def load_designer_bridge_settings(pipeline_config: Path) -> DesignerBridgeSettin
             "(use bearer or subscription_key)"
         )
 
+    # Prefer data_designer.reasoning_effort; fall back to generation.reasoning_effort.
+    reasoning_raw = block.get("reasoning_effort", gen.get("reasoning_effort", None))
+    if reasoning_raw is not None:
+        reasoning_raw = str(reasoning_raw).strip().lower()
+        if reasoning_raw not in {"low", "medium", "high"}:
+            raise DesignerConfigError(
+                f"Unsupported reasoning_effort={reasoning_raw!r} "
+                "(use null|low|medium|high)"
+            )
+
     return DesignerBridgeSettings(
         seed_path=resolve_repo_path(str(block["seed_path"])),
         model_alias=str(block["model_alias"]),
@@ -112,6 +125,7 @@ def load_designer_bridge_settings(pipeline_config: Path) -> DesignerBridgeSettin
         provider=str(block["provider"]),
         temperature=float(block["temperature"]),
         max_tokens=int(block["max_tokens"]),
+        reasoning_effort=reasoning_raw,
         system_prompt_column=str(block.get("system_prompt_column", "system_prompt")),
         user_prompt_column=str(block.get("user_prompt_column", "user_prompt")),
         output_column=str(block.get("output_column", "generated_text")),
@@ -218,7 +232,7 @@ def build_model_provider(settings: DesignerBridgeSettings, api_key: str) -> Any:
     dd, _DataDesigner = _import_data_designer()
     os.environ[settings.provider_api_key_env] = api_key
 
-    extra_body: dict[str, Any] = {"reasoning_effort": None}
+    extra_body: dict[str, Any] = {"reasoning_effort": settings.reasoning_effort}
     if settings.auth_style == "subscription_key":
         # Avoid Bearer; Sarvam requires api-subscription-key.
         return dd.ModelProvider(
@@ -250,10 +264,10 @@ def _ensure_provider_files(settings: DesignerBridgeSettings, api_key: str) -> Pa
     if settings.auth_style == "subscription_key":
         provider_entry["api_key"] = None
         provider_entry["extra_headers"] = {"api-subscription-key": "${" + settings.provider_api_key_env + "}"}
-        provider_entry["extra_body"] = {"reasoning_effort": None}
+        provider_entry["extra_body"] = {"reasoning_effort": settings.reasoning_effort}
     else:
         provider_entry["api_key"] = settings.provider_api_key_env
-        provider_entry["extra_body"] = {"reasoning_effort": None}
+        provider_entry["extra_body"] = {"reasoning_effort": settings.reasoning_effort}
 
     providers_doc = {"providers": [provider_entry]}
     providers_path.write_text(
@@ -271,7 +285,7 @@ def _ensure_provider_files(settings: DesignerBridgeSettings, api_key: str) -> Pa
                 "inference_parameters": {
                     "temperature": settings.temperature,
                     "max_tokens": settings.max_tokens,
-                    "extra_body": {"reasoning_effort": None},
+                    "extra_body": {"reasoning_effort": settings.reasoning_effort},
                 },
             }
         ]
@@ -294,7 +308,7 @@ def _build_config_builder(
     inference_kwargs: dict[str, Any] = {
         "temperature": settings.temperature,
         "max_tokens": settings.max_tokens,
-        "extra_body": {"reasoning_effort": None},
+        "extra_body": {"reasoning_effort": settings.reasoning_effort},
     }
     if max_parallel_requests is not None and max_parallel_requests > 0:
         inference_kwargs["max_parallel_requests"] = int(max_parallel_requests)
@@ -344,6 +358,67 @@ def _dataframe_to_rows(dataset: Any) -> list[dict[str, Any]]:
     raise DesignerConfigError(f"Unsupported Data Designer dataset type: {type(dataset)}")
 
 
+def _load_dd_rows_from_parquet_artifacts(
+    artifact_path: Path,
+    *,
+    dataset_name: str,
+    expected_rows: int,
+) -> list[dict[str, Any]] | None:
+    """Salvage completed DD parquet when ``load_dataset()`` times out post-generate.
+
+    NeMo Data Designer often finishes generation + writes parquet, then hangs on
+    ``Measuring dataset column statistics`` / ``load_dataset``. Prefer on-disk
+    batches over re-burning the full LLM batch.
+    """
+    base = artifact_path / dataset_name / "parquet-files"
+    if not base.is_dir():
+        return None
+    parts = sorted(base.glob("*.parquet"))
+    if not parts:
+        return None
+    try:
+        import pyarrow as pa
+        import pyarrow.parquet as pq
+    except ImportError:
+        return None
+    tables = [pq.read_table(p) for p in parts]
+    if not tables:
+        return None
+    table = pa.concat_tables(tables) if len(tables) > 1 else tables[0]
+    rows = table.to_pylist()
+    if not rows:
+        return None
+    if expected_rows and len(rows) != expected_rows:
+        return None
+    return [dict(row) for row in rows]
+
+
+def _load_data_designer_rows(
+    results: Any,
+    *,
+    artifact_path: Path,
+    dataset_name: str,
+    expected_rows: int,
+) -> list[dict[str, Any]]:
+    """Load DD results; fall back to parquet if ``load_dataset`` times out."""
+    try:
+        dataset = results.load_dataset()
+        return _dataframe_to_rows(dataset)
+    except Exception as load_exc:  # noqa: BLE001 — salvage path
+        salvaged = _load_dd_rows_from_parquet_artifacts(
+            artifact_path,
+            dataset_name=dataset_name,
+            expected_rows=expected_rows,
+        )
+        if salvaged is not None:
+            print(
+                f"[s4] load_dataset failed ({load_exc}); "
+                f"salvaged {len(salvaged)} rows from parquet artifacts",
+                file=sys.stderr,
+                flush=True,
+            )
+            return salvaged
+        raise
 def run_data_designer_generation(pipeline_config: Path) -> dict[str, Path]:
     """Execute S4 strictly via NeMo Data Designer with row-level checkpoints."""
     load_env_file()
@@ -437,32 +512,51 @@ def run_data_designer_generation(pipeline_config: Path) -> dict[str, Path]:
                 dataset_name="s4_generation",
                 artifact_path=str(artifact_path),
             )
-            dataset = results.load_dataset()
-            dd_rows = _dataframe_to_rows(dataset)
+            dd_rows = _load_data_designer_rows(
+                results,
+                artifact_path=artifact_path,
+                dataset_name="s4_generation",
+                expected_rows=num_records,
+            )
         except Exception as exc:  # noqa: BLE001
-            registered = []
-            try:
-                # Never echo secrets from extra_headers / api_key into logs.
-                registered = [
-                    {
-                        "name": p.name,
-                        "endpoint": p.endpoint,
-                        "provider_type": p.provider_type,
-                        "auth_style": settings.auth_style,
-                        "has_extra_headers": bool(p.extra_headers),
-                    }
-                    for p in designer.model_provider_registry.providers
-                ]
-            except Exception:  # noqa: BLE001
+            # Last chance: create may have written parquet before load timed out.
+            salvaged = _load_dd_rows_from_parquet_artifacts(
+                artifact_path,
+                dataset_name="s4_generation",
+                expected_rows=num_records,
+            )
+            if salvaged is not None:
+                print(
+                    f"[s4] create/load failed ({exc}); "
+                    f"salvaged {len(salvaged)} rows from parquet artifacts",
+                    file=sys.stderr,
+                    flush=True,
+                )
+                dd_rows = salvaged
+            else:
                 registered = []
-            raise DesignerConfigError(
-                f"NeMo Data Designer generation failed: {exc}. "
-                f"Requested provider={settings.provider!r} endpoint={settings.provider_endpoint}. "
-                f"Registered providers={registered}. "
-                f"Auth style={settings.auth_style} (Sarvam needs subscription_key). "
-                f"Ensure {settings.provider_api_key_env} is set and "
-                "`data-designer` is installed (`uv sync`)."
-            ) from exc
+                try:
+                    # Never echo secrets from extra_headers / api_key into logs.
+                    registered = [
+                        {
+                            "name": p.name,
+                            "endpoint": p.endpoint,
+                            "provider_type": p.provider_type,
+                            "auth_style": settings.auth_style,
+                            "has_extra_headers": bool(p.extra_headers),
+                        }
+                        for p in designer.model_provider_registry.providers
+                    ]
+                except Exception:  # noqa: BLE001
+                    registered = []
+                raise DesignerConfigError(
+                    f"NeMo Data Designer generation failed: {exc}. "
+                    f"Requested provider={settings.provider!r} endpoint={settings.provider_endpoint}. "
+                    f"Registered providers={registered}. "
+                    f"Auth style={settings.auth_style} (Sarvam needs subscription_key). "
+                    f"Ensure {settings.provider_api_key_env} is set and "
+                    "`data-designer` is installed (`uv sync`)."
+                ) from exc
 
         if len(dd_rows) != len(pending):
             # Align by index when seed order is preserved; otherwise fail closed.

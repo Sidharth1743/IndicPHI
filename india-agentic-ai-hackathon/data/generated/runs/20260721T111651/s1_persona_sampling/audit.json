@@ -1,0 +1,462 @@
+{
+  "stage": "s1_persona_sampling",
+  "timestamp_utc": "2026-07-21T05:46:54.105716+00:00",
+  "dataset_id": "nvidia/Nemotron-Personas-India",
+  "split": "en_IN",
+  "seed": 2027,
+  "sampling_method": "seeded_blake2b_hash_rank_across_shards",
+  "personas_per_language": 2,
+  "docs_per_persona": 3,
+  "languages_requested": [
+    "as",
+    "bn",
+    "brx",
+    "doi",
+    "en",
+    "gu",
+    "hi",
+    "kn",
+    "ks",
+    "kok",
+    "mai",
+    "ml",
+    "mni",
+    "mr",
+    "ne",
+    "or",
+    "pa",
+    "sa",
+    "sat",
+    "sd",
+    "ta",
+    "te",
+    "ur"
+  ],
+  "rows_scanned": 90910,
+  "max_scan_rows": 250000,
+  "personas_selected": 46,
+  "expected_documents_downstream": 138,
+  "by_language": {
+    "as": {
+      "name": "Assamese",
+      "script": "Bengali",
+      "aliases": [
+        "Assamese"
+      ],
+      "selected": 2,
+      "matched_during_scan": 1178
+    },
+    "bn": {
+      "name": "Bengali",
+      "script": "Bengali",
+      "aliases": [
+        "Bengali"
+      ],
+      "selected": 2,
+      "matched_during_scan": 7719
+    },
+    "brx": {
+      "name": "Bodo",
+      "script": "Devanagari",
+      "aliases": [
+        "Bodo"
+      ],
+      "selected": 2,
+      "matched_during_scan": 110
+    },
+    "doi": {
+      "name": "Dogri",
+      "script": "Devanagari",
+      "aliases": [
+        "Dogri"
+      ],
+      "selected": 2,
+      "matched_during_scan": 188
+    },
+    "en": {
+      "name": "English",
+      "script": "Latin",
+      "aliases": [
+        "English"
+      ],
+      "selected": 2,
+      "matched_during_scan": 14
+    },
+    "gu": {
+      "name": "Gujarati",
+      "script": "Gujarati",
+      "aliases": [
+        "Gujarati"
+      ],
+      "selected": 2,
+      "matched_during_scan": 4419
+    },
+    "hi": {
+      "name": "Hindi",
+      "script": "Devanagari",
+      "aliases": [
+        "Hindi"
+      ],
+      "selected": 2,
+      "matched_during_scan": 38165
+    },
+    "kn": {
+      "name": "Kannada",
+      "script": "Kannada",
+      "aliases": [
+        "Kannada"
+      ],
+      "selected": 2,
+      "matched_during_scan": 3474
+    },
+    "ks": {
+      "name": "Kashmiri",
+      "script": "Arabic",
+      "aliases": [
+        "Kashmiri"
+      ],
+      "selected": 2,
+      "matched_during_scan": 431
+    },
+    "kok": {
+      "name": "Konkani",
+      "script": "Devanagari",
+      "aliases": [
+        "Konkani"
+      ],
+      "selected": 2,
+      "matched_during_scan": 203
+    },
+    "mai": {
+      "name": "Maithili",
+      "script": "Devanagari",
+      "aliases": [
+        "Maithili"
+      ],
+      "selected": 2,
+      "matched_during_scan": 867
+    },
+    "ml": {
+      "name": "Malayalam",
+      "script": "Malayalam",
+      "aliases": [
+        "Malayalam"
+      ],
+      "selected": 2,
+      "matched_during_scan": 3106
+    },
+    "mni": {
+      "name": "Manipuri",
+      "script": "Meitei",
+      "aliases": [
+        "Manipuri"
+      ],
+      "selected": 2,
+      "matched_during_scan": 128
+    },
+    "mr": {
+      "name": "Marathi",
+      "script": "Devanagari",
+      "aliases": [
+        "Marathi"
+      ],
+      "selected": 2,
+      "matched_during_scan": 5184
+    },
+    "ne": {
+      "name": "Nepali",
+      "script": "Devanagari",
+      "aliases": [
+        "Nepali"
+      ],
+      "selected": 2,
+      "matched_during_scan": 230
+    },
+    "or": {
+      "name": "Odia",
+      "script": "Odia",
+      "aliases": [
+        "Odia",
+        "Oriya"
+      ],
+      "selected": 2,
+      "matched_during_scan": 2967
+    },
+    "pa": {
+      "name": "Punjabi",
+      "script": "Gurmukhi",
+      "aliases": [
+        "Punjabi"
+      ],
+      "selected": 2,
+      "matched_during_scan": 2740
+    },
+    "sa": {
+      "name": "Sanskrit",
+      "script": "Devanagari",
+      "aliases": [
+        "Sanskrit"
+      ],
+      "selected": 2,
+      "matched_during_scan": 2
+    },
+    "sat": {
+      "name": "Santali",
+      "script": "Ol Chiki",
+      "aliases": [
+        "Santali"
+      ],
+      "selected": 2,
+      "matched_during_scan": 520
+    },
+    "sd": {
+      "name": "Sindhi",
+      "script": "Arabic",
+      "aliases": [
+        "Sindhi"
+      ],
+      "selected": 2,
+      "matched_during_scan": 205
+    },
+    "ta": {
+      "name": "Tamil",
+      "script": "Tamil",
+      "aliases": [
+        "Tamil"
+      ],
+      "selected": 2,
+      "matched_during_scan": 5918
+    },
+    "te": {
+      "name": "Telugu",
+      "script": "Telugu",
+      "aliases": [
+        "Telugu"
+      ],
+      "selected": 2,
+      "matched_during_scan": 6729
+    },
+    "ur": {
+      "name": "Urdu",
+      "script": "Arabic",
+      "aliases": [
+        "Urdu"
+      ],
+      "selected": 2,
+      "matched_during_scan": 3739
+    }
+  },
+  "observed_first_language": {
+    "Hindi": 38165,
+    "Bengali": 7719,
+    "Telugu": 6729,
+    "Tamil": 5918,
+    "Marathi": 5184,
+    "Gujarati": 4419,
+    "Urdu": 3739,
+    "Kannada": 3474,
+    "Malayalam": 3106,
+    "Odia": 2967,
+    "Punjabi": 2740,
+    "Assamese": 1178,
+    "Maithili": 867,
+    "Bhili / Bhilodi": 713,
+    "Santali": 520,
+    "Kashmiri": 431,
+    "Nepali": 230,
+    "Sindhi": 205,
+    "Konkani": 203,
+    "Gondi": 192,
+    "Dogri": 188,
+    "Tulu": 184,
+    "Kurukh / Oraon": 152,
+    "Khandeshi": 133,
+    "Manipuri": 128,
+    "Ho": 111,
+    "Bodo": 110,
+    "Khasi": 90,
+    "Mundari": 76,
+    "Tripuri": 70,
+    "Garo": 66,
+    "Halabi": 56,
+    "Korku": 54,
+    "Lushai / Mizo": 53,
+    "Kui": 51,
+    "Miri / Mishing": 48,
+    "Munda": 44,
+    "Koya": 35,
+    "Karbi / Mikir": 34,
+    "Bhotia": 29,
+    "Nissi / Dafla": 24,
+    "Konyak": 24,
+    "Savara": 23,
+    "Mao": 20,
+    "Kharia": 19,
+    "Khond / Kondh": 19,
+    "Malto": 18,
+    "Thado": 18,
+    "Ao": 18,
+    "Kisan": 16,
+    "Lotha": 16,
+    "Tangkhul": 15,
+    "English": 14,
+    "Kolami": 13,
+    "Dimasa": 12,
+    "Tibetan": 12,
+    "Adi": 11,
+    "Angami": 11,
+    "Rabha": 9,
+    "Lahnda": 9,
+    "Coorgi / Kodagu": 8,
+    "Chakru / Chokri": 8,
+    "Yimchungre": 7,
+    "Kinnauri": 7,
+    "Sangtam": 7,
+    "Hmar": 6,
+    "Kuki": 6,
+    "Koda / Kora": 5,
+    "Wancho": 5,
+    "Khiemnungan": 5,
+    "Zemi": 5,
+    "Kabui": 5,
+    "Liangmei": 5,
+    "Zeliang": 5,
+    "Phom": 4,
+    "Anal": 4,
+    "Jatapu": 4,
+    "Zou": 4,
+    "Mogh": 4,
+    "Konda": 4,
+    "Parji": 4,
+    "Paite": 4,
+    "Mishmi": 4,
+    "Khezha": 4,
+    "Koch": 4,
+    "Rengma": 3,
+    "Tangsa": 3,
+    "Chang": 3,
+    "Lakher": 3,
+    "Nicobarese": 3,
+    "Pochury": 3,
+    "Pawi": 3,
+    "Maram": 3,
+    "Bishnupuriya": 2,
+    "Halam": 2,
+    "Sanskrit": 2,
+    "Arabic / Arbi": 2,
+    "Vaiphei": 2,
+    "Deori": 2,
+    "Afghani / Kabuli / Pashto": 2,
+    "Gadaba": 1,
+    "Sherpa": 1,
+    "Lalung": 1,
+    "Monpa": 1,
+    "Limbu": 1,
+    "Nocte": 1,
+    "Tamang": 1,
+    "Sema": 1,
+    "Lepcha": 1,
+    "Rai": 1,
+    "Shina": 1,
+    "Ladakhi": 1
+  },
+  "demographics": {
+    "sex": {
+      "Male": 23,
+      "Female": 23
+    },
+    "zone": {
+      "Urban": 18,
+      "Rural": 28
+    },
+    "state_top20": {
+      "Karnataka": 6,
+      "West Bengal": 5,
+      "Maharashtra": 5,
+      "Jammu & Kashmir": 4,
+      "Bihar": 4,
+      "Assam": 3,
+      "Gujarat": 3,
+      "Kerala": 2,
+      "Manipur": 2,
+      "Odisha": 2,
+      "Punjab": 2,
+      "Rajasthan": 2,
+      "Andhra Pradesh": 1,
+      "Madhya Pradesh": 1,
+      "Uttar Pradesh": 1,
+      "Jharkhand": 1,
+      "Tamil Nadu": 1,
+      "Telangana": 1
+    },
+    "occupation_top20": {
+      "No Occupation / Retired / Homemaker": 17,
+      "Working Proprietor, Wholesale Trade": 1,
+      "Senior Secondary and Secondary School Teacher, Commerce": 1,
+      "Packer, Hand": 1,
+      "Labeller": 1,
+      "Gatherer, Medicinal Herbs": 1,
+      "Darner": 1,
+      "Tailors and Dress Makers, Other": 1,
+      "Poultry Farm Worker, General": 1,
+      "Transport Equipment Operators and Drivers, Other": 1,
+      "Stall and Market Salespersons, Other": 1,
+      "Cardtenter, Cotton": 1,
+      "Handwork Teacher": 1,
+      "Driver, Bus": 1,
+      "Sales Supervisor, Wholesale Trade": 1,
+      "Hand Embroiderer, Kamdani": 1,
+      "Labourer, Other": 1,
+      "Sports Goods Maker, Wood": 1,
+      "Sewer, Hand": 1,
+      "House Keeper (Domestic)": 1
+    },
+    "persona_source_shard": {
+      "en_IN-00000-of-00011.parquet": 46
+    },
+    "age_min": 18,
+    "age_max": 80,
+    "age_mean": 39.04347826086956
+  },
+  "source_columns_preserved": [
+    "uuid",
+    "professional_persona",
+    "linguistic_persona",
+    "sports_persona",
+    "arts_persona",
+    "travel_persona",
+    "culinary_persona",
+    "persona",
+    "cultural_background",
+    "linguistic_background",
+    "skills_and_expertise",
+    "skills_and_expertise_list",
+    "hobbies_and_interests",
+    "hobbies_and_interests_list",
+    "career_goals_and_ambitions",
+    "sex",
+    "age",
+    "marital_status",
+    "education_level",
+    "education_degree",
+    "occupation",
+    "first_language",
+    "second_language",
+    "third_language",
+    "zone",
+    "state",
+    "district",
+    "country"
+  ],
+  "pipeline_columns_added": [
+    "document_language_code",
+    "document_language_name",
+    "document_script",
+    "docs_per_persona",
+    "persona_source_dataset",
+    "persona_source_split",
+    "persona_source_shard",
+    "sample_seed",
+    "stage"
+  ]
+}

@@ -50,6 +50,26 @@ uv sync   # installs data-designer + nemo-curator (required)
 ./scripts/run_demo.sh
 ```
 
+### Pipeline demo UI (live + replay)
+
+FastAPI backend for the HackGrid presentation UI (`main/ui_api/`):
+
+```bash
+# Terminal 1 — API on http://127.0.0.1:8765
+./scripts/run_ui.sh
+
+# Terminal 2 — Vite UI (when ui/ is present)
+cd ui && npm install && npm run dev   # http://127.0.0.1:5173
+```
+
+- **Replay (safe for talks):** `POST /api/replay/{run_id}` builds a ~40s event
+  timeline from an existing folder under `data/generated/runs/` (e.g.
+  `20260721T095916`). No API keys required.
+- **Live smoke:** `POST /api/runs` with `{num_docs, language_codes}` writes a
+  temp YAML overlay on `pipeline.smoke.yaml` and runs the orchestrator in a
+  background thread. Progress via `GET /api/runs/{id}` or SSE
+  `/api/runs/{id}/stream`. Needs keys in `.env`.
+
 Configs: `configs/synthetic-data/pipeline.yaml` (full),
 `pipeline.smoke.yaml` (10 docs), `pipeline.smoke.medium.yaml` (20 docs),
 `pipeline.diversity.yaml` (23 languages ≈ 69 docs).

@@ -1,0 +1,69 @@
+{
+  "stage": "s2_taxonomy",
+  "timestamp_utc": "2026-07-21T07:36:01.247224+00:00",
+  "input_jsonl": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260721T130558/s1_persona_sampling/personas.jsonl",
+  "seed": 101,
+  "personas_in": 2,
+  "documents_out": 2,
+  "doc_types": 14,
+  "domains": 7,
+  "taxonomy_cells": 98,
+  "prefer_unique_cell_per_persona": true,
+  "prefer_unique_doc_type_per_persona": true,
+  "prefer_unique_domain_per_persona": true,
+  "by_language": {
+    "bn": {
+      "docs": 1,
+      "cells_touched": 1,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "asha_worker_note": 1
+      },
+      "domain_counts": {
+        "tb_ncd": 1
+      },
+      "cell_counts": {
+        "asha_worker_note__tb_ncd": 1
+      }
+    },
+    "brx": {
+      "docs": 1,
+      "cells_touched": 1,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "discharge_summary": 1
+      },
+      "domain_counts": {
+        "psychiatry_behavioral": 1
+      },
+      "cell_counts": {
+        "discharge_summary__psychiatry_behavioral": 1
+      }
+    }
+  },
+  "global_doc_type_counts": {
+    "asha_worker_note": 1,
+    "discharge_summary": 1
+  },
+  "global_domain_counts": {
+    "tb_ncd": 1,
+    "psychiatry_behavioral": 1
+  },
+  "persona_unique_cells_histogram": {
+    "1": 2
+  },
+  "columns_added": [
+    "doc_slot",
+    "doc_type_id",
+    "doc_type_name",
+    "domain_id",
+    "domain_name",
+    "taxonomy_cell_id",
+    "assignment_seed",
+    "stage"
+  ]
+}

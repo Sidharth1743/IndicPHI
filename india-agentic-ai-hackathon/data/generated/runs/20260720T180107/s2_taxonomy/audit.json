@@ -1,0 +1,228 @@
+{
+  "stage": "s2_taxonomy",
+  "timestamp_utc": "2026-07-20T12:31:10.405543+00:00",
+  "input_jsonl": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T180107/s1_persona_sampling/personas.jsonl",
+  "seed": 404,
+  "personas_in": 20,
+  "documents_out": 20,
+  "doc_types": 14,
+  "domains": 7,
+  "taxonomy_cells": 98,
+  "prefer_unique_cell_per_persona": true,
+  "prefer_unique_doc_type_per_persona": true,
+  "prefer_unique_domain_per_persona": true,
+  "by_language": {
+    "bn": {
+      "docs": 2,
+      "cells_touched": 2,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "telemedicine_transcript": 1,
+        "opd_slip": 1
+      },
+      "domain_counts": {
+        "psychiatry_behavioral": 1,
+        "general_medicine": 1
+      },
+      "cell_counts": {
+        "opd_slip__general_medicine": 1,
+        "telemedicine_transcript__psychiatry_behavioral": 1
+      }
+    },
+    "en": {
+      "docs": 2,
+      "cells_touched": 2,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "referral_letter": 2
+      },
+      "domain_counts": {
+        "oncology_chronic": 1,
+        "psychiatry_behavioral": 1
+      },
+      "cell_counts": {
+        "referral_letter__oncology_chronic": 1,
+        "referral_letter__psychiatry_behavioral": 1
+      }
+    },
+    "gu": {
+      "docs": 2,
+      "cells_touched": 2,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "prescription": 1,
+        "lab_report": 1
+      },
+      "domain_counts": {
+        "tb_ncd": 2
+      },
+      "cell_counts": {
+        "prescription__tb_ncd": 1,
+        "lab_report__tb_ncd": 1
+      }
+    },
+    "hi": {
+      "docs": 2,
+      "cells_touched": 2,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "surgical_note": 1,
+        "opd_slip": 1
+      },
+      "domain_counts": {
+        "oncology_chronic": 2
+      },
+      "cell_counts": {
+        "opd_slip__oncology_chronic": 1,
+        "surgical_note__oncology_chronic": 1
+      }
+    },
+    "kn": {
+      "docs": 2,
+      "cells_touched": 2,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "automated_sms": 1,
+        "prescription": 1
+      },
+      "domain_counts": {
+        "general_medicine": 2
+      },
+      "cell_counts": {
+        "prescription__general_medicine": 1,
+        "automated_sms__general_medicine": 1
+      }
+    },
+    "ml": {
+      "docs": 2,
+      "cells_touched": 2,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "discharge_summary": 2
+      },
+      "domain_counts": {
+        "general_medicine": 1,
+        "tb_ncd": 1
+      },
+      "cell_counts": {
+        "discharge_summary__general_medicine": 1,
+        "discharge_summary__tb_ncd": 1
+      }
+    },
+    "mr": {
+      "docs": 2,
+      "cells_touched": 2,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "opd_slip": 1,
+        "surgical_note": 1
+      },
+      "domain_counts": {
+        "oncology_chronic": 2
+      },
+      "cell_counts": {
+        "opd_slip__oncology_chronic": 1,
+        "surgical_note__oncology_chronic": 1
+      }
+    },
+    "pa": {
+      "docs": 2,
+      "cells_touched": 2,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "asha_worker_note": 1,
+        "automated_sms": 1
+      },
+      "domain_counts": {
+        "psychiatry_behavioral": 1,
+        "general_medicine": 1
+      },
+      "cell_counts": {
+        "asha_worker_note__psychiatry_behavioral": 1,
+        "automated_sms__general_medicine": 1
+      }
+    },
+    "ta": {
+      "docs": 2,
+      "cells_touched": 2,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "opd_slip": 1,
+        "surgical_note": 1
+      },
+      "domain_counts": {
+        "tb_ncd": 2
+      },
+      "cell_counts": {
+        "opd_slip__tb_ncd": 1,
+        "surgical_note__tb_ncd": 1
+      }
+    },
+    "te": {
+      "docs": 2,
+      "cells_touched": 2,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "opd_slip": 1,
+        "surgical_note": 1
+      },
+      "domain_counts": {
+        "tb_ncd": 2
+      },
+      "cell_counts": {
+        "opd_slip__tb_ncd": 1,
+        "surgical_note__tb_ncd": 1
+      }
+    }
+  },
+  "global_doc_type_counts": {
+    "telemedicine_transcript": 1,
+    "opd_slip": 5,
+    "referral_letter": 2,
+    "prescription": 2,
+    "lab_report": 1,
+    "surgical_note": 4,
+    "automated_sms": 2,
+    "discharge_summary": 2,
+    "asha_worker_note": 1
+  },
+  "global_domain_counts": {
+    "psychiatry_behavioral": 3,
+    "general_medicine": 5,
+    "oncology_chronic": 5,
+    "tb_ncd": 7
+  },
+  "persona_unique_cells_histogram": {
+    "1": 20
+  },
+  "columns_added": [
+    "doc_slot",
+    "doc_type_id",
+    "doc_type_name",
+    "domain_id",
+    "domain_name",
+    "taxonomy_cell_id",
+    "assignment_seed",
+    "stage"
+  ]
+}

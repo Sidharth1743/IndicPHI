@@ -1,0 +1,165 @@
+{
+  "stage": "s4b_translation",
+  "timestamp_utc": "2026-07-21T04:34:30.107275+00:00",
+  "model": "sarvam-105b",
+  "rows_in": 69,
+  "rows_out": 69,
+  "rows_translated": 66,
+  "rows_skipped": 3,
+  "rows_resumed_from_checkpoint": 0,
+  "rows_newly_translated": 69,
+  "soft_failures": [
+    {
+      "uuid": "a24958482d8b463ab3daeee28d5f5365",
+      "document_id": "a24958482d8b463ab3daeee28d5f5365__2",
+      "doc_type_id": "automated_sms",
+      "document_language_code": "brx",
+      "translation_error": "script_purity_failed:wrong_indic_script:Bengali>Devanagari attempt=1;generator_repair_failed:wrong_indic_script:Bengali>Devanagari",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "217fa134e0d64da4962f287453b86c70",
+      "document_id": "217fa134e0d64da4962f287453b86c70__0",
+      "doc_type_id": "prescription",
+      "document_language_code": "ks",
+      "translation_error": "script_purity_failed:target_script_ratio:0.000<0.35 attempt=1;generator_repair_failed:target_script_ratio:0.000<0.35",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "217fa134e0d64da4962f287453b86c70",
+      "document_id": "217fa134e0d64da4962f287453b86c70__1",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "ks",
+      "translation_error": "script_purity_failed:target_script_ratio:0.000<0.35 attempt=1;generator_repair_failed:target_script_ratio:0.000<0.35",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "217fa134e0d64da4962f287453b86c70",
+      "document_id": "217fa134e0d64da4962f287453b86c70__2",
+      "doc_type_id": "asha_worker_note",
+      "document_language_code": "ks",
+      "translation_error": "script_purity_failed:target_script_ratio:0.000<0.35 attempt=1;generator_repair_failed:target_script_ratio:0.000<0.35",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "1e23bb4e93b0465fa42494aee52e02ef",
+      "document_id": "1e23bb4e93b0465fa42494aee52e02ef__0",
+      "doc_type_id": "telemedicine_transcript",
+      "document_language_code": "mni",
+      "translation_error": "script_purity_failed:wrong_indic_script:Devanagari>Meitei attempt=1;generator_repair_failed:wrong_indic_script:Devanagari>Meitei",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "1e23bb4e93b0465fa42494aee52e02ef",
+      "document_id": "1e23bb4e93b0465fa42494aee52e02ef__1",
+      "doc_type_id": "surgical_note",
+      "document_language_code": "mni",
+      "translation_error": "script_purity_failed:wrong_indic_script:Devanagari>Meitei attempt=1;generator_repair_failed:target_script_ratio:0.010<0.35",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "1e23bb4e93b0465fa42494aee52e02ef",
+      "document_id": "1e23bb4e93b0465fa42494aee52e02ef__2",
+      "doc_type_id": "lab_report",
+      "document_language_code": "mni",
+      "translation_error": "script_purity_failed:target_script_ratio:0.000<0.35 attempt=1;generator_repair_failed:target_script_ratio:0.000<0.35",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "7604eaf4ec554261b752518c0f8a656e",
+      "document_id": "7604eaf4ec554261b752518c0f8a656e__0",
+      "doc_type_id": "referral_letter",
+      "document_language_code": "sat",
+      "translation_error": "script_purity_failed:wrong_indic_script:Devanagari>Ol Chiki attempt=1",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "7604eaf4ec554261b752518c0f8a656e",
+      "document_id": "7604eaf4ec554261b752518c0f8a656e__2",
+      "doc_type_id": "er_triage_notes",
+      "document_language_code": "sat",
+      "translation_error": "script_purity_failed:target_script_ratio:0.000<0.35 attempt=1;generator_repair_failed:target_script_ratio:0.000<0.35",
+      "translation_script_ok": false
+    }
+  ],
+  "soft_fail_count": 9,
+  "script_fail_count": 9,
+  "generator_repaired_count": 1,
+  "max_workers": 24,
+  "requests_per_minute": 110.0,
+  "skip_language_codes": [
+    "en"
+  ],
+  "columns_added": [
+    "generated_text_en",
+    "generated_text",
+    "translation_applied",
+    "translation_script_ok",
+    "translator_model",
+    "translator_finish_reason",
+    "translation_attempts",
+    "translation_error",
+    "translation_soft_fail",
+    "translation_generator_repair_attempts",
+    "translation_repaired_by_generator",
+    "stage"
+  ],
+  "tag_protection": {
+    "id_entity_types": [
+      "AADHAAR_NUMBER",
+      "ABHA_ADDRESS",
+      "ABHA_ID",
+      "ADMISSION_NUMBER",
+      "AGE",
+      "APPOINTMENT_ID",
+      "BANK_ACCOUNT_NUMBER",
+      "BANK_ROUTING_NUMBER",
+      "BED_NUMBER",
+      "BPL_RATION_CARD",
+      "CREDIT_CARD_NUMBER",
+      "CVV",
+      "DOB",
+      "DRIVING_LICENCE",
+      "EMAIL_ADDRESS",
+      "EMPLOYEE_ID",
+      "ENCOUNTER_ID",
+      "GENDER",
+      "HOSPITAL_ID",
+      "IFSC_CODE",
+      "IMEI_NUMBER",
+      "INSURANCE_POLICY_NUMBER",
+      "IP_ADDRESS",
+      "MAC_ADDRESS",
+      "MRN",
+      "PAN_NUMBER",
+      "PASSPORT_NUMBER",
+      "PATIENT_ID",
+      "PHONE_NUMBER",
+      "PIN",
+      "PIN_CODE",
+      "REFERRAL_ID",
+      "STUDENT_ID",
+      "TAX_ID",
+      "TELEPHONE_LANDLINE",
+      "URL",
+      "VEHICLE_REGISTRATION",
+      "VOTER_ID",
+      "WARD_NUMBER"
+    ],
+    "name_place_entity_types": [
+      "ASHA_WORKER_NAME",
+      "CASTE",
+      "DISTRICT",
+      "DOCTOR_NAME",
+      "HOSPITAL_NAME",
+      "OCCUPATION",
+      "PATIENT_NAME",
+      "RELATIVE_NAME",
+      "RELIGION",
+      "RESIDENTIAL_ADDRESS",
+      "VILLAGE"
+    ],
+    "langid_hook": "optional_if_installed",
+    "primary_purity_gate": "script_purity_latin_ratio"
+  }
+}

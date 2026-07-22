@@ -1,0 +1,84 @@
+{
+  "stage": "s7_s8_curation",
+  "timestamp_utc": "2026-07-20T12:40:44.178873+00:00",
+  "rows_in": 12,
+  "dedup": {
+    "backend": "nemo_curator",
+    "rows_in": 12,
+    "rows_kept": 12,
+    "rows_dropped": 0,
+    "duplicate_ids_found": false,
+    "work_dir": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260720T180107/artifacts/nemo_curator_dedup",
+    "text_mode": "english_pivot_or_masked",
+    "template_fingerprints": {
+      "unique": 12,
+      "total": 12
+    },
+    "dropped_template_fingerprints": [
+      "శస్త్రచికిత్స గమనిక — [[HOSPITAL_NAME]] అడ్మిషన్ [[ADMISSION_NUMBER]] వార్డు [[WARD_NUMBER]] [[PATIENT_NAME]] [[AGE]] [[GENDER]] సర్జన్ [[DOCTOR_NAME]] విధానం / పరిశీలనలు: రోగి కుడి పార్శ్వ మాలియోలస్ (lateral malleolus) పై దీర్ఘకాలికంగా మానని పుండుతో వచ్చారు, ఇది డిస్టల్ ఫిబులా యొక్క దీర్ఘకాలిక క్షయ ఆస్టియోమైలిటిస్ (tuberculosis osteomyelitis) వల్ల కలిగింది. శస్త్రచికిత్సకు ముందు పరీక్షలలో మంటౌక్స్ పరీక్ష (Mantoux test) పాజిటివ్ వచ్చింది, మరియు ఛాతీ ఎక్స్-రేలో నయమైన పల్మనరీ TB కనిపించింది. రోగికి జనరల్ అనస్థీషియా ఇవ్వబడింది. కుడి దిగువ అవయవానికి టోర్నికెట్ (tourniquet) అమర్చబడింది. కుడి చీలమండ యొక్క పార్శ్వ భాగంలో నిలువు కోత (longitudinal incision) చేయబడింది. డిసెక్షన్ (Dissection) చేసినప్పుడు విస్తృతమైన మచ్చలు మరియు నెక్రోటిక్ ఎముక ముక్కలు కనిపించాయి, ఇవి క్షయ ఆస్టియోమైలిటిస్‌కు అనుగుణంగా ఉన్నాయి. ఫిబులా యొక్క డిస్టల్ 5 సెం.మీ. భాగాన్ని పదునైన పరికరంతో తొలగించారు (resected). ఆ తర్వాత గాయాన్ని నార్మల్ సెలైన్ (normal saline) తో పూర్తిగా కడిగారు. ఎడమ తొడ నుండి స్ప్లిట్-థిక్నెస్ స్కిన్ గ్రాఫ్ట్ (split-thickness skin graft) సేకరించి, కుట్లు మరియు నాన్-అడెహెరెంట్ డ్రెస్సింగ్‌తో లోపలి భాగంపై అమర్చారు. టోర్నికెట్ తొలగించబడింది మరియు రక్తస్రావం నియంత్రణ (hemostasis) సాధించబడింది. రోగి ప్రక్రియను బాగా తట్టుకున్నారు. శస్త్రచికిత్స తర్వాత ప్రణాళికలో 9 నెలల పాటు యాంటీ-ట్యూబర్‌క్యులర్ థెరపీ (ATT) కొనసాగించడం, గాయం సంరక్షణ మరియు ఫిజియోథెరపీ ఉన్నాయి. [[BED_NUMBER]] [[MRN]] [[PATIENT_ID]] [[RELATIVE_NAME]]"
+    ],
+    "semantic_dedup": {
+      "backend": "hashed_ngram_bag",
+      "threshold": 0.92,
+      "rows_in": 12,
+      "rows_usable": 12,
+      "pairs_checked": 65,
+      "dropped": 1,
+      "dropped_ids": [
+        "f1cc30f8dccb42ccb976c5d5dbdf4b9a__0"
+      ],
+      "clusters": [
+        {
+          "kept": "f38aebf55e9145c3af732e0613af567a__0",
+          "dropped": [
+            "f1cc30f8dccb42ccb976c5d5dbdf4b9a__0"
+          ]
+        }
+      ]
+    },
+    "curator_kept_before_semantic": 12
+  },
+  "balancing": {
+    "enabled": true,
+    "equalize_mode": true,
+    "target_docs_per_language": 1,
+    "min_docs_per_language": null,
+    "allow_underfill": false,
+    "pre_balance_counts": {
+      "en": 2,
+      "gu": 2,
+      "hi": 1,
+      "kn": 2,
+      "mr": 1,
+      "pa": 1,
+      "ta": 1,
+      "te": 1
+    },
+    "per_language": {
+      "en": 1,
+      "gu": 1,
+      "hi": 1,
+      "kn": 1,
+      "mr": 1,
+      "pa": 1,
+      "ta": 1,
+      "te": 1
+    },
+    "discarded_by_balance": 3,
+    "discard_ratio": 0.2727,
+    "rows_out": 8,
+    "underfilled": {},
+    "warning": "large_balance_discard: discarded 3/11 rows (27.3%) while equalizing to 1 docs/language"
+  },
+  "language_counts_out": {
+    "en": 1,
+    "gu": 1,
+    "hi": 1,
+    "kn": 1,
+    "mr": 1,
+    "pa": 1,
+    "ta": 1,
+    "te": 1
+  },
+  "rows_out": 8
+}
