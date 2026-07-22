@@ -1,0 +1,165 @@
+[run] resuming run_id=20260722T010640
+[run] run_id=20260722T010640
+[run] folder=/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T010640
+[run] config=/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T010640/pipeline.resolved.yaml
+--- skip s1_persona_sampling (before --from-stage) ---
+--- skip s2_taxonomy (before --from-stage) ---
+--- skip s2b_persona_summary (before --from-stage) ---
+--- skip s3_prompt_construction (before --from-stage) ---
+--- skip s4_generation (before --from-stage) ---
+--- skip s4b_translation (before --from-stage) ---
+--- skip s5_linguistic_judge (before --from-stage) ---
+--- skip s6_deterministic_auditor (before --from-stage) ---
+
+=== s7_s8_curation ===
+2026-07-22 08:05:39.702 | WARNING  | nemo_curator.core.client:start:121 - No monitoring services are running. Please run the `start_prometheus_grafana.py` script from nemo_curator/metrics folder to setup monitoring services separately.
+2026-07-22 08:05:39.747 | INFO     | nemo_curator.core.utils:init_cluster:185 - Ray start command: ray start --head --node-ip-address 127.0.1.1 --port 6379 --metrics-export-port 8080 --dashboard-host 127.0.0.1 --dashboard-port 8265 --ray-client-server-port 10001 --temp-dir /tmp/ray --disable-usage-stats --block
+[2026-07-22 08:05:40,662 W 257271 257271] network_util.cc:330: Failed to determine local IP via external connectivity to: 8.8.8.8:53, [2001:4860:4860::8888]:53, falling back to hostname resolution
+2026-07-22 08:05:42,422	WARNING services.py:2248 -- WARNING: The object store is using /tmp/ray instead of /dev/shm because /dev/shm has only 67108864 bytes available. This will harm performance! You may be able to free up space by deleting files in /dev/shm. If you are inside a Docker container, you can increase /dev/shm size by passing '--shm-size=4.57gb' to 'docker run' (or add it to the run_options list in a Ray cluster config). Make sure to set this to more than 30% of available RAM.
+2026-07-22 08:05:40,660	INFO usage_lib.py:448 -- Usage stats collection is disabled.
+2026-07-22 08:05:40,662	INFO scripts.py:1042 -- [37mLocal node IP[39m: [1m127.0.1.1[22m
+2026-07-22 08:05:43,560	SUCC scripts.py:1081 -- [32m--------------------[39m
+2026-07-22 08:05:43,560	SUCC scripts.py:1082 -- [32mRay runtime started.[39m
+2026-07-22 08:05:43,560	SUCC scripts.py:1083 -- [32m--------------------[39m
+2026-07-22 08:05:43,560	INFO scripts.py:1085 -- [36mNext steps[39m
+2026-07-22 08:05:43,560	INFO cli_output_helpers.py:16 -- [2mNote: The following commands are intended for use on[22m
+2026-07-22 08:05:43,560	INFO cli_output_helpers.py:17 -- [2mthe head node or within the cluster network.[22m
+2026-07-22 08:05:43,560	INFO scripts.py:1089 -- To add another node to this Ray cluster, run
+2026-07-22 08:05:43,560	INFO scripts.py:1092 -- [1m  ray start --address='127.0.1.1:6379'[22m
+2026-07-22 08:05:43,560	INFO scripts.py:1103 -- To connect to this Ray cluster:
+2026-07-22 08:05:43,560	INFO scripts.py:1105 -- [35mimport[39m[26m ray
+2026-07-22 08:05:43,560	INFO scripts.py:1106 -- ray[35m.[39m[26minit(_node_ip_address[35m=[39m[26m[33m'127.0.1.1'[39m[26m)
+2026-07-22 08:05:43,560	INFO scripts.py:1120 -- To submit a Ray job using the Ray Jobs CLI:
+2026-07-22 08:05:43,560	INFO scripts.py:1121 -- [1m  RAY_API_SERVER_ADDRESS='http://127.0.0.1:8265' ray job submit --working-dir . -- python my_script.py[22m
+2026-07-22 08:05:43,560	INFO scripts.py:1130 -- See https://docs.ray.io/en/latest/cluster/running-applications/job-submission/index.html 
+2026-07-22 08:05:43,560	INFO scripts.py:1134 -- for more information on submitting Ray jobs to the Ray cluster.
+2026-07-22 08:05:43,560	INFO scripts.py:1139 -- To terminate the Ray runtime, run
+2026-07-22 08:05:43,560	INFO scripts.py:1140 -- [1m  ray stop[22m
+2026-07-22 08:05:43,560	INFO scripts.py:1143 -- To view the status of the cluster, use
+2026-07-22 08:05:43,560	INFO scripts.py:1144 --   [1mray status[22m[26m
+2026-07-22 08:05:43,560	INFO scripts.py:1148 -- To monitor and debug Ray, view the dashboard at 
+2026-07-22 08:05:43,560	INFO scripts.py:1149 --   [1m127.0.0.1:8265[22m[26m
+2026-07-22 08:05:43,560	INFO scripts.py:1156 -- [4mIf connection to the dashboard fails, check your firewall settings and network configuration.[24m
+2026-07-22 08:05:43,560	INFO scripts.py:1262 -- [36m[1m--block[22m[39m
+2026-07-22 08:05:43,561	INFO scripts.py:1263 -- This command will now block forever until terminated by a signal.
+2026-07-22 08:05:43,561	INFO scripts.py:1266 -- Running subprocesses are monitored and a message will be printed if any of them terminate unexpectedly. Subprocesses exit with SIGTERM will be treated as graceful, thus NOT reported.
+2026-07-22 08:05:43,561	INFO scripts.py:1271 -- Process exit logs will be saved to: [1m/tmp/ray/session_2026-07-22_08-05-40_692297_257271/logs/ray_process_exit.log[22m[26m
+2026-07-22 08:05:46,977	INFO worker.py:1683 -- Using address 127.0.1.1:6379 set in the environment variable RAY_ADDRESS
+2026-07-22 08:05:46,981	INFO worker.py:1833 -- Connecting to existing Ray cluster at address: 127.0.1.1:6379...
+2026-07-22 08:05:47,024	INFO worker.py:2015 -- Connected to Ray cluster. View the dashboard at [1m[32mhttp://127.0.0.1:8265 [39m[22m
+2026-07-22 08:05:48.051 | WARNING  | nemo_curator.stages.file_partitioning:__post_init__:90 - Blocksize is greater than 512 MB, which is not recommended: 1GiB Consider using a smaller blocksize to avoid potential memory issues.
+2026-07-22 08:05:48.051 | INFO     | nemo_curator.pipeline.pipeline:build:70 - Planning pipeline: minhash_pipeline
+2026-07-22 08:05:48,052	INFO worker.py:1683 -- Using address 127.0.1.1:6379 set in the environment variable RAY_ADDRESS
+2026-07-22 08:05:48,054	INFO worker.py:1833 -- Connecting to existing Ray cluster at address: 127.0.1.1:6379...
+2026-07-22 08:05:48,076	INFO worker.py:2015 -- Connected to Ray cluster. View the dashboard at [1m[32mhttp://127.0.0.1:8265 [39m[22m
+2026-07-22 08:05:48.084 | INFO     | nemo_curator.backends.utils:execute_setup_on_node:228 - Executing setup on node 961e2a327a815ccd80f82eb4a0de1a32bf2428f1acb058fbe563c433 for 2 stages
+2026-07-22 08:05:48.086 | ERROR    | nemo_curator.backends.ray_actor_pool.executor:execute:154 - Error during pipeline execution: The task is not schedulable: The node specified via NodeAffinitySchedulingStrategy doesn't exist any more or is infeasible, and soft=False was specified. lease_id=0100000002000000ffffffffffffffffffffffffffffffffffffffffffffffff, name=_setup_stage_on_node
+2026-07-22 08:05:48.086 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:164 - Shutting down Ray to clean up all resources...
+2026-07-22 08:05:48,342	INFO worker.py:1683 -- Using address 127.0.1.1:6379 set in the environment variable RAY_ADDRESS
+2026-07-22 08:05:48,343	INFO worker.py:1833 -- Connecting to existing Ray cluster at address: 127.0.1.1:6379...
+2026-07-22 08:05:48,367	INFO worker.py:2015 -- Connected to Ray cluster. View the dashboard at [1m[32mhttp://127.0.0.1:8265 [39m[22m
+2026-07-22 08:05:48.379 | INFO     | nemo_curator.core.client:stop:205 - NeMo Curator has stopped the Ray cluster it started by killing the Ray GCS process. It is advised to wait for a few seconds before running any Ray commands to ensure Ray can cleanup other processes.If you are seeing any Ray commands like `ray status` failing, please ensure /tmp/ray/ray_current_cluster has correct information.
+[s7_s8_curation] FAILED after 10.0s: The task is not schedulable: The node specified via NodeAffinitySchedulingStrategy doesn't exist any more or is infeasible, and soft=False was specified. lease_id=0100000002000000ffffffffffffffffffffffffffffffffffffffffffffffff, name=_setup_stage_on_node
+[run] failures audit → /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T010640/failures.md
+[run] resuming run_id=20260722T010640
+[run] run_id=20260722T010640
+[run] folder=/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T010640
+[run] config=/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T010640/pipeline.resolved.yaml
+--- skip s1_persona_sampling (before --from-stage) ---
+--- skip s2_taxonomy (before --from-stage) ---
+--- skip s2b_persona_summary (before --from-stage) ---
+--- skip s3_prompt_construction (before --from-stage) ---
+--- skip s4_generation (before --from-stage) ---
+--- skip s4b_translation (before --from-stage) ---
+--- skip s5_linguistic_judge (before --from-stage) ---
+--- skip s6_deterministic_auditor (before --from-stage) ---
+
+=== s7_s8_curation ===
+2026-07-22 08:06:34.023 | WARNING  | nemo_curator.core.client:start:121 - No monitoring services are running. Please run the `start_prometheus_grafana.py` script from nemo_curator/metrics folder to setup monitoring services separately.
+2026-07-22 08:06:34.067 | INFO     | nemo_curator.core.utils:init_cluster:185 - Ray start command: ray start --head --node-ip-address 127.0.1.1 --port 6379 --metrics-export-port 8080 --dashboard-host 127.0.0.1 --dashboard-port 8265 --ray-client-server-port 10001 --temp-dir /tmp/ray --disable-usage-stats --block
+[2026-07-22 08:06:34,900 W 259252 259252] network_util.cc:330: Failed to determine local IP via external connectivity to: 8.8.8.8:53, [2001:4860:4860::8888]:53, falling back to hostname resolution
+2026-07-22 08:06:36,191	WARNING services.py:2248 -- WARNING: The object store is using /tmp/ray instead of /dev/shm because /dev/shm has only 67108864 bytes available. This will harm performance! You may be able to free up space by deleting files in /dev/shm. If you are inside a Docker container, you can increase /dev/shm size by passing '--shm-size=4.11gb' to 'docker run' (or add it to the run_options list in a Ray cluster config). Make sure to set this to more than 30% of available RAM.
+2026-07-22 08:06:34,900	INFO usage_lib.py:448 -- Usage stats collection is disabled.
+2026-07-22 08:06:34,900	INFO scripts.py:1042 -- [37mLocal node IP[39m: [1m127.0.1.1[22m
+2026-07-22 08:06:37,328	SUCC scripts.py:1081 -- [32m--------------------[39m
+2026-07-22 08:06:37,328	SUCC scripts.py:1082 -- [32mRay runtime started.[39m
+2026-07-22 08:06:37,328	SUCC scripts.py:1083 -- [32m--------------------[39m
+2026-07-22 08:06:37,328	INFO scripts.py:1085 -- [36mNext steps[39m
+2026-07-22 08:06:37,328	INFO cli_output_helpers.py:16 -- [2mNote: The following commands are intended for use on[22m
+2026-07-22 08:06:37,328	INFO cli_output_helpers.py:17 -- [2mthe head node or within the cluster network.[22m
+2026-07-22 08:06:37,328	INFO scripts.py:1089 -- To add another node to this Ray cluster, run
+2026-07-22 08:06:37,328	INFO scripts.py:1092 -- [1m  ray start --address='127.0.1.1:6379'[22m
+2026-07-22 08:06:37,328	INFO scripts.py:1103 -- To connect to this Ray cluster:
+2026-07-22 08:06:37,328	INFO scripts.py:1105 -- [35mimport[39m[26m ray
+2026-07-22 08:06:37,328	INFO scripts.py:1106 -- ray[35m.[39m[26minit(_node_ip_address[35m=[39m[26m[33m'127.0.1.1'[39m[26m)
+2026-07-22 08:06:37,328	INFO scripts.py:1120 -- To submit a Ray job using the Ray Jobs CLI:
+2026-07-22 08:06:37,328	INFO scripts.py:1121 -- [1m  RAY_API_SERVER_ADDRESS='http://127.0.0.1:8265' ray job submit --working-dir . -- python my_script.py[22m
+2026-07-22 08:06:37,328	INFO scripts.py:1130 -- See https://docs.ray.io/en/latest/cluster/running-applications/job-submission/index.html 
+2026-07-22 08:06:37,328	INFO scripts.py:1134 -- for more information on submitting Ray jobs to the Ray cluster.
+2026-07-22 08:06:37,328	INFO scripts.py:1139 -- To terminate the Ray runtime, run
+2026-07-22 08:06:37,328	INFO scripts.py:1140 -- [1m  ray stop[22m
+2026-07-22 08:06:37,328	INFO scripts.py:1143 -- To view the status of the cluster, use
+2026-07-22 08:06:37,328	INFO scripts.py:1144 --   [1mray status[22m[26m
+2026-07-22 08:06:37,328	INFO scripts.py:1148 -- To monitor and debug Ray, view the dashboard at 
+2026-07-22 08:06:37,328	INFO scripts.py:1149 --   [1m127.0.0.1:8265[22m[26m
+2026-07-22 08:06:37,328	INFO scripts.py:1156 -- [4mIf connection to the dashboard fails, check your firewall settings and network configuration.[24m
+2026-07-22 08:06:37,328	INFO scripts.py:1262 -- [36m[1m--block[22m[39m
+2026-07-22 08:06:37,328	INFO scripts.py:1263 -- This command will now block forever until terminated by a signal.
+2026-07-22 08:06:37,328	INFO scripts.py:1266 -- Running subprocesses are monitored and a message will be printed if any of them terminate unexpectedly. Subprocesses exit with SIGTERM will be treated as graceful, thus NOT reported.
+2026-07-22 08:06:37,328	INFO scripts.py:1271 -- Process exit logs will be saved to: [1m/tmp/ray/session_2026-07-22_08-06-34_901289_259252/logs/ray_process_exit.log[22m[26m
+2026-07-22 08:06:41,855	INFO worker.py:1683 -- Using address 127.0.1.1:6379 set in the environment variable RAY_ADDRESS
+2026-07-22 08:06:41,859	INFO worker.py:1833 -- Connecting to existing Ray cluster at address: 127.0.1.1:6379...
+2026-07-22 08:06:41,900	INFO worker.py:2015 -- Connected to Ray cluster. View the dashboard at [1m[32mhttp://127.0.0.1:8265 [39m[22m
+2026-07-22 08:06:42.702 | WARNING  | nemo_curator.stages.file_partitioning:__post_init__:90 - Blocksize is greater than 512 MB, which is not recommended: 1GiB Consider using a smaller blocksize to avoid potential memory issues.
+2026-07-22 08:06:42.702 | INFO     | nemo_curator.pipeline.pipeline:build:70 - Planning pipeline: minhash_pipeline
+2026-07-22 08:06:42,703	INFO worker.py:1683 -- Using address 127.0.1.1:6379 set in the environment variable RAY_ADDRESS
+2026-07-22 08:06:42,705	INFO worker.py:1833 -- Connecting to existing Ray cluster at address: 127.0.1.1:6379...
+2026-07-22 08:06:42,728	INFO worker.py:2015 -- Connected to Ray cluster. View the dashboard at [1m[32mhttp://127.0.0.1:8265 [39m[22m
+2026-07-22 08:06:42.737 | INFO     | nemo_curator.backends.utils:execute_setup_on_node:228 - Executing setup on node 931fe12fc5a6280934d717c589e5f3bc999792187e49198890b1671e for 2 stages
+2026-07-22 08:06:42.739 | ERROR    | nemo_curator.backends.ray_actor_pool.executor:execute:154 - Error during pipeline execution: The task is not schedulable: The node specified via NodeAffinitySchedulingStrategy doesn't exist any more or is infeasible, and soft=False was specified. lease_id=0100000002000000ffffffffffffffffffffffffffffffffffffffffffffffff, name=_setup_stage_on_node
+2026-07-22 08:06:42.739 | INFO     | nemo_curator.backends.ray_actor_pool.executor:execute:164 - Shutting down Ray to clean up all resources...
+2026-07-22 08:06:42,994	INFO worker.py:1683 -- Using address 127.0.1.1:6379 set in the environment variable RAY_ADDRESS
+2026-07-22 08:06:42,995	INFO worker.py:1833 -- Connecting to existing Ray cluster at address: 127.0.1.1:6379...
+2026-07-22 08:06:43,019	INFO worker.py:2015 -- Connected to Ray cluster. View the dashboard at [1m[32mhttp://127.0.0.1:8265 [39m[22m
+2026-07-22 08:06:43.029 | INFO     | nemo_curator.core.client:stop:205 - NeMo Curator has stopped the Ray cluster it started by killing the Ray GCS process. It is advised to wait for a few seconds before running any Ray commands to ensure Ray can cleanup other processes.If you are seeing any Ray commands like `ray status` failing, please ensure /tmp/ray/ray_current_cluster has correct information.
+[s7_s8_curation] FAILED after 10.3s: The task is not schedulable: The node specified via NodeAffinitySchedulingStrategy doesn't exist any more or is infeasible, and soft=False was specified. lease_id=0100000002000000ffffffffffffffffffffffffffffffffffffffffffffffff, name=_setup_stage_on_node
+[run] failures audit → /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T010640/failures.md
+[run] resuming run_id=20260722T010640
+[run] run_id=20260722T010640
+[run] folder=/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T010640
+[run] config=/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T010640/pipeline.resolved.yaml
+--- skip s1_persona_sampling (before --from-stage) ---
+--- skip s2_taxonomy (before --from-stage) ---
+--- skip s2b_persona_summary (before --from-stage) ---
+--- skip s3_prompt_construction (before --from-stage) ---
+--- skip s4_generation (before --from-stage) ---
+--- skip s4b_translation (before --from-stage) ---
+--- skip s5_linguistic_judge (before --from-stage) ---
+--- skip s6_deterministic_auditor (before --from-stage) ---
+--- skip s7_s8_curation (before --from-stage) ---
+
+=== s9_gliner_format ===
+[s9_gliner_format] OK in 0m00s (0.2s) → /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T010640/s9_gliner_format
+  jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T010640/s9_gliner_format/gliner_docs.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T010640/s9_gliner_format/gliner_docs.parquet
+  gliner_json: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T010640/s9_gliner_format/gliner_train.json
+  audit_json: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T010640/s9_gliner_format/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T010640/s9_gliner_format/audit.md
+  preview_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/samples/s9_gliner_preview.jsonl
+
+=== s10_split ===
+[s10_split] OK in 0m00s (0.0s) → /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T010640/s10_split
+  train_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T010640/s10_split/train.jsonl
+  eval_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T010640/s10_split/eval.jsonl
+  gliner_train: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T010640/s10_split/gliner_train.json
+  gliner_eval: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T010640/s10_split/gliner_eval.json
+  audit_json: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T010640/s10_split/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T010640/s10_split/audit.md
+
+[run] stage timings (sum=0m00s):
+  s9_gliner_format: 0m00s (0.2s) [ok]
+  s10_split: 0m00s (0.0s) [ok]
+
+[run] complete → /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T010640
+[run] latest symlink → /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/latest
+[run] failures audit → /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T010640/failures.md

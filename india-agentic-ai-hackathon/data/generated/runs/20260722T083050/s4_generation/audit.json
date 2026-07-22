@@ -1,0 +1,32 @@
+{
+  "stage": "s4_generation",
+  "engine": "nemo_data_designer",
+  "timestamp_utc": "2026-07-22T03:21:57.936873+00:00",
+  "provider": "sarvam",
+  "model": "sarvam-105b",
+  "base_url": "https://api.sarvam.ai/v1",
+  "rows_requested": 138,
+  "rows_generated": 138,
+  "rows_from_checkpoint": 0,
+  "rows_newly_generated": 138,
+  "soft_failures": [
+    {
+      "uuid": "0fbde0cc3f544c77b260ef63a5a3a8d8",
+      "document_id": "0fbde0cc3f544c77b260ef63a5a3a8d8__2",
+      "doc_type_id": "opd_slip",
+      "document_language_code": "or",
+      "missing_required_entities": [
+        "HOSPITAL_NAME"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:HOSPITAL_NAME"
+      ]
+    }
+  ],
+  "soft_fail_count": 1,
+  "generation_repaired_count": 12,
+  "entity_coverage_complete_rate": 0.9927536231884058,
+  "mean_chars": 1321.5434782608695,
+  "checkpoint": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s4_generation/checkpoint.jsonl"
+}

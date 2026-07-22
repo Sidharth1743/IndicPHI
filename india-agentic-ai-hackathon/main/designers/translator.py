@@ -155,6 +155,18 @@ class TranslationSettings:
     # Business Translate (ms-ts) = 1000 RPM — keep separate from 105B chat 120 RPM.
     dedicated_translate_requests_per_minute: float = 900.0
     enable_dedicated_translate_fallback: bool = True
+    # Extra chat attempts on timeout (on top of rare/normal chat budget).
+    timeout_chat_retries: int = 2
+    # Retries for dedicated /translate when that call itself times out.
+    dedicated_retries: int = 2
+
+
+def _is_timeout_error(exc: BaseException) -> bool:
+    """True for bare TimeoutError or wrapped 'timed out' / timeout messages."""
+    if isinstance(exc, TimeoutError):
+        return True
+    msg = str(exc).lower()
+    return "timed out" in msg or "timeout after" in msg or "read operation timed out" in msg
 
 
 @dataclass(frozen=True)
@@ -248,6 +260,8 @@ def load_settings(pipeline_config: Path) -> TranslationSettings:
         enable_dedicated_translate_fallback=bool(
             block.get("enable_dedicated_translate_fallback", True)
         ),
+        timeout_chat_retries=max(0, int(block.get("timeout_chat_retries", 2))),
+        dedicated_retries=max(0, int(block.get("dedicated_retries", 2))),
     )
 
 
@@ -379,18 +393,24 @@ def try_dedicated_translate_fallback(
     english_text: str,
     row: Mapping[str, Any],
     settings: TranslationSettings,
+    force: bool = False,
 ) -> tuple[str | None, str | None, bool]:
-    """Run dedicated /translate + script purity. Returns (text, err, script_ok)."""
+    """Run dedicated /translate + script purity. Returns (text, err, script_ok).
+
+    By default limited to ``rare_script_languages``. Pass ``force=True`` for
+    timeout recovery on any language (Business Translate API is 1000 RPM).
+    """
     lang = str(row.get("document_language_code") or "")
     script = str(row.get("document_script") or "")
     if not settings.enable_dedicated_translate_fallback:
         return None, "dedicated_translate_disabled", False
-    if lang not in settings.rare_script_languages:
+    if not force and lang not in settings.rare_script_languages:
         return None, "not_rare_script", False
 
     print(
         f"[s4b] dedicated /translate fallback lang={lang} "
-        f"uuid={row.get('uuid')} doc_type={row.get('doc_type_id')}",
+        f"uuid={row.get('uuid')} doc_type={row.get('doc_type_id')}"
+        + (" force=timeout" if force else ""),
         file=sys.stderr,
         flush=True,
     )
@@ -401,12 +421,32 @@ def try_dedicated_translate_fallback(
         protection = protect_tags(english_text)
         if not protection.id_mapping and not protection.name_mapping:
             return None, "no_valid_entity_tags_to_protect", False
-        translated = tr.translate_long(
-            protection.text,
-            language_code=lang,
-            model=settings.dedicated_translate_model,
-            timeout_s=settings.dedicated_translate_timeout_s,
-        )
+        last_exc: Exception | None = None
+        translated = ""
+        for ded_round in range(1 + max(0, settings.dedicated_retries)):
+            try:
+                translated = tr.translate_long(
+                    protection.text,
+                    language_code=lang,
+                    model=settings.dedicated_translate_model,
+                    timeout_s=settings.dedicated_translate_timeout_s,
+                )
+                last_exc = None
+                break
+            except (SarvamTranslateError, TranslationError, TimeoutError, OSError) as exc:
+                last_exc = exc
+                if _is_timeout_error(exc) and ded_round < settings.dedicated_retries:
+                    print(
+                        f"[s4b] dedicated timeout retry {ded_round + 1}/"
+                        f"{settings.dedicated_retries} lang={lang} "
+                        f"uuid={row.get('uuid')}",
+                        file=sys.stderr,
+                        flush=True,
+                    )
+                    continue
+                return None, f"dedicated_translate_failed:{exc}", False
+        if last_exc is not None:
+            return None, f"dedicated_translate_failed:{last_exc}", False
         restored = restore_tags(translated, protection)
     except (SarvamTranslateError, TranslationError) as exc:
         return None, f"dedicated_translate_failed:{exc}", False
@@ -634,13 +674,18 @@ def _translate_one(
     last_model: str | None = None
     last_finish: str | None = None
     is_rare = lang in settings.rare_script_languages
-    max_chat = (
+    # Rare: short chat budget. Others: 2 tries. Extra attempts only on timeout.
+    remaining = (
         max(1, settings.rare_script_max_chat_attempts)
         if is_rare
         else 2
     )
-    chat_plan = [(False, True)[i] if i < 2 else True for i in range(max_chat)]
-    for attempt, harder in enumerate(chat_plan):
+    timeout_retries_left = max(0, settings.timeout_chat_retries)
+    timeout_streak = 0
+    attempt = 0
+    while remaining > 0:
+        remaining -= 1
+        harder = attempt > 0
         try:
             result = client.chat_completion(
                 model=settings.model,
@@ -661,6 +706,7 @@ def _translate_one(
             last_restored = restored
             last_model = result.model
             last_finish = result.finish_reason
+            timeout_streak = 0
             ok, reason = evaluate_script_purity(
                 restored, language_code=lang, script=script
             )
@@ -674,6 +720,7 @@ def _translate_one(
                 last_error = TranslationError(
                     f"script_purity_failed:{detail} attempt={attempt}"
                 )
+                attempt += 1
                 continue
             out.update(
                 {
@@ -691,18 +738,45 @@ def _translate_one(
                 }
             )
             return out
-        except (SarvamClientError, TranslationError) as exc:
-            last_error = exc
+        except (SarvamClientError, TranslationError, TimeoutError, OSError) as exc:
+            # Never let bare TimeoutError escape — always retry then dedicated.
+            if _is_timeout_error(exc):
+                timeout_streak += 1
+                if timeout_retries_left > 0:
+                    timeout_retries_left -= 1
+                    remaining += 1  # grant one extra chat attempt
+                last_error = TranslationError(
+                    f"timed out:{exc} attempt={attempt + 1}"
+                )
+                print(
+                    f"[s4b] chat timeout → retry "
+                    f"attempt={attempt + 1} remaining={remaining} "
+                    f"uuid={row.get('uuid')} lang={lang}",
+                    file=sys.stderr,
+                    flush=True,
+                )
+            else:
+                timeout_streak = 0
+                last_error = (
+                    exc
+                    if isinstance(exc, (SarvamClientError, TranslationError))
+                    else TranslationError(str(exc))
+                )
+            attempt += 1
             continue
 
-    # Rare-script budget path: after ≤2 chat attempts, try dedicated /translate
-    # once instead of burning 5 generator repair rounds.
-    if is_rare:
+    max_chat = attempt
+    # Dedicated /translate after chat budget:
+    # - rare scripts: always
+    # - any language after timeout(s): recover instead of soft-fail English body
+    timed_out = last_error is not None and _is_timeout_error(last_error)
+    if is_rare or timed_out or timeout_streak > 0:
         ded_text, ded_err, ded_ok = try_dedicated_translate_fallback(
             client=client,
             english_text=source,
             row=row,
             settings=settings,
+            force=True,
         )
         if ded_text and ded_ok:
             out.update(
@@ -711,7 +785,11 @@ def _translate_one(
                     "translation_applied": True,
                     "translation_script_ok": True,
                     "translator_model": settings.dedicated_translate_model,
-                    "translator_finish_reason": "dedicated_translate_fallback",
+                    "translator_finish_reason": (
+                        "dedicated_after_timeout"
+                        if timed_out or timeout_streak
+                        else "dedicated_translate_fallback"
+                    ),
                     "translation_attempts": max_chat + 1,
                     "translation_error": None,
                     "translation_soft_fail": False,
@@ -725,7 +803,11 @@ def _translate_one(
             last_restored = ded_text
             last_error = TranslationError(ded_err or "dedicated_translate_soft")
             last_model = settings.dedicated_translate_model
-            last_finish = "dedicated_translate_fallback"
+            last_finish = (
+                "dedicated_after_timeout"
+                if timed_out or timeout_streak
+                else "dedicated_translate_fallback"
+            )
 
     # Translate / restore failed both attempts (often: model dropped or
     # localized a name/place TYPE like PATIENT_NAME). Soft-fail + optional
@@ -1033,58 +1115,88 @@ def translate_rows(
                     row = selected[index]
                     err = f"row_exception:{exc}"
                     lang = str(row.get("document_language_code") or "")
-                    # Timeouts on rare scripts: one dedicated /translate attempt
-                    # before soft-fail (avoids leaving English body for S5).
+                    recovered = False
+                    # Last-ditch: re-run _translate_one once (has chat+dedicated retries),
+                    # then dedicated alone if that still raises.
                     if (
-                        lang in settings.rare_script_languages
-                        and settings.enable_dedicated_translate_fallback
-                        and "timed out" in str(exc).lower()
+                        settings.enable_dedicated_translate_fallback
+                        and _is_timeout_error(exc)
                     ):
-                        ded_text, ded_err, ded_ok = try_dedicated_translate_fallback(
-                            client=client,
-                            english_text=str(row.get("generated_text") or ""),
-                            row=row,
-                            settings=settings,
+                        print(
+                            f"[s4b] row timeout → retranslate+dedicated "
+                            f"uuid={row.get('uuid')} lang={lang}",
+                            file=sys.stderr,
+                            flush=True,
                         )
-                        if ded_text and ded_ok:
-                            out = dict(row)
-                            out.update(
-                                {
-                                    "generated_text": ded_text,
-                                    "generated_text_en": row.get("generated_text"),
-                                    "translation_applied": True,
-                                    "translation_script_ok": True,
-                                    "translator_model": settings.dedicated_translate_model,
-                                    "translator_finish_reason": (
-                                        "dedicated_after_timeout"
-                                    ),
-                                    "translation_attempts": 1,
-                                    "translation_error": None,
-                                    "translation_soft_fail": False,
-                                    "translation_generator_repair_attempts": 0,
-                                    "translation_repaired_by_generator": False,
-                                    "stage": "s4b_translation",
-                                }
+                        try:
+                            out = _translate_one(
+                                index,
+                                row,
+                                client=client,
+                                settings=settings,
+                                repair_settings=repair_settings,
                             )
-                            results[index] = out
-                            if checkpoint is not None:
-                                checkpoint.append(
-                                    row_key=row_key_from_prompt(selected[index]),
-                                    status="ok",
-                                    request_hash=req,
-                                    payload=out,
-                                    error=None,
+                            if out.get("translation_applied") and not out.get(
+                                "translation_soft_fail"
+                            ):
+                                recovered = True
+                        except Exception as retry_exc:  # noqa: BLE001
+                            err = f"{err};retry:{retry_exc}"
+                        if not recovered:
+                            ded_text, ded_err, ded_ok = try_dedicated_translate_fallback(
+                                client=client,
+                                english_text=str(row.get("generated_text") or ""),
+                                row=row,
+                                settings=settings,
+                                force=True,
+                            )
+                            if ded_text and ded_ok:
+                                out = dict(row)
+                                out.update(
+                                    {
+                                        "generated_text": ded_text,
+                                        "generated_text_en": row.get("generated_text"),
+                                        "translation_applied": True,
+                                        "translation_script_ok": True,
+                                        "translator_model": (
+                                            settings.dedicated_translate_model
+                                        ),
+                                        "translator_finish_reason": (
+                                            "dedicated_after_timeout"
+                                        ),
+                                        "translation_attempts": 1,
+                                        "translation_error": None,
+                                        "translation_soft_fail": False,
+                                        "translation_generator_repair_attempts": 0,
+                                        "translation_repaired_by_generator": False,
+                                        "stage": "s4b_translation",
+                                    }
                                 )
-                            done_count += 1
-                            print(
-                                f"[s4b] progress {done_count}/{len(pending)} "
-                                f"uuid={row.get('uuid')} lang={lang} "
-                                f"ok=dedicated_after_timeout",
-                                file=sys.stderr,
-                                flush=True,
+                                recovered = True
+                            else:
+                                err = (
+                                    f"{err};"
+                                    f"{ded_err or 'dedicated_after_timeout_failed'}"
+                                )
+                    if recovered:
+                        results[index] = out
+                        if checkpoint is not None:
+                            checkpoint.append(
+                                row_key=row_key_from_prompt(selected[index]),
+                                status="ok",
+                                request_hash=req,
+                                payload=out,
+                                error=None,
                             )
-                            continue
-                        err = f"{err};{ded_err or 'dedicated_after_timeout_failed'}"
+                        done_count += 1
+                        print(
+                            f"[s4b] progress {done_count}/{len(pending)} "
+                            f"uuid={row.get('uuid')} lang={lang} "
+                            f"ok=recovered_after_timeout",
+                            file=sys.stderr,
+                            flush=True,
+                        )
+                        continue
                     print(
                         f"[s4b] SOFT-FAIL uuid={row.get('uuid')} "
                         f"lang={row.get('document_language_code')} "

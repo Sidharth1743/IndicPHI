@@ -157,11 +157,17 @@ def run_pipeline(
                 continue
 
         print(f"\n=== {label} ===")
-        started = datetime.now(timezone.utc).isoformat()
+        started_dt = datetime.now(timezone.utc)
+        started = started_dt.isoformat()
         try:
             paths = runner(resolved_config)
         except Exception as exc:  # noqa: BLE001 — surface stage failure clearly
-            print(f"[{label}] FAILED: {exc}", file=sys.stderr)
+            finished_dt = datetime.now(timezone.utc)
+            elapsed_s = (finished_dt - started_dt).total_seconds()
+            print(
+                f"[{label}] FAILED after {elapsed_s:.1f}s: {exc}",
+                file=sys.stderr,
+            )
             results.append(
                 {
                     "stage": label,
@@ -169,7 +175,8 @@ def run_pipeline(
                     "status": "failed",
                     "error": str(exc),
                     "started_utc": started,
-                    "finished_utc": datetime.now(timezone.utc).isoformat(),
+                    "finished_utc": finished_dt.isoformat(),
+                    "elapsed_s": round(elapsed_s, 2),
                 }
             )
             _write_run_results(
@@ -187,6 +194,8 @@ def run_pipeline(
                 print(f"[run] failures.md write failed: {report_exc}", file=sys.stderr)
             return 1
 
+        finished_dt = datetime.now(timezone.utc)
+        elapsed_s = (finished_dt - started_dt).total_seconds()
         stage_folder = root / folder_name
         preview = _preview_file(stage_folder)
         entry = {
@@ -194,7 +203,8 @@ def run_pipeline(
             "folder": folder_name,
             "status": "ok",
             "started_utc": started,
-            "finished_utc": datetime.now(timezone.utc).isoformat(),
+            "finished_utc": finished_dt.isoformat(),
+            "elapsed_s": round(elapsed_s, 2),
             "outputs": {k: str(v) for k, v in paths.items()},
             "preview": str(preview) if preview else None,
         }
@@ -208,13 +218,22 @@ def run_pipeline(
             base_config=base_config,
             resolved_config=resolved_config,
         )
-        print(f"[{label}] OK → {stage_folder}")
+        mins, secs = divmod(int(elapsed_s), 60)
+        print(f"[{label}] OK in {mins}m{secs:02d}s ({elapsed_s:.1f}s) → {stage_folder}")
         for key, path in paths.items():
             print(f"  {key}: {path}")
 
         if stop_after and (stop_after == label or stop_after == folder_name):
             print(f"[run] stop_after={stop_after}")
             break
+
+    total_s = sum(float(s.get("elapsed_s") or 0) for s in results)
+    tm, ts = divmod(int(total_s), 60)
+    print(f"\n[run] stage timings (sum={tm}m{ts:02d}s):")
+    for s in results:
+        es = float(s.get("elapsed_s") or 0)
+        m, sec = divmod(int(es), 60)
+        print(f"  {s.get('stage')}: {m}m{sec:02d}s ({es:.1f}s) [{s.get('status')}]")
 
     _write_run_results(
         root,

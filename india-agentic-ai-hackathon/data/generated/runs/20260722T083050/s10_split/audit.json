@@ -1,0 +1,12 @@
+{
+  "stage": "s10_split",
+  "timestamp_utc": "2026-07-22T03:36:10.709991+00:00",
+  "input_jsonl": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s9_gliner_format/gliner_docs.jsonl",
+  "rows_in": 0,
+  "train_rows": 0,
+  "eval_rows": 0,
+  "note": "No input rows; wrote empty split outputs.",
+  "gliner_train_records": 0,
+  "gliner_eval_records": 0,
+  "gliner_note": "No tokenized_text/ner fields on input rows; wrote empty GLiNER JSONs. Pass s9 gliner_docs.jsonl (or curated rows that already carry tokenized fields)."
+}

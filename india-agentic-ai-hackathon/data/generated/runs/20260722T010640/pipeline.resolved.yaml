@@ -81,7 +81,7 @@ translation:
   reasoning_effort: medium
   requests_per_minute: 110
   max_workers: 24
-  timeout_s: 1200
+  timeout_s: 300
   skip_language_codes:
   - en
   max_docs: null
@@ -162,7 +162,7 @@ curation:
     seed: 42
     curator_work_dir: data/generated/runs/20260722T010640/artifacts/nemo_curator_dedup
   balancing:
-    enabled: true
+    enabled: false
     target_docs_per_language: null
     min_docs_per_language: null
     allow_underfill: true

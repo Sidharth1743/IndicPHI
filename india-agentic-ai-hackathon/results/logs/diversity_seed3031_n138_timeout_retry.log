@@ -1,0 +1,891 @@
+[08:32:10] [INFO] 🩺 Running health checks for models...
+[08:32:10] [INFO]   |-- 👀 Checking 'sarvam-105b' in provider named 'sarvam' for model alias 'generator'...
+[08:32:15] [INFO]   |-- ✅ Passed!
+[08:32:15] [INFO] OpenTelemetry metrics available at http://127.0.0.1:9464/metrics
+[08:32:15] [INFO] 🎨 Creating Data Designer dataset
+[08:32:15] [INFO]   |-- 🔒 Jinja rendering engine: secure
+[08:32:15] [INFO] ✅ Validation passed
+[08:32:15] [INFO] ⛓️ Sorting column configs into a Directed Acyclic Graph
+[08:32:15] [INFO] 🩺 Running health checks for models...
+[08:32:15] [INFO]   |-- 👀 Checking 'sarvam-105b' in provider named 'sarvam' for model alias 'generator'...
+[08:32:19] [INFO]   |-- ✅ Passed!
+[08:32:19] [INFO] ⚡ Using async task-queue builder
+[08:32:19] [INFO] 📝 llm-text model config for column 'generated_text'
+[08:32:19] [INFO]   |-- model: 'sarvam-105b'
+[08:32:19] [INFO]   |-- model alias: 'generator'
+[08:32:19] [INFO]   |-- model provider: 'sarvam'
+[08:32:19] [INFO]   |-- inference parameters:
+[08:32:19] [INFO]   |  |-- generation_type=chat-completion
+[08:32:19] [INFO]   |  |-- max_parallel_requests=24
+[08:32:19] [INFO]   |  |-- extra_body={'reasoning_effort': 'medium'}
+[08:32:19] [INFO]   |  |-- temperature=0.30
+[08:32:19] [INFO]   |  |-- max_tokens=32768
+[08:32:19] [INFO] ⚡️ Async generation: 1 column(s) (column 'generated_text'), 138 tasks across 1 row group(s)
+[08:32:19] [INFO] 🚀 (1/1) Dispatching with 138 records
+[08:32:19] [INFO] 🌱 (1/1) Sampling 138 records from seed dataset
+[08:32:19] [INFO]   |-- seed dataset size: 138 records
+[08:32:19] [INFO]   |-- sampling strategy: ordered
+[08:32:28] [INFO] 📊 Progress [9.1s]:
+[08:32:28] [INFO]   |-- 🐱 column 'generated_text': 2/138 (1%) 0.2 rec/s
+[08:32:34] [INFO] 📊 Progress [14.7s]:
+[08:32:34] [INFO]   |-- 🐱 column 'generated_text': 9/138 (7%) 0.6 rec/s
+[08:32:39] [INFO] 📊 Progress [20.0s]:
+[08:32:39] [INFO]   |-- 🐱 column 'generated_text': 14/138 (10%) 0.7 rec/s
+[08:32:47] [INFO] 📊 Progress [27.6s]:
+[08:32:47] [INFO]   |-- 🐱 column 'generated_text': 18/138 (13%) 0.7 rec/s
+[08:32:52] [INFO] 📊 Progress [33.0s]:
+[08:32:52] [INFO]   |-- 🐱 column 'generated_text': 21/138 (15%) 0.6 rec/s
+[08:32:58] [INFO] 📊 Progress [38.8s]:
+[08:32:58] [INFO]   |-- 🐱 column 'generated_text': 25/138 (18%) 0.6 rec/s
+[08:33:07] [INFO] 📊 Progress [47.5s]:
+[08:33:07] [INFO]   |-- 🐱 column 'generated_text': 28/138 (20%) 0.6 rec/s
+[08:33:14] [INFO] 📊 Progress [54.5s]:
+[08:33:14] [INFO]   |-- 🐱 column 'generated_text': 32/138 (23%) 0.6 rec/s
+[08:33:19] [INFO] 📊 Progress [60.2s]:
+[08:33:19] [INFO]   |-- 🐱 column 'generated_text': 34/138 (25%) 0.6 rec/s
+[08:33:31] [INFO] 📊 Progress [72.0s]:
+[08:33:31] [INFO]   |-- 😺 column 'generated_text': 37/138 (27%) 0.5 rec/s
+[08:33:37] [INFO] 📊 Progress [77.8s]:
+[08:33:37] [INFO]   |-- 😺 column 'generated_text': 41/138 (30%) 0.5 rec/s
+[08:33:44] [INFO] 📊 Progress [84.9s]:
+[08:33:44] [INFO]   |-- 😺 column 'generated_text': 45/138 (33%) 0.5 rec/s
+[08:33:49] [INFO] 📊 Progress [90.3s]:
+[08:33:49] [INFO]   |-- 😺 column 'generated_text': 51/138 (37%) 0.6 rec/s
+[08:33:55] [INFO] 📊 Progress [95.8s]:
+[08:33:55] [INFO]   |-- 😺 column 'generated_text': 56/138 (41%) 0.6 rec/s
+[08:34:01] [INFO] 📊 Progress [101.6s]:
+[08:34:01] [INFO]   |-- 😺 column 'generated_text': 57/138 (41%) 0.6 rec/s
+[08:34:07] [INFO] 📊 Progress [107.5s]:
+[08:34:07] [INFO]   |-- 😺 column 'generated_text': 61/138 (44%) 0.6 rec/s
+[08:34:12] [INFO] 📊 Progress [113.1s]:
+[08:34:12] [INFO]   |-- 😺 column 'generated_text': 68/138 (49%) 0.6 rec/s
+[08:34:19] [INFO] 📊 Progress [119.5s]:
+[08:34:19] [INFO]   |-- 😸 column 'generated_text': 74/138 (54%) 0.6 rec/s
+[08:34:24] [INFO] 📊 Progress [125.1s]:
+[08:34:24] [INFO]   |-- 😸 column 'generated_text': 76/138 (55%) 0.6 rec/s
+[08:34:30] [INFO] 📊 Progress [131.1s]:
+[08:34:30] [INFO]   |-- 😸 column 'generated_text': 82/138 (59%) 0.6 rec/s
+[08:34:38] [INFO] 📊 Progress [139.2s]:
+[08:34:38] [INFO]   |-- 😸 column 'generated_text': 87/138 (63%) 0.6 rec/s
+[08:34:46] [INFO] 📊 Progress [146.6s]:
+[08:34:46] [INFO]   |-- 😸 column 'generated_text': 94/138 (68%) 0.6 rec/s
+[08:34:51] [INFO] 📊 Progress [152.4s]:
+[08:34:51] [INFO]   |-- 😸 column 'generated_text': 98/138 (71%) 0.6 rec/s
+[08:34:59] [INFO] 📊 Progress [160.2s]:
+[08:34:59] [INFO]   |-- 😸 column 'generated_text': 103/138 (75%) 0.6 rec/s
+[08:35:04] [INFO] 📊 Progress [165.3s]:
+[08:35:04] [INFO]   |-- 😼 column 'generated_text': 105/138 (76%) 0.6 rec/s
+[08:35:13] [INFO] 📊 Progress [173.8s]:
+[08:35:13] [INFO]   |-- 😼 column 'generated_text': 110/138 (80%) 0.6 rec/s
+[08:35:24] [INFO] 📊 Progress [184.5s]:
+[08:35:24] [INFO]   |-- 😼 column 'generated_text': 112/138 (81%) 0.6 rec/s
+[08:35:29] [INFO] 📊 Progress [189.6s]:
+[08:35:29] [INFO]   |-- 😼 column 'generated_text': 116/138 (84%) 0.6 rec/s
+[08:35:38] [INFO] 📊 Progress [198.5s]:
+[08:35:38] [INFO]   |-- 😼 column 'generated_text': 120/138 (87%) 0.6 rec/s
+[08:35:44] [INFO] 📊 Progress [204.8s]:
+[08:35:44] [INFO]   |-- 😼 column 'generated_text': 122/138 (88%) 0.6 rec/s
+[08:35:50] [INFO] 📊 Progress [210.8s]:
+[08:35:50] [INFO]   |-- 😼 column 'generated_text': 125/138 (91%) 0.6 rec/s
+[08:36:18] [INFO] 🔄 (1/1) Salvaging 12 deferred task(s)
+[08:36:34] [INFO] 📊 Progress [255.0s]:
+[08:36:34] [INFO]   |-- 😼 column 'generated_text': 127/138 (92%) 0.5 rec/s
+[08:36:48] [INFO] 📊 Progress [268.5s]:
+[08:36:48] [INFO]   |-- 😼 column 'generated_text': 131/138 (95%) 0.5 rec/s
+[08:36:55] [INFO] 📊 Progress [275.7s]:
+[08:36:55] [INFO]   |-- 😼 column 'generated_text': 134/138 (97%) 0.5 rec/s
+[08:37:14] [INFO] 📊 Progress [294.6s]:
+[08:37:14] [INFO]   |-- 😼 column 'generated_text': 136/138 (99%) 0.5 rec/s
+[08:37:27] [INFO] 📊 Progress [307.6s]:
+[08:37:27] [INFO]   |-- 😼 column 'generated_text': 137/138 (99%) 0.4 rec/s
+[08:37:33] [INFO] 📊 Progress [313.6s]:
+[08:37:33] [INFO]   |-- 🦁 column 'generated_text': 138/138 (100%) 0.4 rec/s
+[08:37:33] [INFO] ✅ Async generation complete [313.7s]: 138 ok, 0 failed across 1 column(s)
+[08:37:34] [INFO] 📊 Model usage summary:
+[08:37:34] [INFO]   |-- model: sarvam-105b
+[08:37:34] [INFO]   |-- tokens: input=564316, output=166217, reasoning=102170 (estimated), total=730533, tps=2319
+[08:37:34] [INFO]   |-- reasoning token count estimated with tiktoken
+[08:37:34] [INFO]   |-- requests: success=138, failed=14, total=152, rpm=28
+[08:37:34] [INFO] 📐 Measuring dataset column statistics:
+[08:37:34] [INFO]   |-- 📝 column: 'generated_text'
+[s4b] start rows=138 pending=138 resumed=0 workers=24 timeout_s=300.0 model=sarvam-105b
+[s4b] progress 1/138 uuid=3a14ecc1de8648689a3311540c7cdd2e lang=as soft=False applied=True
+[s4b] progress 5/138 uuid=f584cfd90471426ea809f549021f9a0f lang=en soft=False applied=False
+[s4b] progress 10/138 uuid=fdc875f657c1440c8e243a6845fb17a5 lang=bn soft=False applied=True
+[s4b] progress 15/138 uuid=7cf3cf4f60be4edabe12ffd948079164 lang=bn soft=False applied=True
+[s4b] progress 20/138 uuid=8116ee5699344b79a2c9c8d1e053dde5 lang=doi soft=False applied=True
+[s4b] progress 25/138 uuid=a0e6acd7770d41b5812edc8bbfbda7ee lang=brx soft=False applied=True
+[s4b] progress 30/138 uuid=57e0ccc76318480b91dca7f2d464c122 lang=gu soft=False applied=True
+[s4b] progress 35/138 uuid=57e0ccc76318480b91dca7f2d464c122 lang=gu soft=False applied=True
+[s4b] progress 40/138 uuid=9a97560e03a846c8929c9b78a488affb lang=kn soft=False applied=True
+[s4b] progress 45/138 uuid=9a97560e03a846c8929c9b78a488affb lang=kn soft=False applied=True
+[s4b] progress 50/138 uuid=59e7e12eb3d44dfbacf8755ef02f52c7 lang=kn soft=False applied=True
+[s4b] progress 55/138 uuid=60ff3470cf8340efaa474e13896d8568 lang=ks soft=False applied=True
+[s4b] progress 60/138 uuid=07483932a3354f04a67c4b8846a2873f lang=mai soft=False applied=True
+[s4b] progress 65/138 uuid=80435bdcef24479390d6e6ae0b2aeeb1 lang=ml soft=False applied=True
+[s4b] progress 70/138 uuid=13f43defce4c471ba920ef1ff92efba0 lang=ml soft=False applied=True
+[s4b] chat timeout → retry attempt=1 remaining=2 uuid=b55ee0c5013c4310a8939d0e6dd22e8d lang=as
+[s4b] progress 75/138 uuid=5c5a472d66774bdc9e232a4893422f0c lang=mr soft=False applied=True
+[s4b] progress 80/138 uuid=3ca088f3e9d4400e893c3f00c17d4ff5 lang=ne soft=False applied=True
+[s4b] dedicated /translate fallback lang=mni uuid=8a02e74c7f104c1fa9f00b8507bac016 doc_type=discharge_summary force=timeout
+[s4b] dedicated /translate fallback lang=mni uuid=df61060159844e75aeafcafe43b1bc0d doc_type=discharge_summary force=timeout
+[s4b] progress 85/138 uuid=8a02e74c7f104c1fa9f00b8507bac016 lang=mni soft=False applied=True
+[s4b] SOFT-FAIL uuid=df61060159844e75aeafcafe43b1bc0d lang=mni doc_type=discharge_summary error=script_purity_failed:wrong_indic_script:Devanagari>Meitei attempt=1
+[s4b] progress 90/138 uuid=67bf2f4af82d452db4c95cd1c7f59330 lang=or soft=False applied=True
+[s4b] dedicated /translate fallback lang=mni uuid=df61060159844e75aeafcafe43b1bc0d doc_type=referral_letter force=timeout
+[s4b] SOFT-FAIL uuid=df61060159844e75aeafcafe43b1bc0d lang=mni doc_type=referral_letter error=script_purity_failed:wrong_indic_script:Devanagari>Meitei attempt=1
+[s4b] progress 95/138 uuid=df61060159844e75aeafcafe43b1bc0d lang=mni soft=True applied=True
+[s4b] progress 100/138 uuid=22ef884ce12247309d07fc3f601a3c59 lang=sa soft=False applied=True
+[s4b] chat timeout → retry attempt=1 remaining=2 uuid=433eba4ea24144438f7866160103b297 lang=mr
+[s4b] SOFT-FAIL uuid=433eba4ea24144438f7866160103b297 lang=mr doc_type=radiology_report error=tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>
+[s4b] SOFT-FAIL uuid=57a29898a6944b899059fb674d16f990 lang=te doc_type=discharge_summary error=tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>
+[s4b] progress 105/138 uuid=57a29898a6944b899059fb674d16f990 lang=te soft=True applied=False
+[s4b] SOFT-FAIL uuid=57a29898a6944b899059fb674d16f990 lang=te doc_type=referral_letter error=tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>
+[s4b] SOFT-FAIL uuid=f0e00cbdb5dd4d33a122229e4883c598 lang=te doc_type=hospital_billing error=tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>;post_repair_translate:Sarvam network error: <urlopen error [Errno -2] Name or service not known>
+[s4b] SOFT-FAIL uuid=f0e00cbdb5dd4d33a122229e4883c598 lang=te doc_type=discharge_summary error=tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>
+[s4b] SOFT-FAIL uuid=f0e00cbdb5dd4d33a122229e4883c598 lang=te doc_type=referral_letter error=tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>;post_repair_translate:Sarvam network error: <urlopen error [Errno -2] Name or service not known>
+[s4b] SOFT-FAIL uuid=6b15543bcd6545f5803d6887e2a48820 lang=ur doc_type=discharge_summary error=tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>
+[s4b] progress 110/138 uuid=6b15543bcd6545f5803d6887e2a48820 lang=ur soft=True applied=False
+[s4b] SOFT-FAIL uuid=6b15543bcd6545f5803d6887e2a48820 lang=ur doc_type=referral_letter error=tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>
+[s4b] SOFT-FAIL uuid=6b15543bcd6545f5803d6887e2a48820 lang=ur doc_type=radiology_report error=tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>
+[s4b] SOFT-FAIL uuid=bf0de98a0c63491c8877846b6f8dad65 lang=ur doc_type=discharge_summary error=tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>
+[s4b] SOFT-FAIL uuid=bf0de98a0c63491c8877846b6f8dad65 lang=ur doc_type=referral_letter error=tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>
+[s4b] SOFT-FAIL uuid=bf0de98a0c63491c8877846b6f8dad65 lang=ur doc_type=radiology_report error=tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>
+[s4b] progress 115/138 uuid=bf0de98a0c63491c8877846b6f8dad65 lang=ur soft=True applied=False
+[s4b] chat timeout → retry attempt=2 remaining=1 uuid=df61060159844e75aeafcafe43b1bc0d lang=mni
+[s4b] dedicated /translate fallback lang=mni uuid=df61060159844e75aeafcafe43b1bc0d doc_type=radiology_report force=timeout
+[s4b] SOFT-FAIL uuid=df61060159844e75aeafcafe43b1bc0d lang=mni doc_type=radiology_report error=Sarvam network error: <urlopen error [Errno -2] Name or service not known>
+[s4b] chat timeout → retry attempt=2 remaining=1 uuid=8a02e74c7f104c1fa9f00b8507bac016 lang=mni
+[s4b] dedicated /translate fallback lang=mni uuid=8a02e74c7f104c1fa9f00b8507bac016 doc_type=radiology_report force=timeout
+[s4b] SOFT-FAIL uuid=8a02e74c7f104c1fa9f00b8507bac016 lang=mni doc_type=radiology_report error=Sarvam network error: <urlopen error [Errno -2] Name or service not known>
+[s4b] chat timeout → retry attempt=1 remaining=2 uuid=6e943dc3578249e38b9e61705d0912a9 lang=sa
+[s4b] SOFT-FAIL uuid=6e943dc3578249e38b9e61705d0912a9 lang=sa doc_type=insurance_claim error=tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>;post_repair_translate:Sarvam network error: <urlopen error [Errno -2] Name or service not known>
+[s4b] chat timeout → retry attempt=1 remaining=2 uuid=0b19143502244d21a03f71ef838ab4ff lang=sat
+[s4b] dedicated /translate fallback lang=sat uuid=0b19143502244d21a03f71ef838ab4ff doc_type=hospital_billing force=timeout
+[s4b] SOFT-FAIL uuid=0b19143502244d21a03f71ef838ab4ff lang=sat doc_type=hospital_billing error=tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>
+[s4b] chat timeout → retry attempt=1 remaining=2 uuid=e899bd99966c4ac6b77d784bae3482f0 lang=sat
+[s4b] dedicated /translate fallback lang=sat uuid=e899bd99966c4ac6b77d784bae3482f0 doc_type=phc_register force=timeout
+[s4b] SOFT-FAIL uuid=e899bd99966c4ac6b77d784bae3482f0 lang=sat doc_type=phc_register error=tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>
+[s4b] progress 120/138 uuid=e899bd99966c4ac6b77d784bae3482f0 lang=sat soft=True applied=False
+[s4b] chat timeout → retry attempt=1 remaining=2 uuid=e899bd99966c4ac6b77d784bae3482f0 lang=sat
+[s4b] dedicated /translate fallback lang=sat uuid=e899bd99966c4ac6b77d784bae3482f0 doc_type=insurance_claim force=timeout
+[s4b] SOFT-FAIL uuid=e899bd99966c4ac6b77d784bae3482f0 lang=sat doc_type=insurance_claim error=tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>
+[s4b] chat timeout → retry attempt=1 remaining=2 uuid=825c4438c02440dc90d3ddec7ffec8ee lang=sd
+[s4b] SOFT-FAIL uuid=825c4438c02440dc90d3ddec7ffec8ee lang=sd doc_type=automated_sms error=tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>
+[s4b] chat timeout → retry attempt=1 remaining=2 uuid=825c4438c02440dc90d3ddec7ffec8ee lang=sd
+[s4b] SOFT-FAIL uuid=825c4438c02440dc90d3ddec7ffec8ee lang=sd doc_type=hospital_billing error=tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>
+[s4b] chat timeout → retry attempt=1 remaining=2 uuid=825c4438c02440dc90d3ddec7ffec8ee lang=sd
+[s4b] SOFT-FAIL uuid=825c4438c02440dc90d3ddec7ffec8ee lang=sd doc_type=discharge_summary error=tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>
+[s4b] chat timeout → retry attempt=1 remaining=2 uuid=fe3a6e05b50a4eb1b679f5fba0c5440b lang=sd
+[s4b] SOFT-FAIL uuid=fe3a6e05b50a4eb1b679f5fba0c5440b lang=sd doc_type=insurance_claim error=tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>;post_repair_translate:Sarvam network error: <urlopen error [Errno -2] Name or service not known>
+[s4b] progress 125/138 uuid=fe3a6e05b50a4eb1b679f5fba0c5440b lang=sd soft=True applied=False
+[s4b] chat timeout → retry attempt=1 remaining=2 uuid=fe3a6e05b50a4eb1b679f5fba0c5440b lang=sd
+[s4b] SOFT-FAIL uuid=fe3a6e05b50a4eb1b679f5fba0c5440b lang=sd doc_type=hospital_billing error=tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>;post_repair_translate:Sarvam network error: <urlopen error [Errno -2] Name or service not known>
+[s4b] chat timeout → retry attempt=1 remaining=2 uuid=fe3a6e05b50a4eb1b679f5fba0c5440b lang=sd
+[s4b] SOFT-FAIL uuid=fe3a6e05b50a4eb1b679f5fba0c5440b lang=sd doc_type=discharge_summary error=tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>
+[s4b] chat timeout → retry attempt=1 remaining=2 uuid=829db9fbfeda404d89ff9b8a405b5e4d lang=ta
+[s4b] SOFT-FAIL uuid=829db9fbfeda404d89ff9b8a405b5e4d lang=ta doc_type=opd_slip error=tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>
+[s4b] chat timeout → retry attempt=1 remaining=2 uuid=829db9fbfeda404d89ff9b8a405b5e4d lang=ta
+[s4b] SOFT-FAIL uuid=829db9fbfeda404d89ff9b8a405b5e4d lang=ta doc_type=prescription error=tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>
+[s4b] chat timeout → retry attempt=1 remaining=2 uuid=829db9fbfeda404d89ff9b8a405b5e4d lang=ta
+[s4b] SOFT-FAIL uuid=829db9fbfeda404d89ff9b8a405b5e4d lang=ta doc_type=insurance_claim error=tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>;post_repair_translate:Sarvam network error: <urlopen error [Errno -2] Name or service not known>
+[s4b] progress 130/138 uuid=829db9fbfeda404d89ff9b8a405b5e4d lang=ta soft=True applied=False
+[s4b] chat timeout → retry attempt=1 remaining=2 uuid=ce942a5fb5644181ac0db94b6c9c1314 lang=ta
+[s4b] SOFT-FAIL uuid=ce942a5fb5644181ac0db94b6c9c1314 lang=ta doc_type=asha_worker_note error=tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>
+[s4b] chat timeout → retry attempt=1 remaining=2 uuid=ce942a5fb5644181ac0db94b6c9c1314 lang=ta
+[s4b] SOFT-FAIL uuid=ce942a5fb5644181ac0db94b6c9c1314 lang=ta doc_type=automated_sms error=tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>
+[s4b] chat timeout → retry attempt=2 remaining=1 uuid=0b19143502244d21a03f71ef838ab4ff lang=sat
+[s4b] dedicated /translate fallback lang=sat uuid=0b19143502244d21a03f71ef838ab4ff doc_type=asha_worker_note force=timeout
+[s4b] SOFT-FAIL uuid=0b19143502244d21a03f71ef838ab4ff lang=sat doc_type=asha_worker_note error=Sarvam network error: <urlopen error [Errno -2] Name or service not known>
+[s4b] chat timeout → retry attempt=2 remaining=1 uuid=e899bd99966c4ac6b77d784bae3482f0 lang=sat
+[s4b] dedicated /translate fallback lang=sat uuid=e899bd99966c4ac6b77d784bae3482f0 doc_type=asha_worker_note force=timeout
+[s4b] SOFT-FAIL uuid=e899bd99966c4ac6b77d784bae3482f0 lang=sat doc_type=asha_worker_note error=Sarvam network error: <urlopen error [Errno -2] Name or service not known>
+[s4b] chat timeout → retry attempt=1 remaining=2 uuid=ce942a5fb5644181ac0db94b6c9c1314 lang=ta
+[s4b] SOFT-FAIL uuid=ce942a5fb5644181ac0db94b6c9c1314 lang=ta doc_type=insurance_claim error=tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>
+[s4b] progress 135/138 uuid=ce942a5fb5644181ac0db94b6c9c1314 lang=ta soft=True applied=False
+[s4b] chat timeout → retry attempt=1 remaining=2 uuid=57a29898a6944b899059fb674d16f990 lang=te
+[s4b] SOFT-FAIL uuid=57a29898a6944b899059fb674d16f990 lang=te doc_type=hospital_billing error=tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>
+[s4b] chat timeout → retry attempt=2 remaining=1 uuid=6e943dc3578249e38b9e61705d0912a9 lang=sa
+[s4b] SOFT-FAIL uuid=6e943dc3578249e38b9e61705d0912a9 lang=sa doc_type=hospital_billing error=tag_restore_or_translate_failed:Sarvam network error: <urlopen error [Errno -2] Name or service not known>;post_repair_translate:Sarvam network error: <urlopen error [Errno -2] Name or service not known>
+[s4b] chat timeout → retry attempt=2 remaining=1 uuid=0b19143502244d21a03f71ef838ab4ff lang=sat
+[s4b] dedicated /translate fallback lang=sat uuid=0b19143502244d21a03f71ef838ab4ff doc_type=automated_sms force=timeout
+[s4b] SOFT-FAIL uuid=0b19143502244d21a03f71ef838ab4ff lang=sat doc_type=automated_sms error=Sarvam network error: <urlopen error [Errno -2] Name or service not known>
+[s4b] progress 138/138 uuid=0b19143502244d21a03f71ef838ab4ff lang=sat soft=True applied=True
+[s4b] WARNING: 37 translation soft-fail(s) logged — see audit soft_failures
+[s5] start rows=138 pending=138 resumed=0 workers=24 timeout_s=600.0 model=grok-4.3
+[s5] judging 1/138 uuid=3a14ecc1de8648689a3311540c7cdd2e lang=as doc_type=surgical_note
+[s5] judging 2/138 uuid=3a14ecc1de8648689a3311540c7cdd2e lang=as doc_type=lab_report
+[s5] judging 3/138 uuid=3a14ecc1de8648689a3311540c7cdd2e lang=as doc_type=opd_slip
+[s5] judging 4/138 uuid=b55ee0c5013c4310a8939d0e6dd22e8d lang=as doc_type=surgical_note
+[s5] judging 5/138 uuid=b55ee0c5013c4310a8939d0e6dd22e8d lang=as doc_type=lab_report
+[s5] judging 6/138 uuid=b55ee0c5013c4310a8939d0e6dd22e8d lang=as doc_type=opd_slip
+[s5] retry 1/2 uuid=3a14ecc1de8648689a3311540c7cdd2e after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 7/138 uuid=7cf3cf4f60be4edabe12ffd948079164 lang=bn doc_type=opd_slip
+[s5] judging 8/138 uuid=7cf3cf4f60be4edabe12ffd948079164 lang=bn doc_type=surgical_note
+[s5] judging 9/138 uuid=7cf3cf4f60be4edabe12ffd948079164 lang=bn doc_type=prescription
+[s5] judging 10/138 uuid=fdc875f657c1440c8e243a6845fb17a5 lang=bn doc_type=surgical_note
+[s5] judging 11/138 uuid=fdc875f657c1440c8e243a6845fb17a5 lang=bn doc_type=opd_slip
+[s5] judging 12/138 uuid=fdc875f657c1440c8e243a6845fb17a5 lang=bn doc_type=lab_report
+[s5] judging 13/138 uuid=3ceb8b6e61ba4069980e557280aa9ba0 lang=brx doc_type=opd_slip
+[s5] judging 14/138 uuid=3ceb8b6e61ba4069980e557280aa9ba0 lang=brx doc_type=prescription
+[s5] judging 15/138 uuid=3ceb8b6e61ba4069980e557280aa9ba0 lang=brx doc_type=insurance_claim
+[s5] judging 16/138 uuid=a0e6acd7770d41b5812edc8bbfbda7ee lang=brx doc_type=surgical_note
+[s5] judging 17/138 uuid=a0e6acd7770d41b5812edc8bbfbda7ee lang=brx doc_type=lab_report
+[s5] judging 18/138 uuid=a0e6acd7770d41b5812edc8bbfbda7ee lang=brx doc_type=prescription
+[s5] judging 19/138 uuid=18473c8835b140ff8c0b5ed0d35a5271 lang=doi doc_type=opd_slip
+[s5] judging 20/138 uuid=18473c8835b140ff8c0b5ed0d35a5271 lang=doi doc_type=prescription
+[s5] judging 21/138 uuid=18473c8835b140ff8c0b5ed0d35a5271 lang=doi doc_type=insurance_claim
+[s5] judging 22/138 uuid=8116ee5699344b79a2c9c8d1e053dde5 lang=doi doc_type=asha_worker_note
+[s5] judging 23/138 uuid=8116ee5699344b79a2c9c8d1e053dde5 lang=doi doc_type=automated_sms
+[s5] judging 24/138 uuid=8116ee5699344b79a2c9c8d1e053dde5 lang=doi doc_type=insurance_claim
+[s5] retry 1/2 uuid=3a14ecc1de8648689a3311540c7cdd2e after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=3a14ecc1de8648689a3311540c7cdd2e after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=b55ee0c5013c4310a8939d0e6dd22e8d after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=b55ee0c5013c4310a8939d0e6dd22e8d after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=b55ee0c5013c4310a8939d0e6dd22e8d after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=7cf3cf4f60be4edabe12ffd948079164 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=7cf3cf4f60be4edabe12ffd948079164 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=7cf3cf4f60be4edabe12ffd948079164 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=fdc875f657c1440c8e243a6845fb17a5 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=fdc875f657c1440c8e243a6845fb17a5 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=fdc875f657c1440c8e243a6845fb17a5 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=3ceb8b6e61ba4069980e557280aa9ba0 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=3ceb8b6e61ba4069980e557280aa9ba0 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=3ceb8b6e61ba4069980e557280aa9ba0 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=a0e6acd7770d41b5812edc8bbfbda7ee after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=a0e6acd7770d41b5812edc8bbfbda7ee after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=a0e6acd7770d41b5812edc8bbfbda7ee after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=18473c8835b140ff8c0b5ed0d35a5271 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=18473c8835b140ff8c0b5ed0d35a5271 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=18473c8835b140ff8c0b5ed0d35a5271 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=8116ee5699344b79a2c9c8d1e053dde5 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=8116ee5699344b79a2c9c8d1e053dde5 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=8116ee5699344b79a2c9c8d1e053dde5 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=3a14ecc1de8648689a3311540c7cdd2e after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=3a14ecc1de8648689a3311540c7cdd2e after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=3a14ecc1de8648689a3311540c7cdd2e after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=b55ee0c5013c4310a8939d0e6dd22e8d after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=b55ee0c5013c4310a8939d0e6dd22e8d after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=b55ee0c5013c4310a8939d0e6dd22e8d after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=7cf3cf4f60be4edabe12ffd948079164 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=7cf3cf4f60be4edabe12ffd948079164 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=7cf3cf4f60be4edabe12ffd948079164 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=fdc875f657c1440c8e243a6845fb17a5 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=fdc875f657c1440c8e243a6845fb17a5 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=fdc875f657c1440c8e243a6845fb17a5 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=3ceb8b6e61ba4069980e557280aa9ba0 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=3ceb8b6e61ba4069980e557280aa9ba0 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=3ceb8b6e61ba4069980e557280aa9ba0 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=a0e6acd7770d41b5812edc8bbfbda7ee after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=a0e6acd7770d41b5812edc8bbfbda7ee after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=a0e6acd7770d41b5812edc8bbfbda7ee after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=18473c8835b140ff8c0b5ed0d35a5271 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=18473c8835b140ff8c0b5ed0d35a5271 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=18473c8835b140ff8c0b5ed0d35a5271 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=8116ee5699344b79a2c9c8d1e053dde5 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=8116ee5699344b79a2c9c8d1e053dde5 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=8116ee5699344b79a2c9c8d1e053dde5 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=3a14ecc1de8648689a3311540c7cdd2e doc_type=surgical_note error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 25/138 uuid=29189dcea56e4d3d9df1aa7573656171 lang=en doc_type=radiology_report
+[s5] progress 1/138 uuid=3a14ecc1de8648689a3311540c7cdd2e lang=as verdict=fail soft=True
+[s5] SOFT-FAIL uuid=3a14ecc1de8648689a3311540c7cdd2e doc_type=lab_report error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 26/138 uuid=29189dcea56e4d3d9df1aa7573656171 lang=en doc_type=er_triage_notes
+[s5] SOFT-FAIL uuid=3a14ecc1de8648689a3311540c7cdd2e doc_type=opd_slip error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 27/138 uuid=29189dcea56e4d3d9df1aa7573656171 lang=en doc_type=telemedicine_transcript
+[s5] SOFT-FAIL uuid=b55ee0c5013c4310a8939d0e6dd22e8d doc_type=surgical_note error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 28/138 uuid=f584cfd90471426ea809f549021f9a0f lang=en doc_type=radiology_report
+[s5] SOFT-FAIL uuid=b55ee0c5013c4310a8939d0e6dd22e8d doc_type=lab_report error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 29/138 uuid=f584cfd90471426ea809f549021f9a0f lang=en doc_type=er_triage_notes
+[s5] progress 5/138 uuid=b55ee0c5013c4310a8939d0e6dd22e8d lang=as verdict=fail soft=True
+[s5] SOFT-FAIL uuid=b55ee0c5013c4310a8939d0e6dd22e8d doc_type=opd_slip error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 30/138 uuid=f584cfd90471426ea809f549021f9a0f lang=en doc_type=telemedicine_transcript
+[s5] SOFT-FAIL uuid=7cf3cf4f60be4edabe12ffd948079164 doc_type=opd_slip error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 31/138 uuid=1f7da27d8fe544a191d7adc016e62971 lang=gu doc_type=hospital_billing
+[s5] SOFT-FAIL uuid=7cf3cf4f60be4edabe12ffd948079164 doc_type=surgical_note error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 32/138 uuid=1f7da27d8fe544a191d7adc016e62971 lang=gu doc_type=discharge_summary
+[s5] retry 1/2 uuid=29189dcea56e4d3d9df1aa7573656171 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=7cf3cf4f60be4edabe12ffd948079164 doc_type=prescription error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 33/138 uuid=1f7da27d8fe544a191d7adc016e62971 lang=gu doc_type=referral_letter
+[s5] retry 1/2 uuid=29189dcea56e4d3d9df1aa7573656171 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=fdc875f657c1440c8e243a6845fb17a5 doc_type=surgical_note error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 34/138 uuid=57e0ccc76318480b91dca7f2d464c122 lang=gu doc_type=hospital_billing
+[s5] progress 10/138 uuid=fdc875f657c1440c8e243a6845fb17a5 lang=bn verdict=fail soft=True
+[s5] retry 1/2 uuid=29189dcea56e4d3d9df1aa7573656171 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=fdc875f657c1440c8e243a6845fb17a5 doc_type=opd_slip error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 35/138 uuid=57e0ccc76318480b91dca7f2d464c122 lang=gu doc_type=discharge_summary
+[s5] retry 1/2 uuid=f584cfd90471426ea809f549021f9a0f after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=fdc875f657c1440c8e243a6845fb17a5 doc_type=lab_report error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 36/138 uuid=57e0ccc76318480b91dca7f2d464c122 lang=gu doc_type=referral_letter
+[s5] retry 1/2 uuid=f584cfd90471426ea809f549021f9a0f after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=3ceb8b6e61ba4069980e557280aa9ba0 doc_type=opd_slip error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 37/138 uuid=00930e6ff6e94bbfb1ce26958434c1af lang=hi doc_type=automated_sms
+[s5] retry 1/2 uuid=f584cfd90471426ea809f549021f9a0f after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=3ceb8b6e61ba4069980e557280aa9ba0 doc_type=prescription error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 38/138 uuid=00930e6ff6e94bbfb1ce26958434c1af lang=hi doc_type=insurance_claim
+[s5] retry 1/2 uuid=1f7da27d8fe544a191d7adc016e62971 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=3ceb8b6e61ba4069980e557280aa9ba0 doc_type=insurance_claim error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 39/138 uuid=00930e6ff6e94bbfb1ce26958434c1af lang=hi doc_type=hospital_billing
+[s5] progress 15/138 uuid=3ceb8b6e61ba4069980e557280aa9ba0 lang=brx verdict=fail soft=True
+[s5] retry 1/2 uuid=1f7da27d8fe544a191d7adc016e62971 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=a0e6acd7770d41b5812edc8bbfbda7ee doc_type=surgical_note error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 40/138 uuid=7e1fefa3b81344778d2739efd7575c6c lang=hi doc_type=insurance_claim
+[s5] SOFT-FAIL uuid=a0e6acd7770d41b5812edc8bbfbda7ee doc_type=lab_report error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 41/138 uuid=7e1fefa3b81344778d2739efd7575c6c lang=hi doc_type=automated_sms
+[s5] retry 1/2 uuid=1f7da27d8fe544a191d7adc016e62971 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=a0e6acd7770d41b5812edc8bbfbda7ee doc_type=prescription error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 42/138 uuid=7e1fefa3b81344778d2739efd7575c6c lang=hi doc_type=hospital_billing
+[s5] SOFT-FAIL uuid=18473c8835b140ff8c0b5ed0d35a5271 doc_type=opd_slip error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 43/138 uuid=59e7e12eb3d44dfbacf8755ef02f52c7 lang=kn doc_type=opd_slip
+[s5] retry 1/2 uuid=57e0ccc76318480b91dca7f2d464c122 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=18473c8835b140ff8c0b5ed0d35a5271 doc_type=prescription error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 44/138 uuid=59e7e12eb3d44dfbacf8755ef02f52c7 lang=kn doc_type=surgical_note
+[s5] progress 20/138 uuid=18473c8835b140ff8c0b5ed0d35a5271 lang=doi verdict=fail soft=True
+[s5] SOFT-FAIL uuid=18473c8835b140ff8c0b5ed0d35a5271 doc_type=insurance_claim error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 45/138 uuid=59e7e12eb3d44dfbacf8755ef02f52c7 lang=kn doc_type=prescription
+[s5] retry 1/2 uuid=57e0ccc76318480b91dca7f2d464c122 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=8116ee5699344b79a2c9c8d1e053dde5 doc_type=asha_worker_note error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 46/138 uuid=9a97560e03a846c8929c9b78a488affb lang=kn doc_type=surgical_note
+[s5] SOFT-FAIL uuid=8116ee5699344b79a2c9c8d1e053dde5 doc_type=automated_sms error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 47/138 uuid=9a97560e03a846c8929c9b78a488affb lang=kn doc_type=lab_report
+[s5] retry 1/2 uuid=57e0ccc76318480b91dca7f2d464c122 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=8116ee5699344b79a2c9c8d1e053dde5 doc_type=insurance_claim error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 48/138 uuid=9a97560e03a846c8929c9b78a488affb lang=kn doc_type=opd_slip
+[s5] retry 2/2 uuid=29189dcea56e4d3d9df1aa7573656171 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=00930e6ff6e94bbfb1ce26958434c1af after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=29189dcea56e4d3d9df1aa7573656171 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=00930e6ff6e94bbfb1ce26958434c1af after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=29189dcea56e4d3d9df1aa7573656171 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=00930e6ff6e94bbfb1ce26958434c1af after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=f584cfd90471426ea809f549021f9a0f after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=7e1fefa3b81344778d2739efd7575c6c after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=7e1fefa3b81344778d2739efd7575c6c after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=f584cfd90471426ea809f549021f9a0f after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=7e1fefa3b81344778d2739efd7575c6c after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=f584cfd90471426ea809f549021f9a0f after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=59e7e12eb3d44dfbacf8755ef02f52c7 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=1f7da27d8fe544a191d7adc016e62971 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=59e7e12eb3d44dfbacf8755ef02f52c7 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=59e7e12eb3d44dfbacf8755ef02f52c7 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=1f7da27d8fe544a191d7adc016e62971 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=9a97560e03a846c8929c9b78a488affb after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=9a97560e03a846c8929c9b78a488affb after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=1f7da27d8fe544a191d7adc016e62971 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=9a97560e03a846c8929c9b78a488affb after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=57e0ccc76318480b91dca7f2d464c122 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=57e0ccc76318480b91dca7f2d464c122 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=57e0ccc76318480b91dca7f2d464c122 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=00930e6ff6e94bbfb1ce26958434c1af after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=00930e6ff6e94bbfb1ce26958434c1af after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=00930e6ff6e94bbfb1ce26958434c1af after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=7e1fefa3b81344778d2739efd7575c6c after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=7e1fefa3b81344778d2739efd7575c6c after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=29189dcea56e4d3d9df1aa7573656171 doc_type=radiology_report error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 49/138 uuid=25a8008cbebf4abda209c7d28427bb99 lang=kok doc_type=prescription
+[s5] progress 25/138 uuid=29189dcea56e4d3d9df1aa7573656171 lang=en verdict=fail soft=True
+[s5] retry 2/2 uuid=7e1fefa3b81344778d2739efd7575c6c after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=29189dcea56e4d3d9df1aa7573656171 doc_type=er_triage_notes error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 50/138 uuid=25a8008cbebf4abda209c7d28427bb99 lang=kok doc_type=lab_report
+[s5] retry 2/2 uuid=59e7e12eb3d44dfbacf8755ef02f52c7 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=29189dcea56e4d3d9df1aa7573656171 doc_type=telemedicine_transcript error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 51/138 uuid=25a8008cbebf4abda209c7d28427bb99 lang=kok doc_type=asha_worker_note
+[s5] retry 2/2 uuid=59e7e12eb3d44dfbacf8755ef02f52c7 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=f584cfd90471426ea809f549021f9a0f doc_type=radiology_report error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 52/138 uuid=bfa3ca76f88b4b8f9ee3a47d5e04dae6 lang=kok doc_type=lab_report
+[s5] retry 2/2 uuid=59e7e12eb3d44dfbacf8755ef02f52c7 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=9a97560e03a846c8929c9b78a488affb after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=f584cfd90471426ea809f549021f9a0f doc_type=er_triage_notes error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 53/138 uuid=bfa3ca76f88b4b8f9ee3a47d5e04dae6 lang=kok doc_type=opd_slip
+[s5] retry 2/2 uuid=9a97560e03a846c8929c9b78a488affb after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=f584cfd90471426ea809f549021f9a0f doc_type=telemedicine_transcript error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 54/138 uuid=bfa3ca76f88b4b8f9ee3a47d5e04dae6 lang=kok doc_type=phc_register
+[s5] progress 30/138 uuid=f584cfd90471426ea809f549021f9a0f lang=en verdict=fail soft=True
+[s5] retry 2/2 uuid=9a97560e03a846c8929c9b78a488affb after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=25a8008cbebf4abda209c7d28427bb99 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=1f7da27d8fe544a191d7adc016e62971 doc_type=hospital_billing error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 55/138 uuid=60ff3470cf8340efaa474e13896d8568 lang=ks doc_type=er_triage_notes
+[s5] retry 1/2 uuid=25a8008cbebf4abda209c7d28427bb99 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=1f7da27d8fe544a191d7adc016e62971 doc_type=discharge_summary error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 56/138 uuid=60ff3470cf8340efaa474e13896d8568 lang=ks doc_type=telemedicine_transcript
+[s5] retry 1/2 uuid=25a8008cbebf4abda209c7d28427bb99 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=bfa3ca76f88b4b8f9ee3a47d5e04dae6 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=1f7da27d8fe544a191d7adc016e62971 doc_type=referral_letter error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 57/138 uuid=60ff3470cf8340efaa474e13896d8568 lang=ks doc_type=opd_slip
+[s5] SOFT-FAIL uuid=57e0ccc76318480b91dca7f2d464c122 doc_type=hospital_billing error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 58/138 uuid=885a67d0071948ac8a8336b278e81003 lang=ks doc_type=er_triage_notes
+[s5] retry 1/2 uuid=bfa3ca76f88b4b8f9ee3a47d5e04dae6 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=57e0ccc76318480b91dca7f2d464c122 doc_type=discharge_summary error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 59/138 uuid=885a67d0071948ac8a8336b278e81003 lang=ks doc_type=telemedicine_transcript
+[s5] progress 35/138 uuid=57e0ccc76318480b91dca7f2d464c122 lang=gu verdict=fail soft=True
+[s5] SOFT-FAIL uuid=57e0ccc76318480b91dca7f2d464c122 doc_type=referral_letter error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 60/138 uuid=885a67d0071948ac8a8336b278e81003 lang=ks doc_type=opd_slip
+[s5] retry 1/2 uuid=bfa3ca76f88b4b8f9ee3a47d5e04dae6 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=00930e6ff6e94bbfb1ce26958434c1af doc_type=automated_sms error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 61/138 uuid=07483932a3354f04a67c4b8846a2873f lang=mai doc_type=opd_slip
+[s5] SOFT-FAIL uuid=00930e6ff6e94bbfb1ce26958434c1af doc_type=insurance_claim error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 62/138 uuid=07483932a3354f04a67c4b8846a2873f lang=mai doc_type=phc_register
+[s5] SOFT-FAIL uuid=00930e6ff6e94bbfb1ce26958434c1af doc_type=hospital_billing error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 63/138 uuid=07483932a3354f04a67c4b8846a2873f lang=mai doc_type=prescription
+[s5] retry 1/2 uuid=60ff3470cf8340efaa474e13896d8568 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=7e1fefa3b81344778d2739efd7575c6c doc_type=insurance_claim error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 64/138 uuid=57bb67467d7c4747ac5af1eeb8f4a56a lang=mai doc_type=surgical_note
+[s5] progress 40/138 uuid=7e1fefa3b81344778d2739efd7575c6c lang=hi verdict=fail soft=True
+[s5] SOFT-FAIL uuid=7e1fefa3b81344778d2739efd7575c6c doc_type=automated_sms error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 65/138 uuid=57bb67467d7c4747ac5af1eeb8f4a56a lang=mai doc_type=opd_slip
+[s5] retry 1/2 uuid=60ff3470cf8340efaa474e13896d8568 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=7e1fefa3b81344778d2739efd7575c6c doc_type=hospital_billing error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 66/138 uuid=57bb67467d7c4747ac5af1eeb8f4a56a lang=mai doc_type=prescription
+[s5] retry 1/2 uuid=60ff3470cf8340efaa474e13896d8568 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=59e7e12eb3d44dfbacf8755ef02f52c7 doc_type=opd_slip error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 67/138 uuid=13f43defce4c471ba920ef1ff92efba0 lang=ml doc_type=er_triage_notes
+[s5] retry 1/2 uuid=885a67d0071948ac8a8336b278e81003 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=25a8008cbebf4abda209c7d28427bb99 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=59e7e12eb3d44dfbacf8755ef02f52c7 doc_type=surgical_note error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 68/138 uuid=13f43defce4c471ba920ef1ff92efba0 lang=ml doc_type=telemedicine_transcript
+[s5] retry 1/2 uuid=885a67d0071948ac8a8336b278e81003 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=885a67d0071948ac8a8336b278e81003 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=25a8008cbebf4abda209c7d28427bb99 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=59e7e12eb3d44dfbacf8755ef02f52c7 doc_type=prescription error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 69/138 uuid=13f43defce4c471ba920ef1ff92efba0 lang=ml doc_type=opd_slip
+[s5] progress 45/138 uuid=59e7e12eb3d44dfbacf8755ef02f52c7 lang=kn verdict=fail soft=True
+[s5] SOFT-FAIL uuid=9a97560e03a846c8929c9b78a488affb doc_type=surgical_note error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 70/138 uuid=80435bdcef24479390d6e6ae0b2aeeb1 lang=ml doc_type=er_triage_notes
+[s5] retry 1/2 uuid=07483932a3354f04a67c4b8846a2873f after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=25a8008cbebf4abda209c7d28427bb99 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=07483932a3354f04a67c4b8846a2873f after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=bfa3ca76f88b4b8f9ee3a47d5e04dae6 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=9a97560e03a846c8929c9b78a488affb doc_type=lab_report error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 71/138 uuid=80435bdcef24479390d6e6ae0b2aeeb1 lang=ml doc_type=telemedicine_transcript
+[s5] retry 1/2 uuid=07483932a3354f04a67c4b8846a2873f after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=9a97560e03a846c8929c9b78a488affb doc_type=opd_slip error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 72/138 uuid=80435bdcef24479390d6e6ae0b2aeeb1 lang=ml doc_type=surgical_note
+[s5] retry 1/2 uuid=57bb67467d7c4747ac5af1eeb8f4a56a after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=bfa3ca76f88b4b8f9ee3a47d5e04dae6 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=57bb67467d7c4747ac5af1eeb8f4a56a after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=57bb67467d7c4747ac5af1eeb8f4a56a after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=bfa3ca76f88b4b8f9ee3a47d5e04dae6 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=13f43defce4c471ba920ef1ff92efba0 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=60ff3470cf8340efaa474e13896d8568 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=13f43defce4c471ba920ef1ff92efba0 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=60ff3470cf8340efaa474e13896d8568 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=13f43defce4c471ba920ef1ff92efba0 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=60ff3470cf8340efaa474e13896d8568 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=80435bdcef24479390d6e6ae0b2aeeb1 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=885a67d0071948ac8a8336b278e81003 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=885a67d0071948ac8a8336b278e81003 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=80435bdcef24479390d6e6ae0b2aeeb1 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=885a67d0071948ac8a8336b278e81003 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=80435bdcef24479390d6e6ae0b2aeeb1 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=07483932a3354f04a67c4b8846a2873f after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=25a8008cbebf4abda209c7d28427bb99 doc_type=prescription error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 73/138 uuid=8a02e74c7f104c1fa9f00b8507bac016 lang=mni doc_type=discharge_summary
+[s5] retry 2/2 uuid=07483932a3354f04a67c4b8846a2873f after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=07483932a3354f04a67c4b8846a2873f after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=25a8008cbebf4abda209c7d28427bb99 doc_type=lab_report error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 74/138 uuid=8a02e74c7f104c1fa9f00b8507bac016 lang=mni doc_type=referral_letter
+[s5] progress 50/138 uuid=25a8008cbebf4abda209c7d28427bb99 lang=kok verdict=fail soft=True
+[s5] retry 2/2 uuid=57bb67467d7c4747ac5af1eeb8f4a56a after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=57bb67467d7c4747ac5af1eeb8f4a56a after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=25a8008cbebf4abda209c7d28427bb99 doc_type=asha_worker_note error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 75/138 uuid=8a02e74c7f104c1fa9f00b8507bac016 lang=mni doc_type=radiology_report
+[s5] retry 2/2 uuid=57bb67467d7c4747ac5af1eeb8f4a56a after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=bfa3ca76f88b4b8f9ee3a47d5e04dae6 doc_type=lab_report error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 76/138 uuid=df61060159844e75aeafcafe43b1bc0d lang=mni doc_type=discharge_summary
+[s5] retry 2/2 uuid=13f43defce4c471ba920ef1ff92efba0 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=13f43defce4c471ba920ef1ff92efba0 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=13f43defce4c471ba920ef1ff92efba0 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=bfa3ca76f88b4b8f9ee3a47d5e04dae6 doc_type=opd_slip error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 77/138 uuid=df61060159844e75aeafcafe43b1bc0d lang=mni doc_type=referral_letter
+[s5] retry 1/2 uuid=8a02e74c7f104c1fa9f00b8507bac016 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=80435bdcef24479390d6e6ae0b2aeeb1 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=bfa3ca76f88b4b8f9ee3a47d5e04dae6 doc_type=phc_register error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 78/138 uuid=df61060159844e75aeafcafe43b1bc0d lang=mni doc_type=radiology_report
+[s5] retry 1/2 uuid=8a02e74c7f104c1fa9f00b8507bac016 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=80435bdcef24479390d6e6ae0b2aeeb1 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=60ff3470cf8340efaa474e13896d8568 doc_type=er_triage_notes error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 79/138 uuid=433eba4ea24144438f7866160103b297 lang=mr doc_type=discharge_summary
+[s5] progress 55/138 uuid=60ff3470cf8340efaa474e13896d8568 lang=ks verdict=fail soft=True
+[s5] retry 1/2 uuid=8a02e74c7f104c1fa9f00b8507bac016 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=80435bdcef24479390d6e6ae0b2aeeb1 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=60ff3470cf8340efaa474e13896d8568 doc_type=telemedicine_transcript error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 80/138 uuid=433eba4ea24144438f7866160103b297 lang=mr doc_type=referral_letter
+[s5] retry 1/2 uuid=df61060159844e75aeafcafe43b1bc0d after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=60ff3470cf8340efaa474e13896d8568 doc_type=opd_slip error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 81/138 uuid=433eba4ea24144438f7866160103b297 lang=mr doc_type=radiology_report
+[s5] SOFT-FAIL uuid=885a67d0071948ac8a8336b278e81003 doc_type=er_triage_notes error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 82/138 uuid=5c5a472d66774bdc9e232a4893422f0c lang=mr doc_type=referral_letter
+[s5] SOFT-FAIL uuid=885a67d0071948ac8a8336b278e81003 doc_type=telemedicine_transcript error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 83/138 uuid=5c5a472d66774bdc9e232a4893422f0c lang=mr doc_type=radiology_report
+[s5] retry 1/2 uuid=df61060159844e75aeafcafe43b1bc0d after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=885a67d0071948ac8a8336b278e81003 doc_type=opd_slip error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 84/138 uuid=5c5a472d66774bdc9e232a4893422f0c lang=mr doc_type=er_triage_notes
+[s5] progress 60/138 uuid=885a67d0071948ac8a8336b278e81003 lang=ks verdict=fail soft=True
+[s5] retry 1/2 uuid=df61060159844e75aeafcafe43b1bc0d after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=07483932a3354f04a67c4b8846a2873f doc_type=opd_slip error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 85/138 uuid=3ca088f3e9d4400e893c3f00c17d4ff5 lang=ne doc_type=automated_sms
+[s5] SOFT-FAIL uuid=07483932a3354f04a67c4b8846a2873f doc_type=phc_register error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 86/138 uuid=3ca088f3e9d4400e893c3f00c17d4ff5 lang=ne doc_type=insurance_claim
+[s5] retry 1/2 uuid=433eba4ea24144438f7866160103b297 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=07483932a3354f04a67c4b8846a2873f doc_type=prescription error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 87/138 uuid=3ca088f3e9d4400e893c3f00c17d4ff5 lang=ne doc_type=hospital_billing
+[s5] SOFT-FAIL uuid=57bb67467d7c4747ac5af1eeb8f4a56a doc_type=surgical_note error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 88/138 uuid=8d7895d6831e4b31956f868182103764 lang=ne doc_type=prescription
+[s5] retry 1/2 uuid=433eba4ea24144438f7866160103b297 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=8a02e74c7f104c1fa9f00b8507bac016 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=57bb67467d7c4747ac5af1eeb8f4a56a doc_type=opd_slip error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 89/138 uuid=8d7895d6831e4b31956f868182103764 lang=ne doc_type=asha_worker_note
+[s5] progress 65/138 uuid=57bb67467d7c4747ac5af1eeb8f4a56a lang=mai verdict=fail soft=True
+[s5] retry 1/2 uuid=433eba4ea24144438f7866160103b297 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=57bb67467d7c4747ac5af1eeb8f4a56a doc_type=prescription error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 90/138 uuid=8d7895d6831e4b31956f868182103764 lang=ne doc_type=automated_sms
+[s5] retry 1/2 uuid=5c5a472d66774bdc9e232a4893422f0c after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=8a02e74c7f104c1fa9f00b8507bac016 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=5c5a472d66774bdc9e232a4893422f0c after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=13f43defce4c471ba920ef1ff92efba0 doc_type=er_triage_notes error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 91/138 uuid=0fbde0cc3f544c77b260ef63a5a3a8d8 lang=or doc_type=surgical_note
+[s5] SOFT-FAIL uuid=13f43defce4c471ba920ef1ff92efba0 doc_type=telemedicine_transcript error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 92/138 uuid=0fbde0cc3f544c77b260ef63a5a3a8d8 lang=or doc_type=lab_report
+[s5] retry 1/2 uuid=5c5a472d66774bdc9e232a4893422f0c after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=8a02e74c7f104c1fa9f00b8507bac016 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=13f43defce4c471ba920ef1ff92efba0 doc_type=opd_slip error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 93/138 uuid=0fbde0cc3f544c77b260ef63a5a3a8d8 lang=or doc_type=opd_slip
+[s5] retry 1/2 uuid=3ca088f3e9d4400e893c3f00c17d4ff5 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=3ca088f3e9d4400e893c3f00c17d4ff5 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=df61060159844e75aeafcafe43b1bc0d after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=80435bdcef24479390d6e6ae0b2aeeb1 doc_type=er_triage_notes error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 94/138 uuid=67bf2f4af82d452db4c95cd1c7f59330 lang=or doc_type=opd_slip
+[s5] progress 70/138 uuid=80435bdcef24479390d6e6ae0b2aeeb1 lang=ml verdict=fail soft=True
+[s5] retry 1/2 uuid=3ca088f3e9d4400e893c3f00c17d4ff5 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=8d7895d6831e4b31956f868182103764 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=80435bdcef24479390d6e6ae0b2aeeb1 doc_type=telemedicine_transcript error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 95/138 uuid=67bf2f4af82d452db4c95cd1c7f59330 lang=or doc_type=surgical_note
+[s5] retry 2/2 uuid=df61060159844e75aeafcafe43b1bc0d after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=8d7895d6831e4b31956f868182103764 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=df61060159844e75aeafcafe43b1bc0d after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=80435bdcef24479390d6e6ae0b2aeeb1 doc_type=surgical_note error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 96/138 uuid=67bf2f4af82d452db4c95cd1c7f59330 lang=or doc_type=prescription
+[s5] retry 1/2 uuid=8d7895d6831e4b31956f868182103764 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=433eba4ea24144438f7866160103b297 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=0fbde0cc3f544c77b260ef63a5a3a8d8 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=433eba4ea24144438f7866160103b297 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=0fbde0cc3f544c77b260ef63a5a3a8d8 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=433eba4ea24144438f7866160103b297 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=0fbde0cc3f544c77b260ef63a5a3a8d8 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=5c5a472d66774bdc9e232a4893422f0c after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=5c5a472d66774bdc9e232a4893422f0c after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=67bf2f4af82d452db4c95cd1c7f59330 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=8a02e74c7f104c1fa9f00b8507bac016 doc_type=discharge_summary error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 97/138 uuid=7c5ed5ed53ea43189c76c8f6d4bef1a8 lang=pa doc_type=opd_slip
+[s5] retry 2/2 uuid=5c5a472d66774bdc9e232a4893422f0c after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=67bf2f4af82d452db4c95cd1c7f59330 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=3ca088f3e9d4400e893c3f00c17d4ff5 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=3ca088f3e9d4400e893c3f00c17d4ff5 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=8a02e74c7f104c1fa9f00b8507bac016 doc_type=referral_letter error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 98/138 uuid=7c5ed5ed53ea43189c76c8f6d4bef1a8 lang=pa doc_type=surgical_note
+[s5] retry 1/2 uuid=67bf2f4af82d452db4c95cd1c7f59330 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=3ca088f3e9d4400e893c3f00c17d4ff5 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=8d7895d6831e4b31956f868182103764 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=8a02e74c7f104c1fa9f00b8507bac016 doc_type=radiology_report error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 99/138 uuid=7c5ed5ed53ea43189c76c8f6d4bef1a8 lang=pa doc_type=prescription
+[s5] progress 75/138 uuid=8a02e74c7f104c1fa9f00b8507bac016 lang=mni verdict=fail soft=True
+[s5] retry 2/2 uuid=8d7895d6831e4b31956f868182103764 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=df61060159844e75aeafcafe43b1bc0d doc_type=discharge_summary error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 100/138 uuid=b18798ffecf04ecc87455c46e724894f lang=pa doc_type=surgical_note
+[s5] retry 2/2 uuid=8d7895d6831e4b31956f868182103764 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=7c5ed5ed53ea43189c76c8f6d4bef1a8 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=0fbde0cc3f544c77b260ef63a5a3a8d8 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=0fbde0cc3f544c77b260ef63a5a3a8d8 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=df61060159844e75aeafcafe43b1bc0d doc_type=referral_letter error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 101/138 uuid=b18798ffecf04ecc87455c46e724894f lang=pa doc_type=lab_report
+[s5] retry 2/2 uuid=0fbde0cc3f544c77b260ef63a5a3a8d8 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=df61060159844e75aeafcafe43b1bc0d doc_type=radiology_report error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 102/138 uuid=b18798ffecf04ecc87455c46e724894f lang=pa doc_type=phc_register
+[s5] retry 1/2 uuid=7c5ed5ed53ea43189c76c8f6d4bef1a8 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=67bf2f4af82d452db4c95cd1c7f59330 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=433eba4ea24144438f7866160103b297 doc_type=discharge_summary error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 103/138 uuid=22ef884ce12247309d07fc3f601a3c59 lang=sa doc_type=prescription
+[s5] retry 1/2 uuid=7c5ed5ed53ea43189c76c8f6d4bef1a8 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=433eba4ea24144438f7866160103b297 doc_type=referral_letter error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 104/138 uuid=22ef884ce12247309d07fc3f601a3c59 lang=sa doc_type=insurance_claim
+[s5] progress 80/138 uuid=433eba4ea24144438f7866160103b297 lang=mr verdict=fail soft=True
+[s5] retry 2/2 uuid=67bf2f4af82d452db4c95cd1c7f59330 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=b18798ffecf04ecc87455c46e724894f after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=433eba4ea24144438f7866160103b297 doc_type=radiology_report error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 105/138 uuid=22ef884ce12247309d07fc3f601a3c59 lang=sa doc_type=asha_worker_note
+[s5] SOFT-FAIL uuid=5c5a472d66774bdc9e232a4893422f0c doc_type=referral_letter error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 106/138 uuid=6e943dc3578249e38b9e61705d0912a9 lang=sa doc_type=automated_sms
+[s5] retry 2/2 uuid=67bf2f4af82d452db4c95cd1c7f59330 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=5c5a472d66774bdc9e232a4893422f0c doc_type=radiology_report error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 107/138 uuid=6e943dc3578249e38b9e61705d0912a9 lang=sa doc_type=insurance_claim
+[s5] retry 1/2 uuid=b18798ffecf04ecc87455c46e724894f after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=5c5a472d66774bdc9e232a4893422f0c doc_type=er_triage_notes error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 108/138 uuid=6e943dc3578249e38b9e61705d0912a9 lang=sa doc_type=hospital_billing
+[s5] retry 1/2 uuid=b18798ffecf04ecc87455c46e724894f after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=3ca088f3e9d4400e893c3f00c17d4ff5 doc_type=automated_sms error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 109/138 uuid=0b19143502244d21a03f71ef838ab4ff lang=sat doc_type=asha_worker_note
+[s5] progress 85/138 uuid=3ca088f3e9d4400e893c3f00c17d4ff5 lang=ne verdict=fail soft=True
+[s5] SOFT-FAIL uuid=3ca088f3e9d4400e893c3f00c17d4ff5 doc_type=insurance_claim error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 110/138 uuid=0b19143502244d21a03f71ef838ab4ff lang=sat doc_type=automated_sms
+[s5] retry 1/2 uuid=22ef884ce12247309d07fc3f601a3c59 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=7c5ed5ed53ea43189c76c8f6d4bef1a8 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=22ef884ce12247309d07fc3f601a3c59 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=3ca088f3e9d4400e893c3f00c17d4ff5 doc_type=hospital_billing error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 111/138 uuid=0b19143502244d21a03f71ef838ab4ff lang=sat doc_type=hospital_billing
+[s5] SOFT-FAIL uuid=8d7895d6831e4b31956f868182103764 doc_type=prescription error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 112/138 uuid=e899bd99966c4ac6b77d784bae3482f0 lang=sat doc_type=phc_register
+[s5] retry 1/2 uuid=22ef884ce12247309d07fc3f601a3c59 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=8d7895d6831e4b31956f868182103764 doc_type=asha_worker_note error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 113/138 uuid=e899bd99966c4ac6b77d784bae3482f0 lang=sat doc_type=asha_worker_note
+[s5] retry 1/2 uuid=6e943dc3578249e38b9e61705d0912a9 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=7c5ed5ed53ea43189c76c8f6d4bef1a8 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=8d7895d6831e4b31956f868182103764 doc_type=automated_sms error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 114/138 uuid=e899bd99966c4ac6b77d784bae3482f0 lang=sat doc_type=insurance_claim
+[s5] progress 90/138 uuid=8d7895d6831e4b31956f868182103764 lang=ne verdict=fail soft=True
+[s5] retry 1/2 uuid=6e943dc3578249e38b9e61705d0912a9 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=7c5ed5ed53ea43189c76c8f6d4bef1a8 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=0fbde0cc3f544c77b260ef63a5a3a8d8 doc_type=surgical_note error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 115/138 uuid=825c4438c02440dc90d3ddec7ffec8ee lang=sd doc_type=automated_sms
+[s5] retry 1/2 uuid=6e943dc3578249e38b9e61705d0912a9 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=0fbde0cc3f544c77b260ef63a5a3a8d8 doc_type=lab_report error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 116/138 uuid=825c4438c02440dc90d3ddec7ffec8ee lang=sd doc_type=hospital_billing
+[s5] retry 1/2 uuid=0b19143502244d21a03f71ef838ab4ff after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=b18798ffecf04ecc87455c46e724894f after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=0fbde0cc3f544c77b260ef63a5a3a8d8 doc_type=opd_slip error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 117/138 uuid=825c4438c02440dc90d3ddec7ffec8ee lang=sd doc_type=discharge_summary
+[s5] retry 1/2 uuid=0b19143502244d21a03f71ef838ab4ff after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=67bf2f4af82d452db4c95cd1c7f59330 doc_type=opd_slip error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 118/138 uuid=fe3a6e05b50a4eb1b679f5fba0c5440b lang=sd doc_type=insurance_claim
+[s5] retry 1/2 uuid=0b19143502244d21a03f71ef838ab4ff after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=b18798ffecf04ecc87455c46e724894f after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=e899bd99966c4ac6b77d784bae3482f0 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=b18798ffecf04ecc87455c46e724894f after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=67bf2f4af82d452db4c95cd1c7f59330 doc_type=surgical_note error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 119/138 uuid=fe3a6e05b50a4eb1b679f5fba0c5440b lang=sd doc_type=hospital_billing
+[s5] progress 95/138 uuid=67bf2f4af82d452db4c95cd1c7f59330 lang=or verdict=fail soft=True
+[s5] retry 1/2 uuid=e899bd99966c4ac6b77d784bae3482f0 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=22ef884ce12247309d07fc3f601a3c59 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=e899bd99966c4ac6b77d784bae3482f0 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=67bf2f4af82d452db4c95cd1c7f59330 doc_type=prescription error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 120/138 uuid=fe3a6e05b50a4eb1b679f5fba0c5440b lang=sd doc_type=discharge_summary
+[s5] retry 2/2 uuid=22ef884ce12247309d07fc3f601a3c59 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=825c4438c02440dc90d3ddec7ffec8ee after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=22ef884ce12247309d07fc3f601a3c59 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=825c4438c02440dc90d3ddec7ffec8ee after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=6e943dc3578249e38b9e61705d0912a9 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=825c4438c02440dc90d3ddec7ffec8ee after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=7c5ed5ed53ea43189c76c8f6d4bef1a8 doc_type=opd_slip error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 121/138 uuid=829db9fbfeda404d89ff9b8a405b5e4d lang=ta doc_type=opd_slip
+[s5] retry 2/2 uuid=6e943dc3578249e38b9e61705d0912a9 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=fe3a6e05b50a4eb1b679f5fba0c5440b after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=6e943dc3578249e38b9e61705d0912a9 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=0b19143502244d21a03f71ef838ab4ff after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=fe3a6e05b50a4eb1b679f5fba0c5440b after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=7c5ed5ed53ea43189c76c8f6d4bef1a8 doc_type=surgical_note error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 122/138 uuid=829db9fbfeda404d89ff9b8a405b5e4d lang=ta doc_type=prescription
+[s5] retry 2/2 uuid=0b19143502244d21a03f71ef838ab4ff after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=7c5ed5ed53ea43189c76c8f6d4bef1a8 doc_type=prescription error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 123/138 uuid=829db9fbfeda404d89ff9b8a405b5e4d lang=ta doc_type=insurance_claim
+[s5] retry 1/2 uuid=fe3a6e05b50a4eb1b679f5fba0c5440b after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=0b19143502244d21a03f71ef838ab4ff after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=e899bd99966c4ac6b77d784bae3482f0 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=b18798ffecf04ecc87455c46e724894f doc_type=surgical_note error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 124/138 uuid=ce942a5fb5644181ac0db94b6c9c1314 lang=ta doc_type=asha_worker_note
+[s5] progress 100/138 uuid=b18798ffecf04ecc87455c46e724894f lang=pa verdict=fail soft=True
+[s5] retry 2/2 uuid=e899bd99966c4ac6b77d784bae3482f0 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=829db9fbfeda404d89ff9b8a405b5e4d after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=e899bd99966c4ac6b77d784bae3482f0 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=b18798ffecf04ecc87455c46e724894f doc_type=lab_report error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 125/138 uuid=ce942a5fb5644181ac0db94b6c9c1314 lang=ta doc_type=automated_sms
+[s5] retry 2/2 uuid=825c4438c02440dc90d3ddec7ffec8ee after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=b18798ffecf04ecc87455c46e724894f doc_type=phc_register error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 126/138 uuid=ce942a5fb5644181ac0db94b6c9c1314 lang=ta doc_type=insurance_claim
+[s5] retry 2/2 uuid=825c4438c02440dc90d3ddec7ffec8ee after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=829db9fbfeda404d89ff9b8a405b5e4d after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=825c4438c02440dc90d3ddec7ffec8ee after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=22ef884ce12247309d07fc3f601a3c59 doc_type=prescription error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 127/138 uuid=57a29898a6944b899059fb674d16f990 lang=te doc_type=hospital_billing
+[s5] retry 1/2 uuid=829db9fbfeda404d89ff9b8a405b5e4d after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=fe3a6e05b50a4eb1b679f5fba0c5440b after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=22ef884ce12247309d07fc3f601a3c59 doc_type=insurance_claim error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 128/138 uuid=57a29898a6944b899059fb674d16f990 lang=te doc_type=discharge_summary
+[s5] retry 1/2 uuid=ce942a5fb5644181ac0db94b6c9c1314 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=22ef884ce12247309d07fc3f601a3c59 doc_type=asha_worker_note error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 129/138 uuid=57a29898a6944b899059fb674d16f990 lang=te doc_type=referral_letter
+[s5] progress 105/138 uuid=22ef884ce12247309d07fc3f601a3c59 lang=sa verdict=fail soft=True
+[s5] retry 2/2 uuid=fe3a6e05b50a4eb1b679f5fba0c5440b after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=6e943dc3578249e38b9e61705d0912a9 doc_type=automated_sms error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 130/138 uuid=f0e00cbdb5dd4d33a122229e4883c598 lang=te doc_type=hospital_billing
+[s5] retry 1/2 uuid=ce942a5fb5644181ac0db94b6c9c1314 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=fe3a6e05b50a4eb1b679f5fba0c5440b after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=6e943dc3578249e38b9e61705d0912a9 doc_type=insurance_claim error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 131/138 uuid=f0e00cbdb5dd4d33a122229e4883c598 lang=te doc_type=discharge_summary
+[s5] retry 1/2 uuid=ce942a5fb5644181ac0db94b6c9c1314 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=6e943dc3578249e38b9e61705d0912a9 doc_type=hospital_billing error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 132/138 uuid=f0e00cbdb5dd4d33a122229e4883c598 lang=te doc_type=referral_letter
+[s5] SOFT-FAIL uuid=0b19143502244d21a03f71ef838ab4ff doc_type=asha_worker_note error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 133/138 uuid=6b15543bcd6545f5803d6887e2a48820 lang=ur doc_type=discharge_summary
+[s5] retry 1/2 uuid=57a29898a6944b899059fb674d16f990 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=829db9fbfeda404d89ff9b8a405b5e4d after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=0b19143502244d21a03f71ef838ab4ff doc_type=automated_sms error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 134/138 uuid=6b15543bcd6545f5803d6887e2a48820 lang=ur doc_type=referral_letter
+[s5] progress 110/138 uuid=0b19143502244d21a03f71ef838ab4ff lang=sat verdict=fail soft=True
+[s5] retry 1/2 uuid=57a29898a6944b899059fb674d16f990 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=0b19143502244d21a03f71ef838ab4ff doc_type=hospital_billing error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 135/138 uuid=6b15543bcd6545f5803d6887e2a48820 lang=ur doc_type=radiology_report
+[s5] retry 1/2 uuid=57a29898a6944b899059fb674d16f990 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=e899bd99966c4ac6b77d784bae3482f0 doc_type=phc_register error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 136/138 uuid=bf0de98a0c63491c8877846b6f8dad65 lang=ur doc_type=discharge_summary
+[s5] retry 2/2 uuid=829db9fbfeda404d89ff9b8a405b5e4d after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=f0e00cbdb5dd4d33a122229e4883c598 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=e899bd99966c4ac6b77d784bae3482f0 doc_type=asha_worker_note error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 137/138 uuid=bf0de98a0c63491c8877846b6f8dad65 lang=ur doc_type=referral_letter
+[s5] retry 2/2 uuid=829db9fbfeda404d89ff9b8a405b5e4d after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=e899bd99966c4ac6b77d784bae3482f0 doc_type=insurance_claim error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] judging 138/138 uuid=bf0de98a0c63491c8877846b6f8dad65 lang=ur doc_type=radiology_report
+[s5] retry 1/2 uuid=f0e00cbdb5dd4d33a122229e4883c598 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=825c4438c02440dc90d3ddec7ffec8ee doc_type=automated_sms error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] progress 115/138 uuid=825c4438c02440dc90d3ddec7ffec8ee lang=sd verdict=fail soft=True
+[s5] retry 1/2 uuid=f0e00cbdb5dd4d33a122229e4883c598 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=ce942a5fb5644181ac0db94b6c9c1314 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=6b15543bcd6545f5803d6887e2a48820 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=825c4438c02440dc90d3ddec7ffec8ee doc_type=hospital_billing error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=825c4438c02440dc90d3ddec7ffec8ee doc_type=discharge_summary error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=6b15543bcd6545f5803d6887e2a48820 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=ce942a5fb5644181ac0db94b6c9c1314 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=6b15543bcd6545f5803d6887e2a48820 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=fe3a6e05b50a4eb1b679f5fba0c5440b doc_type=insurance_claim error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=ce942a5fb5644181ac0db94b6c9c1314 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=bf0de98a0c63491c8877846b6f8dad65 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=57a29898a6944b899059fb674d16f990 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=fe3a6e05b50a4eb1b679f5fba0c5440b doc_type=hospital_billing error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=bf0de98a0c63491c8877846b6f8dad65 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 1/2 uuid=bf0de98a0c63491c8877846b6f8dad65 after 1s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=57a29898a6944b899059fb674d16f990 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=fe3a6e05b50a4eb1b679f5fba0c5440b doc_type=discharge_summary error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] progress 120/138 uuid=fe3a6e05b50a4eb1b679f5fba0c5440b lang=sd verdict=fail soft=True
+[s5] retry 2/2 uuid=57a29898a6944b899059fb674d16f990 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=f0e00cbdb5dd4d33a122229e4883c598 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=829db9fbfeda404d89ff9b8a405b5e4d doc_type=opd_slip error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=f0e00cbdb5dd4d33a122229e4883c598 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=f0e00cbdb5dd4d33a122229e4883c598 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=829db9fbfeda404d89ff9b8a405b5e4d doc_type=prescription error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=6b15543bcd6545f5803d6887e2a48820 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=829db9fbfeda404d89ff9b8a405b5e4d doc_type=insurance_claim error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=6b15543bcd6545f5803d6887e2a48820 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=6b15543bcd6545f5803d6887e2a48820 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=ce942a5fb5644181ac0db94b6c9c1314 doc_type=asha_worker_note error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=bf0de98a0c63491c8877846b6f8dad65 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=bf0de98a0c63491c8877846b6f8dad65 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] retry 2/2 uuid=bf0de98a0c63491c8877846b6f8dad65 after 2s: OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=ce942a5fb5644181ac0db94b6c9c1314 doc_type=automated_sms error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] progress 125/138 uuid=ce942a5fb5644181ac0db94b6c9c1314 lang=ta verdict=fail soft=True
+[s5] SOFT-FAIL uuid=ce942a5fb5644181ac0db94b6c9c1314 doc_type=insurance_claim error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=57a29898a6944b899059fb674d16f990 doc_type=hospital_billing error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=57a29898a6944b899059fb674d16f990 doc_type=discharge_summary error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=57a29898a6944b899059fb674d16f990 doc_type=referral_letter error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=f0e00cbdb5dd4d33a122229e4883c598 doc_type=hospital_billing error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] progress 130/138 uuid=f0e00cbdb5dd4d33a122229e4883c598 lang=te verdict=fail soft=True
+[s5] SOFT-FAIL uuid=f0e00cbdb5dd4d33a122229e4883c598 doc_type=discharge_summary error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=f0e00cbdb5dd4d33a122229e4883c598 doc_type=referral_letter error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=6b15543bcd6545f5803d6887e2a48820 doc_type=discharge_summary error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=6b15543bcd6545f5803d6887e2a48820 doc_type=referral_letter error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=6b15543bcd6545f5803d6887e2a48820 doc_type=radiology_report error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] progress 135/138 uuid=6b15543bcd6545f5803d6887e2a48820 lang=ur verdict=fail soft=True
+[s5] SOFT-FAIL uuid=bf0de98a0c63491c8877846b6f8dad65 doc_type=discharge_summary error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=bf0de98a0c63491c8877846b6f8dad65 doc_type=referral_letter error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] SOFT-FAIL uuid=bf0de98a0c63491c8877846b6f8dad65 doc_type=radiology_report error=OpenAI-compatible network error: <urlopen error [Errno -2] Name or service not known>
+[s5] progress 138/138 uuid=bf0de98a0c63491c8877846b6f8dad65 lang=ur verdict=fail soft=True
+[s5] WARNING: 138 judge network soft-fail(s) logged — see audit soft_failures / failed.jsonl
+[s5] WARNING: 138 judge fail(s) after repair logged — see failed.jsonl and audit failures
+[s5] MUST-WORK language fail(s): 72 (treat as system bug) langs=['as', 'bn', 'gu', 'hi', 'kn', 'ml', 'mr', 'or', 'pa', 'ta', 'te', 'ur']
+[s5] rare-script fail(s): 24 (expected capacity loss) langs=['brx', 'ks', 'mni', 'sat']
+[run] run_id=20260722T083050
+[run] folder=/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050
+[run] config=/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/pipeline.resolved.yaml
+
+=== s1_persona_sampling ===
+[s1_persona_sampling] OK in 0m02s (2.8s) → /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s1_persona_sampling
+  jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s1_persona_sampling/personas.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s1_persona_sampling/personas.parquet
+  audit_json: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s1_persona_sampling/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s1_persona_sampling/audit.md
+  preview_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/samples/s1_personas_preview.jsonl
+
+=== s2_taxonomy ===
+[s2_taxonomy] OK in 0m00s (0.0s) → /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s2_taxonomy
+  jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s2_taxonomy/assignments.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s2_taxonomy/assignments.parquet
+  audit_json: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s2_taxonomy/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s2_taxonomy/audit.md
+  preview_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/samples/s2_taxonomy_preview.jsonl
+
+=== s2b_persona_summary ===
+[s2b_persona_summary] OK in 1m15s (75.5s) → /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s2b_persona_summary
+  jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s2b_persona_summary/assignments_summarized.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s2b_persona_summary/assignments_summarized.parquet
+  audit_json: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s2b_persona_summary/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s2b_persona_summary/audit.md
+
+=== s3_prompt_construction ===
+[s3_prompt_construction] OK in 0m00s (0.1s) → /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s3_prompts
+  jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s3_prompts/prompts.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s3_prompts/prompts.parquet
+  audit_json: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s3_prompts/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s3_prompts/audit.md
+  preview_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/samples/s3_prompts_preview.jsonl
+
+=== s4_generation ===
+[s4_generation] OK in 19m48s (1188.3s) → /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s4_generation
+  jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s4_generation/documents.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s4_generation/documents.parquet
+  audit_json: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s4_generation/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s4_generation/audit.md
+  soft_failures_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s4_generation/soft_failures.jsonl
+  checkpoint_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s4_generation/checkpoint.jsonl
+
+=== s4b_translation ===
+[s4b_translation] OK in 13m22s (802.8s) → /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s4b_translation
+  jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s4b_translation/documents.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s4b_translation/documents.parquet
+  audit_json: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s4b_translation/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s4b_translation/audit.md
+  soft_failures_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s4b_translation/soft_failures.jsonl
+
+=== s5_linguistic_judge ===
+[s5_linguistic_judge] OK in 0m49s (50.0s) → /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s5_linguistic_judge
+  all_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s5_linguistic_judge/judged.jsonl
+  passed_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s5_linguistic_judge/passed.jsonl
+  failed_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s5_linguistic_judge/failed.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s5_linguistic_judge/judged.parquet
+  audit_json: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s5_linguistic_judge/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s5_linguistic_judge/audit.md
+  soft_failures_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s5_linguistic_judge/soft_failures.jsonl
+
+=== s6_deterministic_auditor ===
+[s6_deterministic_auditor] OK in 0m00s (0.0s) → /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s6_deterministic_auditor
+  all_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s6_deterministic_auditor/audited.jsonl
+  passed_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s6_deterministic_auditor/passed.jsonl
+  failed_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s6_deterministic_auditor/failed.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s6_deterministic_auditor/audited.parquet
+  audit_json: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s6_deterministic_auditor/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s6_deterministic_auditor/audit.md
+  failures_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s6_deterministic_auditor/failures.jsonl
+
+=== s7_s8_curation ===
+[s7_s8_curation] OK in 0m00s (0.0s) → /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s7_s8_curation[s10_split] FAILED after 0.0s: 'eval_fraction_actual_docs'
+
+  jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s7_s8_curation/curated.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s7_s8_curation/curated.parquet
+  audit_json: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s7_s8_curation/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s7_s8_curation/audit.md
+
+=== s9_gliner_format ===
+[s9_gliner_format] OK in 0m00s (0.0s) → /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s9_gliner_format
+  jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s9_gliner_format/gliner_docs.jsonl
+  parquet: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s9_gliner_format/gliner_docs.parquet
+  gliner_json: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s9_gliner_format/gliner_train.json
+  audit_json: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s9_gliner_format/audit.json
+  audit_md: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s9_gliner_format/audit.md
+  preview_jsonl: /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/samples/s9_gliner_preview.jsonl
+
+=== s10_split ===
+[run] failures audit → /home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/failures.md

@@ -1,0 +1,27 @@
+{
+  "stage": "s9_gliner_format",
+  "timestamp_utc": "2026-07-22T03:36:10.702971+00:00",
+  "input_jsonl": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T083050/s7_s8_curation/curated.jsonl",
+  "rows_in": 0,
+  "rows_out": 0,
+  "mean_tokens": 0.0,
+  "mean_entities": 0.0,
+  "ecr": {
+    "mean_ecr": 0.0,
+    "n": 0
+  },
+  "ised": {
+    "mean_ised": 0.0,
+    "per_entity_type": {},
+    "entity_types": 0
+  },
+  "ied": {
+    "mean_ised": 0.0,
+    "per_entity_type": {},
+    "entity_types": 0
+  },
+  "gold_span_metrics": null,
+  "gold_jsonl": null,
+  "fail_on_token_misalign": true,
+  "note": "No curated rows; wrote empty GLiNER outputs."
+}

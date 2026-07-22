@@ -110,14 +110,18 @@ translation:
   reasoning_effort: medium
   requests_per_minute: 110
   max_workers: 24
-  # Raised: rare-script + reasoning medium often hit 600s timeouts.
-  timeout_s: 1200
+  # Chat translate: keep timeout tight; on timeout → chat retry then dedicated.
+  # Old 1200s hung workers and soft-failed without translating.
+  timeout_s: 300
   skip_language_codes: [en]
   max_docs: null
-  # After ≤2 chat-translate failures on these langs → dedicated /translate once
-  # (no 5× generator repair burn). Undo: enable_dedicated_translate_fallback: false
+  # After ≤2 chat-translate failures on rare langs → dedicated /translate.
+  # Timeouts on ANY language: +timeout_chat_retries chat tries, then dedicated
+  # with dedicated_retries (never leave English body as final "timeout" soft-fail).
   rare_script_languages: [brx, mni, sat, ks]
   rare_script_max_chat_attempts: 2
+  timeout_chat_retries: 2
+  dedicated_retries: 2
   enable_dedicated_translate_fallback: true
   dedicated_translate_model: sarvam-translate:v1
   dedicated_translate_timeout_s: 180
@@ -192,11 +196,11 @@ curation:
     seed: 42
     curator_work_dir: artifacts/nemo_curator_dedup
   balancing:
-    enabled: true
-    # null = equalize down to the scarcest language count after dedup.
-    # Full run: set to ~5217 for 120k / 23 languages.
+    # Keep ALL quality (S6-passed) docs. Equalize-to-scarcest was discarding
+    # ~40%+ of good data (e.g. 126→69) just because brx/sat had fewer rows.
+    # Undo equalize: set enabled true + target_docs_per_language: null.
+    enabled: false
     target_docs_per_language: null
-    # Fail if any language has fewer than this many docs after dedup.
     min_docs_per_language: null
     allow_underfill: true
 
