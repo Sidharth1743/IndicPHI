@@ -1,0 +1,463 @@
+{
+  "stage": "s10_split",
+  "timestamp_utc": "2026-07-24T10:07:02.080106+00:00",
+  "input_jsonl": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260724T100211/s9_gliner_format/gliner_docs.jsonl",
+  "rows_in": 382,
+  "personas_in": 46,
+  "eval_fraction_target": 0.15,
+  "seed": 5051,
+  "persona_id_field": "uuid",
+  "language_field": "document_language_code",
+  "stratify_by": [
+    "language",
+    "doc_type_id",
+    "domain_id"
+  ],
+  "train_rows": 376,
+  "eval_rows": 6,
+  "eval_personas": 1,
+  "train_personas": 45,
+  "eval_fraction_actual_docs": 0.0157,
+  "per_language": {
+    "as": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 22
+    },
+    "bn": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 18
+    },
+    "brx": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 17
+    },
+    "doi": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 20
+    },
+    "en": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 20
+    },
+    "gu": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 15
+    },
+    "hi": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 19
+    },
+    "kn": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 20
+    },
+    "kok": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 15
+    },
+    "ks": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 15
+    },
+    "mai": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 19
+    },
+    "ml": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 20
+    },
+    "mni": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 17
+    },
+    "mr": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 18
+    },
+    "ne": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 13
+    },
+    "or": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 16
+    },
+    "pa": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 13
+    },
+    "sat": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 10
+    },
+    "sa": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 15
+    },
+    "sd": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 12
+    },
+    "ta": {
+      "personas": 2,
+      "eval_personas": 1,
+      "train_personas": 1,
+      "docs": 14
+    },
+    "te": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 16
+    },
+    "ur": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 18
+    }
+  },
+  "per_stratum": {
+    "as|automated_sms|general_medicine": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 11
+    },
+    "as|insurance_claim|tb_ncd": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 11
+    },
+    "bn|surgical_note|general_medicine": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 9
+    },
+    "bn|surgical_note|tb_ncd": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 9
+    },
+    "brx|lab_report|tb_ncd": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 9
+    },
+    "brx|prescription|general_medicine": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 8
+    },
+    "doi|lab_report|tb_ncd": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 9
+    },
+    "doi|prescription|general_medicine": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 11
+    },
+    "en|referral_letter|general_medicine": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 10
+    },
+    "en|referral_letter|maternal_health": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 10
+    },
+    "gu|asha_worker_note|oncology_chronic": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 7
+    },
+    "gu|opd_slip|general_medicine": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 8
+    },
+    "hi|phc_register|general_medicine": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 9
+    },
+    "hi|phc_register|maternal_health": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 10
+    },
+    "kn|lab_report|tb_ncd": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 9
+    },
+    "kn|prescription|general_medicine": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 11
+    },
+    "kok|hospital_billing|general_medicine": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 10
+    },
+    "kok|radiology_report|tb_ncd": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 5
+    },
+    "ks|asha_worker_note|general_medicine": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 7
+    },
+    "ks|phc_register|general_medicine": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 8
+    },
+    "mai|radiology_report|general_medicine": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 10
+    },
+    "mai|radiology_report|tb_ncd": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 9
+    },
+    "ml|asha_worker_note|general_medicine": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 10
+    },
+    "ml|phc_register|tb_ncd": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 10
+    },
+    "mni|automated_sms|general_medicine": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 8
+    },
+    "mni|automated_sms|maternal_health": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 9
+    },
+    "mr|lab_report|tb_ncd": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 8
+    },
+    "mr|prescription|general_medicine": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 10
+    },
+    "ne|automated_sms|general_medicine": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 7
+    },
+    "ne|insurance_claim|general_medicine": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 6
+    },
+    "or|er_triage_notes|general_medicine": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 7
+    },
+    "or|radiology_report|tb_ncd": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 9
+    },
+    "pa|radiology_report|tb_ncd": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 6
+    },
+    "pa|referral_letter|general_medicine": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 7
+    },
+    "sat|automated_sms|tb_ncd": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 6
+    },
+    "sat|insurance_claim|general_medicine": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 4
+    },
+    "sa|opd_slip|tb_ncd": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 7
+    },
+    "sa|surgical_note|general_medicine": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 8
+    },
+    "sd|asha_worker_note|general_medicine": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 7
+    },
+    "sd|radiology_report|tb_ncd": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 5
+    },
+    "ta|surgical_note|general_medicine": {
+      "personas": 2,
+      "eval_personas": 1,
+      "train_personas": 1,
+      "docs": 14
+    },
+    "te|asha_worker_note|general_medicine": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 9
+    },
+    "te|phc_register|tb_ncd": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 7
+    },
+    "ur|surgical_note|general_medicine": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 9
+    },
+    "ur|surgical_note|maternal_health": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 9
+    }
+  },
+  "train_language_counts": {
+    "as": 22,
+    "bn": 18,
+    "brx": 17,
+    "doi": 20,
+    "en": 20,
+    "gu": 15,
+    "hi": 19,
+    "kn": 20,
+    "kok": 15,
+    "ks": 15,
+    "mai": 19,
+    "ml": 20,
+    "mni": 17,
+    "mr": 18,
+    "ne": 13,
+    "or": 16,
+    "pa": 13,
+    "sa": 15,
+    "sat": 10,
+    "sd": 12,
+    "ta": 8,
+    "te": 16,
+    "ur": 18
+  },
+  "eval_language_counts": {
+    "ta": 6
+  },
+  "gliner_train_records": 376,
+  "gliner_eval_records": 6
+}

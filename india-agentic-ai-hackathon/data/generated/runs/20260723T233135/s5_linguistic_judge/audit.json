@@ -1,0 +1,83 @@
+{
+  "stage": "s5_linguistic_judge",
+  "timestamp_utc": "2026-07-23T19:03:12.371956+00:00",
+  "provider": "azure_foundry",
+  "model": "grok-4.3",
+  "base_url": "https://ambedkar-interpreter-resource.services.ai.azure.com/openai/v1",
+  "requests_per_minute": 500.0,
+  "max_workers": 24,
+  "timeout_s": 600.0,
+  "network_retries": 2,
+  "rows_judged": 138,
+  "rows_resumed_from_checkpoint": 0,
+  "pass_rate": 0.9927536231884058,
+  "label_distribution": {
+    "fail": 0.007246376811594203,
+    "pass": 0.9927536231884058
+  },
+  "positional_length_bias": {
+    "pearson_r": -0.057824713344977755,
+    "n": 138.0
+  },
+  "failures": [
+    {
+      "uuid": "fe3a6e05b50a4eb1b679f5fba0c5440b",
+      "document_id": "fe3a6e05b50a4eb1b679f5fba0c5440b__1",
+      "doc_type_id": "hospital_billing",
+      "document_language_code": "sd",
+      "judge_verdict": "fail",
+      "judge_score": 0.65,
+      "judge_flags": [
+        "instruction_drift"
+      ],
+      "judge_rationale": "Sindhi Arabic-script prose and allow-listed tags are correct with plausible 75F TB+NCD billing content; meta leakage '(سادو نثر — قسم ناهي)' indicates instruction_drift.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 2
+    }
+  ],
+  "failure_count": 1,
+  "soft_failures": [],
+  "soft_fail_count": 0,
+  "judge_repaired_count": 25,
+  "en_pivot_repair_count": 0,
+  "quality_repair_max": 5,
+  "repair_multi_constraint": true,
+  "repair_via_english_pivot": false,
+  "must_work_languages": [
+    "hi",
+    "ta",
+    "te",
+    "bn",
+    "mr",
+    "gu",
+    "kn",
+    "ml",
+    "pa",
+    "or",
+    "as",
+    "ur"
+  ],
+  "rare_script_languages": [
+    "brx",
+    "mni",
+    "sat",
+    "ks",
+    "sd",
+    "doi",
+    "sa"
+  ],
+  "columns_added": [
+    "judge_verdict",
+    "judge_score",
+    "judge_reasoning",
+    "judge_flags",
+    "judge_provider",
+    "judge_model",
+    "judge_soft_fail",
+    "judge_error",
+    "judge_repair_attempts",
+    "judge_repaired",
+    "stage"
+  ]
+}

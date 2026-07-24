@@ -1,0 +1,152 @@
+{
+  "stage": "s6_deterministic_auditor",
+  "timestamp_utc": "2026-07-24T10:06:03.828388+00:00",
+  "rows_audited": 492,
+  "rows_passed": 479,
+  "rows_failed": 13,
+  "pass_rate": 0.9735772357723578,
+  "mean_dics": 0.9908536585365854,
+  "mean_ecr": 0.9998729674796748,
+  "mean_bcr": 0.0,
+  "failures": [
+    {
+      "uuid": "f594af83f49d4547947752d58c0e45a9",
+      "document_id": "f594af83f49d4547947752d58c0e45a9__7",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "bn",
+      "auditor_errors": [
+        "phi_residue:2"
+      ],
+      "auditor_repair_attempts": 5
+    },
+    {
+      "uuid": "f594af83f49d4547947752d58c0e45a9",
+      "document_id": "f594af83f49d4547947752d58c0e45a9__8",
+      "doc_type_id": "hospital_billing",
+      "document_language_code": "bn",
+      "auditor_errors": [
+        "script_purity:target_script_ratio:0.000<0.35"
+      ],
+      "auditor_repair_attempts": 5
+    },
+    {
+      "uuid": "d21516b79dbe4fb78827faca53231bb6",
+      "document_id": "d21516b79dbe4fb78827faca53231bb6__4",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "doi",
+      "auditor_errors": [
+        "missing_required:BANK_ROUTING_NUMBER",
+        "phi_residue:4",
+        "script_purity:target_script_ratio:0.000<0.35"
+      ],
+      "auditor_repair_attempts": 5
+    },
+    {
+      "uuid": "39f3b8aa1d6b43a7bb32ef3cbb8bd25c",
+      "document_id": "39f3b8aa1d6b43a7bb32ef3cbb8bd25c__6",
+      "doc_type_id": "hospital_billing",
+      "document_language_code": "gu",
+      "auditor_errors": [
+        "entity_stuffing:TAX_ID,TELEPHONE_LANDLINE",
+        "phi_residue:1"
+      ],
+      "auditor_repair_attempts": 5
+    },
+    {
+      "uuid": "ba9480c1ca6a41458712603104065e74",
+      "document_id": "ba9480c1ca6a41458712603104065e74__1",
+      "doc_type_id": "referral_letter",
+      "document_language_code": "kok",
+      "auditor_errors": [
+        "dics_below_threshold:0.0"
+      ],
+      "auditor_repair_attempts": 1
+    },
+    {
+      "uuid": "666ba63c7da84db8a643943d59820646",
+      "document_id": "666ba63c7da84db8a643943d59820646__4",
+      "doc_type_id": "hospital_billing",
+      "document_language_code": "ml",
+      "auditor_errors": [
+        "dics_below_threshold:0.0"
+      ],
+      "auditor_repair_attempts": 1
+    },
+    {
+      "uuid": "ffc851ec5afe45e7920df93ce2dbe4ab",
+      "document_id": "ffc851ec5afe45e7920df93ce2dbe4ab__6",
+      "doc_type_id": "hospital_billing",
+      "document_language_code": "mr",
+      "auditor_errors": [
+        "phi_residue:1"
+      ],
+      "auditor_repair_attempts": 5
+    },
+    {
+      "uuid": "093fd825483c42618796923e84fdb6f0",
+      "document_id": "093fd825483c42618796923e84fdb6f0__2",
+      "doc_type_id": "hospital_billing",
+      "document_language_code": "ne",
+      "auditor_errors": [
+        "format:PAN_NUMBER:pan_format"
+      ],
+      "auditor_repair_attempts": 5
+    },
+    {
+      "uuid": "0538f3faf4324debbd546bf332d419f6",
+      "document_id": "0538f3faf4324debbd546bf332d419f6__3",
+      "doc_type_id": "telemedicine_transcript",
+      "document_language_code": "pa",
+      "auditor_errors": [
+        "dics_below_threshold:0.0"
+      ],
+      "auditor_repair_attempts": 5
+    },
+    {
+      "uuid": "3bc580120add4e55b09a0e1ac85b643f",
+      "document_id": "3bc580120add4e55b09a0e1ac85b643f__0",
+      "doc_type_id": "prescription",
+      "document_language_code": "sat",
+      "auditor_errors": [
+        "script_purity:target_script_ratio:0.000<0.35"
+      ],
+      "auditor_repair_attempts": 5
+    },
+    {
+      "uuid": "dfdd30d26dc24c94a8e5a3cd4aa57a2e",
+      "document_id": "dfdd30d26dc24c94a8e5a3cd4aa57a2e__2",
+      "doc_type_id": "hospital_billing",
+      "document_language_code": "sat",
+      "auditor_errors": [
+        "format:PAN_NUMBER:pan_format",
+        "script_purity:target_script_ratio:0.000<0.35"
+      ],
+      "auditor_repair_attempts": 5
+    },
+    {
+      "uuid": "228cb6f1c22941279fc07428487acd05",
+      "document_id": "228cb6f1c22941279fc07428487acd05__0",
+      "doc_type_id": "prescription",
+      "document_language_code": "sd",
+      "auditor_errors": [
+        "dics_below_threshold:0.0"
+      ],
+      "auditor_repair_attempts": 0
+    },
+    {
+      "uuid": "6227e1809b0743be8c7473f02961d290",
+      "document_id": "6227e1809b0743be8c7473f02961d290__5",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "sd",
+      "auditor_errors": [
+        "phi_residue:8",
+        "dics_below_threshold:0.5",
+        "script_purity:wrong_indic_script:Devanagari>Arabic"
+      ],
+      "auditor_repair_attempts": 5
+    }
+  ],
+  "failure_count": 13,
+  "auditor_repaired_count": 79,
+  "quality_repair_max": 5
+}

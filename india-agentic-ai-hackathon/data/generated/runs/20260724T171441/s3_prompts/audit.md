@@ -1,0 +1,7 @@
+# Stage 3 — Prompt Construction Audit
+
+- rows_in: **3**
+- rows_out: **3**
+- max_docs: `3`
+- languages: `{'as': 1, 'bn': 1, 'hi': 1}`
+- doc_types: `{'asha_worker_note': 1, 'automated_sms': 1, 'hospital_billing': 1}`

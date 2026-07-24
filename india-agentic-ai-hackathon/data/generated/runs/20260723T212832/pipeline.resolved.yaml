@@ -1,0 +1,217 @@
+targets:
+  total_docs: 138
+  languages: 23
+  taxonomy_cells: 98
+persona_sampling:
+  dataset_id: nvidia/Nemotron-Personas-India
+  split: en_IN
+  seed: 3031
+  personas_per_language: 2
+  docs_per_persona: 3
+  max_scan_rows: 250000
+  language_codes: null
+  languages_config: configs/synthetic-data/languages.yaml
+  output_dir: data/generated/runs/20260723T212832/s1_persona_sampling
+  local_shard_path: data/nemotron-personas-india/en_IN-00000-of-00011.parquet
+taxonomy:
+  input_jsonl: data/generated/runs/20260723T212832/s1_persona_sampling/personas.jsonl
+  doc_types_config: configs/synthetic-data/doc_types.yaml
+  domains_config: configs/synthetic-data/domains.yaml
+  output_dir: data/generated/runs/20260723T212832/s2_taxonomy
+  seed: 3031
+  prefer_unique_cell_per_persona: true
+  prefer_unique_doc_type_per_persona: true
+  prefer_unique_domain_per_persona: true
+persona_summary:
+  input_jsonl: data/generated/runs/20260723T212832/s2_taxonomy/assignments.jsonl
+  output_dir: data/generated/runs/20260723T212832/s2b_persona_summary
+  model: sarvam-30b
+  base_url: https://api.sarvam.ai/v1
+  api_key_env: SARVAM_API_KEY
+  temperature: 0.2
+  max_tokens: 512
+  reasoning_effort: null
+  empty_content_retries: 3
+  requests_per_minute: 110
+  max_workers: 24
+  timeout_s: 120
+  narrative_max_chars: 240
+  max_docs: null
+prompt_construction:
+  input_jsonl: data/generated/runs/20260723T212832/s2b_persona_summary/assignments_summarized.jsonl
+  entities_config: configs/synthetic-data/entities.yaml
+  entity_profiles_config: configs/synthetic-data/entity_profiles.yaml
+  annotation_rules_config: configs/synthetic-data/annotation_rules.yaml
+  entity_format_examples_config: configs/synthetic-data/entity_format_examples.yaml
+  doc_format_examples_config: configs/synthetic-data/doc_format_examples.yaml
+  include_persona_narrative_in_prompt: false
+  persona_narrative_max_chars: 180
+  require_all_profile_entities: true
+  output_dir: data/generated/runs/20260723T212832/s3_prompts
+  max_docs: null
+  language_codes: null
+generation:
+  engine: data_designer
+  provider: sarvam
+  input_jsonl: data/generated/runs/20260723T212832/s3_prompts/prompts.jsonl
+  output_dir: data/generated/runs/20260723T212832/s4_generation
+  model: sarvam-105b
+  base_url: https://api.sarvam.ai/v1
+  api_key_env: SARVAM_API_KEY
+  temperature: 0.3
+  max_tokens: 32768
+  reasoning_effort: medium
+  requests_per_minute: 110
+  max_workers: 24
+  timeout_s: 600
+  max_docs: null
+  empty_content_retries: 3
+  repair_retries: 5
+  repair_multi_constraint: true
+  repair_via_english_pivot: false
+  reject_truncated: true
+translation:
+  input_jsonl: data/generated/runs/20260723T212832/s4_generation/documents.jsonl
+  output_dir: data/generated/runs/20260723T212832/s4b_translation
+  model: sarvam-105b
+  base_url: https://api.sarvam.ai/v1
+  api_key_env: SARVAM_API_KEY
+  temperature: 0.2
+  max_tokens: 32768
+  reasoning_effort: medium
+  requests_per_minute: 110
+  max_workers: 12
+  timeout_s: 300
+  skip_language_codes:
+  - en
+  max_docs: null
+  rare_script_languages:
+  - brx
+  - mni
+  - sat
+  - ks
+  - sd
+  - doi
+  - sa
+  rare_script_dedicated_first: true
+  rare_script_max_chat_attempts: 1
+  timeout_chat_retries: 0
+  dedicated_retries: 2
+  enable_dedicated_translate_fallback: true
+  dedicated_translate_model: sarvam-translate:v1
+  dedicated_translate_timeout_s: 180
+  rare_dedicated_translate_timeout_s: 300
+  fewshot_config: configs/synthetic-data/translation_fewshots.yaml
+  dedicated_translate_requests_per_minute: 900
+linguistic_judge:
+  provider: azure_foundry
+  input_jsonl: data/generated/runs/20260723T212832/s4b_translation/documents.jsonl
+  output_dir: data/generated/runs/20260723T212832/s5_linguistic_judge
+  model: grok-4.3
+  base_url: https://ambedkar-interpreter-resource.services.ai.azure.com/openai/v1
+  api_key_env: AZURE_FOUNDRY_API_KEY
+  api_key_env_fallbacks:
+  - AZURE_FOUNDARY_API_KEY
+  entities_config: configs/synthetic-data/entities.yaml
+  temperature: 0.0
+  max_tokens: 8192
+  max_tokens_field: max_tokens
+  reasoning_effort: medium
+  requests_per_minute: 500
+  max_workers: 24
+  timeout_s: 600
+  network_retries: 2
+  pass_threshold: 0.7
+  max_docs: null
+  must_work_languages:
+  - hi
+  - ta
+  - te
+  - bn
+  - mr
+  - gu
+  - kn
+  - ml
+  - pa
+  - or
+  - as
+  - ur
+  rare_script_languages:
+  - brx
+  - mni
+  - sat
+  - ks
+  - sd
+  - doi
+  - sa
+deterministic_auditor:
+  input_jsonl: data/generated/runs/20260723T212832/s5_linguistic_judge/passed.jsonl
+  entities_config: configs/synthetic-data/entities.yaml
+  entity_profiles_config: configs/synthetic-data/entity_profiles.yaml
+  output_dir: data/generated/runs/20260723T212832/s6_deterministic_auditor
+  require_judge_pass: true
+  min_dics: 1.0
+  max_boundary_corruption_rate: 0.01
+  require_all_profile_entities: true
+  max_workers: 24
+  max_docs: null
+curation:
+  input_jsonl: data/generated/runs/20260723T212832/s6_deterministic_auditor/passed.jsonl
+  output_dir: data/generated/runs/20260723T212832/s7_s8_curation
+  text_field: generated_text
+  id_field: document_id
+  language_field: document_language_code
+  max_docs: null
+  dedup:
+    backend: nemo_curator
+    text_mode: english_pivot_or_masked
+    jaccard_threshold: 0.8
+    char_ngrams: 24
+    num_bands: 20
+    rows_per_band: 5
+    minhashes_per_band: 13
+    seed: 42
+    curator_work_dir: data/generated/runs/20260723T212832/artifacts/nemo_curator_dedup
+  balancing:
+    enabled: false
+    target_docs_per_language: null
+    min_docs_per_language: null
+    allow_underfill: true
+gliner_format:
+  input_jsonl: data/generated/runs/20260723T212832/s7_s8_curation/curated.jsonl
+  output_dir: data/generated/runs/20260723T212832/s9_gliner_format
+  entities_config: configs/synthetic-data/entities.yaml
+  entity_profiles_config: configs/synthetic-data/entity_profiles.yaml
+  text_field: generated_text
+  id_field: document_id
+  gold_jsonl: null
+  fail_on_token_misalign: true
+  max_docs: null
+split:
+  input_jsonl: data/generated/runs/20260723T212832/s9_gliner_format/gliner_docs.jsonl
+  output_dir: data/generated/runs/20260723T212832/s10_split
+  eval_fraction: 0.15
+  seed: 3031
+  persona_id_field: uuid
+  language_field: document_language_code
+data_designer:
+  required: true
+  engine: data_designer
+  seed_path: data/generated/runs/20260723T212832/s3_prompts/prompts.parquet
+  model_alias: generator
+  model_id: sarvam-105b
+  provider: sarvam
+  provider_endpoint: https://api.sarvam.ai/v1
+  provider_api_key_env: SARVAM_API_KEY
+  auth_style: subscription_key
+  temperature: 0.3
+  max_tokens: 32768
+  reasoning_effort: medium
+  system_prompt_column: system_prompt
+  user_prompt_column: user_prompt
+  output_column: generated_text
+run:
+  run_id: 20260723T212832
+  created_utc: '2026-07-23T15:58:32.062878+00:00'
+  base_config: /tmp/pipeline.diversity.seed3031_n138.yaml
+  runs_root: data/generated/runs

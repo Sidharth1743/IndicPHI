@@ -1,0 +1,35 @@
+{
+  "actual_num_records": 406,
+  "buffer_size": 1000,
+  "column_statistics": [
+    {
+      "column_name": "generated_text",
+      "column_type": "llm-text",
+      "input_tokens_mean": 3576.42,
+      "input_tokens_median": 3538.0,
+      "input_tokens_stddev": 107.67,
+      "num_null": 0,
+      "num_records": 406,
+      "num_unique": 406,
+      "output_tokens_mean": 343.44,
+      "output_tokens_median": 313.5,
+      "output_tokens_stddev": 164.72,
+      "pyarrow_dtype": "string",
+      "simple_dtype": "string"
+    }
+  ],
+  "config_hash": "sha256:a52db20869a8d998f266cdb56900ffef22d67a84231409eaa88c1793ac251029",
+  "config_hash_algo": "sha256",
+  "config_hash_version": 2,
+  "dataset_name": "s4_generation",
+  "file_paths": {
+    "parquet-files": [
+      "parquet-files/batch_00000.parquet"
+    ]
+  },
+  "num_completed_batches": 1,
+  "original_target_num_records": 506,
+  "preserve_dropped_columns": true,
+  "target_num_records": 506,
+  "total_num_batches": 1
+}

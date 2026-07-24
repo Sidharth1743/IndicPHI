@@ -1,0 +1,74 @@
+{
+  "run_id": "20260724T095918",
+  "status": "failed",
+  "stages": [
+    {
+      "stage": "s1_persona_sampling",
+      "folder": "s1_persona_sampling",
+      "status": "failed",
+      "error": "Language quotas under-filled with exact first_language alias matching (no fallback). underfilled={'sa': {'have': 2, 'need': 7}} scanned=90910 max_scan_rows=250000 observed_first_language_top=[('Hindi', 38165), ('Bengali', 7719), ('Telugu', 6729), ('Tamil', 5918), ('Marathi', 5184), ('Gujarati', 4419), ('Urdu', 3739), ('Kannada', 3474), ('Malayalam', 3106), ('Odia', 2967), ('Punjabi', 2740), ('Assamese', 1178), ('Maithili', 867), ('Bhili / Bhilodi', 713), ('Santali', 520), ('Kashmiri', 431), ('Nepali', 230), ('Sindhi', 205), ('Konkani', 203), ('Gondi', 192), ('Dogri', 188), ('Tulu', 184), ('Kurukh / Oraon', 152), ('Khandeshi', 133), ('Manipuri', 128), ('Ho', 111), ('Bodo', 110), ('Khasi', 90), ('Mundari', 76), ('Tripuri', 70)]",
+      "started_utc": "2026-07-24T04:29:18.647763+00:00",
+      "finished_utc": "2026-07-24T04:29:21.128071+00:00",
+      "elapsed_s": 2.48
+    }
+  ],
+  "stage_specs": [
+    {
+      "block": "persona_sampling",
+      "folder": "s1_persona_sampling",
+      "primary": "personas.jsonl"
+    },
+    {
+      "block": "taxonomy",
+      "folder": "s2_taxonomy",
+      "primary": "assignments.jsonl"
+    },
+    {
+      "block": "persona_summary",
+      "folder": "s2b_persona_summary",
+      "primary": "assignments_summarized.jsonl"
+    },
+    {
+      "block": "prompt_construction",
+      "folder": "s3_prompts",
+      "primary": "prompts.jsonl"
+    },
+    {
+      "block": "generation",
+      "folder": "s4_generation",
+      "primary": "documents.jsonl"
+    },
+    {
+      "block": "translation",
+      "folder": "s4b_translation",
+      "primary": "documents.jsonl"
+    },
+    {
+      "block": "linguistic_judge",
+      "folder": "s5_linguistic_judge",
+      "primary": "judged.jsonl"
+    },
+    {
+      "block": "deterministic_auditor",
+      "folder": "s6_deterministic_auditor",
+      "primary": "audited.jsonl"
+    },
+    {
+      "block": "curation",
+      "folder": "s7_s8_curation",
+      "primary": "curated.jsonl"
+    },
+    {
+      "block": "gliner_format",
+      "folder": "s9_gliner_format",
+      "primary": "gliner_docs.jsonl"
+    },
+    {
+      "block": "split",
+      "folder": "s10_split",
+      "primary": "train.jsonl"
+    }
+  ],
+  "base_config": "/tmp/pipeline.diversity.seed5051_n483.yaml",
+  "resolved_config": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260724T095918/pipeline.resolved.yaml"
+}

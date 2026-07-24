@@ -1,0 +1,87 @@
+{
+  "stage": "s2_taxonomy",
+  "timestamp_utc": "2026-07-24T11:44:45.537645+00:00",
+  "input_jsonl": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260724T171441/s1_persona_sampling/personas.jsonl",
+  "seed": 101,
+  "personas_in": 3,
+  "documents_out": 3,
+  "doc_types": 14,
+  "domains": 7,
+  "taxonomy_cells": 98,
+  "prefer_unique_cell_per_persona": true,
+  "prefer_unique_doc_type_per_persona": true,
+  "prefer_unique_domain_per_persona": true,
+  "by_language": {
+    "as": {
+      "docs": 1,
+      "cells_touched": 1,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "hospital_billing": 1
+      },
+      "domain_counts": {
+        "surgical": 1
+      },
+      "cell_counts": {
+        "hospital_billing__surgical": 1
+      }
+    },
+    "bn": {
+      "docs": 1,
+      "cells_touched": 1,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "asha_worker_note": 1
+      },
+      "domain_counts": {
+        "tb_ncd": 1
+      },
+      "cell_counts": {
+        "asha_worker_note__tb_ncd": 1
+      }
+    },
+    "hi": {
+      "docs": 1,
+      "cells_touched": 1,
+      "cells_total": 98,
+      "min_cell_fill": 0,
+      "max_cell_fill": 1,
+      "doc_type_counts": {
+        "automated_sms": 1
+      },
+      "domain_counts": {
+        "general_medicine": 1
+      },
+      "cell_counts": {
+        "automated_sms__general_medicine": 1
+      }
+    }
+  },
+  "global_doc_type_counts": {
+    "hospital_billing": 1,
+    "asha_worker_note": 1,
+    "automated_sms": 1
+  },
+  "global_domain_counts": {
+    "surgical": 1,
+    "tb_ncd": 1,
+    "general_medicine": 1
+  },
+  "persona_unique_cells_histogram": {
+    "1": 3
+  },
+  "columns_added": [
+    "doc_slot",
+    "doc_type_id",
+    "doc_type_name",
+    "domain_id",
+    "domain_name",
+    "taxonomy_cell_id",
+    "assignment_seed",
+    "stage"
+  ]
+}

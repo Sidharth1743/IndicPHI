@@ -156,9 +156,22 @@ class TranslationSettings:
     dedicated_translate_requests_per_minute: float = 900.0
     enable_dedicated_translate_fallback: bool = True
     # Extra chat attempts on timeout (on top of rare/normal chat budget).
-    timeout_chat_retries: int = 2
+    # Set 0 to jump to dedicated on first chat timeout.
+    timeout_chat_retries: int = 0
     # Retries for dedicated /translate when that call itself times out.
     dedicated_retries: int = 2
+    # Rare langs: try dedicated /translate first (then chat recovery if needed).
+    rare_script_dedicated_first: bool = True
+    # Longer dedicated timeout for rare scripts (Ol Chiki / Meitei / etc.).
+    rare_dedicated_translate_timeout_s: float = 300.0
+    # Langs where dedicated empirically fails → chat+few-shot first, then dedicated.
+    rare_prefer_chat_languages: tuple[str, ...] = ()
+    # Short chat budget for rare recovery (avoid 300s×N burns after dedicated fail).
+    rare_chat_timeout_s: float = 180.0
+    # Chat attempts after dedicated fails (or when prefer-chat).
+    rare_chat_recovery_attempts: int = 1
+    # Optional YAML with per-lang gold few-shot lines for chat translate.
+    fewshot_config: Path | None = None
 
 
 def _is_timeout_error(exc: BaseException) -> bool:
@@ -167,6 +180,69 @@ def _is_timeout_error(exc: BaseException) -> bool:
         return True
     msg = str(exc).lower()
     return "timed out" in msg or "timeout after" in msg or "read operation timed out" in msg
+
+
+_TRANSPORT_NEEDLES = (
+    "timed out",
+    "timeout after",
+    "read operation timed out",
+    "network error",
+    "name or service not known",
+    "temporary failure in name resolution",
+    "connection reset",
+    "connection refused",
+    "connection aborted",
+    "broken pipe",
+    "remotely closed",
+    "errno -2",
+    "errno 104",
+    "errno 111",
+)
+
+# Quality / ladder failures — not transport even if an earlier attempt timed out.
+_QUALITY_NEEDLES = (
+    "lost protected",
+    "lost or altered",
+    "missing id placeholder",
+    "under-counted",
+    "script_purity",
+    "wrong_indic",
+    "tag_restore",
+    "empty translation",
+    "dedicated_translate_failed:translation",
+)
+
+
+def _error_segments(msg: str) -> list[str]:
+    return [part.strip() for part in str(msg).split(";") if part.strip()]
+
+
+def _segment_is_transport(segment: str) -> bool:
+    low = segment.lower()
+    if any(n in low for n in _QUALITY_NEEDLES):
+        return False
+    return any(n in low for n in _TRANSPORT_NEEDLES)
+
+
+def _is_retryable_transport_error(exc_or_msg: BaseException | str | None) -> bool:
+    """True when the *final* failure cause is DNS/timeout/connection.
+
+    Error trails are ``attempt1:...;attempt2:...;last:...``. A timeout mid-ladder
+    followed by ``lost protected ID tag`` is a quality soft-fail, not transport.
+    """
+    if exc_or_msg is None:
+        return False
+    if isinstance(exc_or_msg, BaseException):
+        # Bare exceptions have no multi-attempt trail — use full message.
+        if _is_timeout_error(exc_or_msg):
+            return True
+        msg = str(exc_or_msg)
+    else:
+        msg = str(exc_or_msg)
+    segments = _error_segments(msg)
+    if not segments:
+        return False
+    return _segment_is_transport(segments[-1])
 
 
 @dataclass(frozen=True)
@@ -228,7 +304,9 @@ def load_settings(pipeline_config: Path) -> TranslationSettings:
     if rare is None:
         # Fall back to linguistic_judge SLA list when translation omits it.
         judge = root.get("linguistic_judge") if isinstance(root.get("linguistic_judge"), dict) else {}
-        rare = judge.get("rare_script_languages") or ["brx", "mni", "sat", "ks"]
+        rare = judge.get("rare_script_languages") or [
+            "brx", "mni", "sat", "ks", "sd", "doi", "sa"
+        ]
     if not isinstance(rare, list) or not all(isinstance(x, str) for x in rare):
         raise ValueError("rare_script_languages must be a list of strings")
 
@@ -260,8 +338,32 @@ def load_settings(pipeline_config: Path) -> TranslationSettings:
         enable_dedicated_translate_fallback=bool(
             block.get("enable_dedicated_translate_fallback", True)
         ),
-        timeout_chat_retries=max(0, int(block.get("timeout_chat_retries", 2))),
+        timeout_chat_retries=max(0, int(block.get("timeout_chat_retries", 0))),
         dedicated_retries=max(0, int(block.get("dedicated_retries", 2))),
+        rare_script_dedicated_first=bool(
+            block.get("rare_script_dedicated_first", True)
+        ),
+        rare_dedicated_translate_timeout_s=float(
+            block.get("rare_dedicated_translate_timeout_s", 300)
+        ),
+        rare_prefer_chat_languages=tuple(
+            str(x)
+            for x in (
+                block.get("rare_prefer_chat_languages")
+                or ["doi", "ks", "sd"]
+            )
+        ),
+        rare_chat_timeout_s=float(block.get("rare_chat_timeout_s", 180)),
+        rare_chat_recovery_attempts=max(
+            0, int(block.get("rare_chat_recovery_attempts", 1))
+        ),
+        fewshot_config=(
+            resolve_repo_path(str(block["fewshot_config"]))
+            if block.get("fewshot_config")
+            else resolve_repo_path(
+                "configs/synthetic-data/translation_fewshots.yaml"
+            )
+        ),
     )
 
 
@@ -394,11 +496,15 @@ def try_dedicated_translate_fallback(
     row: Mapping[str, Any],
     settings: TranslationSettings,
     force: bool = False,
+    rate_limiter: RateLimiter | None = None,
 ) -> tuple[str | None, str | None, bool]:
     """Run dedicated /translate + script purity. Returns (text, err, script_ok).
 
     By default limited to ``rare_script_languages``. Pass ``force=True`` for
     timeout recovery on any language (Business Translate API is 1000 RPM).
+
+    Pass a **shared** ``rate_limiter`` from the stage so workers do not each
+    create their own limiter and stampede the Translate API (timeouts).
     """
     lang = str(row.get("document_language_code") or "")
     script = str(row.get("document_script") or "")
@@ -416,11 +522,19 @@ def try_dedicated_translate_fallback(
     )
     try:
         # Translate API has its own Business pool (1000 RPM) — do not share 105B chat limiter.
-        tr_limiter = RateLimiter(settings.dedicated_translate_requests_per_minute)
+        tr_limiter = rate_limiter or RateLimiter(
+            settings.dedicated_translate_requests_per_minute
+        )
         tr = SarvamTranslateClient(api_key=client.api_key, rate_limiter=tr_limiter)
         protection = protect_tags(english_text)
         if not protection.id_mapping and not protection.name_mapping:
             return None, "no_valid_entity_tags_to_protect", False
+        is_rare = lang in settings.rare_script_languages
+        ded_timeout = (
+            settings.rare_dedicated_translate_timeout_s
+            if is_rare
+            else settings.dedicated_translate_timeout_s
+        )
         last_exc: Exception | None = None
         translated = ""
         for ded_round in range(1 + max(0, settings.dedicated_retries)):
@@ -429,7 +543,7 @@ def try_dedicated_translate_fallback(
                     protection.text,
                     language_code=lang,
                     model=settings.dedicated_translate_model,
-                    timeout_s=settings.dedicated_translate_timeout_s,
+                    timeout_s=ded_timeout,
                 )
                 last_exc = None
                 break
@@ -459,6 +573,82 @@ def try_dedicated_translate_fallback(
     return restored, None, True
 
 
+def _fewshot_block(language_code: str, settings: TranslationSettings) -> str:
+    """Load 2–3 gold lines for rare-script chat translate (empty if missing)."""
+    path = settings.fewshot_config
+    if path is None or not Path(path).is_file():
+        return ""
+    try:
+        raw = load_yaml(Path(path))
+        shots = (raw.get("fewshots") or {}).get(language_code) or []
+    except Exception:  # noqa: BLE001 — optional few-shots must not abort
+        return ""
+    lines = [str(x).strip() for x in shots if str(x).strip()][:4]
+    if not lines:
+        return ""
+    joined = "\n".join(f"- {ln}" for ln in lines)
+    return (
+        f"\nGOLD FEW-SHOT lines in the target script (match this language/"
+        f"script style; do NOT copy entity values verbatim):\n{joined}\n"
+    )
+
+
+def _is_mostly_english_pivot(text: str, *, language_code: str, script: str) -> bool:
+    """True when purity fails for latin-heavy body (not merely wrong Indic script)."""
+    ok, reason = evaluate_script_purity(
+        text, language_code=language_code, script=script
+    )
+    if ok:
+        return False
+    r = (reason or "").lower()
+    if "wrong_indic_script" in r:
+        return False
+    return "latin" in r or "english" in r or "ratio" in r
+
+
+def _chat_translate_once(
+    client: SarvamClient,
+    *,
+    protection: TagProtection,
+    row: Mapping[str, Any],
+    settings: TranslationSettings,
+    fewshot_extra: str,
+    retry_harder: bool,
+    timeout_s: float,
+    script_lock: bool = False,
+) -> tuple[str | None, Exception | None, str | None, str | None]:
+    """One protected chat translate. Returns (text, err, model, finish)."""
+    lang = str(row.get("document_language_code") or "")
+    script = str(row.get("document_script") or "")
+    try:
+        result = client.chat_completion(
+            model=settings.model,
+            messages=build_translate_messages(
+                protected_text=protection.text,
+                language_name=str(row.get("document_language_name", "")),
+                language_code=lang,
+                script=script,
+                doc_type_name=str(row.get("doc_type_name", "")),
+                retry_harder=retry_harder,
+                fewshot_extra=fewshot_extra,
+                script_lock=script_lock,
+            ),
+            temperature=settings.temperature,
+            max_tokens=settings.max_tokens,
+            reasoning_effort=settings.reasoning_effort,
+            timeout_s=timeout_s,
+        )
+        restored = restore_tags(result.content.strip(), protection)
+        return restored, None, result.model, result.finish_reason
+    except (SarvamClientError, TranslationError, TimeoutError, OSError) as exc:
+        err = (
+            exc
+            if isinstance(exc, (SarvamClientError, TranslationError))
+            else TranslationError(str(exc))
+        )
+        return None, err, None, None
+
+
 def build_translate_messages(
     *,
     protected_text: str,
@@ -467,6 +657,8 @@ def build_translate_messages(
     script: str,
     doc_type_name: str,
     retry_harder: bool = False,
+    fewshot_extra: str = "",
+    script_lock: bool = False,
 ) -> list[dict[str, str]]:
     system = (
         "You translate synthetic Indian clinical documents into the requested "
@@ -485,20 +677,37 @@ def build_translate_messages(
         "4) Keep ID/number/email/URL entity VALUES unchanged (they appear as "
         "⟦IDn⟧ placeholders).\n"
         "5) Translate ALL clinical prose and headings into the target language/"
-        "script. Do NOT leave the body in English.\n"
+        "script. Do NOT leave the body in English. Do NOT substitute a neighbor "
+        "language (no Hindi for Dogri/Bodo; no Urdu for Kashmiri; no Hindi "
+        "Devanagari for Sindhi).\n"
         "6) Keep drug names, lab analyte names, and Latin abbreviations as Latin.\n"
         "7) Output ONLY the translated document text."
     )
+    # Sindhi/Kashmiri use Arabic script — models often slip into Devanagari.
+    if script.strip().lower() == "arabic" or language_code in {"sd", "ks"}:
+        system += (
+            f"\nSCRIPT: {language_name} MUST use Arabic/Perso-Arabic letters "
+            "(Sindhi/Kashmiri orthography). NEVER write Devanagari "
+            "(कखग / डिस्चार्ज). Neighbor Hindi in Devanagari is a hard fail."
+        )
     if retry_harder:
         system += (
-            "\nRETRY: Previous output was still mostly English. You MUST rewrite "
-            f"the prose in {language_name} ({script} script). ID placeholders stay. "
-            "Translate name/place values into the target script when natural."
+            "\nRETRY: Previous output was still mostly English or wrong language. "
+            f"You MUST rewrite the prose in {language_name} ({script} script) only. "
+            "ID placeholders stay. Translate name/place values into the target "
+            "script when natural."
+        )
+    if script_lock:
+        system += (
+            "\nSCRIPT LOCK (mandatory): Previous draft used the WRONG script "
+            f"(e.g. Devanagari). Rewrite the ENTIRE body in {language_name} using "
+            f"ONLY {script} script. Do not mix scripts. Keep ⟦IDn⟧ / TYPE names."
         )
     user = (
         f"Target language: {language_name} (code={language_code}, script={script}).\n"
-        f"Document type: {doc_type_name}.\n\n"
-        f"English source with protected entity placeholders:\n{protected_text}"
+        f"Document type: {doc_type_name}.\n"
+        f"{fewshot_extra}"
+        f"\nEnglish source with protected entity placeholders:\n{protected_text}"
     )
     return [
         {"role": "system", "content": system},
@@ -531,6 +740,11 @@ def translate_english_once(
     if not protection.id_mapping and not protection.name_mapping:
         return None, "no_valid_entity_tags_to_protect"
 
+    fewshot_extra = (
+        _fewshot_block(lang, settings)
+        if lang in settings.rare_script_languages
+        else ""
+    )
     try:
         result = client.chat_completion(
             model=settings.model,
@@ -541,6 +755,7 @@ def translate_english_once(
                 script=script,
                 doc_type_name=str(row.get("doc_type_name") or row.get("doc_type_id") or ""),
                 retry_harder=retry_harder,
+                fewshot_extra=fewshot_extra,
             ),
             temperature=settings.temperature,
             max_tokens=settings.max_tokens,
@@ -566,6 +781,7 @@ def _translate_one(
     client: SarvamClient,
     settings: TranslationSettings,
     repair_settings: RepairSettings | None = None,
+    dedicated_limiter: RateLimiter | None = None,
 ) -> dict[str, Any]:
     source = str(row.get("generated_text", ""))
     if not source.strip():
@@ -674,140 +890,373 @@ def _translate_one(
     last_model: str | None = None
     last_finish: str | None = None
     is_rare = lang in settings.rare_script_languages
-    # Rare: short chat budget. Others: 2 tries. Extra attempts only on timeout.
-    remaining = (
-        max(1, settings.rare_script_max_chat_attempts)
-        if is_rare
-        else 2
+    fewshot_extra = _fewshot_block(lang, settings) if is_rare else ""
+    prefer_chat = is_rare and lang in settings.rare_prefer_chat_languages
+    dedicated_first = bool(
+        is_rare and settings.rare_script_dedicated_first and not prefer_chat
     )
-    timeout_retries_left = max(0, settings.timeout_chat_retries)
-    timeout_streak = 0
     attempt = 0
-    while remaining > 0:
-        remaining -= 1
-        harder = attempt > 0
-        try:
-            result = client.chat_completion(
-                model=settings.model,
-                messages=build_translate_messages(
-                    protected_text=protection.text,
-                    language_name=str(row.get("document_language_name", "")),
-                    language_code=lang,
-                    script=script,
-                    doc_type_name=str(row.get("doc_type_name", "")),
-                    retry_harder=harder,
-                ),
-                temperature=settings.temperature,
-                max_tokens=settings.max_tokens,
-                reasoning_effort=settings.reasoning_effort,
-                timeout_s=settings.timeout_s,
-            )
-            restored = restore_tags(result.content.strip(), protection)
-            last_restored = restored
-            last_model = result.model
-            last_finish = result.finish_reason
-            timeout_streak = 0
-            ok, reason = evaluate_script_purity(
-                restored, language_code=lang, script=script
-            )
-            if not ok:
-                # Script purity already encodes Latin-ratio failures; optional
-                # langid may add a secondary soft-fail hint when available.
-                langid_hint = optional_langid_score(restored, language_code=lang)
-                detail = reason
-                if langid_hint:
-                    detail = f"{reason};{langid_hint}"
-                last_error = TranslationError(
-                    f"script_purity_failed:{detail} attempt={attempt}"
-                )
-                attempt += 1
-                continue
-            out.update(
-                {
-                    "generated_text": restored,
-                    "translation_applied": True,
-                    "translation_script_ok": True,
-                    "translator_model": result.model,
-                    "translator_finish_reason": result.finish_reason,
-                    "translation_attempts": attempt + 1,
-                    "translation_error": None,
-                    "translation_soft_fail": False,
-                    "translation_generator_repair_attempts": tag_repair_attempts,
-                    "translation_repaired_by_generator": tag_repair_attempts > 0,
-                    "stage": "s4b_translation",
-                }
-            )
-            return out
-        except (SarvamClientError, TranslationError, TimeoutError, OSError) as exc:
-            # Never let bare TimeoutError escape — always retry then dedicated.
-            if _is_timeout_error(exc):
-                timeout_streak += 1
-                if timeout_retries_left > 0:
-                    timeout_retries_left -= 1
-                    remaining += 1  # grant one extra chat attempt
-                last_error = TranslationError(
-                    f"timed out:{exc} attempt={attempt + 1}"
-                )
-                print(
-                    f"[s4b] chat timeout → retry "
-                    f"attempt={attempt + 1} remaining={remaining} "
-                    f"uuid={row.get('uuid')} lang={lang}",
-                    file=sys.stderr,
-                    flush=True,
-                )
-            else:
-                timeout_streak = 0
-                last_error = (
-                    exc
-                    if isinstance(exc, (SarvamClientError, TranslationError))
-                    else TranslationError(str(exc))
-                )
-            attempt += 1
-            continue
+    timed_out = False
+    err_trail: list[str] = []
 
-    max_chat = attempt
-    # Dedicated /translate after chat budget:
-    # - rare scripts: always
-    # - any language after timeout(s): recover instead of soft-fail English body
-    timed_out = last_error is not None and _is_timeout_error(last_error)
-    if is_rare or timed_out or timeout_streak > 0:
+    def _accept_ok(
+        text: str,
+        *,
+        model: str | None,
+        finish: str | None,
+        attempts: int,
+    ) -> dict[str, Any]:
+        out.update(
+            {
+                "generated_text": text,
+                "translation_applied": True,
+                "translation_script_ok": True,
+                "translator_model": model,
+                "translator_finish_reason": finish,
+                "translation_attempts": attempts,
+                "translation_error": None,
+                "translation_soft_fail": False,
+                "translation_generator_repair_attempts": tag_repair_attempts,
+                "translation_repaired_by_generator": tag_repair_attempts > 0,
+                "stage": "s4b_translation",
+            }
+        )
+        return out
+
+    def _keep_candidate(
+        text: str,
+        *,
+        model: str | None,
+        finish: str | None,
+        err: str,
+    ) -> None:
+        nonlocal last_restored, last_model, last_finish, last_error
+        # Prefer non-English candidates over English pivot.
+        if last_restored is None or (
+            _is_mostly_english_pivot(last_restored, language_code=lang, script=script)
+            and not _is_mostly_english_pivot(text, language_code=lang, script=script)
+        ):
+            last_restored = text
+            last_model = model
+            last_finish = finish
+        last_error = TranslationError(err)
+        err_trail.append(err)
+
+    def _run_dedicated(finish_label: str) -> dict[str, Any] | None:
+        nonlocal attempt, last_error
         ded_text, ded_err, ded_ok = try_dedicated_translate_fallback(
             client=client,
             english_text=source,
             row=row,
             settings=settings,
             force=True,
+            rate_limiter=dedicated_limiter,
         )
+        attempt += 1
         if ded_text and ded_ok:
+            print(
+                f"[s4b] dedicated OK lang={lang} uuid={row.get('uuid')} "
+                f"via={finish_label}",
+                file=sys.stderr,
+                flush=True,
+            )
+            return _accept_ok(
+                ded_text,
+                model=settings.dedicated_translate_model,
+                finish=finish_label,
+                attempts=attempt,
+            )
+        if ded_text:
+            _keep_candidate(
+                ded_text,
+                model=settings.dedicated_translate_model,
+                finish=finish_label,
+                err=ded_err or "dedicated_script_soft",
+            )
+            print(
+                f"[s4b] dedicated soft lang={lang} uuid={row.get('uuid')} "
+                f"err={ded_err}",
+                file=sys.stderr,
+                flush=True,
+            )
+        else:
+            # Always record real error (was previously lost → ":None").
+            detail = ded_err or "dedicated_empty"
+            last_error = TranslationError(detail)
+            err_trail.append(detail)
+            print(
+                f"[s4b] dedicated FAIL lang={lang} uuid={row.get('uuid')} "
+                f"err={detail}",
+                file=sys.stderr,
+                flush=True,
+            )
+        return None
+
+    def _run_chat_recovery(*, harder: bool, label: str) -> dict[str, Any] | None:
+        nonlocal attempt, timed_out, last_error
+        # Sindhi: chat is the working path; allow more wall time than generic rare.
+        if lang == "sd":
+            timeout_s = max(float(settings.rare_chat_timeout_s), 240.0)
+        elif is_rare:
+            timeout_s = settings.rare_chat_timeout_s
+        else:
+            timeout_s = settings.timeout_s
+        text, err, model, finish = _chat_translate_once(
+            client,
+            protection=protection,
+            row=row,
+            settings=settings,
+            fewshot_extra=fewshot_extra,
+            retry_harder=harder,
+            timeout_s=timeout_s,
+        )
+        attempt += 1
+        if err is not None:
+            if _is_timeout_error(err):
+                timed_out = True
+            last_error = err
+            err_trail.append(f"{label}:{err}")
+            print(
+                f"[s4b] chat {label} fail lang={lang} uuid={row.get('uuid')} "
+                f"err={err}",
+                file=sys.stderr,
+                flush=True,
+            )
+            return None
+        assert text is not None
+        ok, reason = evaluate_script_purity(
+            text, language_code=lang, script=script
+        )
+        if ok:
+            print(
+                f"[s4b] chat {label} OK lang={lang} uuid={row.get('uuid')}",
+                file=sys.stderr,
+                flush=True,
+            )
+            return _accept_ok(
+                text, model=model, finish=finish or label, attempts=attempt
+            )
+        # Arabic-script langs (sd/ks): one forced script-lock rewrite if Devanagari leaked.
+        if (
+            "wrong_indic_script" in (reason or "").lower()
+            and script.strip().lower() == "arabic"
+        ):
+            print(
+                f"[s4b] chat script-lock retry lang={lang} uuid={row.get('uuid')} "
+                f"reason={reason}",
+                file=sys.stderr,
+                flush=True,
+            )
+            locked, lerr, lmodel, lfinish = _chat_translate_once(
+                client,
+                protection=protection,
+                row=row,
+                settings=settings,
+                fewshot_extra=fewshot_extra,
+                retry_harder=True,
+                timeout_s=timeout_s,
+                script_lock=True,
+            )
+            attempt += 1
+            if lerr is None and locked is not None:
+                lok, lreason = evaluate_script_purity(
+                    locked, language_code=lang, script=script
+                )
+                if lok:
+                    return _accept_ok(
+                        locked,
+                        model=lmodel,
+                        finish=lfinish or f"{label}_script_lock",
+                        attempts=attempt,
+                    )
+                _keep_candidate(
+                    locked,
+                    model=lmodel,
+                    finish=lfinish or f"{label}_script_lock",
+                    err=f"script_purity_failed:{lreason}",
+                )
+            elif lerr is not None:
+                err_trail.append(f"{label}_script_lock:{lerr}")
+        _keep_candidate(
+            text,
+            model=model,
+            finish=finish or label,
+            err=f"script_purity_failed:{reason}",
+        )
+        return None
+
+    # ---- Rare ladder: fix language at S4b (cheap) so S5 does not burn repairs ----
+    # Evidence: doi/ks/sd — dedicated often empty or drops ID tags; chat+few-shot
+    # recovers. brx/mni — dedicated often OK. Wrong-script still beats English.
+    if is_rare:
+        if dedicated_first:
+            hit = _run_dedicated("dedicated_first")
+            if hit is not None:
+                return hit
+        # Prefer-chat langs get ≥2 attempts (sd timeouts / Devanagari slips).
+        prefer_chat_rounds = max(2, settings.rare_chat_recovery_attempts)
+        recovery_rounds = max(1, settings.rare_chat_recovery_attempts)
+        chat_rounds = prefer_chat_rounds if prefer_chat else (
+            recovery_rounds
+            if (
+                dedicated_first
+                or not settings.rare_script_dedicated_first
+            )
+            else 0
+        )
+        if prefer_chat and not dedicated_first:
+            for i in range(prefer_chat_rounds):
+                hit = _run_chat_recovery(
+                    harder=i > 0, label=f"prefer_chat_{i + 1}"
+                )
+                if hit is not None:
+                    return hit
+            # Dedicated last — may still help ks; sd often tag-fails (then ignored).
+            hit = _run_dedicated("dedicated_after_prefer_chat")
+            if hit is not None:
+                return hit
+        elif chat_rounds:
+            for i in range(chat_rounds):
+                hit = _run_chat_recovery(
+                    harder=True, label=f"rare_recovery_{i + 1}"
+                )
+                if hit is not None:
+                    return hit
+            hit = _run_dedicated("dedicated_after_chat_recovery")
+            if hit is not None:
+                return hit
+        # Keep best non-English candidate rather than English soft-fail.
+        if last_restored and not _is_mostly_english_pivot(
+            last_restored, language_code=lang, script=script
+        ):
+            print(
+                f"[s4b] rare keep non-English soft lang={lang} "
+                f"uuid={row.get('uuid')} finish={last_finish}",
+                file=sys.stderr,
+                flush=True,
+            )
             out.update(
                 {
-                    "generated_text": ded_text,
+                    "generated_text": last_restored,
                     "translation_applied": True,
-                    "translation_script_ok": True,
-                    "translator_model": settings.dedicated_translate_model,
-                    "translator_finish_reason": (
-                        "dedicated_after_timeout"
-                        if timed_out or timeout_streak
-                        else "dedicated_translate_fallback"
-                    ),
-                    "translation_attempts": max_chat + 1,
-                    "translation_error": None,
-                    "translation_soft_fail": False,
+                    "translation_script_ok": False,
+                    "translator_model": last_model,
+                    "translator_finish_reason": last_finish or "rare_soft_keep",
+                    "translation_attempts": attempt,
+                    "translation_error": ";".join(err_trail) or str(last_error),
+                    "translation_soft_fail": True,
                     "translation_generator_repair_attempts": tag_repair_attempts,
                     "translation_repaired_by_generator": False,
                     "stage": "s4b_translation",
                 }
             )
             return out
+        # True rare failure — English left; do NOT burn generator repairs here.
+        error_msg = ";".join(err_trail) or f"rare_translate_failed:{last_error}"
+        print(
+            f"[s4b] SOFT-FAIL rare uuid={row.get('uuid')} lang={lang} "
+            f"error={error_msg}",
+            file=sys.stderr,
+            flush=True,
+        )
+        out.update(
+            {
+                "generated_text": source,
+                "translation_applied": False,
+                "translation_script_ok": False,
+                "translator_model": last_model,
+                "translator_finish_reason": "rare_unrecovered",
+                "translation_attempts": attempt,
+                "translation_error": error_msg,
+                "translation_soft_fail": True,
+                "translation_generator_repair_attempts": tag_repair_attempts,
+                "translation_repaired_by_generator": False,
+                "stage": "s4b_translation",
+            }
+        )
+        return out
+
+    # ---- Common langs: chat (≤2), first timeout → dedicated immediately ----
+    remaining = 2
+    timeout_streak = 0
+    while remaining > 0:
+        remaining -= 1
+        harder = attempt > 0
+        text, err, model, finish = _chat_translate_once(
+            client,
+            protection=protection,
+            row=row,
+            settings=settings,
+            fewshot_extra="",
+            retry_harder=harder,
+            timeout_s=settings.timeout_s,
+        )
+        if err is not None:
+            if _is_timeout_error(err):
+                timeout_streak += 1
+                timed_out = True
+                last_error = TranslationError(
+                    f"timed out:{err} attempt={attempt + 1}"
+                )
+                print(
+                    f"[s4b] chat timeout → dedicated "
+                    f"attempt={attempt + 1} uuid={row.get('uuid')} lang={lang}",
+                    file=sys.stderr,
+                    flush=True,
+                )
+                attempt += 1
+                break
+            last_error = err
+            attempt += 1
+            continue
+        assert text is not None
+        last_restored = text
+        last_model = model
+        last_finish = finish
+        ok, reason = evaluate_script_purity(
+            text, language_code=lang, script=script
+        )
+        if not ok:
+            langid_hint = optional_langid_score(text, language_code=lang)
+            detail = reason
+            if langid_hint:
+                detail = f"{reason};{langid_hint}"
+            last_error = TranslationError(
+                f"script_purity_failed:{detail} attempt={attempt}"
+            )
+            attempt += 1
+            continue
+        return _accept_ok(
+            text, model=model, finish=finish, attempts=attempt + 1
+        )
+
+    max_chat = attempt
+    timed_out = timed_out or (
+        last_error is not None and _is_timeout_error(last_error)
+    )
+    if timed_out or timeout_streak > 0:
+        ded_text, ded_err, ded_ok = try_dedicated_translate_fallback(
+            client=client,
+            english_text=source,
+            row=row,
+            settings=settings,
+            force=True,
+            rate_limiter=dedicated_limiter,
+        )
+        if ded_text and ded_ok:
+            return _accept_ok(
+                ded_text,
+                model=settings.dedicated_translate_model,
+                finish="dedicated_after_timeout",
+                attempts=max_chat + 1,
+            )
         if ded_text:
             last_restored = ded_text
             last_error = TranslationError(ded_err or "dedicated_translate_soft")
             last_model = settings.dedicated_translate_model
-            last_finish = (
-                "dedicated_after_timeout"
-                if timed_out or timeout_streak
-                else "dedicated_translate_fallback"
-            )
+            last_finish = "dedicated_after_timeout"
+        elif ded_err:
+            last_error = TranslationError(ded_err)
 
     # Translate / restore failed both attempts (often: model dropped or
     # localized a name/place TYPE like PATIENT_NAME). Soft-fail + optional
@@ -1058,6 +1507,9 @@ def translate_rows(
     if not selected:
         raise TranslationError("No rows selected for translation")
 
+    # Shared across workers — per-call limiters stampede /translate and cause timeouts.
+    dedicated_limiter = RateLimiter(settings.dedicated_translate_requests_per_minute)
+
     results: dict[int, dict[str, Any]] = {}
     pending: list[tuple[int, Mapping[str, Any], str]] = []
     resumed = 0
@@ -1089,7 +1541,9 @@ def translate_rows(
     print(
         f"[s4b] start rows={len(selected)} pending={len(pending)} "
         f"resumed={resumed} workers={workers} "
-        f"timeout_s={settings.timeout_s} model={settings.model}",
+        f"timeout_s={settings.timeout_s} model={settings.model} "
+        f"rare_prefer_chat={list(settings.rare_prefer_chat_languages)} "
+        f"dedicated_rpm={settings.dedicated_translate_requests_per_minute}",
         file=sys.stderr,
         flush=True,
     )
@@ -1104,6 +1558,7 @@ def translate_rows(
                     client=client,
                     settings=settings,
                     repair_settings=repair_settings,
+                    dedicated_limiter=dedicated_limiter,
                 ): (index, req)
                 for index, row, req in pending
             }
@@ -1135,6 +1590,7 @@ def translate_rows(
                                 client=client,
                                 settings=settings,
                                 repair_settings=repair_settings,
+                                dedicated_limiter=dedicated_limiter,
                             )
                             if out.get("translation_applied") and not out.get(
                                 "translation_soft_fail"
@@ -1149,6 +1605,7 @@ def translate_rows(
                                 row=row,
                                 settings=settings,
                                 force=True,
+                                rate_limiter=dedicated_limiter,
                             )
                             if ded_text and ded_ok:
                                 out = dict(row)
@@ -1223,7 +1680,13 @@ def translate_rows(
                     )
                 results[index] = out
                 if checkpoint is not None:
-                    if out.get("translation_soft_fail"):
+                    err_msg = out.get("translation_error")
+                    if _is_retryable_transport_error(
+                        err_msg if isinstance(err_msg, str) else None
+                    ):
+                        # Transient DNS/timeout/connection — resume must retry.
+                        status = "hard_fail"
+                    elif out.get("translation_soft_fail"):
                         status = "soft_fail"
                     elif not out.get("translation_applied"):
                         status = "skipped"
@@ -1247,6 +1710,23 @@ def translate_rows(
                         flush=True,
                     )
     outputs = [results[i] for i in range(len(selected))]
+    transport_fails = [
+        row
+        for row in outputs
+        if _is_retryable_transport_error(
+            row.get("translation_error")
+            if isinstance(row.get("translation_error"), str)
+            else None
+        )
+    ]
+    if transport_fails:
+        # Fail closed so operators resume S4b after DNS/API recovers (docs: checkpoint resume).
+        # Do not write a poisoned documents.jsonl of English soft-fails.
+        raise TranslationError(
+            f"S4b transport failures on {len(transport_fails)}/{len(outputs)} rows "
+            f"(DNS/timeout/connection). Checkpointed as hard_fail for resume. "
+            f"Example: {transport_fails[0].get('translation_error')}"
+        )
     translated = sum(1 for row in outputs if row.get("translation_applied"))
     soft_failures = [
         {
@@ -1352,8 +1832,15 @@ def write_outputs(
 
 
 def run(pipeline_config: Path) -> dict[str, Path]:
+    print("[s4b] boot: load env + settings", file=sys.stderr, flush=True)
     load_env_file()
     settings = load_settings(pipeline_config)
+    print(
+        f"[s4b] boot: input={settings.input_jsonl} "
+        f"workers={settings.max_workers} rare={list(settings.rare_script_languages)}",
+        file=sys.stderr,
+        flush=True,
+    )
     api_key = require_env(settings.api_key_env)
     limiter = (
         RateLimiter(settings.requests_per_minute)
@@ -1368,7 +1855,9 @@ def run(pipeline_config: Path) -> dict[str, Path]:
     repair_settings = (
         load_repair_settings_from_generation(gen) if gen.get("model") else None
     )
+    print("[s4b] boot: reading input jsonl", file=sys.stderr, flush=True)
     rows = read_jsonl(settings.input_jsonl)
+    print(f"[s4b] boot: rows_loaded={len(rows)}", file=sys.stderr, flush=True)
     checkpoint = CheckpointStore(settings.output_dir / "checkpoint.jsonl")
     translated, audit = translate_rows(
         rows,

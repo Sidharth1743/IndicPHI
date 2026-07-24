@@ -1,0 +1,18 @@
+{
+  "stage": "s4_generation",
+  "engine": "nemo_data_designer",
+  "timestamp_utc": "2026-07-22T16:13:46.110310+00:00",
+  "provider": "sarvam",
+  "model": "sarvam-105b",
+  "base_url": "https://api.sarvam.ai/v1",
+  "rows_requested": 69,
+  "rows_generated": 69,
+  "rows_from_checkpoint": 0,
+  "rows_newly_generated": 69,
+  "soft_failures": [],
+  "soft_fail_count": 0,
+  "generation_repaired_count": 7,
+  "entity_coverage_complete_rate": 1.0,
+  "mean_chars": 1286.536231884058,
+  "checkpoint": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260722T213905/s4_generation/checkpoint.jsonl"
+}

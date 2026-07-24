@@ -1,0 +1,67 @@
+{
+  "stage": "s9_gliner_format",
+  "timestamp_utc": "2026-07-24T11:50:17.308677+00:00",
+  "input_jsonl": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260724T171441/s7_s8_curation/curated.jsonl",
+  "rows_in": 2,
+  "rows_out": 2,
+  "soft_skip_count": 0,
+  "soft_failures": [],
+  "token_boundary_snap_docs": 0,
+  "mean_tokens": 353.0,
+  "mean_entities": 15.5,
+  "ecr": {
+    "mean_ecr": 1.0,
+    "min_ecr": 1.0,
+    "max_ecr": 1.0,
+    "n": 2
+  },
+  "ised": {
+    "mean_ised": 0.71875,
+    "per_entity_type": {
+      "AADHAAR_NUMBER": 0.5,
+      "APPOINTMENT_ID": 1.0,
+      "DISTRICT": 1.0,
+      "DOCTOR_NAME": 0.6666666666666666,
+      "EMAIL_ADDRESS": 0.5,
+      "HOSPITAL_NAME": 1.0,
+      "INSURANCE_POLICY_NUMBER": 0.5,
+      "MRN": 1.0,
+      "PAN_NUMBER": 0.5,
+      "PATIENT_NAME": 0.6666666666666666,
+      "PHONE_NUMBER": 0.6666666666666666,
+      "PIN_CODE": 1.0,
+      "RESIDENTIAL_ADDRESS": 0.5,
+      "TAX_ID": 0.5,
+      "TELEPHONE_LANDLINE": 1.0,
+      "VEHICLE_REGISTRATION": 0.5
+    },
+    "entity_types": 16,
+    "total_mentions": 31
+  },
+  "ied": {
+    "mean_ised": 0.71875,
+    "per_entity_type": {
+      "AADHAAR_NUMBER": 0.5,
+      "APPOINTMENT_ID": 1.0,
+      "DISTRICT": 1.0,
+      "DOCTOR_NAME": 0.6666666666666666,
+      "EMAIL_ADDRESS": 0.5,
+      "HOSPITAL_NAME": 1.0,
+      "INSURANCE_POLICY_NUMBER": 0.5,
+      "MRN": 1.0,
+      "PAN_NUMBER": 0.5,
+      "PATIENT_NAME": 0.6666666666666666,
+      "PHONE_NUMBER": 0.6666666666666666,
+      "PIN_CODE": 1.0,
+      "RESIDENTIAL_ADDRESS": 0.5,
+      "TAX_ID": 0.5,
+      "TELEPHONE_LANDLINE": 1.0,
+      "VEHICLE_REGISTRATION": 0.5
+    },
+    "entity_types": 16,
+    "total_mentions": 31
+  },
+  "gold_span_metrics": null,
+  "gold_jsonl": null,
+  "fail_on_token_misalign": true
+}

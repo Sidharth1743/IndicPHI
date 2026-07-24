@@ -1,0 +1,68 @@
+{
+  "stage": "s6_deterministic_auditor",
+  "timestamp_utc": "2026-07-23T19:07:46.121477+00:00",
+  "rows_audited": 137,
+  "rows_passed": 132,
+  "rows_failed": 5,
+  "pass_rate": 0.9635036496350365,
+  "mean_dics": 0.9845324991310392,
+  "mean_ecr": 1.0,
+  "mean_bcr": 0.0,
+  "failures": [
+    {
+      "uuid": "57e0ccc76318480b91dca7f2d464c122",
+      "document_id": "57e0ccc76318480b91dca7f2d464c122__2",
+      "doc_type_id": "referral_letter",
+      "document_language_code": "gu",
+      "auditor_errors": [
+        "dics_below_threshold:0.7142857142857143"
+      ],
+      "auditor_repair_attempts": 1
+    },
+    {
+      "uuid": "7e1fefa3b81344778d2739efd7575c6c",
+      "document_id": "7e1fefa3b81344778d2739efd7575c6c__0",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "hi",
+      "auditor_errors": [
+        "phi_residue:1",
+        "dics_below_threshold:0.0",
+        "script_purity:target_script_ratio:0.000<0.35"
+      ],
+      "auditor_repair_attempts": 5
+    },
+    {
+      "uuid": "df61060159844e75aeafcafe43b1bc0d",
+      "document_id": "df61060159844e75aeafcafe43b1bc0d__1",
+      "doc_type_id": "referral_letter",
+      "document_language_code": "mni",
+      "auditor_errors": [
+        "dics_below_threshold:0.6666666666666666"
+      ],
+      "auditor_repair_attempts": 0
+    },
+    {
+      "uuid": "825c4438c02440dc90d3ddec7ffec8ee",
+      "document_id": "825c4438c02440dc90d3ddec7ffec8ee__1",
+      "doc_type_id": "hospital_billing",
+      "document_language_code": "sd",
+      "auditor_errors": [
+        "script_purity:target_script_ratio:0.000<0.35"
+      ],
+      "auditor_repair_attempts": 5
+    },
+    {
+      "uuid": "6b15543bcd6545f5803d6887e2a48820",
+      "document_id": "6b15543bcd6545f5803d6887e2a48820__1",
+      "doc_type_id": "referral_letter",
+      "document_language_code": "ur",
+      "auditor_errors": [
+        "dics_below_threshold:0.5"
+      ],
+      "auditor_repair_attempts": 2
+    }
+  ],
+  "failure_count": 5,
+  "auditor_repaired_count": 18,
+  "quality_repair_max": 5
+}

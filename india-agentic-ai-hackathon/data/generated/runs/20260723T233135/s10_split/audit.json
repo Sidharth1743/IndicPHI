@@ -1,0 +1,467 @@
+{
+  "stage": "s10_split",
+  "timestamp_utc": "2026-07-23T19:08:19.240913+00:00",
+  "input_jsonl": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s9_gliner_format/gliner_docs.jsonl",
+  "rows_in": 114,
+  "personas_in": 46,
+  "eval_fraction_target": 0.15,
+  "seed": 3031,
+  "persona_id_field": "uuid",
+  "language_field": "document_language_code",
+  "stratify_by": [
+    "language",
+    "doc_type_id",
+    "domain_id"
+  ],
+  "train_rows": 114,
+  "eval_rows": 0,
+  "eval_personas": 0,
+  "train_personas": 46,
+  "eval_fraction_actual_docs": 0.0,
+  "per_language": {
+    "as": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 6
+    },
+    "bn": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 5
+    },
+    "brx": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 6
+    },
+    "doi": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 6
+    },
+    "en": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 6
+    },
+    "gu": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 5
+    },
+    "hi": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 5
+    },
+    "kn": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 4
+    },
+    "kok": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 6
+    },
+    "ks": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 3
+    },
+    "mai": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 4
+    },
+    "ml": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 3
+    },
+    "mni": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 5
+    },
+    "mr": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 5
+    },
+    "ne": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 6
+    },
+    "or": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 4
+    },
+    "pa": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 5
+    },
+    "sat": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 6
+    },
+    "sa": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 6
+    },
+    "sd": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 3
+    },
+    "ta": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 5
+    },
+    "te": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 6
+    },
+    "ur": {
+      "personas": 2,
+      "eval_personas": 0,
+      "train_personas": 2,
+      "docs": 4
+    }
+  },
+  "per_stratum": {
+    "as|surgical_note|maternal_health": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 3
+    },
+    "as|surgical_note|tb_ncd": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 3
+    },
+    "bn|opd_slip|general_medicine": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 3
+    },
+    "bn|surgical_note|general_medicine": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 2
+    },
+    "brx|opd_slip|psychiatry_behavioral": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 3
+    },
+    "brx|surgical_note|psychiatry_behavioral": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 3
+    },
+    "doi|asha_worker_note|psychiatry_behavioral": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 3
+    },
+    "doi|opd_slip|psychiatry_behavioral": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 3
+    },
+    "en|radiology_report|oncology_chronic": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 3
+    },
+    "en|radiology_report|surgical": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 3
+    },
+    "gu|hospital_billing|oncology_chronic": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 3
+    },
+    "gu|hospital_billing|psychiatry_behavioral": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 2
+    },
+    "hi|automated_sms|surgical": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 2
+    },
+    "hi|automated_sms|tb_ncd": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 3
+    },
+    "kn|surgical_note|general_medicine": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 2
+    },
+    "kn|surgical_note|tb_ncd": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 2
+    },
+    "kok|lab_report|oncology_chronic": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 3
+    },
+    "kok|prescription|oncology_chronic": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 3
+    },
+    "ks|er_triage_notes|oncology_chronic": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 1
+    },
+    "ks|er_triage_notes|psychiatry_behavioral": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 2
+    },
+    "mai|opd_slip|general_medicine": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 3
+    },
+    "mai|prescription|surgical": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 1
+    },
+    "ml|er_triage_notes|oncology_chronic": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 2
+    },
+    "ml|er_triage_notes|psychiatry_behavioral": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 1
+    },
+    "mni|discharge_summary|surgical": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 2
+    },
+    "mni|discharge_summary|tb_ncd": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 3
+    },
+    "mr|discharge_summary|psychiatry_behavioral": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 3
+    },
+    "mr|radiology_report|general_medicine": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 2
+    },
+    "ne|automated_sms|oncology_chronic": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 3
+    },
+    "ne|prescription|oncology_chronic": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 3
+    },
+    "or|surgical_note|general_medicine": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 2
+    },
+    "or|surgical_note|tb_ncd": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 2
+    },
+    "pa|surgical_note|maternal_health": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 3
+    },
+    "pa|surgical_note|surgical": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 2
+    },
+    "sat|asha_worker_note|tb_ncd": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 3
+    },
+    "sat|phc_register|tb_ncd": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 3
+    },
+    "sa|automated_sms|tb_ncd": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 3
+    },
+    "sa|prescription|tb_ncd": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 3
+    },
+    "sd|automated_sms|psychiatry_behavioral": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 2
+    },
+    "sd|discharge_summary|general_medicine": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 1
+    },
+    "ta|asha_worker_note|psychiatry_behavioral": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 3
+    },
+    "ta|prescription|general_medicine": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 2
+    },
+    "te|hospital_billing|surgical": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 3
+    },
+    "te|hospital_billing|tb_ncd": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 3
+    },
+    "ur|discharge_summary|maternal_health": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 2
+    },
+    "ur|discharge_summary|tb_ncd": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 2
+    }
+  },
+  "train_language_counts": {
+    "as": 6,
+    "bn": 5,
+    "brx": 6,
+    "doi": 6,
+    "en": 6,
+    "gu": 5,
+    "hi": 5,
+    "kn": 4,
+    "kok": 6,
+    "ks": 3,
+    "mai": 4,
+    "ml": 3,
+    "mni": 5,
+    "mr": 5,
+    "ne": 6,
+    "or": 4,
+    "pa": 5,
+    "sa": 6,
+    "sat": 6,
+    "sd": 3,
+    "ta": 5,
+    "te": 6,
+    "ur": 4
+  },
+  "eval_language_counts": {},
+  "gliner_train_records": 114,
+  "gliner_eval_records": 0
+}

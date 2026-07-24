@@ -1,0 +1,357 @@
+{
+  "stage": "s4b_translation",
+  "timestamp_utc": "2026-07-23T16:28:19.329221+00:00",
+  "model": "sarvam-105b",
+  "rows_in": 138,
+  "rows_out": 138,
+  "rows_translated": 101,
+  "rows_skipped": 37,
+  "rows_resumed_from_checkpoint": 0,
+  "rows_newly_translated": 138,
+  "soft_failures": [
+    {
+      "uuid": "3a14ecc1de8648689a3311540c7cdd2e",
+      "document_id": "3a14ecc1de8648689a3311540c7cdd2e__1",
+      "doc_type_id": "lab_report",
+      "document_language_code": "as",
+      "translation_error": "tag_restore_or_translate_failed:timed out:Sarvam timeout after 300.0s: The read operation timed out attempt=1",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "3ceb8b6e61ba4069980e557280aa9ba0",
+      "document_id": "3ceb8b6e61ba4069980e557280aa9ba0__0",
+      "doc_type_id": "opd_slip",
+      "document_language_code": "brx",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "3ceb8b6e61ba4069980e557280aa9ba0",
+      "document_id": "3ceb8b6e61ba4069980e557280aa9ba0__2",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "brx",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "18473c8835b140ff8c0b5ed0d35a5271",
+      "document_id": "18473c8835b140ff8c0b5ed0d35a5271__0",
+      "doc_type_id": "opd_slip",
+      "document_language_code": "doi",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "18473c8835b140ff8c0b5ed0d35a5271",
+      "document_id": "18473c8835b140ff8c0b5ed0d35a5271__1",
+      "doc_type_id": "prescription",
+      "document_language_code": "doi",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "18473c8835b140ff8c0b5ed0d35a5271",
+      "document_id": "18473c8835b140ff8c0b5ed0d35a5271__2",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "doi",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "8116ee5699344b79a2c9c8d1e053dde5",
+      "document_id": "8116ee5699344b79a2c9c8d1e053dde5__0",
+      "doc_type_id": "asha_worker_note",
+      "document_language_code": "doi",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "8116ee5699344b79a2c9c8d1e053dde5",
+      "document_id": "8116ee5699344b79a2c9c8d1e053dde5__1",
+      "doc_type_id": "automated_sms",
+      "document_language_code": "doi",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "8116ee5699344b79a2c9c8d1e053dde5",
+      "document_id": "8116ee5699344b79a2c9c8d1e053dde5__2",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "doi",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "60ff3470cf8340efaa474e13896d8568",
+      "document_id": "60ff3470cf8340efaa474e13896d8568__0",
+      "doc_type_id": "er_triage_notes",
+      "document_language_code": "ks",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "60ff3470cf8340efaa474e13896d8568",
+      "document_id": "60ff3470cf8340efaa474e13896d8568__1",
+      "doc_type_id": "telemedicine_transcript",
+      "document_language_code": "ks",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "60ff3470cf8340efaa474e13896d8568",
+      "document_id": "60ff3470cf8340efaa474e13896d8568__2",
+      "doc_type_id": "opd_slip",
+      "document_language_code": "ks",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "885a67d0071948ac8a8336b278e81003",
+      "document_id": "885a67d0071948ac8a8336b278e81003__0",
+      "doc_type_id": "er_triage_notes",
+      "document_language_code": "ks",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "885a67d0071948ac8a8336b278e81003",
+      "document_id": "885a67d0071948ac8a8336b278e81003__1",
+      "doc_type_id": "telemedicine_transcript",
+      "document_language_code": "ks",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "885a67d0071948ac8a8336b278e81003",
+      "document_id": "885a67d0071948ac8a8336b278e81003__2",
+      "doc_type_id": "opd_slip",
+      "document_language_code": "ks",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "df61060159844e75aeafcafe43b1bc0d",
+      "document_id": "df61060159844e75aeafcafe43b1bc0d__0",
+      "doc_type_id": "discharge_summary",
+      "document_language_code": "mni",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "df61060159844e75aeafcafe43b1bc0d",
+      "document_id": "df61060159844e75aeafcafe43b1bc0d__1",
+      "doc_type_id": "referral_letter",
+      "document_language_code": "mni",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "22ef884ce12247309d07fc3f601a3c59",
+      "document_id": "22ef884ce12247309d07fc3f601a3c59__1",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "sa",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "22ef884ce12247309d07fc3f601a3c59",
+      "document_id": "22ef884ce12247309d07fc3f601a3c59__2",
+      "doc_type_id": "asha_worker_note",
+      "document_language_code": "sa",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "6e943dc3578249e38b9e61705d0912a9",
+      "document_id": "6e943dc3578249e38b9e61705d0912a9__0",
+      "doc_type_id": "automated_sms",
+      "document_language_code": "sa",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "6e943dc3578249e38b9e61705d0912a9",
+      "document_id": "6e943dc3578249e38b9e61705d0912a9__1",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "sa",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "0b19143502244d21a03f71ef838ab4ff",
+      "document_id": "0b19143502244d21a03f71ef838ab4ff__0",
+      "doc_type_id": "asha_worker_note",
+      "document_language_code": "sat",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "0b19143502244d21a03f71ef838ab4ff",
+      "document_id": "0b19143502244d21a03f71ef838ab4ff__1",
+      "doc_type_id": "automated_sms",
+      "document_language_code": "sat",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "0b19143502244d21a03f71ef838ab4ff",
+      "document_id": "0b19143502244d21a03f71ef838ab4ff__2",
+      "doc_type_id": "hospital_billing",
+      "document_language_code": "sat",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "e899bd99966c4ac6b77d784bae3482f0",
+      "document_id": "e899bd99966c4ac6b77d784bae3482f0__1",
+      "doc_type_id": "asha_worker_note",
+      "document_language_code": "sat",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "e899bd99966c4ac6b77d784bae3482f0",
+      "document_id": "e899bd99966c4ac6b77d784bae3482f0__2",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "sat",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "825c4438c02440dc90d3ddec7ffec8ee",
+      "document_id": "825c4438c02440dc90d3ddec7ffec8ee__0",
+      "doc_type_id": "automated_sms",
+      "document_language_code": "sd",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "825c4438c02440dc90d3ddec7ffec8ee",
+      "document_id": "825c4438c02440dc90d3ddec7ffec8ee__1",
+      "doc_type_id": "hospital_billing",
+      "document_language_code": "sd",
+      "translation_error": "dedicated_script_purity_failed:wrong_indic_script:Devanagari>Arabic",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "825c4438c02440dc90d3ddec7ffec8ee",
+      "document_id": "825c4438c02440dc90d3ddec7ffec8ee__2",
+      "doc_type_id": "discharge_summary",
+      "document_language_code": "sd",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "fe3a6e05b50a4eb1b679f5fba0c5440b",
+      "document_id": "fe3a6e05b50a4eb1b679f5fba0c5440b__0",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "sd",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "fe3a6e05b50a4eb1b679f5fba0c5440b",
+      "document_id": "fe3a6e05b50a4eb1b679f5fba0c5440b__1",
+      "doc_type_id": "hospital_billing",
+      "document_language_code": "sd",
+      "translation_error": "dedicated_script_purity_failed:wrong_indic_script:Devanagari>Arabic",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "fe3a6e05b50a4eb1b679f5fba0c5440b",
+      "document_id": "fe3a6e05b50a4eb1b679f5fba0c5440b__2",
+      "doc_type_id": "discharge_summary",
+      "document_language_code": "sd",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "57a29898a6944b899059fb674d16f990",
+      "document_id": "57a29898a6944b899059fb674d16f990__0",
+      "doc_type_id": "hospital_billing",
+      "document_language_code": "te",
+      "translation_error": "tag_restore_or_translate_failed:Translation lost protected ID tag '[[STATE|…]]';post_repair_translate:Translation lost protected ID tag '[[STATE|…]]'",
+      "translation_script_ok": false
+    }
+  ],
+  "soft_fail_count": 33,
+  "script_fail_count": 2,
+  "generator_repaired_count": 0,
+  "max_workers": 12,
+  "requests_per_minute": 110.0,
+  "skip_language_codes": [
+    "en"
+  ],
+  "columns_added": [
+    "generated_text_en",
+    "generated_text",
+    "translation_applied",
+    "translation_script_ok",
+    "translator_model",
+    "translator_finish_reason",
+    "translation_attempts",
+    "translation_error",
+    "translation_soft_fail",
+    "translation_generator_repair_attempts",
+    "translation_repaired_by_generator",
+    "stage"
+  ],
+  "tag_protection": {
+    "id_entity_types": [
+      "AADHAAR_NUMBER",
+      "ABHA_ADDRESS",
+      "ABHA_ID",
+      "ADMISSION_NUMBER",
+      "AGE",
+      "APPOINTMENT_ID",
+      "BANK_ACCOUNT_NUMBER",
+      "BANK_ROUTING_NUMBER",
+      "BED_NUMBER",
+      "BPL_RATION_CARD",
+      "CREDIT_CARD_NUMBER",
+      "CVV",
+      "DOB",
+      "DRIVING_LICENCE",
+      "EMAIL_ADDRESS",
+      "EMPLOYEE_ID",
+      "ENCOUNTER_ID",
+      "GENDER",
+      "HOSPITAL_ID",
+      "IFSC_CODE",
+      "IMEI_NUMBER",
+      "INSURANCE_POLICY_NUMBER",
+      "IP_ADDRESS",
+      "MAC_ADDRESS",
+      "MRN",
+      "PAN_NUMBER",
+      "PASSPORT_NUMBER",
+      "PATIENT_ID",
+      "PHONE_NUMBER",
+      "PIN",
+      "PIN_CODE",
+      "REFERRAL_ID",
+      "STUDENT_ID",
+      "TAX_ID",
+      "TELEPHONE_LANDLINE",
+      "URL",
+      "VEHICLE_REGISTRATION",
+      "VOTER_ID",
+      "WARD_NUMBER"
+    ],
+    "name_place_entity_types": [
+      "ASHA_WORKER_NAME",
+      "CASTE",
+      "DISTRICT",
+      "DOCTOR_NAME",
+      "HOSPITAL_NAME",
+      "OCCUPATION",
+      "PATIENT_NAME",
+      "RELATIVE_NAME",
+      "RELIGION",
+      "RESIDENTIAL_ADDRESS",
+      "VILLAGE"
+    ],
+    "langid_hook": "optional_if_installed",
+    "primary_purity_gate": "script_purity_latin_ratio"
+  }
+}

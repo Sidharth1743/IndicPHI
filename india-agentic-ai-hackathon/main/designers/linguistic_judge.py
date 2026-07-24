@@ -21,6 +21,11 @@ from main.designers.entity_checks import (
     SOFT_JUDGE_FLAGS,
     normalize_inline_entity_tags,
 )
+from main.designers.persona_tag_patch import (
+    apply_persona_tag_patch,
+    locked_surrogates,
+    persona_flags_present,
+)
 from main.designers.repair import (
     clear_upstream_soft_fail_fields,
     issues_from_judge_flags,
@@ -512,9 +517,57 @@ def _judge_one_row(
         lang = str(working.get("document_language_code") or "")
         rare_langs = set(settings.rare_script_languages or ())
         is_rare = lang in rare_langs
-        row_max_repairs = (
-            min(2, max_quality_repairs) if is_rare else max_quality_repairs
-        )
+        # Persona path: tag-only patch then at most one LLM (2 repairs total).
+        # Other flags keep configured max; rare still capped at 2.
+        has_persona = persona_flags_present(accumulated_flags or flags)
+        if has_persona and not any(
+            f
+            in {
+                "dialect_script_impurity",
+                "cross_language_entity_shift",
+                "instruction_drift",
+                "invented_entity_type",
+                "length_violation",
+            }
+            for f in (accumulated_flags or flags)
+        ):
+            row_max_repairs = min(2, max_quality_repairs)
+        else:
+            row_max_repairs = (
+                min(2, max_quality_repairs) if is_rare else max_quality_repairs
+            )
+
+        # First persona fail → tag-only patch (no LLM), then re-judge.
+        if (
+            has_persona
+            and not working.get("_persona_tag_patched")
+            and quality_round < row_max_repairs
+        ):
+            patched, notes = apply_persona_tag_patch(
+                str(working.get("generated_text") or ""),
+                working,
+            )
+            working["_persona_tag_patched"] = True
+            repair_attempts += 1
+            if notes:
+                working["generated_text"] = patched
+                working["persona_tag_patch_notes"] = notes
+                # Also patch EN pivot so later translate stays consistent.
+                en_src = str(working.get("generated_text_en") or "")
+                if en_src.strip():
+                    en_patched, en_notes = apply_persona_tag_patch(en_src, working)
+                    if en_notes:
+                        working["generated_text_en"] = en_patched
+                clear_upstream_soft_fail_fields(working)
+                print(
+                    f"[s5] persona tag-only patch "
+                    f"uuid={working.get('uuid')} changes={notes[:6]}",
+                    file=sys.stderr,
+                    flush=True,
+                )
+                continue
+            # No tag changes possible — fall through to LLM with locked values.
+
         if quality_round >= row_max_repairs:
             if (
                 is_rare
@@ -578,7 +631,8 @@ def _judge_one_row(
                 if multi_constraint and accumulated_flags != flags
                 else ""
             )
-            + (" via=en_pivot+translate" if use_en_pivot else ""),
+            + (" via=en_pivot+translate" if use_en_pivot else "")
+            + (" persona_llm" if has_persona else ""),
             file=sys.stderr,
             flush=True,
         )
@@ -592,6 +646,7 @@ def _judge_one_row(
             multi_constraint=repair_settings.multi_constraint,
             via_english_pivot=repair_settings.via_english_pivot,
         )
+        locks = locked_surrogates(working) if has_persona else None
         if use_en_pivot:
             en_draft = str(
                 working.get("generated_text_en")
@@ -606,6 +661,7 @@ def _judge_one_row(
                 issues=issues,
                 settings=one_shot,
                 check_script=False,
+                locked_surrogates=locks,
             )
             repair_attempts += 1
             if fix.text.strip():
@@ -645,6 +701,7 @@ def _judge_one_row(
                 issues=issues,
                 settings=one_shot,
                 check_script=check_script,
+                locked_surrogates=locks,
             )
             repair_attempts += 1
             if fix.text.strip():
@@ -661,6 +718,7 @@ def _judge_one_row(
             )
 
     out = dict(working)
+    out.pop("_persona_tag_patched", None)
     status = "ok"
     soft_entry: dict[str, Any] | None = None
     if parsed is not None and result is not None:
@@ -717,7 +775,12 @@ def _judge_one_row(
                 "stage": "s5_linguistic_judge",
             }
         )
-        status = "soft_fail"
+        # Transport blips must not stick — resume retries (same policy as S4b).
+        status = (
+            "hard_fail"
+            if _is_retryable_judge_error(last_error)
+            else "soft_fail"
+        )
     return out, status, soft_entry, repaired, en_pivot_delta
 
 
@@ -869,7 +932,11 @@ def judge_documents(
                             "stage": "s5_linguistic_judge",
                         }
                     )
-                    status = "soft_fail"
+                    status = (
+                        "hard_fail"
+                        if _is_retryable_judge_error(exc)
+                        else "soft_fail"
+                    )
                     repaired = False
                     en_pivot_delta = 0
                 results_by_index[index] = out
@@ -897,6 +964,17 @@ def judge_documents(
                     )
 
     outputs = [results_by_index[i] for i in range(len(selected))]
+    network_fail_n = sum(
+        1
+        for row in outputs
+        if "judge_network_error" in (row.get("judge_flags") or [])
+        and row.get("judge_soft_fail")
+    )
+    if pending and network_fail_n >= max(1, len(pending) // 2):
+        raise JudgeError(
+            f"S5 transport failures on {network_fail_n}/{len(selected)} rows "
+            "(timeout/connection). Checkpointed as hard_fail for resume."
+        )
 
     verdicts = [str(row["judge_verdict"]) for row in outputs]
     failures = [

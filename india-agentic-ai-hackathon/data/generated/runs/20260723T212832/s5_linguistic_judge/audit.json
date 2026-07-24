@@ -1,0 +1,296 @@
+{
+  "stage": "s5_linguistic_judge",
+  "timestamp_utc": "2026-07-23T16:52:38.974570+00:00",
+  "provider": "azure_foundry",
+  "model": "grok-4.3",
+  "base_url": "https://ambedkar-interpreter-resource.services.ai.azure.com/openai/v1",
+  "requests_per_minute": 500.0,
+  "max_workers": 24,
+  "timeout_s": 600.0,
+  "network_retries": 2,
+  "rows_judged": 138,
+  "rows_resumed_from_checkpoint": 0,
+  "pass_rate": 0.8913043478260869,
+  "label_distribution": {
+    "fail": 0.10869565217391304,
+    "pass": 0.8913043478260869
+  },
+  "positional_length_bias": {
+    "pearson_r": 0.0809412936969853,
+    "n": 138.0
+  },
+  "failures": [
+    {
+      "uuid": "18473c8835b140ff8c0b5ed0d35a5271",
+      "document_id": "18473c8835b140ff8c0b5ed0d35a5271__2",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "doi",
+      "judge_verdict": "fail",
+      "judge_score": 0.35,
+      "judge_flags": [
+        "dialect_script_impurity",
+        "surrogate_plausibility_collapse"
+      ],
+      "judge_rationale": "Hindi prose instead of Dogri; Bari Brahmana village mismatches Kathua district.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 2
+    },
+    {
+      "uuid": "8116ee5699344b79a2c9c8d1e053dde5",
+      "document_id": "8116ee5699344b79a2c9c8d1e053dde5__2",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "doi",
+      "judge_verdict": "fail",
+      "judge_score": 0.55,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Narrative prose mixes English dates/numbers outside tags with Dogri Devanagari; not fully compliant with expected script/language for clinical content.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 2
+    },
+    {
+      "uuid": "df61060159844e75aeafcafe43b1bc0d",
+      "document_id": "df61060159844e75aeafcafe43b1bc0d__0",
+      "doc_type_id": "discharge_summary",
+      "document_language_code": "mni",
+      "judge_verdict": "fail",
+      "judge_score": 0.2,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Clinical prose entirely in English; expected Manipuri/Meitei script for narrative.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 2
+    },
+    {
+      "uuid": "df61060159844e75aeafcafe43b1bc0d",
+      "document_id": "df61060159844e75aeafcafe43b1bc0d__1",
+      "doc_type_id": "referral_letter",
+      "document_language_code": "mni",
+      "judge_verdict": "fail",
+      "judge_score": 0.3,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Clinical prose in Bengali script + English mix instead of required Meitei; all entity TYPEs allowed and persona/domain fit otherwise.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 2
+    },
+    {
+      "uuid": "0b19143502244d21a03f71ef838ab4ff",
+      "document_id": "0b19143502244d21a03f71ef838ab4ff__0",
+      "doc_type_id": "asha_worker_note",
+      "document_language_code": "sat",
+      "judge_verdict": "fail",
+      "judge_score": 0.35,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Narrative prose entirely in Roman script with mixed Hindi/Santali transliteration; no Ol Chiki script used despite explicit Santali requirement.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 2
+    },
+    {
+      "uuid": "0b19143502244d21a03f71ef838ab4ff",
+      "document_id": "0b19143502244d21a03f71ef838ab4ff__1",
+      "doc_type_id": "automated_sms",
+      "document_language_code": "sat",
+      "judge_verdict": "fail",
+      "judge_score": 0.2,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "SMS prose entirely in English; expected Santali Ol Chiki narrative.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 2
+    },
+    {
+      "uuid": "0b19143502244d21a03f71ef838ab4ff",
+      "document_id": "0b19143502244d21a03f71ef838ab4ff__2",
+      "doc_type_id": "hospital_billing",
+      "document_language_code": "sat",
+      "judge_verdict": "fail",
+      "judge_score": 0.55,
+      "judge_flags": [
+        "instruction_drift",
+        "invented_entity_type"
+      ],
+      "judge_rationale": "Meta notes about untagged receipt/state fields and placeholder text indicate drift; receipt number invented outside allow-list despite soft billing rule.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 2
+    },
+    {
+      "uuid": "e899bd99966c4ac6b77d784bae3482f0",
+      "document_id": "e899bd99966c4ac6b77d784bae3482f0__1",
+      "doc_type_id": "asha_worker_note",
+      "document_language_code": "sat",
+      "judge_verdict": "fail",
+      "judge_score": 0.35,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Prose uses Roman script + English code-mixing instead of required Santali Ol Chiki; all other elements (entities, persona, domain) acceptable.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 2
+    },
+    {
+      "uuid": "e899bd99966c4ac6b77d784bae3482f0",
+      "document_id": "e899bd99966c4ac6b77d784bae3482f0__2",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "sat",
+      "judge_verdict": "fail",
+      "judge_score": 0.2,
+      "judge_flags": [
+        "dialect_script_impurity",
+        "instruction_drift"
+      ],
+      "judge_rationale": "Clinical prose is English; expected Santali Ol Chiki. All tags/IDs/types/persona fit otherwise.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 2
+    },
+    {
+      "uuid": "825c4438c02440dc90d3ddec7ffec8ee",
+      "document_id": "825c4438c02440dc90d3ddec7ffec8ee__0",
+      "doc_type_id": "automated_sms",
+      "document_language_code": "sd",
+      "judge_verdict": "fail",
+      "judge_score": 0.55,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Prose mixes Devanagari into expected Sindhi Arabic script; other entities/persona fit.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 2
+    },
+    {
+      "uuid": "825c4438c02440dc90d3ddec7ffec8ee",
+      "document_id": "825c4438c02440dc90d3ddec7ffec8ee__2",
+      "doc_type_id": "discharge_summary",
+      "document_language_code": "sd",
+      "judge_verdict": "fail",
+      "judge_score": 0.2,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Clinical prose entirely in English instead of required Sindhi Arabic script; all tags allowed and persona/domain fit otherwise.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 2
+    },
+    {
+      "uuid": "fe3a6e05b50a4eb1b679f5fba0c5440b",
+      "document_id": "fe3a6e05b50a4eb1b679f5fba0c5440b__0",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "sd",
+      "judge_verdict": "fail",
+      "judge_score": 0.25,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Clinical narrative entirely in Devanagari/Hindi-Urdu mix instead of required Sindhi Arabic script; language not Sindhi prose despite tags and IDs being allow-listed.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 2
+    },
+    {
+      "uuid": "fe3a6e05b50a4eb1b679f5fba0c5440b",
+      "document_id": "fe3a6e05b50a4eb1b679f5fba0c5440b__1",
+      "doc_type_id": "hospital_billing",
+      "document_language_code": "sd",
+      "judge_verdict": "fail",
+      "judge_score": 0.3,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Prose entirely in Devanagari; expected Sindhi Arabic script. All TYPE tags allowed and IDs Latin; persona/domain fit ok.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 2
+    },
+    {
+      "uuid": "fe3a6e05b50a4eb1b679f5fba0c5440b",
+      "document_id": "fe3a6e05b50a4eb1b679f5fba0c5440b__2",
+      "doc_type_id": "discharge_summary",
+      "document_language_code": "sd",
+      "judge_verdict": "fail",
+      "judge_score": 0.65,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Devanagari 'डॉक्टर' intrudes into otherwise Arabic-script Sindhi prose; all tags allowed, persona/clinical fit and length OK.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 2
+    },
+    {
+      "uuid": "829db9fbfeda404d89ff9b8a405b5e4d",
+      "document_id": "829db9fbfeda404d89ff9b8a405b5e4d__0",
+      "doc_type_id": "opd_slip",
+      "document_language_code": "ta",
+      "judge_verdict": "fail",
+      "judge_score": 0.55,
+      "judge_flags": [
+        "domain_persona_mismatch"
+      ],
+      "judge_rationale": "Occupation 'News Paper Boy' conflicts with female/40yo persona; all other prose, tags, script and clinical content align.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 2
+    }
+  ],
+  "failure_count": 15,
+  "soft_failures": [],
+  "soft_fail_count": 0,
+  "judge_repaired_count": 32,
+  "en_pivot_repair_count": 0,
+  "quality_repair_max": 5,
+  "repair_multi_constraint": true,
+  "repair_via_english_pivot": false,
+  "must_work_languages": [
+    "hi",
+    "ta",
+    "te",
+    "bn",
+    "mr",
+    "gu",
+    "kn",
+    "ml",
+    "pa",
+    "or",
+    "as",
+    "ur"
+  ],
+  "rare_script_languages": [
+    "brx",
+    "mni",
+    "sat",
+    "ks",
+    "sd",
+    "doi",
+    "sa"
+  ],
+  "columns_added": [
+    "judge_verdict",
+    "judge_score",
+    "judge_reasoning",
+    "judge_flags",
+    "judge_provider",
+    "judge_model",
+    "judge_soft_fail",
+    "judge_error",
+    "judge_repair_attempts",
+    "judge_repaired",
+    "stage"
+  ]
+}

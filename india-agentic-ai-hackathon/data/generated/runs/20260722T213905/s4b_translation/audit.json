@@ -1,0 +1,229 @@
+{
+  "stage": "s4b_translation",
+  "timestamp_utc": "2026-07-22T16:17:50.099925+00:00",
+  "model": "sarvam-105b",
+  "rows_in": 69,
+  "rows_out": 69,
+  "rows_translated": 49,
+  "rows_skipped": 20,
+  "rows_resumed_from_checkpoint": 0,
+  "rows_newly_translated": 69,
+  "soft_failures": [
+    {
+      "uuid": "269a94e437d84643b728d5b86d5d08be",
+      "document_id": "269a94e437d84643b728d5b86d5d08be__0",
+      "doc_type_id": "automated_sms",
+      "document_language_code": "brx",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "269a94e437d84643b728d5b86d5d08be",
+      "document_id": "269a94e437d84643b728d5b86d5d08be__1",
+      "doc_type_id": "hospital_billing",
+      "document_language_code": "brx",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "e6a759d47c084de984729dfaf40785e1",
+      "document_id": "e6a759d47c084de984729dfaf40785e1__0",
+      "doc_type_id": "hospital_billing",
+      "document_language_code": "doi",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "e6a759d47c084de984729dfaf40785e1",
+      "document_id": "e6a759d47c084de984729dfaf40785e1__1",
+      "doc_type_id": "discharge_summary",
+      "document_language_code": "doi",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "e6a759d47c084de984729dfaf40785e1",
+      "document_id": "e6a759d47c084de984729dfaf40785e1__2",
+      "doc_type_id": "referral_letter",
+      "document_language_code": "doi",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "1bd09fe5a4884629b02cbfd7660b402c",
+      "document_id": "1bd09fe5a4884629b02cbfd7660b402c__0",
+      "doc_type_id": "asha_worker_note",
+      "document_language_code": "ks",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "1bd09fe5a4884629b02cbfd7660b402c",
+      "document_id": "1bd09fe5a4884629b02cbfd7660b402c__1",
+      "doc_type_id": "automated_sms",
+      "document_language_code": "ks",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "1bd09fe5a4884629b02cbfd7660b402c",
+      "document_id": "1bd09fe5a4884629b02cbfd7660b402c__2",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "ks",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "2f97625028784d7ab66673d76e697478",
+      "document_id": "2f97625028784d7ab66673d76e697478__1",
+      "doc_type_id": "phc_register",
+      "document_language_code": "mni",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "6e943dc3578249e38b9e61705d0912a9",
+      "document_id": "6e943dc3578249e38b9e61705d0912a9__0",
+      "doc_type_id": "asha_worker_note",
+      "document_language_code": "sa",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "6e943dc3578249e38b9e61705d0912a9",
+      "document_id": "6e943dc3578249e38b9e61705d0912a9__2",
+      "doc_type_id": "automated_sms",
+      "document_language_code": "sa",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "b5204bb0fe954a2cb47f1c994a300872",
+      "document_id": "b5204bb0fe954a2cb47f1c994a300872__0",
+      "doc_type_id": "er_triage_notes",
+      "document_language_code": "sat",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "b5204bb0fe954a2cb47f1c994a300872",
+      "document_id": "b5204bb0fe954a2cb47f1c994a300872__1",
+      "doc_type_id": "telemedicine_transcript",
+      "document_language_code": "sat",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "b5204bb0fe954a2cb47f1c994a300872",
+      "document_id": "b5204bb0fe954a2cb47f1c994a300872__2",
+      "doc_type_id": "opd_slip",
+      "document_language_code": "sat",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "e9ec69ab351340d49920d8203b96c015",
+      "document_id": "e9ec69ab351340d49920d8203b96c015__0",
+      "doc_type_id": "asha_worker_note",
+      "document_language_code": "sd",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "e9ec69ab351340d49920d8203b96c015",
+      "document_id": "e9ec69ab351340d49920d8203b96c015__1",
+      "doc_type_id": "phc_register",
+      "document_language_code": "sd",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    },
+    {
+      "uuid": "e9ec69ab351340d49920d8203b96c015",
+      "document_id": "e9ec69ab351340d49920d8203b96c015__2",
+      "doc_type_id": "automated_sms",
+      "document_language_code": "sd",
+      "translation_error": "tag_restore_or_translate_failed:None",
+      "translation_script_ok": false
+    }
+  ],
+  "soft_fail_count": 17,
+  "script_fail_count": 0,
+  "generator_repaired_count": 0,
+  "max_workers": 12,
+  "requests_per_minute": 110.0,
+  "skip_language_codes": [
+    "en"
+  ],
+  "columns_added": [
+    "generated_text_en",
+    "generated_text",
+    "translation_applied",
+    "translation_script_ok",
+    "translator_model",
+    "translator_finish_reason",
+    "translation_attempts",
+    "translation_error",
+    "translation_soft_fail",
+    "translation_generator_repair_attempts",
+    "translation_repaired_by_generator",
+    "stage"
+  ],
+  "tag_protection": {
+    "id_entity_types": [
+      "AADHAAR_NUMBER",
+      "ABHA_ADDRESS",
+      "ABHA_ID",
+      "ADMISSION_NUMBER",
+      "AGE",
+      "APPOINTMENT_ID",
+      "BANK_ACCOUNT_NUMBER",
+      "BANK_ROUTING_NUMBER",
+      "BED_NUMBER",
+      "BPL_RATION_CARD",
+      "CREDIT_CARD_NUMBER",
+      "CVV",
+      "DOB",
+      "DRIVING_LICENCE",
+      "EMAIL_ADDRESS",
+      "EMPLOYEE_ID",
+      "ENCOUNTER_ID",
+      "GENDER",
+      "HOSPITAL_ID",
+      "IFSC_CODE",
+      "IMEI_NUMBER",
+      "INSURANCE_POLICY_NUMBER",
+      "IP_ADDRESS",
+      "MAC_ADDRESS",
+      "MRN",
+      "PAN_NUMBER",
+      "PASSPORT_NUMBER",
+      "PATIENT_ID",
+      "PHONE_NUMBER",
+      "PIN",
+      "PIN_CODE",
+      "REFERRAL_ID",
+      "STUDENT_ID",
+      "TAX_ID",
+      "TELEPHONE_LANDLINE",
+      "URL",
+      "VEHICLE_REGISTRATION",
+      "VOTER_ID",
+      "WARD_NUMBER"
+    ],
+    "name_place_entity_types": [
+      "ASHA_WORKER_NAME",
+      "CASTE",
+      "DISTRICT",
+      "DOCTOR_NAME",
+      "HOSPITAL_NAME",
+      "OCCUPATION",
+      "PATIENT_NAME",
+      "RELATIVE_NAME",
+      "RELIGION",
+      "RESIDENTIAL_ADDRESS",
+      "VILLAGE"
+    ],
+    "langid_hook": "optional_if_installed",
+    "primary_purity_gate": "script_purity_latin_ratio"
+  }
+}

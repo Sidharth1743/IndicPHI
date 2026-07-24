@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import json
 import os
+import shutil
 import sys
 from dataclasses import dataclass
 from datetime import datetime, timezone
@@ -363,12 +364,17 @@ def _load_dd_rows_from_parquet_artifacts(
     *,
     dataset_name: str,
     expected_rows: int,
+    allow_partial: bool = False,
 ) -> list[dict[str, Any]] | None:
     """Salvage completed DD parquet when ``load_dataset()`` times out post-generate.
 
     NeMo Data Designer often finishes generation + writes parquet, then hangs on
     ``Measuring dataset column statistics`` / ``load_dataset``. Prefer on-disk
     batches over re-burning the full LLM batch.
+
+    When the provider drops rows (rate-limit / timeout salvage), parquet may be
+    shorter than ``expected_rows``. Pass ``allow_partial=True`` to keep those
+    rows for key-aligned checkpointing + resume.
     """
     base = artifact_path / dataset_name / "parquet-files"
     if not base.is_dir():
@@ -388,9 +394,56 @@ def _load_dd_rows_from_parquet_artifacts(
     rows = table.to_pylist()
     if not rows:
         return None
-    if expected_rows and len(rows) != expected_rows:
+    if expected_rows and len(rows) != expected_rows and not allow_partial:
         return None
     return [dict(row) for row in rows]
+
+
+def _archive_data_designer_dataset(artifact_path: Path, dataset_name: str) -> Path | None:
+    """Move a prior DD dataset aside so resume batches do not mix with old parquet."""
+    src = artifact_path / dataset_name
+    if not src.exists():
+        return None
+    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    dest = artifact_path / f"{dataset_name}.prev_{stamp}"
+    shutil.move(str(src), str(dest))
+    print(f"[s4] archived prior Data Designer artifacts → {dest}", file=sys.stderr, flush=True)
+    return dest
+
+
+def _align_dd_rows_to_seeds(
+    pending: Sequence[Mapping[str, Any]],
+    dd_rows: Sequence[Mapping[str, Any]],
+    *,
+    output_column: str,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
+    """Match DD outputs to seeds by ``uuid__doc_slot`` (not positional zip).
+
+    Returns ``(matched_seeds, matched_dd, unmatched_seeds)``.
+    """
+    by_key: dict[str, dict[str, Any]] = {}
+    for raw in dd_rows:
+        row = dict(raw)
+        key = row_key_from_prompt(row)
+        text = str(row.get(output_column) or row.get("generated_text") or "").strip()
+        if not text:
+            continue
+        # First non-empty wins; duplicates should not happen for a single batch.
+        by_key.setdefault(key, row)
+
+    matched_seeds: list[dict[str, Any]] = []
+    matched_dd: list[dict[str, Any]] = []
+    unmatched: list[dict[str, Any]] = []
+    for seed in pending:
+        seed_row = dict(seed)
+        key = row_key_from_prompt(seed_row)
+        dd_row = by_key.get(key)
+        if dd_row is None:
+            unmatched.append(seed_row)
+            continue
+        matched_seeds.append(seed_row)
+        matched_dd.append(dd_row)
+    return matched_seeds, matched_dd, unmatched
 
 
 def _load_data_designer_rows(
@@ -409,6 +462,7 @@ def _load_data_designer_rows(
             artifact_path,
             dataset_name=dataset_name,
             expected_rows=expected_rows,
+            allow_partial=True,
         )
         if salvaged is not None:
             print(
@@ -498,6 +552,8 @@ def run_data_designer_generation(pipeline_config: Path) -> dict[str, Path]:
 
         artifact_path = output_dir / "data_designer_artifacts"
         artifact_path.mkdir(parents=True, exist_ok=True)
+        # Prior underfilled batches must not mix into the next resume create/load.
+        _archive_data_designer_dataset(artifact_path, "s4_generation")
         designer = DataDesigner(
             model_providers=[provider],
             artifact_path=str(artifact_path),
@@ -524,6 +580,7 @@ def run_data_designer_generation(pipeline_config: Path) -> dict[str, Path]:
                 artifact_path,
                 dataset_name="s4_generation",
                 expected_rows=num_records,
+                allow_partial=True,
             )
             if salvaged is not None:
                 print(
@@ -558,17 +615,26 @@ def run_data_designer_generation(pipeline_config: Path) -> dict[str, Path]:
                     "`data-designer` is installed (`uv sync`)."
                 ) from exc
 
-        if len(dd_rows) != len(pending):
-            # Align by index when seed order is preserved; otherwise fail closed.
-            raise DesignerConfigError(
-                f"Data Designer returned {len(dd_rows)} rows for {len(pending)} seeds"
+        matched_seeds, matched_dd, unmatched_seeds = _align_dd_rows_to_seeds(
+            pending,
+            dd_rows,
+            output_column=settings.output_column,
+        )
+        if unmatched_seeds:
+            print(
+                f"[s4] Data Designer underfill: matched {len(matched_seeds)}/"
+                f"{len(pending)} seeds by uuid__doc_slot; "
+                f"will checkpoint matches then fail for resume "
+                f"({len(unmatched_seeds)} remaining)",
+                file=sys.stderr,
+                flush=True,
             )
 
         # Targeted generator repair for known cheap issues (missing tags / stuffing)
         # instead of soft-failing immediately — cheaper than a full DD rebatch.
         repair_settings = load_repair_settings_from_generation(gen)
         repair_client: SarvamClient | None = None
-        if repair_settings.max_repairs > 0:
+        if repair_settings.max_repairs > 0 and matched_seeds:
             rpm = gen.get("requests_per_minute")
             limiter = (
                 RateLimiter(float(rpm))
@@ -581,7 +647,7 @@ def run_data_designer_generation(pipeline_config: Path) -> dict[str, Path]:
                 rate_limiter=limiter,
             )
 
-        for seed_row, dd_row in zip(pending, dd_rows):
+        for seed_row, dd_row in zip(matched_seeds, matched_dd):
             text = str(dd_row.get(settings.output_column) or dd_row.get("generated_text") or "")
             key = row_key_from_prompt(seed_row)
             req = request_hash(
@@ -667,6 +733,12 @@ def run_data_designer_generation(pipeline_config: Path) -> dict[str, Path]:
                         "reasons": reasons,
                     }
                 )
+
+        if unmatched_seeds:
+            raise DesignerConfigError(
+                f"Data Designer returned {len(dd_rows)} rows for {len(pending)} seeds "
+                f"(checkpointed {len(matched_seeds)}; resume remaining {len(unmatched_seeds)})"
+            )
 
     # Rebuild full ordered outputs from checkpoint (idempotent).
     by_key = {row_key_from_prompt(r): r for r in checkpoint.completed_payloads()}

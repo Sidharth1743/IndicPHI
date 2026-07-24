@@ -12,6 +12,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
 from datetime import datetime, timezone
@@ -218,17 +219,29 @@ def _summarize_one(
                 }
             )
             return out
-        except (SarvamClientError, SummaryError) as exc:
+        except (SarvamClientError, SummaryError, TimeoutError, OSError) as exc:
             last_exc = exc
             msg = str(exc).lower()
-            retryable = "empty content" in msg or "too short" in msg
+            retryable = (
+                "empty content" in msg
+                or "too short" in msg
+                or "timed out" in msg
+                or "timeout" in msg
+                or "connection reset" in msg
+                or "connection aborted" in msg
+                or "temporarily unavailable" in msg
+                or "network error" in msg
+                or isinstance(exc, (TimeoutError, OSError))
+            )
             if retryable and attempt < attempts - 1:
+                delay = min(20.0, 2.0 ** attempt)
                 print(
-                    f"[s2b] empty/short retry {attempt + 1}/{attempts - 1} "
-                    f"uuid={row.get('uuid')}: {exc}",
+                    f"[s2b] retry {attempt + 1}/{attempts - 1} "
+                    f"uuid={row.get('uuid')} after {delay:.0f}s: {exc}",
                     file=sys.stderr,
                     flush=True,
                 )
+                time.sleep(delay)
                 continue
             raise SummaryError(
                 f"Persona summary failed at row {index} uuid={row.get('uuid')!r}: {exc}"

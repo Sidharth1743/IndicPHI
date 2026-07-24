@@ -316,18 +316,20 @@ def _repair_instructions(issues: Sequence[RepairIssue]) -> str:
             )
         elif issue.kind == "wrong_language_script":
             bits.append(
-                "WRONG LANGUAGE/SCRIPT — "
-                f"({issue.detail}). Rewrite ALL clinical prose/headings into the "
-                "target language AND exact target script (not Devanagari unless that "
-                "is the target; not English). Keep [[TYPE|…]] tags. Translate "
-                "name/place VALUES into the target script when natural; keep "
-                "ID/number/email/URL values Latin/digits."
+                "LANGUAGE-LOCKED — "
+                f"({issue.detail}). Rewrite ALL clinical prose into the EXACT "
+                "target language AND script. Do NOT substitute a neighbor language "
+                "(no Hindi for Dogri/Bodo/Konkani; no Urdu for Kashmiri; no Marathi "
+                "for Konkani; no English body). Keep [[TYPE|…]] tags. ID/email/URL "
+                "values stay Latin/digits; drug/lab names may stay Latin."
             )
         elif issue.kind == "dialect_script_impurity":
             bits.append(
-                "SCRIPT IMPURITY — clinical narrative is wrong language/script. "
-                f"Detail: {issue.detail}. Rewrite the WHOLE body into the target "
-                "script. Latin inside ID tags is fine; prose must not stay English."
+                "LANGUAGE-LOCKED SCRIPT — clinical narrative is wrong language/script. "
+                f"Detail: {issue.detail}. Rewrite the WHOLE body into the assigned "
+                "target language+script only. Forbidden: English body, Hindi stand-in, "
+                "Urdu stand-in, or any non-target Indic. Latin inside ID tags is fine; "
+                "ASCII drug/lab abbreviations OK."
             )
         elif issue.kind == "instruction_drift":
             bits.append(
@@ -338,16 +340,16 @@ def _repair_instructions(issues: Sequence[RepairIssue]) -> str:
         elif issue.kind == "surrogate_plausibility_collapse":
             bits.append(
                 "PLAUSIBILITY — geography/names/IDs contradict persona anchors. "
-                f"Detail: {issue.detail}. DISTRICT/VILLAGE/HOSPITAL must sit in the "
-                "persona state+district. PATIENT_NAME and ABHA local-part must align. "
-                "Do not invent distant districts."
+                f"Detail: {issue.detail}. Use ONLY the locked DISTRICT/GENDER/"
+                "PATIENT_NAME/AGE tags listed in the repair prompt when provided. "
+                "Do not invent distant districts or opposite-gender patient names."
             )
         elif issue.kind == "domain_persona_mismatch":
             bits.append(
-                "DOMAIN×PERSONA MISMATCH — clinical content conflicts with sex/age. "
-                f"Detail: {issue.detail}. Match persona sex and age exactly "
-                "(no male maternal delivery; no paediatric content for adults; "
-                "no unsafe extreme-age routine pregnancy)."
+                "DOMAIN×PERSONA MISMATCH — clinical content conflicts with sex/age/"
+                f"name. Detail: {issue.detail}. Keep locked PATIENT_NAME/GENDER/AGE/"
+                "DISTRICT tags exactly when provided. Match persona sex and age "
+                "(no male maternal delivery; no paediatric content for adults)."
             )
         elif issue.kind == "cross_language_entity_shift":
             bits.append(
@@ -397,6 +399,7 @@ def build_repair_messages(
     required: Sequence[str],
     english_pivot: bool = False,
     multi_constraint: bool = False,
+    locked_surrogates: Mapping[str, str] | None = None,
 ) -> list[dict[str, str]]:
     lang_name = str(row.get("document_language_name") or "")
     lang_code = str(row.get("document_language_code") or "")
@@ -417,9 +420,13 @@ def build_repair_messages(
         "English (Latin) pivot document with correct tags — a later stage "
         "translates prose to the target language.\n"
         "6) When fixing language/script after translation, rewrite the whole "
-        "body into the exact target script — keep TYPE names English.\n"
+        "body into the exact target script — keep TYPE names English. "
+        "LANGUAGE-LOCKED: never substitute Hindi/Urdu/English/neighbor language "
+        "for the assigned target.\n"
         "7) Never fix one issue by causing another (e.g. do not English-rewrite "
-        "to fix tags if the body must stay in the target script)."
+        "to fix tags if the body must stay in the target script).\n"
+        "8) When LOCKED SURROGATES are listed, copy those [[TYPE|value]] strings "
+        "exactly — do not invent alternate patient names, genders, or districts."
     )
     mandatory = ", ".join(required) if required else "(none listed)"
     anchors = (
@@ -438,18 +445,29 @@ def build_repair_messages(
     else:
         lang_block = (
             f"Target language: {lang_name} (code={lang_code}, script={script})\n"
-            "Rewrite clinical prose into that exact script; keep TYPE names ASCII.\n"
+            "LANGUAGE-LOCKED: rewrite clinical prose into that exact language+"
+            "script only (no Hindi/Urdu/English stand-in). Keep TYPE names ASCII.\n"
         )
     stability = (
         f"\n{_stability_guard_block(english_pivot=english_pivot)}\n"
         if multi_constraint
         else ""
     )
+    locked_block = ""
+    if locked_surrogates:
+        lines = "\n".join(
+            f"  [[{k}|{v}]]" for k, v in locked_surrogates.items()
+        )
+        locked_block = (
+            "LOCKED SURROGATES (copy exactly — do not invent alternatives):\n"
+            f"{lines}\n"
+        )
     user = (
         f"Document type: {doc_type}\n"
         f"Clinical domain: {domain}\n"
         f"{lang_block}"
         f"Persona anchors (MUST stay consistent): {anchors}\n"
+        f"{locked_block}"
         f"Mandatory TYPEs (each ≥ once): {mandatory}\n"
         f"{stability}"
         f"REPAIR INSTRUCTIONS (follow ALL):\n{_repair_instructions(issues)}\n\n"
@@ -498,6 +516,7 @@ def repair_document(
     issues: Sequence[RepairIssue],
     settings: RepairSettings,
     check_script: bool = False,
+    locked_surrogates: Mapping[str, str] | None = None,
 ) -> RepairResult:
     """Call generator up to ``max_repairs`` times until checks pass or exhausted.
 
@@ -553,6 +572,16 @@ def repair_document(
             deterministic_fixes=deterministic_fixes or None,
         )
 
+    # Auto-lock persona tags when repairing persona/geo flags (post-judge path).
+    locks = dict(locked_surrogates or {})
+    if not locks and any(
+        i.kind in {"domain_persona_mismatch", "surrogate_plausibility_collapse"}
+        for i in remaining
+    ):
+        from main.designers.persona_tag_patch import locked_surrogates as _locks
+
+        locks = _locks(row)
+
     last_model: str | None = None
     last_finish: str | None = None
     last_error: str | None = None
@@ -570,6 +599,7 @@ def repair_document(
                     required=required,
                     english_pivot=not check_script,
                     multi_constraint=settings.multi_constraint,
+                    locked_surrogates=locks or None,
                 ),
                 temperature=settings.temperature,
                 max_tokens=settings.max_tokens,

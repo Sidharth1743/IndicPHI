@@ -1,0 +1,56 @@
+{
+  "stage": "s10_split",
+  "timestamp_utc": "2026-07-24T11:50:17.318210+00:00",
+  "input_jsonl": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260724T171441/s9_gliner_format/gliner_docs.jsonl",
+  "rows_in": 2,
+  "personas_in": 2,
+  "eval_fraction_target": 0.15,
+  "seed": 42,
+  "persona_id_field": "uuid",
+  "language_field": "document_language_code",
+  "stratify_by": [
+    "language",
+    "doc_type_id",
+    "domain_id"
+  ],
+  "train_rows": 2,
+  "eval_rows": 0,
+  "eval_personas": 0,
+  "train_personas": 2,
+  "eval_fraction_actual_docs": 0.0,
+  "per_language": {
+    "as": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 1
+    },
+    "hi": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 1
+    }
+  },
+  "per_stratum": {
+    "as|hospital_billing|surgical": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 1
+    },
+    "hi|automated_sms|general_medicine": {
+      "personas": 1,
+      "eval_personas": 0,
+      "train_personas": 1,
+      "docs": 1
+    }
+  },
+  "train_language_counts": {
+    "as": 1,
+    "hi": 1
+  },
+  "eval_language_counts": {},
+  "gliner_train_records": 2,
+  "gliner_eval_records": 0
+}

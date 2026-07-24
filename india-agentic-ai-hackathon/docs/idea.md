@@ -43,7 +43,9 @@ languages + English** (native script, romanized, code-mixed). We still use an
                                   v                                        |
 +---------------------------------------------------------------------+    |
 | [S4b] Tag-preserving translation → target Indic script              | ---+
-|      ↻ generator repair: wrong language / script                    |
+|      Rare: dedicated ↔ few-shot chat ladder (prefer-chat: doi/ks/sd)  |
+|      Arabic script-lock if Devanagari leaks; sd ≥2 chat / 240s       |
+|      ↻ non-rare: generator repair on wrong language / script        |
 +---------------------------------------------------------------------+
                                   |
                                   v
@@ -52,7 +54,8 @@ languages + English** (native script, romanized, code-mixed). We still use an
 | Flags: dialect_script_impurity, instruction_drift,                  |    |
 |        surrogate_plausibility_collapse, domain_persona_mismatch,    |    |
 |        invented_entity_type, length_violation, …                    |    |
-| ↻ design: flag-targeted repair 3–5× then re-judge                   | ---+
+| Persona fail → tag-only patch → rejudge → LLM (max 2)               | ---+
+| Other flags → language-locked LLM repair (no neighbor soft-pass)    |
 +---------------------------------------------------------------------+
                                   |
                                   v
@@ -77,9 +80,11 @@ languages + English** (native script, romanized, code-mixed). We still use an
 
 - **S5 (LLM):** language/script, domain fit, persona plausibility — needs judgment.
 - **S6 (Python):** Aadhaar Verhoeff, phone format, PHI residue — zero hallucination.
-- **Repair loop:** known cheap failures (missing tags, wrong script, stuffing,
-  and — by design — S5 flags / checksums) go **back to the generator** with
-  clear instructions (3–5 attempts) instead of wasting the whole document.
+- **Repair loop:** known cheap failures go back with clear instructions instead of
+  wasting the document. Persona: **post-judge** tag patch then at most one LLM
+  (diversity stays high at first generation). Rare langs: dedicated translate
+  first; repairs stay language-locked (no Hindi/English stand-in).
+  Code-switching / code-mix is **not** implemented yet.
   Prevention first: S3 prompts/examples teach good vs bad.
 
 ### NVIDIA stack (required)

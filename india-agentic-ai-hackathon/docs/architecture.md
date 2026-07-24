@@ -33,12 +33,14 @@ for known, recoverable failures:
             │  ↻ repair: missing tags / stuffing (generator)
             ▼
    S4b translate → target script
-            │  ↻ repair: wrong language/script (generator)
+            │  rare: dedicated /translate first + few-shots
+            │  ↻ timeout → dedicated; language-locked
             ▼
    S5 LLM judge (Grok)     S6 deterministic auditor
-            │  ↻ (design)           │  ↻ (design)
+            │  ↻ persona: tag patch → LLM (≤2)
+            │  ↻ other flags: language-locked LLM
             │  flag-targeted        │  checksum / phone /
-            │  repair 3–5×          │  tag / PHI repair
+            │  repair               │  tag / PHI repair
             └──────────┬────────────┘
                        ▼
    S7–S8 NeMo Curator fuzzy dedup + semantic near-dup + balance
@@ -101,8 +103,19 @@ and domain anchoring. Prompts require **all profile entities** as inline tags.
 - **ID entity values** byte-stable; **name/place** values may localize.
 - Script purity gate (ratio + wrong-Indic-script detection; aliases e.g.
   `Ol_Chiki` → `Ol Chiki`).
-- **Repair (implemented):** on script fail, rewrite from English pivot via
-  generator, then re-check purity + tag coverage.
+- **Rare scripts** (`brx`, `mni`, `sat`, `ks`, `sd`, `doi`, `sa`):
+  recover **at S4b** (not S5): dedicated `/translate` first (except prefer-chat
+  `doi`/`ks`/`sd`), then short chat recovery, then dedicated again; for Arabic
+  script (`sd`/`ks`) a script-lock rewrite if Devanagari leaks; `sd` gets longer
+  chat timeout + ≥2 prefer-chat attempts (dedicated often drops ID tags);
+  shared Translate RPM limiter; keep non-English wrong-script over English.
+- Common langs: chat translate; first timeout → dedicated.
+- Chat workers kept lower than generation so Translate API is not starved.
+- **Transport (DNS / timeout / connection):** if the *final* ladder error is
+  transport, checkpoint as `hard_fail` and fail the stage for resume. Mid-ladder
+  timeouts that end in tag/script quality fails stay soft-fail.
+- **Repair:** non-rare script fails may rewrite via generator; rare stays on
+  the S4b ladder (language-locked) so judge does not burn CoT on English.
 
 ### S5 — Linguistic judge
 Grok-4.3 (Azure Foundry). Returns `verdict`, `score`, `flags`, `reasoning`.
@@ -118,9 +131,15 @@ Pass if `verdict=pass` and `score ≥ pass_threshold` (default 0.7).
 | `invented_entity_type` | TYPE outside allow-list |
 | `length_violation` | SMS / short form is a chart dump |
 
-**Repair (design — next):** map each flag → clear generator instructions;
-repair **3–5** times; re-judge. Prefer preventing fails via S3 examples of
-good vs bad (domain match, script, persona geo).
+**Repair (implemented):**
+- First generation stays free (no pre-S5 persona pin — preserves diversity).
+- After judge fails on persona flags → **tag-only patch** from large name pools
+  (PATIENT_NAME / GENDER / DISTRICT / AGE) → re-judge.
+- Same persona failure again → **one** language-locked LLM repair with locked
+  surrogates (max **2** repairs on persona-only path).
+- Additional flags (script, drift, …) → act accordingly (language-locked LLM;
+  rare still capped; dedicated `/translate` last resort for rare script fails).
+- No tiny Python pre-gate before judge; no neighbor-lang soft-pass.
 
 ### S6 — Deterministic auditor
 Checksums (Aadhaar Verhoeff, phone, …), unknown types, PHI residue, DICS,
@@ -181,7 +200,10 @@ python -m main.pipeline.run_pipeline \
 - **LLM for language; Python for structure.**
 - **English pivot** for tag discipline; Indic render in S4b.
 - **Repair known failures** before soft-fail / drop — cheaper than regenerating
-  whole batches; target: no deterministic fails in the curated set.
+  whole batches; persona patch is **post-judge** only (keeps generation diverse).
+- **Language-locked** rare-script path (dedicated first + few-shots); no
+  neighbor-lang soft-pass.
 - **Fail closed** on checksum / unknown types after repairs exhaust.
 - **NeMo Data Designer (S4) + NeMo Curator (S7)** are required — no silent
   bypass backends.
+- Code-switching / code-mix generation is deferred (not implemented).

@@ -109,24 +109,34 @@ translation:
   max_tokens: 32768
   reasoning_effort: medium
   requests_per_minute: 110
-  max_workers: 24
-  # Chat translate: keep timeout tight; on timeout → chat retry then dedicated.
-  # Old 1200s hung workers and soft-failed without translating.
+  # Lower chat workers so rare dedicated /translate is not starved behind 105B.
+  max_workers: 12
+  # Chat translate: keep timeout tight; first timeout → dedicated (no chat burn).
   timeout_s: 300
   skip_language_codes: [en]
   max_docs: null
-  # After ≤2 chat-translate failures on rare langs → dedicated /translate.
-  # Timeouts on ANY language: +timeout_chat_retries chat tries, then dedicated
-  # with dedicated_retries (never leave English body as final "timeout" soft-fail).
-  rare_script_languages: [brx, mni, sat, ks]
-  rare_script_max_chat_attempts: 2
-  timeout_chat_retries: 2
+  # Rare scripts: dedicated first (except prefer-chat langs), then short
+  # few-shot chat recovery, then dedicated again. Never leave English silently.
+  # Shared dedicated RPM limiter across workers (avoids stampede timeouts).
+  rare_script_languages: [brx, mni, sat, ks, sd, doi, sa]
+  rare_script_dedicated_first: true
+  # Dedicated often empty / drops tags for these → chat+few-shot first.
+  # sd: dedicated loses ID tags; chat produces Arabic Sindhi when it finishes.
+  rare_prefer_chat_languages: [doi, ks, sd]
+  rare_chat_timeout_s: 180
+  # Prefer-chat path uses max(2, this). Extra attempt covers sd timeouts.
+  rare_chat_recovery_attempts: 1
+  rare_script_max_chat_attempts: 1
+  timeout_chat_retries: 0
   dedicated_retries: 2
   enable_dedicated_translate_fallback: true
   dedicated_translate_model: sarvam-translate:v1
   dedicated_translate_timeout_s: 180
+  rare_dedicated_translate_timeout_s: 300
+  fewshot_config: configs/synthetic-data/translation_fewshots.yaml
   # Business ms-ts Translate = 1000 RPM (separate from sarvam-105b 120 RPM).
-  dedicated_translate_requests_per_minute: 900
+  # Cap a bit under so shared limiter + retries stay safe.
+  dedicated_translate_requests_per_minute: 600
 
 linguistic_judge:
   # Judge: Grok-4.3 via Azure Foundry OpenAI-compatible chat/completions.
@@ -156,10 +166,9 @@ linguistic_judge:
   max_docs: null
   # Language SLA (reporting / ops — does NOT auto-pass docs).
   # Must-work: hi, ta, te, bn, mr, gu, kn, ml, pa, or, as, ur — failures = system bug.
-  # Rare-script capacity: brx, mni, sat (+ often ks/sd) — soft-fail expected; do not
-  # treat wipeouts as pipeline breakage. Undo: delete these keys.
+  # Rare-script capacity tracked separately; still language-locked (no neighbor soft-pass).
   must_work_languages: [hi, ta, te, bn, mr, gu, kn, ml, pa, or, as, ur]
-  rare_script_languages: [brx, mni, sat, ks]
+  rare_script_languages: [brx, mni, sat, ks, sd, doi, sa]
 
 deterministic_auditor:
   # Prefer judge-passed docs; set input to s5 passed.jsonl in normal runs.

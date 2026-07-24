@@ -1,0 +1,677 @@
+{
+  "stage": "s4_generation",
+  "engine": "nemo_data_designer",
+  "timestamp_utc": "2026-07-24T05:35:06.531988+00:00",
+  "provider": "sarvam",
+  "model": "sarvam-105b",
+  "base_url": "https://api.sarvam.ai/v1",
+  "rows_requested": 506,
+  "rows_generated": 506,
+  "rows_from_checkpoint": 406,
+  "rows_newly_generated": 100,
+  "soft_failures": [
+    {
+      "uuid": "c36e6f40b5b54d01aad2c9b0d29fc043",
+      "document_id": "c36e6f40b5b54d01aad2c9b0d29fc043__1",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "as",
+      "missing_required_entities": [
+        "BANK_ROUTING_NUMBER"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:BANK_ROUTING_NUMBER"
+      ]
+    },
+    {
+      "uuid": "c36e6f40b5b54d01aad2c9b0d29fc043",
+      "document_id": "c36e6f40b5b54d01aad2c9b0d29fc043__5",
+      "doc_type_id": "radiology_report",
+      "document_language_code": "as",
+      "missing_required_entities": [
+        "DISTRICT",
+        "PHONE_NUMBER",
+        "HOSPITAL_ID",
+        "ABHA_ID"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:DISTRICT,PHONE_NUMBER,HOSPITAL_ID,ABHA_ID"
+      ]
+    },
+    {
+      "uuid": "ff5183030c4443eb8619d8ed622ce962",
+      "document_id": "ff5183030c4443eb8619d8ed622ce962__0",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "as",
+      "missing_required_entities": [
+        "BANK_ROUTING_NUMBER"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:BANK_ROUTING_NUMBER"
+      ]
+    },
+    {
+      "uuid": "79e1e0bff3044effab3659ac879fecc8",
+      "document_id": "79e1e0bff3044effab3659ac879fecc8__4",
+      "doc_type_id": "asha_worker_note",
+      "document_language_code": "bn",
+      "missing_required_entities": [
+        "VOTER_ID",
+        "RELIGION"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:VOTER_ID,RELIGION"
+      ]
+    },
+    {
+      "uuid": "79e1e0bff3044effab3659ac879fecc8",
+      "document_id": "79e1e0bff3044effab3659ac879fecc8__10",
+      "doc_type_id": "referral_letter",
+      "document_language_code": "bn",
+      "missing_required_entities": [
+        "RELATIVE_NAME"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:RELATIVE_NAME"
+      ]
+    },
+    {
+      "uuid": "f594af83f49d4547947752d58c0e45a9",
+      "document_id": "f594af83f49d4547947752d58c0e45a9__8",
+      "doc_type_id": "hospital_billing",
+      "document_language_code": "bn",
+      "missing_required_entities": [
+        "HOSPITAL_NAME",
+        "DISTRICT",
+        "PIN_CODE"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:HOSPITAL_NAME,DISTRICT,PIN_CODE"
+      ]
+    },
+    {
+      "uuid": "f619d5abd8244e93aab697fe1a8241a8",
+      "document_id": "f619d5abd8244e93aab697fe1a8241a8__9",
+      "doc_type_id": "radiology_report",
+      "document_language_code": "brx",
+      "missing_required_entities": [
+        "DISTRICT",
+        "PHONE_NUMBER",
+        "HOSPITAL_ID",
+        "ABHA_ID"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:DISTRICT,PHONE_NUMBER,HOSPITAL_ID,ABHA_ID"
+      ]
+    },
+    {
+      "uuid": "d21516b79dbe4fb78827faca53231bb6",
+      "document_id": "d21516b79dbe4fb78827faca53231bb6__4",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "doi",
+      "missing_required_entities": [
+        "BANK_ROUTING_NUMBER"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:BANK_ROUTING_NUMBER"
+      ]
+    },
+    {
+      "uuid": "d21516b79dbe4fb78827faca53231bb6",
+      "document_id": "d21516b79dbe4fb78827faca53231bb6__7",
+      "doc_type_id": "discharge_summary",
+      "document_language_code": "doi",
+      "missing_required_entities": [
+        "DISTRICT"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:DISTRICT"
+      ]
+    },
+    {
+      "uuid": "7568f8e67bea4c959a480fd295d29db7",
+      "document_id": "7568f8e67bea4c959a480fd295d29db7__0",
+      "doc_type_id": "referral_letter",
+      "document_language_code": "en",
+      "missing_required_entities": [],
+      "stuffed_entity_types": [
+        "HOSPITAL_NAME"
+      ],
+      "reasons": [
+        "entity_stuffing:HOSPITAL_NAME"
+      ]
+    },
+    {
+      "uuid": "7568f8e67bea4c959a480fd295d29db7",
+      "document_id": "7568f8e67bea4c959a480fd295d29db7__1",
+      "doc_type_id": "radiology_report",
+      "document_language_code": "en",
+      "missing_required_entities": [
+        "DISTRICT",
+        "PHONE_NUMBER",
+        "HOSPITAL_ID",
+        "ABHA_ID"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:DISTRICT,PHONE_NUMBER,HOSPITAL_ID,ABHA_ID"
+      ]
+    },
+    {
+      "uuid": "9a7013a761314576999588794d2811cd",
+      "document_id": "9a7013a761314576999588794d2811cd__1",
+      "doc_type_id": "radiology_report",
+      "document_language_code": "en",
+      "missing_required_entities": [
+        "DISTRICT",
+        "PHONE_NUMBER",
+        "HOSPITAL_ID",
+        "ABHA_ID"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:DISTRICT,PHONE_NUMBER,HOSPITAL_ID,ABHA_ID"
+      ]
+    },
+    {
+      "uuid": "9a7013a761314576999588794d2811cd",
+      "document_id": "9a7013a761314576999588794d2811cd__10",
+      "doc_type_id": "asha_worker_note",
+      "document_language_code": "en",
+      "missing_required_entities": [
+        "RELATIVE_NAME"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:RELATIVE_NAME"
+      ]
+    },
+    {
+      "uuid": "9e6b1442143d466a9594f34920f107cf",
+      "document_id": "9e6b1442143d466a9594f34920f107cf__7",
+      "doc_type_id": "radiology_report",
+      "document_language_code": "gu",
+      "missing_required_entities": [
+        "DISTRICT",
+        "PHONE_NUMBER",
+        "HOSPITAL_ID",
+        "ABHA_ID"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:DISTRICT,PHONE_NUMBER,HOSPITAL_ID,ABHA_ID"
+      ]
+    },
+    {
+      "uuid": "9adda18066ec40f3ab6b33a531b52784",
+      "document_id": "9adda18066ec40f3ab6b33a531b52784__3",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "hi",
+      "missing_required_entities": [
+        "BANK_ROUTING_NUMBER"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:BANK_ROUTING_NUMBER"
+      ]
+    },
+    {
+      "uuid": "07e9532716ae495cbcc16b67e6aeb464",
+      "document_id": "07e9532716ae495cbcc16b67e6aeb464__10",
+      "doc_type_id": "er_triage_notes",
+      "document_language_code": "kn",
+      "missing_required_entities": [
+        "HOSPITAL_NAME",
+        "ENCOUNTER_ID",
+        "WARD_NUMBER"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:HOSPITAL_NAME,ENCOUNTER_ID,WARD_NUMBER"
+      ]
+    },
+    {
+      "uuid": "9e10c9ebc51946eaad9364b1b8e0329a",
+      "document_id": "9e10c9ebc51946eaad9364b1b8e0329a__4",
+      "doc_type_id": "er_triage_notes",
+      "document_language_code": "kok",
+      "missing_required_entities": [
+        "HOSPITAL_NAME"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:HOSPITAL_NAME"
+      ]
+    },
+    {
+      "uuid": "ba9480c1ca6a41458712603104065e74",
+      "document_id": "ba9480c1ca6a41458712603104065e74__1",
+      "doc_type_id": "referral_letter",
+      "document_language_code": "kok",
+      "missing_required_entities": [
+        "PASSPORT_NUMBER"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:PASSPORT_NUMBER"
+      ]
+    },
+    {
+      "uuid": "8b96070203834ab1a5d6aae624425c6c",
+      "document_id": "8b96070203834ab1a5d6aae624425c6c__0",
+      "doc_type_id": "radiology_report",
+      "document_language_code": "mai",
+      "missing_required_entities": [
+        "HOSPITAL_NAME"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:HOSPITAL_NAME"
+      ]
+    },
+    {
+      "uuid": "8b96070203834ab1a5d6aae624425c6c",
+      "document_id": "8b96070203834ab1a5d6aae624425c6c__3",
+      "doc_type_id": "surgical_note",
+      "document_language_code": "mai",
+      "missing_required_entities": [
+        "BED_NUMBER",
+        "MRN",
+        "RELATIVE_NAME",
+        "PATIENT_ID"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:BED_NUMBER,MRN,RELATIVE_NAME,PATIENT_ID"
+      ]
+    },
+    {
+      "uuid": "8b96070203834ab1a5d6aae624425c6c",
+      "document_id": "8b96070203834ab1a5d6aae624425c6c__8",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "mai",
+      "missing_required_entities": [
+        "BANK_ROUTING_NUMBER"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:BANK_ROUTING_NUMBER"
+      ]
+    },
+    {
+      "uuid": "c2eca376dacc4c65bc6097c63376f49f",
+      "document_id": "c2eca376dacc4c65bc6097c63376f49f__10",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "mai",
+      "missing_required_entities": [
+        "BANK_ROUTING_NUMBER"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:BANK_ROUTING_NUMBER"
+      ]
+    },
+    {
+      "uuid": "9d2d55242ddb4c2f9f68dd62fe538b3d",
+      "document_id": "9d2d55242ddb4c2f9f68dd62fe538b3d__8",
+      "doc_type_id": "er_triage_notes",
+      "document_language_code": "ml",
+      "missing_required_entities": [
+        "HOSPITAL_NAME"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:HOSPITAL_NAME"
+      ]
+    },
+    {
+      "uuid": "ffc851ec5afe45e7920df93ce2dbe4ab",
+      "document_id": "ffc851ec5afe45e7920df93ce2dbe4ab__9",
+      "doc_type_id": "radiology_report",
+      "document_language_code": "mr",
+      "missing_required_entities": [
+        "DISTRICT",
+        "PHONE_NUMBER",
+        "HOSPITAL_ID",
+        "ABHA_ID"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:DISTRICT,PHONE_NUMBER,HOSPITAL_ID,ABHA_ID"
+      ]
+    },
+    {
+      "uuid": "ffc851ec5afe45e7920df93ce2dbe4ab",
+      "document_id": "ffc851ec5afe45e7920df93ce2dbe4ab__10",
+      "doc_type_id": "er_triage_notes",
+      "document_language_code": "mr",
+      "missing_required_entities": [
+        "PATIENT_NAME",
+        "AGE",
+        "GENDER",
+        "DOCTOR_NAME",
+        "HOSPITAL_NAME",
+        "ENCOUNTER_ID",
+        "WARD_NUMBER",
+        "RELATIVE_NAME",
+        "PHONE_NUMBER",
+        "BED_NUMBER",
+        "VEHICLE_REGISTRATION"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:PATIENT_NAME,AGE,GENDER,DOCTOR_NAME,HOSPITAL_NAME,ENCOUNTER_ID,WARD_NUMBER,RELATIVE_NAME,PHONE_NUMBER,BED_NUMBER,VEHICLE_REGISTRATION"
+      ]
+    },
+    {
+      "uuid": "093fd825483c42618796923e84fdb6f0",
+      "document_id": "093fd825483c42618796923e84fdb6f0__2",
+      "doc_type_id": "hospital_billing",
+      "document_language_code": "ne",
+      "missing_required_entities": [
+        "HOSPITAL_NAME"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:HOSPITAL_NAME"
+      ]
+    },
+    {
+      "uuid": "093fd825483c42618796923e84fdb6f0",
+      "document_id": "093fd825483c42618796923e84fdb6f0__5",
+      "doc_type_id": "radiology_report",
+      "document_language_code": "ne",
+      "missing_required_entities": [
+        "DISTRICT",
+        "PHONE_NUMBER",
+        "HOSPITAL_ID",
+        "ABHA_ID"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:DISTRICT,PHONE_NUMBER,HOSPITAL_ID,ABHA_ID"
+      ]
+    },
+    {
+      "uuid": "6886de1121f1401595e50fbe778b2d42",
+      "document_id": "6886de1121f1401595e50fbe778b2d42__0",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "ne",
+      "missing_required_entities": [],
+      "stuffed_entity_types": [
+        "BANK_ACCOUNT_NUMBER",
+        "BANK_ROUTING_NUMBER",
+        "CREDIT_CARD_NUMBER",
+        "CVV",
+        "IFSC_CODE",
+        "INSURANCE_POLICY_NUMBER",
+        "PHONE_NUMBER",
+        "PIN",
+        "VEHICLE_REGISTRATION"
+      ],
+      "reasons": [
+        "entity_stuffing:BANK_ACCOUNT_NUMBER,BANK_ROUTING_NUMBER,CREDIT_CARD_NUMBER,CVV,IFSC_CODE,INSURANCE_POLICY_NUMBER,PHONE_NUMBER,PIN,VEHICLE_REGISTRATION"
+      ]
+    },
+    {
+      "uuid": "6886de1121f1401595e50fbe778b2d42",
+      "document_id": "6886de1121f1401595e50fbe778b2d42__5",
+      "doc_type_id": "referral_letter",
+      "document_language_code": "ne",
+      "missing_required_entities": [
+        "MRN"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:MRN"
+      ]
+    },
+    {
+      "uuid": "b6b35bc6f61841c1ac6d9e8581a2144b",
+      "document_id": "b6b35bc6f61841c1ac6d9e8581a2144b__3",
+      "doc_type_id": "opd_slip",
+      "document_language_code": "or",
+      "missing_required_entities": [
+        "HOSPITAL_NAME",
+        "HOSPITAL_ID"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:HOSPITAL_NAME,HOSPITAL_ID"
+      ]
+    },
+    {
+      "uuid": "b6b35bc6f61841c1ac6d9e8581a2144b",
+      "document_id": "b6b35bc6f61841c1ac6d9e8581a2144b__4",
+      "doc_type_id": "surgical_note",
+      "document_language_code": "or",
+      "missing_required_entities": [
+        "HOSPITAL_NAME"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:HOSPITAL_NAME"
+      ]
+    },
+    {
+      "uuid": "dc5ecaa9f7e84391ad0f873de4b38e07",
+      "document_id": "dc5ecaa9f7e84391ad0f873de4b38e07__4",
+      "doc_type_id": "opd_slip",
+      "document_language_code": "or",
+      "missing_required_entities": [
+        "HOSPITAL_NAME"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:HOSPITAL_NAME"
+      ]
+    },
+    {
+      "uuid": "dc5ecaa9f7e84391ad0f873de4b38e07",
+      "document_id": "dc5ecaa9f7e84391ad0f873de4b38e07__10",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "or",
+      "missing_required_entities": [
+        "BANK_ROUTING_NUMBER"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:BANK_ROUTING_NUMBER"
+      ]
+    },
+    {
+      "uuid": "0538f3faf4324debbd546bf332d419f6",
+      "document_id": "0538f3faf4324debbd546bf332d419f6__1",
+      "doc_type_id": "radiology_report",
+      "document_language_code": "pa",
+      "missing_required_entities": [
+        "DISTRICT",
+        "PHONE_NUMBER",
+        "HOSPITAL_ID",
+        "ABHA_ID"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:DISTRICT,PHONE_NUMBER,HOSPITAL_ID,ABHA_ID"
+      ]
+    },
+    {
+      "uuid": "45add1637b8c4cdbb97d91677348819a",
+      "document_id": "45add1637b8c4cdbb97d91677348819a__10",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "pa",
+      "missing_required_entities": [
+        "BANK_ROUTING_NUMBER"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:BANK_ROUTING_NUMBER"
+      ]
+    },
+    {
+      "uuid": "22ef884ce12247309d07fc3f601a3c59",
+      "document_id": "22ef884ce12247309d07fc3f601a3c59__5",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "sa",
+      "missing_required_entities": [
+        "BANK_ROUTING_NUMBER"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:BANK_ROUTING_NUMBER"
+      ]
+    },
+    {
+      "uuid": "3bc580120add4e55b09a0e1ac85b643f",
+      "document_id": "3bc580120add4e55b09a0e1ac85b643f__0",
+      "doc_type_id": "prescription",
+      "document_language_code": "sat",
+      "missing_required_entities": [
+        "DISTRICT"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:DISTRICT"
+      ]
+    },
+    {
+      "uuid": "3bc580120add4e55b09a0e1ac85b643f",
+      "document_id": "3bc580120add4e55b09a0e1ac85b643f__5",
+      "doc_type_id": "discharge_summary",
+      "document_language_code": "sat",
+      "missing_required_entities": [
+        "DISTRICT",
+        "PHONE_NUMBER",
+        "ABHA_ADDRESS",
+        "CASTE"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:DISTRICT,PHONE_NUMBER,ABHA_ADDRESS,CASTE"
+      ]
+    },
+    {
+      "uuid": "3bc580120add4e55b09a0e1ac85b643f",
+      "document_id": "3bc580120add4e55b09a0e1ac85b643f__10",
+      "doc_type_id": "surgical_note",
+      "document_language_code": "sat",
+      "missing_required_entities": [
+        "HOSPITAL_NAME"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:HOSPITAL_NAME"
+      ]
+    },
+    {
+      "uuid": "dfdd30d26dc24c94a8e5a3cd4aa57a2e",
+      "document_id": "dfdd30d26dc24c94a8e5a3cd4aa57a2e__10",
+      "doc_type_id": "prescription",
+      "document_language_code": "sat",
+      "missing_required_entities": [
+        "DISTRICT"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:DISTRICT"
+      ]
+    },
+    {
+      "uuid": "228cb6f1c22941279fc07428487acd05",
+      "document_id": "228cb6f1c22941279fc07428487acd05__2",
+      "doc_type_id": "asha_worker_note",
+      "document_language_code": "sd",
+      "missing_required_entities": [
+        "BPL_RATION_CARD",
+        "RELIGION"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:BPL_RATION_CARD,RELIGION"
+      ]
+    },
+    {
+      "uuid": "6227e1809b0743be8c7473f02961d290",
+      "document_id": "6227e1809b0743be8c7473f02961d290__5",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "sd",
+      "missing_required_entities": [
+        "BANK_ROUTING_NUMBER",
+        "CREDIT_CARD_NUMBER",
+        "CVV",
+        "PIN",
+        "PHONE_NUMBER"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:BANK_ROUTING_NUMBER,CREDIT_CARD_NUMBER,CVV,PIN,PHONE_NUMBER"
+      ]
+    },
+    {
+      "uuid": "6227e1809b0743be8c7473f02961d290",
+      "document_id": "6227e1809b0743be8c7473f02961d290__6",
+      "doc_type_id": "er_triage_notes",
+      "document_language_code": "sd",
+      "missing_required_entities": [
+        "HOSPITAL_NAME"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:HOSPITAL_NAME"
+      ]
+    },
+    {
+      "uuid": "6227e1809b0743be8c7473f02961d290",
+      "document_id": "6227e1809b0743be8c7473f02961d290__9",
+      "doc_type_id": "surgical_note",
+      "document_language_code": "sd",
+      "missing_required_entities": [
+        "MRN",
+        "PATIENT_ID"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:MRN,PATIENT_ID"
+      ]
+    },
+    {
+      "uuid": "a9d809d8ae7147fca1bb8d78a5c50cbc",
+      "document_id": "a9d809d8ae7147fca1bb8d78a5c50cbc__6",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "ta",
+      "missing_required_entities": [
+        "BANK_ROUTING_NUMBER"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:BANK_ROUTING_NUMBER"
+      ]
+    },
+    {
+      "uuid": "36935bf173e3478495baf6420bc875be",
+      "document_id": "36935bf173e3478495baf6420bc875be__0",
+      "doc_type_id": "phc_register",
+      "document_language_code": "te",
+      "missing_required_entities": [
+        "BPL_RATION_CARD"
+      ],
+      "stuffed_entity_types": [],
+      "reasons": [
+        "missing_required_entities:BPL_RATION_CARD"
+      ]
+    }
+  ],
+  "soft_fail_count": 46,
+  "generation_repaired_count": 7,
+  "entity_coverage_complete_rate": 0.9130434782608695,
+  "mean_chars": 1282.6857707509882,
+  "checkpoint": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260724T100211/s4_generation/checkpoint.jsonl"
+}

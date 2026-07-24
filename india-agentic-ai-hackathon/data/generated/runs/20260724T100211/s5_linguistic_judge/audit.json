@@ -1,0 +1,283 @@
+{
+  "stage": "s5_linguistic_judge",
+  "timestamp_utc": "2026-07-24T09:31:17.677588+00:00",
+  "provider": "azure_foundry",
+  "model": "grok-4.3",
+  "base_url": "https://ambedkar-interpreter-resource.services.ai.azure.com/openai/v1",
+  "requests_per_minute": 120.0,
+  "max_workers": 8,
+  "timeout_s": 600.0,
+  "network_retries": 4,
+  "rows_judged": 506,
+  "rows_resumed_from_checkpoint": 281,
+  "pass_rate": 0.9723320158102767,
+  "label_distribution": {
+    "fail": 0.02766798418972332,
+    "pass": 0.9723320158102767
+  },
+  "positional_length_bias": {
+    "pearson_r": -0.021587677953490467,
+    "n": 506.0
+  },
+  "failures": [
+    {
+      "uuid": "f619d5abd8244e93aab697fe1a8241a8",
+      "document_id": "f619d5abd8244e93aab697fe1a8241a8__1",
+      "doc_type_id": "lab_report",
+      "document_language_code": "brx",
+      "judge_verdict": "fail",
+      "judge_score": 0.25,
+      "judge_flags": [
+        "dialect_script_impurity",
+        "invented_entity_type"
+      ],
+      "judge_rationale": "Clinical prose uses Bengali-Assamese script and Assamese phrasing instead of required Bodo Devanagari; LABORATORY_TECHNICIAN_NAME and LAB_TECH_ID outside allow-list.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 2
+    },
+    {
+      "uuid": "f619d5abd8244e93aab697fe1a8241a8",
+      "document_id": "f619d5abd8244e93aab697fe1a8241a8__2",
+      "doc_type_id": "asha_worker_note",
+      "document_language_code": "brx",
+      "judge_verdict": "fail",
+      "judge_score": 0.35,
+      "judge_flags": [
+        "dialect_script_impurity",
+        "cross_language_entity_shift",
+        "surrogate_plausibility_collapse"
+      ],
+      "judge_rationale": "Bodo prose polluted with Hindi phrases; patient name culturally implausible and in wrong script for Devanagari Bodo note.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 2
+    },
+    {
+      "uuid": "fee4de17dbbf4d15b95ef10f6a01c60c",
+      "document_id": "fee4de17dbbf4d15b95ef10f6a01c60c__8",
+      "doc_type_id": "referral_letter",
+      "document_language_code": "brx",
+      "judge_verdict": "fail",
+      "judge_score": 0.65,
+      "judge_flags": [
+        "invented_entity_type"
+      ],
+      "judge_rationale": "REFERRAL_ID outside allow-list; Bodo Devanagari prose and persona fit otherwise acceptable.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 0
+    },
+    {
+      "uuid": "e90c7788a683415497f7cf0718f7966b",
+      "document_id": "e90c7788a683415497f7cf0718f7966b__9",
+      "doc_type_id": "telemedicine_transcript",
+      "document_language_code": "ks",
+      "judge_verdict": "fail",
+      "judge_score": 0.55,
+      "judge_flags": [
+        "surrogate_plausibility_collapse"
+      ],
+      "judge_rationale": "Name clash: PATIENT_NAME=Manoj Yadav vs. doctor addressing patient as غلام رسول + ghulam.rasool email; Kashmiri prose and clinical fit otherwise acceptable.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 2
+    },
+    {
+      "uuid": "75419f1fe22f409c8108d2a13f2e677f",
+      "document_id": "75419f1fe22f409c8108d2a13f2e677f__3",
+      "doc_type_id": "referral_letter",
+      "document_language_code": "mni",
+      "judge_verdict": "fail",
+      "judge_score": 0.2,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "All clinical prose in English; expected Manipuri/Meitei script per instructions.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 2
+    },
+    {
+      "uuid": "6e943dc3578249e38b9e61705d0912a9",
+      "document_id": "6e943dc3578249e38b9e61705d0912a9__6",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "sa",
+      "judge_verdict": "fail",
+      "judge_score": 0.45,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Prose mixes Hindi/English (TPA, RTA, PAN, IFSC, दावा) instead of Sanskrit; Devanagari present but language not matching expected sa.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 2
+    },
+    {
+      "uuid": "3bc580120add4e55b09a0e1ac85b643f",
+      "document_id": "3bc580120add4e55b09a0e1ac85b643f__4",
+      "doc_type_id": "hospital_billing",
+      "document_language_code": "sat",
+      "judge_verdict": "fail",
+      "judge_score": 0.2,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "All narrative prose in English/Latin; expected Santali Ol Chiki script absent despite correct allow-listed tags and persona fit.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 2
+    },
+    {
+      "uuid": "3bc580120add4e55b09a0e1ac85b643f",
+      "document_id": "3bc580120add4e55b09a0e1ac85b643f__5",
+      "doc_type_id": "discharge_summary",
+      "document_language_code": "sat",
+      "judge_verdict": "fail",
+      "judge_score": 0.55,
+      "judge_flags": [
+        "domain_persona_mismatch",
+        "surrogate_plausibility_collapse"
+      ],
+      "judge_rationale": "Female patient described with 'patni' (wife) relative + male name Bijoy; gender/spouse mismatch breaks persona and surrogate plausibility.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 2
+    },
+    {
+      "uuid": "3bc580120add4e55b09a0e1ac85b643f",
+      "document_id": "3bc580120add4e55b09a0e1ac85b643f__8",
+      "doc_type_id": "er_triage_notes",
+      "document_language_code": "sat",
+      "judge_verdict": "fail",
+      "judge_score": 0.2,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Prose entirely English; expected Santali Ol Chiki clinical narrative.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 2
+    },
+    {
+      "uuid": "228cb6f1c22941279fc07428487acd05",
+      "document_id": "228cb6f1c22941279fc07428487acd05__7",
+      "doc_type_id": "radiology_report",
+      "document_language_code": "sd",
+      "judge_verdict": "fail",
+      "judge_score": 0.55,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Clinical narrative prose mixes Gujarati characters into Sindhi Arabic script; other elements (tags, persona, length, entity types) compliant.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 2
+    },
+    {
+      "uuid": "228cb6f1c22941279fc07428487acd05",
+      "document_id": "228cb6f1c22941279fc07428487acd05__9",
+      "doc_type_id": "telemedicine_transcript",
+      "document_language_code": "sd",
+      "judge_verdict": "fail",
+      "judge_score": 0.35,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Sindhi prose rendered in Devanagari (with Hindi intrusions like 'नमस्ते') instead of required Arabic script; all tags/IDs valid and persona fit ok.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 2
+    },
+    {
+      "uuid": "6227e1809b0743be8c7473f02961d290",
+      "document_id": "6227e1809b0743be8c7473f02961d290__0",
+      "doc_type_id": "automated_sms",
+      "document_language_code": "sd",
+      "judge_verdict": "fail",
+      "judge_score": 0.3,
+      "judge_flags": [
+        "dialect_script_impurity"
+      ],
+      "judge_rationale": "Sindhi Arabic prose polluted by Gujarati script intrusion (માટે) and English transliterations; other aspects (persona, entities, length) acceptable.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 2
+    },
+    {
+      "uuid": "6227e1809b0743be8c7473f02961d290",
+      "document_id": "6227e1809b0743be8c7473f02961d290__2",
+      "doc_type_id": "discharge_summary",
+      "document_language_code": "sd",
+      "judge_verdict": "fail",
+      "judge_score": 0.55,
+      "judge_flags": [
+        "cross_language_entity_shift",
+        "surrogate_plausibility_collapse"
+      ],
+      "judge_rationale": "Patient name Latin + South-Indian (Karthik Krishnan) mismatches Sindhi/Arabic-script prose, Memon relative/caste, and Ramesh ABHA; other elements (prose script, domain, tags, length) acceptable.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 2
+    },
+    {
+      "uuid": "043f5fb0c78c482298663bcaa05618fe",
+      "document_id": "043f5fb0c78c482298663bcaa05618fe__3",
+      "doc_type_id": "insurance_claim",
+      "document_language_code": "te",
+      "judge_verdict": "fail",
+      "judge_score": 0.62,
+      "judge_flags": [
+        "invented_entity_type"
+      ],
+      "judge_rationale": "ZONE outside allow-list; duplicate/misplaced RESIDENTIAL_ADDRESS + PIN reuse create minor admin inconsistency; Telugu clinical prose and persona/domain fit otherwise acceptable.",
+      "judge_soft_fail": false,
+      "judge_error": null,
+      "judge_repair_attempts": 0
+    }
+  ],
+  "failure_count": 14,
+  "soft_failures": [],
+  "soft_fail_count": 0,
+  "judge_repaired_count": 49,
+  "en_pivot_repair_count": 0,
+  "quality_repair_max": 5,
+  "repair_multi_constraint": true,
+  "repair_via_english_pivot": false,
+  "must_work_languages": [
+    "hi",
+    "ta",
+    "te",
+    "bn",
+    "mr",
+    "gu",
+    "kn",
+    "ml",
+    "pa",
+    "or",
+    "as",
+    "ur"
+  ],
+  "rare_script_languages": [
+    "brx",
+    "mni",
+    "sat",
+    "ks",
+    "sd",
+    "doi",
+    "sa"
+  ],
+  "columns_added": [
+    "judge_verdict",
+    "judge_score",
+    "judge_reasoning",
+    "judge_flags",
+    "judge_provider",
+    "judge_model",
+    "judge_soft_fail",
+    "judge_error",
+    "judge_repair_attempts",
+    "judge_repaired",
+    "stage"
+  ]
+}

@@ -1,0 +1,214 @@
+{
+  "run_id": "20260723T233135",
+  "status": "ok",
+  "stages": [
+    {
+      "stage": "s2b_persona_summary",
+      "folder": "s2b_persona_summary",
+      "status": "ok",
+      "started_utc": "2026-07-23T18:04:52.653126+00:00",
+      "finished_utc": "2026-07-23T18:05:17.046935+00:00",
+      "elapsed_s": 24.39,
+      "outputs": {
+        "jsonl": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s2b_persona_summary/assignments_summarized.jsonl",
+        "parquet": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s2b_persona_summary/assignments_summarized.parquet",
+        "audit_json": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s2b_persona_summary/audit.json",
+        "audit_md": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s2b_persona_summary/audit.md"
+      },
+      "preview": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s2b_persona_summary/audit.md"
+    },
+    {
+      "stage": "s3_prompt_construction",
+      "folder": "s3_prompts",
+      "status": "ok",
+      "started_utc": "2026-07-23T18:05:17.047188+00:00",
+      "finished_utc": "2026-07-23T18:05:17.094449+00:00",
+      "elapsed_s": 0.05,
+      "outputs": {
+        "jsonl": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s3_prompts/prompts.jsonl",
+        "parquet": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s3_prompts/prompts.parquet",
+        "audit_json": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s3_prompts/audit.json",
+        "audit_md": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s3_prompts/audit.md",
+        "preview_jsonl": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/samples/s3_prompts_preview.jsonl"
+      },
+      "preview": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s3_prompts/audit.md"
+    },
+    {
+      "stage": "s4_generation",
+      "folder": "s4_generation",
+      "status": "ok",
+      "started_utc": "2026-07-23T18:05:17.094713+00:00",
+      "finished_utc": "2026-07-23T18:33:49.681431+00:00",
+      "elapsed_s": 1712.59,
+      "outputs": {
+        "jsonl": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s4_generation/documents.jsonl",
+        "parquet": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s4_generation/documents.parquet",
+        "audit_json": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s4_generation/audit.json",
+        "audit_md": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s4_generation/audit.md",
+        "soft_failures_jsonl": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s4_generation/soft_failures.jsonl",
+        "checkpoint_jsonl": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s4_generation/checkpoint.jsonl"
+      },
+      "preview": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s4_generation/audit.md"
+    },
+    {
+      "stage": "s4b_translation",
+      "folder": "s4b_translation",
+      "status": "ok",
+      "started_utc": "2026-07-23T18:33:49.681769+00:00",
+      "finished_utc": "2026-07-23T18:49:13.310379+00:00",
+      "elapsed_s": 923.63,
+      "outputs": {
+        "jsonl": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s4b_translation/documents.jsonl",
+        "parquet": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s4b_translation/documents.parquet",
+        "audit_json": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s4b_translation/audit.json",
+        "audit_md": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s4b_translation/audit.md",
+        "soft_failures_jsonl": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s4b_translation/soft_failures.jsonl"
+      },
+      "preview": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s4b_translation/audit.md"
+    },
+    {
+      "stage": "s5_linguistic_judge",
+      "folder": "s5_linguistic_judge",
+      "status": "ok",
+      "started_utc": "2026-07-23T18:49:13.310708+00:00",
+      "finished_utc": "2026-07-23T19:03:12.637257+00:00",
+      "elapsed_s": 839.33,
+      "outputs": {
+        "all_jsonl": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s5_linguistic_judge/judged.jsonl",
+        "passed_jsonl": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s5_linguistic_judge/passed.jsonl",
+        "failed_jsonl": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s5_linguistic_judge/failed.jsonl",
+        "parquet": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s5_linguistic_judge/judged.parquet",
+        "audit_json": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s5_linguistic_judge/audit.json",
+        "audit_md": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s5_linguistic_judge/audit.md",
+        "soft_failures_jsonl": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s5_linguistic_judge/soft_failures.jsonl"
+      },
+      "preview": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s5_linguistic_judge/audit.md"
+    },
+    {
+      "stage": "s6_deterministic_auditor",
+      "folder": "s6_deterministic_auditor",
+      "status": "ok",
+      "started_utc": "2026-07-23T19:03:12.640928+00:00",
+      "finished_utc": "2026-07-23T19:07:46.185066+00:00",
+      "elapsed_s": 273.54,
+      "outputs": {
+        "all_jsonl": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s6_deterministic_auditor/audited.jsonl",
+        "passed_jsonl": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s6_deterministic_auditor/passed.jsonl",
+        "failed_jsonl": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s6_deterministic_auditor/failed.jsonl",
+        "parquet": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s6_deterministic_auditor/audited.parquet",
+        "audit_json": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s6_deterministic_auditor/audit.json",
+        "audit_md": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s6_deterministic_auditor/audit.md",
+        "failures_jsonl": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s6_deterministic_auditor/failures.jsonl"
+      },
+      "preview": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s6_deterministic_auditor/audit.md"
+    },
+    {
+      "stage": "s7_s8_curation",
+      "folder": "s7_s8_curation",
+      "status": "ok",
+      "started_utc": "2026-07-23T19:07:46.185495+00:00",
+      "finished_utc": "2026-07-23T19:08:19.121383+00:00",
+      "elapsed_s": 32.94,
+      "outputs": {
+        "jsonl": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s7_s8_curation/curated.jsonl",
+        "parquet": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s7_s8_curation/curated.parquet",
+        "audit_json": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s7_s8_curation/audit.json",
+        "audit_md": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s7_s8_curation/audit.md"
+      },
+      "preview": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s7_s8_curation/audit.md"
+    },
+    {
+      "stage": "s9_gliner_format",
+      "folder": "s9_gliner_format",
+      "status": "ok",
+      "started_utc": "2026-07-23T19:08:19.122021+00:00",
+      "finished_utc": "2026-07-23T19:08:19.226269+00:00",
+      "elapsed_s": 0.1,
+      "outputs": {
+        "jsonl": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s9_gliner_format/gliner_docs.jsonl",
+        "parquet": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s9_gliner_format/gliner_docs.parquet",
+        "gliner_json": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s9_gliner_format/gliner_train.json",
+        "audit_json": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s9_gliner_format/audit.json",
+        "audit_md": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s9_gliner_format/audit.md",
+        "preview_jsonl": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/samples/s9_gliner_preview.jsonl"
+      },
+      "preview": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s9_gliner_format/audit.md"
+    },
+    {
+      "stage": "s10_split",
+      "folder": "s10_split",
+      "status": "ok",
+      "started_utc": "2026-07-23T19:08:19.226798+00:00",
+      "finished_utc": "2026-07-23T19:08:19.261694+00:00",
+      "elapsed_s": 0.03,
+      "outputs": {
+        "train_jsonl": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s10_split/train.jsonl",
+        "eval_jsonl": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s10_split/eval.jsonl",
+        "gliner_train": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s10_split/gliner_train.json",
+        "gliner_eval": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s10_split/gliner_eval.json",
+        "audit_json": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s10_split/audit.json",
+        "audit_md": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s10_split/audit.md"
+      },
+      "preview": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/s10_split/audit.md"
+    }
+  ],
+  "stage_specs": [
+    {
+      "block": "persona_sampling",
+      "folder": "s1_persona_sampling",
+      "primary": "personas.jsonl"
+    },
+    {
+      "block": "taxonomy",
+      "folder": "s2_taxonomy",
+      "primary": "assignments.jsonl"
+    },
+    {
+      "block": "persona_summary",
+      "folder": "s2b_persona_summary",
+      "primary": "assignments_summarized.jsonl"
+    },
+    {
+      "block": "prompt_construction",
+      "folder": "s3_prompts",
+      "primary": "prompts.jsonl"
+    },
+    {
+      "block": "generation",
+      "folder": "s4_generation",
+      "primary": "documents.jsonl"
+    },
+    {
+      "block": "translation",
+      "folder": "s4b_translation",
+      "primary": "documents.jsonl"
+    },
+    {
+      "block": "linguistic_judge",
+      "folder": "s5_linguistic_judge",
+      "primary": "judged.jsonl"
+    },
+    {
+      "block": "deterministic_auditor",
+      "folder": "s6_deterministic_auditor",
+      "primary": "audited.jsonl"
+    },
+    {
+      "block": "curation",
+      "folder": "s7_s8_curation",
+      "primary": "curated.jsonl"
+    },
+    {
+      "block": "gliner_format",
+      "folder": "s9_gliner_format",
+      "primary": "gliner_docs.jsonl"
+    },
+    {
+      "block": "split",
+      "folder": "s10_split",
+      "primary": "train.jsonl"
+    }
+  ],
+  "base_config": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/pipeline.resolved.yaml",
+  "resolved_config": "/home/sidharth/Desktop/nvidia-hack/india-agentic-ai-hackathon/data/generated/runs/20260723T233135/pipeline.resolved.yaml"
+}

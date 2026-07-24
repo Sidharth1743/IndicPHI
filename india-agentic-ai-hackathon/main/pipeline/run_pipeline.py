@@ -156,7 +156,8 @@ def run_pipeline(
                 print(f"--- skip {label} (before --from-stage) ---")
                 continue
 
-        print(f"\n=== {label} ===")
+        print(f"\n=== {label} ===", flush=True)
+        print(f"[run] starting {label} …", flush=True)
         started_dt = datetime.now(timezone.utc)
         started = started_dt.isoformat()
         try:

@@ -1,0 +1,34 @@
+# Gold few-shot lines for rare-script S4b translation (2–3 short clinical lines each).
+# Shown only for rare_script_languages so the model sees true script, not Hindi fallback.
+
+fewshots:
+  brx:
+    - "बिथां जानाय: गोबां समनिखौ गोसोआव लाखो। [[PATIENT_NAME|बिथां]] आरो [[AGE|42]]।"
+    - "हास्पिटाल: [[HOSPITAL_NAME|कोडमा हस्पितल]]। जिल्ला: [[DISTRICT|कोडमा]]।"
+    - "फोन: [[PHONE_NUMBER|9876543210]]। डाक्टर: [[DOCTOR_NAME|राम बसुमतारी]]।"
+  mni:
+    - "ꯄꯥꯁꯦꯟꯠ: [[PATIENT_NAME|ꯃꯩꯇꯩ ꯂꯦꯝꯕꯤ]] [[AGE|35]] [[GENDER|Female]]।"
+    - "ꯍꯣꯁ꯭ꯄꯤꯇꯦꯜ: [[HOSPITAL_NAME|ꯔꯤꯖꯅꯦꯜ ꯏꯟꯁꯇꯤꯠꯌꯨꯠ]]। ꯗꯤꯁꯇ꯭ꯔꯤꯛ: [[DISTRICT|ꯏꯝꯐꯥꯜ]]।"
+    - "ꯃꯔꯝ: ꯆꯤꯡꯁꯤꯟꯕ ꯑꯃꯁꯨꯡ ꯃꯁꯥ ꯂꯥꯏꯅꯕ। ꯗꯣꯛꯇꯔ: [[DOCTOR_NAME|ꯁꯣꯔꯣꯛꯄꯝ]]।"
+  sat:
+    - "ᱯᱮᱥᱮᱱᱴ: [[PATIENT_NAME|ᱥᱚᱢᱟ ᱢᱩᱨᱢᱩ]] [[AGE|28]] [[GENDER|Female]]।"
+    - "ᱦᱚᱥᱯᱤᱴᱟᱞ: [[HOSPITAL_NAME|ᱰᱤᱥᱴᱨᱤᱠᱴ ᱦᱚᱥᱯᱤᱴᱟᱞ]]। ᱡᱤᱞᱟ: [[DISTRICT|ᱫᱩᱢᱠᱟ]]।"
+    - "ᱠᱟᱹᱢᱤ: ᱠᱟᱥᱤ ᱟᱨ ᱡᱩᱨ ᱛᱟᱦᱮᱸᱱᱟ। ᱰᱚᱠᱴᱚᱨ: [[DOCTOR_NAME|ᱨᱟᱢ ᱦᱮᱢᱵᱨᱚᱢ]]।"
+  ks:
+    - "مریض: [[PATIENT_NAME|یاسمین بیگ]] [[AGE|40]] [[GENDER|Female]]۔"
+    - "ہسپتال: [[HOSPITAL_NAME|ایس کے آئی ایم ایس]]۔ ضلع: [[DISTRICT|سری نگر]]۔"
+    - "شکایت: کھانسی تہٕ تپہٕ۔ ڈاکٹر: [[DOCTOR_NAME|فیروز احمد]]۔"
+  sd:
+    - "مريض: [[PATIENT_NAME|فاطمہ ميمڻ]] [[AGE|45]] [[GENDER|Female]]."
+    - "اسپتال: [[HOSPITAL_NAME|سویل اسپتال]]۔ ضلعو: [[DISTRICT|حيدرآباد]]."
+    - "شڪايت: کنگهه ۽ بخار۔ ڊاڪٽر: [[DOCTOR_NAME|علي شاه]]."
+    # Reminder lines (Arabic only — never Devanagari Hindi for Sindhi):
+    - "خارج ٿيڻ جو خلاصو — مريض [[PATIENT_NAME|شِلپا]]، اسپتال [[HOSPITAL_NAME|سيول]]."
+  doi:
+    - "मरीज: [[PATIENT_NAME|सुनीता देवी]] [[AGE|48]] [[GENDER|Female]]।"
+    - "हस्पताल: [[HOSPITAL_NAME|सरकारी हस्पताल जम्मू]]। जिला: [[DISTRICT|जम्मू]]।"
+    - "शिकायत: खांसी ते बुखार। डाक्टर: [[DOCTOR_NAME|राजेश शर्मा]]।"
+  sa:
+    - "रोगी: [[PATIENT_NAME|सीता देवी]] [[AGE|50]] [[GENDER|Female]]।"
+    - "चिकित्सालयः [[HOSPITAL_NAME|राजकीय चिकित्सालय]]। जनपदः [[DISTRICT|वाराणसी]]।"
+    - "लक्षणम्: कासः ज्वरश्च। वैद्यः: [[DOCTOR_NAME|रामचन्द्रः]]।"

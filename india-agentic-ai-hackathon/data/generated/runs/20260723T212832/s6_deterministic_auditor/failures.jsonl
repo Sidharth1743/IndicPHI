@@ -1,0 +1,4 @@
+{"uuid": "57e0ccc76318480b91dca7f2d464c122", "document_id": "57e0ccc76318480b91dca7f2d464c122__2", "doc_type_id": "referral_letter", "document_language_code": "gu", "auditor_errors": ["dics_below_threshold:0.7142857142857143"], "auditor_repair_attempts": 0}
+{"uuid": "5c5a472d66774bdc9e232a4893422f0c", "document_id": "5c5a472d66774bdc9e232a4893422f0c__0", "doc_type_id": "referral_letter", "document_language_code": "mr", "auditor_errors": ["dics_below_threshold:0.5"], "auditor_repair_attempts": 1}
+{"uuid": "825c4438c02440dc90d3ddec7ffec8ee", "document_id": "825c4438c02440dc90d3ddec7ffec8ee__1", "doc_type_id": "hospital_billing", "document_language_code": "sd", "auditor_errors": ["persona_age_mismatch"], "auditor_repair_attempts": 0}
+{"uuid": "ce942a5fb5644181ac0db94b6c9c1314", "document_id": "ce942a5fb5644181ac0db94b6c9c1314__2", "doc_type_id": "insurance_claim", "document_language_code": "ta", "auditor_errors": ["phi_residue:1"], "auditor_repair_attempts": 5}
